@@ -1,0 +1,732 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>科室完善 PRD文档 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要背景为了完成万家科室项目，需获取全国医院及科室的基础信息及其位置信息（北京、合肥等城市优先），并将其整合到Yolar下相关的表结构中
+实现通过爬虫爬到相关城市的医院科室信息，利用这些信息调用高德地图的API，获得其地理位置信息并整理存储在我们的数据库表结构中
+预期产出
+完整的中国三级行政区域结构表
+包含有基础信息以及地理位置信息的医院和科室信息
+对医院和科室信息的CURD以及认证审核的接口">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="科室完善 PRD文档"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>科室完善 PRD文档</h2>
+					
+					<div>
+						<span class="post-time">2017-03-14 13:30:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>为了完成万家科室项目，需获取全国医院及科室的基础信息及其位置信息（北京、合肥等城市优先），并将其整合到Yolar下相关的表结构中</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>通过爬虫爬到相关城市的医院科室信息，利用这些信息调用高德地图的API，获得其地理位置信息并整理存储在我们的数据库表结构中</p>
+<h2 id="预期产出"><a href="#预期产出" class="headerlink" title="预期产出"></a>预期产出</h2><ol>
+<li>完整的中国三级行政区域结构表</li>
+<li>包含有基础信息以及地理位置信息的医院和科室信息</li>
+<li>对医院和科室信息的CURD以及认证审核的接口</li>
+</ol>
+<a id="more"></a>
+<h1 id="文档更新"><a href="#文档更新" class="headerlink" title="文档更新"></a>文档更新</h1><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>内容</th>
+<th>维护人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017-3-14</td>
+<td>创建文档</td>
+<td>李圣阳</td>
+</tr>
+<tr>
+<td>2017-3-15</td>
+<td>完善文档</td>
+<td>李圣阳</td>
+</tr>
+</tbody>
+</table>
+<h1 id="设计使用场景"><a href="#设计使用场景" class="headerlink" title="设计使用场景"></a>设计使用场景</h1><p><strong>预配置</strong></p>
+<ol>
+<li>三级行政区域信息入库</li>
+<li>爬取全国城市的医院科室信息（主要城市优先）</li>
+<li>更新Yolar数据库中医院和科室的基本信息</li>
+<li>更新Yolar数据库中医院和科室的位置信息</li>
+<li>完成预配置</li>
+</ol>
+<p><strong>优护助手中的护士</strong></p>
+<ol>
+<li>护士注册时新建医院，科室</li>
+<li>护士注册时选择医院，科室</li>
+</ol>
+<p><strong>admin端</strong></p>
+<ol>
+<li>运营人员新建医院，科室</li>
+<li>运营人员修改医院，科室信息</li>
+<li>运营人员审核认证医院，科室</li>
+</ol>
+<h1 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h1><h2 id="Area模型介绍"><a href="#Area模型介绍" class="headerlink" title="Area模型介绍"></a>Area模型介绍</h2><h3 id="为何会有Area"><a href="#为何会有Area" class="headerlink" title="为何会有Area"></a>为何会有Area</h3><p>为了存储全国的三级地理行政区域划分，在我们的系统中引入了Area（区域）这个概念模型并落实到表和类中（表结构在下文数据库设计中，其对应的实体类则严格按照数据库表结构来生成）</p>
+<h3 id="何为Area"><a href="#何为Area" class="headerlink" title="何为Area"></a>何为Area</h3><p>Area（区域）为一个设计概念，在这个模型中，所有的省，市，行政区域皆为平级结构模型Area，也就是说，这三个等级的区域划分在我们的数据库和类中是不做区分的，统一为Area这个模型概念。而当我们需要一个严格按照地理区域规划形成的“省——市——行政区域”的树状层级的数据结构的时候，我们从数据库中一次性遍历出所有的节点（所有的省、市、行政区域的Area），根据他们节点信息中存储的parent_id（其上一个地理区域划分的节点），将之构建为我们需要的结构。</p>
+<h3 id="Area与医院地理位置信息"><a href="#Area与医院地理位置信息" class="headerlink" title="Area与医院地理位置信息"></a>Area与医院地理位置信息</h3><p>在我们这一期项目中，会对医院的结构中加入一个名为Area_id的字段，并将其作为医院表的外键连接Area表的id字段；保存在医院表中的id字段为该医院所位于的第三级地理区域划分的area记录的id（即医院所在行政区域的id，如”中国人民解放军总医院第一附属医院”这条医院记录中的area_id所对应的area表中表示的应该是海淀区）</p>
+<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><p><strong>行政区域表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`area`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'唯一标识id'</span>,</div><div class="line">  <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'当前行政区域名称'</span>,</div><div class="line">  <span class="string">`parent_id`</span> <span class="built_in">BIGINT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">'-999'</span> <span class="keyword">COMMENT</span> <span class="string">'该行政区域上一级的行政区域的id，默认为-999，即省级行政区域的上一级为-999'</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>))</div><div class="line"><span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure>
+<p><strong>Yolar.organization</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`organization`</span> </div><div class="line"><span class="keyword">ADD</span> <span class="keyword">COLUMN</span> <span class="string">`level`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'String 用来记录医院的等级 暂时的等级是一级、二级、三级；甲等乙等丙等（其中三级独有特等）'</span> <span class="keyword">AFTER</span> <span class="string">`status`</span>,</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">COLUMN</span> <span class="string">`area_id`</span> <span class="built_in">BIGINT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'外键 关联区域规划表中的区级 用来存储医院的区域信息'</span> <span class="keyword">AFTER</span> <span class="string">`level`</span>,</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">COLUMN</span> <span class="string">`img_url`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'医院图片的url'</span> <span class="keyword">AFTER</span> <span class="string">`area_id`</span>;</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`organization`</span> </div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> <span class="string">`organization_area`</span></div><div class="line">  FOREIGN <span class="keyword">KEY</span> ()</div><div class="line">  <span class="keyword">REFERENCES</span> <span class="string">`area`</span> ()</div><div class="line">  <span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">NO</span> <span class="keyword">ACTION</span></div><div class="line">  <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">NO</span> <span class="keyword">ACTION</span>;</div></pre></td></tr></table></figure>
+<p><strong>Yolar.department</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="string">`department`</span> </div><div class="line"><span class="keyword">ADD</span> <span class="keyword">COLUMN</span> <span class="string">`may_contact`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'可能的联系方式'</span> <span class="keyword">AFTER</span> <span class="string">`status`</span>,</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">COLUMN</span> <span class="string">`img_url`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'科室图片url'</span> <span class="keyword">AFTER</span> <span class="string">`may_contact`</span>;</div></pre></td></tr></table></figure>
+<h2 id="protobuf数据模型"><a href="#protobuf数据模型" class="headerlink" title="protobuf数据模型"></a>protobuf数据模型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// ---------- area result message ----------//</div><div class="line"></div><div class="line">//区级行政规划数据，包括id和其name</div><div class="line">message </div><div class="line">AdministrativeDivisionData&#123;</div><div class="line">    optional int64 adId = 1;</div><div class="line">    optional string adName = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//市级行政规划数据，包括其id、name以及其下所有的区级区域的信息</div><div class="line">message CityData&#123;</div><div class="line">    optional int64 cityId = 1;</div><div class="line">    optional string cityName = 2;</div><div class="line">    repeated AdministrativeDivisionData administrativeDivisions = 3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//省级行政规划数据，包括其id，name以及其下所有的市级区域信息</div><div class="line">message ProvinceData&#123;</div><div class="line">    optional int64 pId = 1;</div><div class="line">    optional string pName = 2;</div><div class="line">    repeated CityData cities = 3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//用来包装所有的省级区域信息</div><div class="line">message MapDataDTO&#123;</div><div class="line">    repeated ProvinceData provinces = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//用来返回result以及包装返回数据</div><div class="line">message MapDTO&#123;</div><div class="line">    optional Result result = 1;</div><div class="line">    optional MapDataDTO data = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// ---------- message for zhushuo ----------//</div><div class="line"></div><div class="line">//简单的医院信息</div><div class="line">message OrganizationInfo&#123;</div><div class="line">    optional int64 id = 1;</div><div class="line">    optional string name = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//包装简单医院信息</div><div class="line">message LBSOrganizationDataDTO&#123;</div><div class="line">    repeated OrganizationInfo infos = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//包装返回信息和result</div><div class="line">message LBSOrganizationDTO&#123;</div><div class="line">    optional Result result = 1;</div><div class="line">    optional LBSOrganizationDataDTO data = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//简单科室信息</div><div class="line">message LBSDepartmentInfo&#123;</div><div class="line">    optional int64 id = 1;</div><div class="line">    optional string name = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//包装简单科室信息</div><div class="line">message LBSDepartmentDataDTO&#123;</div><div class="line">    repeated LBSDepartmentInfo infos = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//包装返回信息和result</div><div class="line">message LBSDepartmentDTO&#123;</div><div class="line">    optional Result result = 1;</div><div class="line">    optional LBSDepartmentDataDTO data = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//注册科室：</div><div class="line">//organizationId：医院id</div><div class="line">//name：科室的名称</div><div class="line">//mayContact：审核联系方式</div><div class="line">message LBSCreateDepartmentOption&#123;</div><div class="line">    optional int64 organizationId = 1;</div><div class="line">    optional string name = 2;</div><div class="line">    optional string mayContact = 3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//创建医院及科室的接口中的科室的信息</div><div class="line">message LBSCreateDepartment&#123;</div><div class="line">    optional string name = 1;</div><div class="line">    optional string mayContact = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//创建医院及科室的传入信息</div><div class="line">//name:医院的名字</div><div class="line">//area_id:该医院所在的区域（区级行政区域划分的id）</div><div class="line">message LBSCreateOrganizationAndDepartmentOption&#123;</div><div class="line">    optional string name = 1;</div><div class="line">    optional int64 area_id = 2;</div><div class="line">    optional LBSCreateDepartment departmentInfo = 3;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//---------- message for admin ----------//</div><div class="line">//manager organization</div><div class="line">message CreateOrUpdateOrganizationOption&#123;</div><div class="line">    optional int64 id = 1;</div><div class="line">    optional string name = 2;</div><div class="line">    optional string level = 3;</div><div class="line">    optional string address = 4;</div><div class="line">    optional double lat = 5;</div><div class="line">    optional double lon = 6;</div><div class="line">    optional int32 status = 7;</div><div class="line">    optional int64 areaId = 8;</div><div class="line">    optional string imgUrl = 9;</div><div class="line">&#125;</div><div class="line"></div><div class="line">message ManagerOrganization&#123;</div><div class="line">    optional int64 id = 1;</div><div class="line">    optional string name = 2;</div><div class="line">    optional string level = 3;</div><div class="line">    optional string province = 4;</div><div class="line">    optional string city = 5;</div><div class="line">    optional string ad = 6;</div><div class="line">    optional string address = 7;</div><div class="line">    optional double lat = 8;</div><div class="line">    optional double lon = 9;</div><div class="line">    optional int64 createdAt = 10;</div><div class="line">    optional int32 status = 11;</div><div class="line">    optional int64 areaId = 12;</div><div class="line">    optional string imgUrl = 13;</div><div class="line">&#125;</div><div class="line"></div><div class="line">message ManagerOrganizationDataDTO&#123;</div><div class="line">    optional ManagerOrganization organization = 1;</div><div class="line">&#125;</div><div class="line">message ManagerOrganizationDTO&#123;</div><div class="line">    optional Result result = 1;</div><div class="line">    optional ManagerOrganizationDataDTO data = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">message ManagerOrganizationListDataDTO&#123;</div><div class="line">    repeated ManagerOrganization managerOrganizations = 1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">message ManagerOrganizationListDTO&#123;</div><div class="line">    optional Result result = 1;</div><div class="line">    optional ManagerOrganizationListDataDTO data = 2;</div><div class="line">    optional int32 draw = 3;</div><div class="line">    optional int32 recordsFiltered = 4;</div><div class="line">    optional int32 recordsTotal = 5;</div><div class="line">&#125;</div><div class="line">//mamager department</div><div class="line">message CreateOrUpdateDepartmentOption&#123;</div><div class="line">    optional int64 id = 1;</div><div class="line">    optional int64 organizationId = 2;</div><div class="line">    optional string name = 3;</div><div class="line">    optional string number = 4;</div><div class="line">    optional string mayContact = 5;</div><div class="line">    optional string imgUrl = 6;</div><div class="line">    optional int32 status = 7;</div><div class="line">&#125;</div><div class="line"></div><div class="line">message ManagerDepartment&#123;</div><div class="line">    optional int64 id = 1;</div><div class="line">    optional int64 organizationId = 2;</div><div class="line">    optional string name = 3;</div><div class="line">    optional string number = 4;</div><div class="line">    optional string mayContact = 5;</div><div class="line">    optional string imgUrl = 6;</div><div class="line">    optional string organizationName = 7;</div><div class="line">    optional int64 createdAt = 8;</div><div class="line">    optional int32 status = 9;</div><div class="line">&#125;</div><div class="line"></div><div class="line">message ManagerDepartmentDataDTO&#123;</div><div class="line">    optional ManagerDepartment department = 1;</div><div class="line">&#125;</div><div class="line">message ManagerDepartmentDTO&#123;</div><div class="line">    optional Result result = 1;</div><div class="line">    optional ManagerDepartmentDataDTO data = 2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">message ManagerDepartmentListDataDTO&#123;</div><div class="line">    repeated ManagerDepartment managerDepartments = 1;</div><div class="line">&#125;</div><div class="line">message ManagerDepartmentListDTO&#123;</div><div class="line">    optional Result result = 1;</div><div class="line">    optional ManagerDepartmentListDataDTO data = 2;</div><div class="line">&#125;</div><div class="line">//---------- end ----------//</div></pre></td></tr></table></figure>
+<h1 id="附上高德地图关键API测试url（个人开发账号-每月请求次数有限-请不要没事点两下）"><a href="#附上高德地图关键API测试url（个人开发账号-每月请求次数有限-请不要没事点两下）" class="headerlink" title="附上高德地图关键API测试url（个人开发账号 每月请求次数有限 请不要没事点两下）"></a>附上高德地图关键API测试url（个人开发账号 每月请求次数有限 请不要没事点两下）</h1><h2 id="获取全国的三级行政区域划分数据："><a href="#获取全国的三级行政区域划分数据：" class="headerlink" title="获取全国的三级行政区域划分数据："></a>获取全国的三级行政区域划分数据：</h2><p><a href="http://restapi.amap.com/v3/config/district?key=6fc800378f55173878a9004e0dd1aa7b&amp;keywords=中国&amp;subdistrict=3&amp;showbiz=false&amp;extensions=base" target="_blank" rel="external">http://restapi.amap.com/v3/config/district?key=6fc800378f55173878a9004e0dd1aa7b&amp;keywords=中国&amp;subdistrict=3&amp;showbiz=false&amp;extensions=base</a></p>
+<h2 id="根据医院名称以及省份获取医院的区域规划信息："><a href="#根据医院名称以及省份获取医院的区域规划信息：" class="headerlink" title="根据医院名称以及省份获取医院的区域规划信息："></a>根据医院名称以及省份获取医院的区域规划信息：</h2><p><a href="http://restapi.amap.com/v3/place/text?key=6fc800378f55173878a9004e0dd1aa7b&amp;keywords=吐鲁番市高昌区人民医院&amp;types=&amp;city=吐鲁番&amp;children=1&amp;offset=20&amp;page=1&amp;extensions=all" target="_blank" rel="external">http://restapi.amap.com/v3/place/text?key=6fc800378f55173878a9004e0dd1aa7b&amp;keywords=吐鲁番市高昌区人民医院&amp;types=&amp;city=吐鲁番&amp;children=1&amp;offset=20&amp;page=1&amp;extensions=all</a></p>
+<h1 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h1><h2 id="优护助手"><a href="#优护助手" class="headerlink" title="优护助手"></a>优护助手</h2><h3 id="新增科室"><a href="#新增科室" class="headerlink" title="新增科室"></a>新增科室</h3><ul>
+<li>注册时选择医院<ul>
+<li>基于地理位置：省市/直辖市区</li>
+<li>选择医院时，发现无此医院，可以进行新增（医院名下至少有一个科室）<ul>
+<li>显示已选的地区</li>
+<li>填写医院及科室的名称、联系方式</li>
+</ul>
+</li>
+<li>新增完成，填入其所填医院及科室</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/chooseHospital.png" alt="chooseHospital"></p>
+<ul>
+<li>注册时选择科室<ul>
+<li>如有科室，选择后返回注册页面</li>
+<li>如没有科室，可以新建科室<ul>
+<li>显示已选的地区</li>
+<li>填写科室的名称、联系方式</li>
+<li>提交后返回注册页</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/chooseDepartment-1.png" alt="chooseDepartment"></p>
+<ul>
+<li>对于新增的医院及科室，状态均为<strong>审核不通过</strong></li>
+<li>审核通过即在B端医院&amp;科室list显示</li>
+</ul>
+<h2 id="admin端"><a href="#admin端" class="headerlink" title="admin端"></a>admin端</h2><h3 id="科室审核"><a href="#科室审核" class="headerlink" title="科室审核"></a>科室审核</h3><ul>
+<li>医院列表</li>
+</ul>
+<p><img src="/media/id_01.jpg" alt="41医院列表"></p>
+<ul>
+<li>新增&amp;编辑医院信息</li>
+</ul>
+<p><img src="/media/id_02.jpg" alt="42医院新增编辑"></p>
+<ul>
+<li>科室列表</li>
+</ul>
+<p><img src="/media/id_03.jpg" alt="51科室列表"></p>
+<ul>
+<li>新增&amp;编辑科室信息</li>
+</ul>
+<p><img src="/media/id_04.jpg" alt="52科室编辑"><br><img src="/media/id_05.jpg" alt="52科室新增"></p>
+<h1 id="接口文档"><a href="#接口文档" class="headerlink" title="接口文档"></a>接口文档</h1><h2 id="工具服务相关接口"><a href="#工具服务相关接口" class="headerlink" title="工具服务相关接口"></a>工具服务相关接口</h2><p><strong>获取三级行政区域划分</strong></p>
+<p>GET /api/era/utils/areas</p>
+<ul>
+<li><p>接口描述：获取所有省份的三级行政区域划分的数据集合</p>
+</li>
+<li><p>Response  (protobuf MapDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"provinces"</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">"pId"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"pName"</span>: <span class="string">"黑龙江"</span>,</div><div class="line">                <span class="attr">"cities"</span>: [</div><div class="line">                    &#123;</div><div class="line">                        <span class="attr">"cityId"</span>: <span class="number">34</span>,</div><div class="line">                        <span class="attr">"cityName"</span>: <span class="string">"哈尔滨"</span>,</div><div class="line">                        <span class="attr">"administrativeDivisions"</span>: [</div><div class="line">                            &#123;</div><div class="line">                                <span class="attr">"adId"</span>: <span class="number">677</span>,</div><div class="line">                                <span class="attr">"adName"</span>: <span class="string">"道里区"</span></div><div class="line">                            &#125;</div><div class="line">                        ]</div><div class="line">                    &#125;</div><div class="line">                ]</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="优护助手相关服务接口"><a href="#优护助手相关服务接口" class="headerlink" title="优护助手相关服务接口"></a>优护助手相关服务接口</h2><p><strong>新建医院及科室</strong></p>
+<p>POST /api/organizations/create-organization-and-department</p>
+<ul>
+<li><p>接口描述：创建医院及其名下一个科室</p>
+</li>
+<li><p>Request  (protobuf LBSCreateOrganizationAndDepartmentOption)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"304医院"</span>,</div><div class="line">    <span class="attr">"area_id"</span>: <span class="number">455</span>,</div><div class="line">    <span class="attr">"departmentInfo"</span>: &#123;</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"生老病死科"</span>,</div><div class="line">        <span class="attr">"mayContact"</span>: <span class="string">"110-119-120"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response  (protobuf CreateOrUpdateOrganizationDTO,会有部分字段因为不存在的关系没有数据)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"organization"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">1222</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"火烧蛋包饭附属医院"</span>,</div><div class="line">            <span class="attr">"level"</span>: <span class="string">"三级甲等"</span>,</div><div class="line">            <span class="attr">"areaId"</span>: <span class="number">456</span>,</div><div class="line">            <span class="attr">"lat"</span>: <span class="number">112.44</span>,</div><div class="line">            <span class="attr">"lon"</span>: <span class="number">211.22</span>,</div><div class="line">            <span class="attr">"address"</span>: <span class="string">"二踢脚弄二次爆炸胡同3号"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>:<span class="string">"http://www.kengni.w"</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>新建科室</strong></p>
+<p>POST /api/departments/create-department</p>
+<ul>
+<li><p>接口描述：创建一个科室</p>
+</li>
+<li><p>Request  (protobuf LBSCreateDepartmentOption)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"organizationId"</span>: <span class="number">11</span>,</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"戛然而止科"</span>,</div><div class="line">    <span class="attr">"mayContact"</span>: <span class="string">"134422"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response  (protobuf CreateOrUpdateDepartmentDTO,会有部分字段因为不存在的原因没有数据)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"department"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">2333</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"六点多科"</span>,</div><div class="line">            <span class="attr">"organizationId"</span>: <span class="number">32</span>,</div><div class="line">            <span class="attr">"number"</span>: <span class="string">"ldd-12"</span>,</div><div class="line">            <span class="attr">"mayContact"</span>: <span class="string">"18833334444"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>: <span class="string">"http://www.kengni.w"</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>根据行政区域划分查询对应的医院</strong></p>
+<p>GET /api/organizations/get-by-area/{administrativeDivisionId}</p>
+<ul>
+<li><p>接口描述：根据行政区域划分中的区级信息对应的id，查找当前区域内的所有医院</p>
+</li>
+<li><p>Response  (protobuf LBSOrganizationDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"infos"</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">"id"</span>: <span class="number">123</span>,</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"苞米地第一医院"</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>根据医院id查询对应的科室</strong></p>
+<p>GET /api/departments/get-by-org-id/{orgId}</p>
+<ul>
+<li><p>接口描述：根据医院对应的id，查找所有在其名下的科室</p>
+</li>
+<li><p>Response  (protobuf LBSDepartmentDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"infos"</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">"id"</span>: <span class="number">123</span>,</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"旗鼓相当科"</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="后台管理相关服务接口"><a href="#后台管理相关服务接口" class="headerlink" title="后台管理相关服务接口"></a>后台管理相关服务接口</h2><p><strong>根据行政区域划分查询对应的医院</strong></p>
+<p>GET /api/era/v1/admin/organizations/get-by-area/{administrativeDivisionId}</p>
+<ul>
+<li><p>接口描述：根据行政区域划分中的区级信息对应的id，查找当前区域内的所有医院</p>
+</li>
+<li><p>Response  (protobuf LBSOrganizationDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"infos"</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">"id"</span>: <span class="number">123</span>,</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"苞米地第一医院"</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取所有的医院列表</strong></p>
+</li>
+</ul>
+<p>GET /api/era/v1/admin/organizations/manager-organization?adId={adId}&amp;draw={draw}&amp;length={length}&amp;start={start}</p>
+<ul>
+<li><p>接口描述：获取所有的医院（包括未审核的医院）</p>
+</li>
+<li><p>Response  (protobuf ManagerOrganizationListDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"managerOrganizations"</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">"id"</span>: <span class="number">12</span>,</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"驴打滚生生不息医院"</span>,</div><div class="line">                <span class="attr">"level"</span>: <span class="string">"二级甲等"</span>,</div><div class="line">                <span class="attr">"province"</span>: <span class="string">"辽宁省"</span>,</div><div class="line">                <span class="attr">"city"</span>: <span class="string">"沈阳市"</span>,</div><div class="line">                <span class="attr">"ad"</span>: <span class="string">"二货区"</span>,</div><div class="line">                <span class="attr">"address"</span>: <span class="string">"胡同拐角狗洞2号"</span>,</div><div class="line">                <span class="attr">"lat"</span>: <span class="number">111.22</span>,</div><div class="line">                <span class="attr">"lon"</span>: <span class="number">233.44</span>,</div><div class="line">                <span class="attr">"createdAt"</span>: <span class="number">23123198231231</span>,</div><div class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</div><div class="line">                <span class="attr">"areaId"</span>:<span class="number">456</span>,</div><div class="line">                <span class="attr">"imgUrl"</span>:<span class="string">"wwww.www.w"</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  <strong>根据医院获取所有的科室列表</strong></p>
+<p>GET /api/era/v1/admin/departments/manager-department?orgId</p>
+<ul>
+<li><p>接口描述：获取医院名下所有的科室（包括未审核的科室）</p>
+</li>
+<li><p>Response  (protobuf ManagerDepartmentListDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"managerDepartments"</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">"id"</span>: <span class="number">12</span>,</div><div class="line">                <span class="attr">"organizationId"</span>:<span class="number">100329</span>,</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"不会旋转科"</span>,</div><div class="line">                <span class="attr">"organizationName"</span>: <span class="string">"驴打滚生生不息医院"</span>,</div><div class="line">                <span class="attr">"createdAt"</span>: <span class="number">23123198231231</span>,</div><div class="line">                <span class="attr">"status"</span>: <span class="number">0</span>,</div><div class="line">                <span class="attr">"number"</span>:<span class="string">"kk-10"</span>,</div><div class="line">                <span class="attr">"mayContact"</span>:<span class="string">"400-820-8820"</span>,</div><div class="line">                <span class="attr">"imgUrl"</span>:<span class="string">"www.w.w.w.w"</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  <strong>新建医院</strong></p>
+<p>POST /api/era/v1/admin/organizations/manager-organization</p>
+<ul>
+<li><p>接口描述：创建一个医院</p>
+</li>
+<li><p>Request  (protobuf CreateOrUpdateOrganizationOption)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"火烧蛋包饭附属医院"</span>,</div><div class="line">    <span class="attr">"level"</span>: <span class="string">"三级特等"</span>,</div><div class="line">    <span class="attr">"areaId"</span>:<span class="number">456</span>,</div><div class="line">    <span class="attr">"lat"</span>:<span class="number">112.44</span>,</div><div class="line">    <span class="attr">"lon"</span>:<span class="number">211.22</span>,</div><div class="line">    <span class="attr">"address"</span>:<span class="string">"二踢脚弄二次爆炸胡同3号"</span>,</div><div class="line">    <span class="attr">"imgUrl"</span>:<span class="string">"http://www.kengni.w"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response  (protobuf ManagerOrganizationDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"organization"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">1222</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"火烧蛋包饭附属医院"</span>,</div><div class="line">            <span class="attr">"level"</span>: <span class="string">"三级特等"</span>,</div><div class="line">            <span class="attr">"areaId"</span>: <span class="number">456</span>,</div><div class="line">            <span class="attr">"lat"</span>: <span class="number">112.44</span>,</div><div class="line">            <span class="attr">"lon"</span>: <span class="number">211.22</span>,</div><div class="line">            <span class="attr">"address"</span>: <span class="string">"二踢脚弄二次爆炸胡同3号"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>:<span class="string">"http://www.kengni.w"</span>,</div><div class="line">            <span class="attr">"status"</span>:<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>新建科室</strong></p>
+</li>
+</ul>
+<p>POST /api/era/v1/admin/departments/manager-department</p>
+<ul>
+<li><p>接口描述：创建一个科室</p>
+</li>
+<li><p>Request  (protobuf CreateOrUpdateDepartmentOption)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"六点多科"</span>,</div><div class="line">    <span class="attr">"organizationId"</span>: <span class="number">32</span>,</div><div class="line">    <span class="attr">"number"</span>:<span class="string">"ldd-12"</span>,</div><div class="line">    <span class="attr">"mayContact"</span>:<span class="string">"18833334444"</span>,</div><div class="line">    <span class="attr">"imgUrl"</span>:<span class="string">"http://www.kengni.w"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response  (protobuf ManagerDepartmentDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"department"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">2333</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"六点多科"</span>,</div><div class="line">            <span class="attr">"organizationId"</span>: <span class="number">32</span>,</div><div class="line">            <span class="attr">"number"</span>: <span class="string">"ldd-12"</span>,</div><div class="line">            <span class="attr">"mayContact"</span>: <span class="string">"18833334444"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>: <span class="string">"http://www.kengni.w"</span>,</div><div class="line">            <span class="attr">"status"</span>:<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  <strong>修改医院信息</strong></p>
+<p>PATCH /api/era/v1/admin/organizations/manager-organization/{orgId}</p>
+<ul>
+<li><p>接口描述：修改医院信息</p>
+</li>
+<li><p>Request  (protobuf CreateOrUpdateOrganizationOption)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"火烧蛋包饭附属医院"</span>,</div><div class="line">    <span class="attr">"level"</span>:  <span class="string">"一级丙等"</span>,</div><div class="line">    <span class="attr">"areaId"</span>:<span class="number">456</span>,</div><div class="line">    <span class="attr">"lat"</span>:<span class="number">112.44</span>,</div><div class="line">    <span class="attr">"lon"</span>:<span class="number">211.22</span>,</div><div class="line">    <span class="attr">"address"</span>:<span class="string">"二踢脚弄二次爆炸胡同3号"</span>,</div><div class="line">    <span class="attr">"imgUrl"</span>:<span class="string">"www.baidu.com"</span>,</div><div class="line">    <span class="attr">"status"</span>:<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response  (protobuf ManagerOrganizationDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"organization"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">1222</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"火烧蛋包饭附属医院"</span>,</div><div class="line">            <span class="attr">"level"</span>: <span class="string">"二级乙等"</span>,</div><div class="line">            <span class="attr">"areaId"</span>: <span class="number">456</span>,</div><div class="line">            <span class="attr">"lat"</span>: <span class="number">112.44</span>,</div><div class="line">            <span class="attr">"lon"</span>: <span class="number">211.22</span>,</div><div class="line">            <span class="attr">"address"</span>: <span class="string">"二踢脚弄二次爆炸胡同3号"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>:<span class="string">"http://www.kengni.w"</span>,</div><div class="line">    <span class="attr">"status"</span>:<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>修改科室信息</strong></p>
+</li>
+</ul>
+<p>PATCH /api/era/v1/admin/departments/manager-department/{departmentId}</p>
+<ul>
+<li><p>接口描述：修改科室信息</p>
+</li>
+<li><p>Request  (protobuf CreateOrUpdateDepartmentOption)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"六点多科"</span>,</div><div class="line">    <span class="attr">"organizationId"</span>: <span class="number">32</span>,</div><div class="line">    <span class="attr">"number"</span>:<span class="string">"ldd-12"</span>,</div><div class="line">    <span class="attr">"mayContact"</span>:<span class="string">"18833334444"</span>,</div><div class="line">    <span class="attr">"imgUrl"</span>:<span class="string">"www.google.cn"</span>,</div><div class="line">    <span class="attr">"status"</span>:<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response  (protobuf ManagerDepartmentDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"department"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">2333</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"六点多科"</span>,</div><div class="line">            <span class="attr">"organizationId"</span>: <span class="number">32</span>,</div><div class="line">            <span class="attr">"number"</span>: <span class="string">"ldd-12"</span>,</div><div class="line">            <span class="attr">"mayContact"</span>: <span class="string">"18833334444"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>: <span class="string">"http://www.kengni.w"</span></div><div class="line">,</div><div class="line">    <span class="attr">"status"</span>:<span class="number">1</span>        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  <strong>删除一个医院</strong></p>
+<p>DELETE /api/era/v1/admin/organizations/manager-organization/{orgId}</p>
+<ul>
+<li><p>接口描述：根据医院id删除一个医院</p>
+</li>
+<li><p>Response   (protobuf ManagerOrganizationDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>删除一个科室</strong></p>
+</li>
+</ul>
+<p>DELETE /api/era/v1/admin/departments/manager-department/{departmentId}</p>
+<ul>
+<li><p>接口描述：根据科室id删除一个科室</p>
+</li>
+<li><p>Response   (protobuf ManagerDepartmentDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  <strong>获取单个医院信息</strong></p>
+<p>GET /api/era/v1/admin/organizations/manager-organization/{orgId}</p>
+<ul>
+<li><p>接口描述：根据医院id获取一个医院的信息</p>
+</li>
+<li><p>Response  (protobuf ManagerOrganizationDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"organization"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">122</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"麦乐鸡扭曲第三医院"</span>,</div><div class="line">            <span class="attr">"level"</span>: <span class="string">"乙级二等"</span>,</div><div class="line">            <span class="attr">"province"</span>: <span class="string">"吉林省"</span>,</div><div class="line">            <span class="attr">"city"</span>: <span class="string">"吉林市"</span>,</div><div class="line">            <span class="attr">"ad"</span>: <span class="string">"吉林区"</span>,</div><div class="line">            <span class="attr">"lat"</span>: <span class="number">222.33</span>,</div><div class="line">            <span class="attr">"lon"</span>: <span class="number">111.22</span>,</div><div class="line">            <span class="attr">"address"</span>: <span class="string">"木头桩子村村口王师傅脚下"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>: <span class="string">"www.sina.com.cn"</span>,</div><div class="line">    <span class="attr">"status"</span>:<span class="number">1</span>,</div><div class="line">    <span class="attr">"createdAt"</span>:<span class="number">1231232323123</span>,</div><div class="line">    <span class="attr">"areaId"</span>:<span class="number">456</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取单个科室信息</strong></p>
+</li>
+</ul>
+<p>GET /api/era/v1/admin/departments/manager-department/{departmentId}</p>
+<ul>
+<li><p>接口描述：根据科室id获取一个科室信息</p>
+</li>
+<li><p>Response  (protobuf ManagerDepartmentDTO)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">  &#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"department"</span>: &#123;</div><div class="line">            <span class="attr">"id"</span>: <span class="number">122</span>,</div><div class="line">            <span class="attr">"organizationId"</span>:<span class="number">11</span></div><div class="line">            <span class="string">"organizationName"</span>: <span class="string">"麦乐鸡扭曲第三医院"</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"骨缝破裂科"</span>,</div><div class="line">            <span class="attr">"number"</span>: <span class="string">"gfpl"</span>,</div><div class="line">            <span class="attr">"mayContact"</span>: <span class="string">"400-820-8820"</span>,</div><div class="line">            <span class="attr">"imgUrl"</span>: <span class="string">"www.soho.cn"</span>,</div><div class="line">    <span class="attr">"status"</span>:<span class="number">1</span>,</div><div class="line">    <span class="attr">"createdAt"</span>:<span class="number">1234567</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="开发方案"><a href="#开发方案" class="headerlink" title="开发方案"></a>开发方案</h1><h2 id="预处理阶段"><a href="#预处理阶段" class="headerlink" title="预处理阶段"></a>预处理阶段</h2><ol>
+<li>利用高德地图API获取全国所有的省市三级行政区域划分信息，按照area表结构入库</li>
+<li>根据医院分级创建医院科室的分级信息enum</li>
+<li>根据设计的表结构，建表并生成对应的实体类</li>
+</ol>
+<h2 id="数据获得阶段"><a href="#数据获得阶段" class="headerlink" title="数据获得阶段"></a>数据获得阶段</h2><ol>
+<li>先将我们数据库中所有的医院和科室的status置为已审核（1）</li>
+<li><p>通过爬虫爬取医院及科室信息，大致的json如下：<br>{“hospital_level”: “三甲”, “department_name”: “运动医学科”, “hospital_name”: “北京百汇京顺医院”, “city_name”: “朝阳”, “province_name”: “北京”}</p>
+</li>
+<li><p>根据这些json信息过滤出我们需要的信息（医院名称，科室名称，省份信息）</p>
+</li>
+<li>进行一次性操作：根据医院/科室名称，更新已有科室的level信息，同时新建查询不到的医院/科室</li>
+<li>根据高德地图API和对应的医院、省份信息获取医院的行政区域划分同时更新area_id字段</li>
+</ol>
+<h2 id="收尾阶段"><a href="#收尾阶段" class="headerlink" title="收尾阶段"></a>收尾阶段</h2><ol>
+<li>完成功能接口，实现科室和医院的CRUD以及审核等接口</li>
+<li>自测</li>
+</ol>
+<h1 id="可能存在的风险"><a href="#可能存在的风险" class="headerlink" title="可能存在的风险"></a>可能存在的风险</h1><ol>
+<li>高德地图的API使用次数，使用方法，复杂返回值的处理</li>
+<li>因为新增了很多的科室，所以其他项目中的获取全部医院/科室的接口调用就会变更为获取全部已审核的医院/科室，可能会有部分方法的实现需要改动</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://wiki.office.test.youhujia.com/2017/03/06/Our_Perfect_Departments/" target="_blank" rel="external">http://wiki.office.test.youhujia.com/2017/03/06/Our_Perfect_Departments/</a></p>
+<p>  <a href="http://wiki.office.test.youhujia.com/2017/03/13/improve_department/" target="_blank" rel="external">http://wiki.office.test.youhujia.com/2017/03/13/improve_department/</a></p>
+<h1 id="开发排期"><a href="#开发排期" class="headerlink" title="开发排期"></a>开发排期</h1><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>耗时/人日</th>
+<th>actor</th>
+<th>预计开始日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前期准备：数据库修改、生成实体类、protobuf对象生成、医院等级enum对象构建等</td>
+<td>1</td>
+<td>李圣阳</td>
+<td>03.20</td>
+</tr>
+<tr>
+<td>地理区域高德API调用入库</td>
+<td>1</td>
+<td>李圣阳</td>
+<td>03.21</td>
+</tr>
+<tr>
+<td>数据爬取梳理</td>
+<td>1.5</td>
+<td>李圣阳</td>
+<td>03.22</td>
+</tr>
+<tr>
+<td>数据处理入库</td>
+<td>1</td>
+<td>李圣阳</td>
+<td>03.23</td>
+</tr>
+<tr>
+<td>医院、科室的CRUD和审核接口</td>
+<td>1.5</td>
+<td>李圣阳</td>
+<td>03.25</td>
+</tr>
+<tr>
+<td>受影响的接口的修改</td>
+<td>1</td>
+<td>李圣阳</td>
+<td>03.27</td>
+</tr>
+<tr>
+<td>前端页面开发</td>
+<td>3</td>
+<td>李旭</td>
+<td>03.25</td>
+</tr>
+<tr>
+<td>客户端开发</td>
+<td>3</td>
+<td>-</td>
+<td>03.2？</td>
+</tr>
+<tr>
+<td>自测</td>
+<td>1</td>
+<td>李圣阳</td>
+<td>03.28</td>
+</tr>
+<tr>
+<td>客户端联调</td>
+<td>1</td>
+<td>李圣阳&amp;-</td>
+<td>03.29</td>
+</tr>
+<tr>
+<td>前后端联调</td>
+<td>1</td>
+<td>李圣阳&amp;李旭</td>
+<td>03.30</td>
+</tr>
+<tr>
+<td>提测</td>
+<td>1</td>
+<td>郑旭红</td>
+<td>03.31</td>
+</tr>
+<tr>
+<td>部署、验收、上线</td>
+<td>1</td>
+<td>李圣阳&amp;张正宇</td>
+<td>04.01</td>
+</tr>
+</tbody>
+</table>
+<h1 id="部署上线流程："><a href="#部署上线流程：" class="headerlink" title="部署上线流程："></a>部署上线流程：</h1><p>1、合并Halo,Yolar,Era,Gateway的代码到master分支</p>
+<p>2、调用 /api/era/utils/all-in 接口，在数据库中生成Area信息</p>
+<p>3、修改Area中部分脏数据：</p>
+<p>北京市市辖区、天津市市辖区、上海市市辖区、重庆市市辖区 —— 北京市、上海市、天津市、重庆市</p>
+<p>为 济源市、神农架林区、潜江市、天门市、仙桃市、嘉峪关市、三沙市、儋州市、石河子市、五家渠市、东莞市、中山市、定西市 添加同名区域信息</p>
+<p>在做数据注入前，必须要先把所有医院和科室的status置为1</p>
+<p>4、去权限管理系统中配置app和role</p>
+<p>5、修改config_repo的配置：</p>
+<p>Era:</p>
+<p>role:<br>  reader: 10<br>  editor: 12<br>  admin: 13 </p>
+<p>  improveDepartment:<br>  id: 9<br>  secret: 875ea597-958e-409b-b69e-e186b09bc11</p>
+<p>  map:<br>  areaInfoUrl: <a href="http://restapi.amap.com/v3/config/district" target="_blank" rel="external">http://restapi.amap.com/v3/config/district</a><br>  areaInfoParams: key=6fc800378f55173878a9004e0dd1aa7b&amp;keywords=中国&amp;subdistrict=3&amp;showbiz=false&amp;extensions=base<br>  readHospitalFileName: src/main/resources/department.json<br>  amapAPIKey: 6fc800378f55173878a9004e0dd1aa7b<br>  amapSearchPOIUrl: <a href="http://restapi.amap.com/v3/place/text" target="_blank" rel="external">http://restapi.amap.com/v3/place/text</a><br>  hospitalErrOutFileName: src/main/resources/errorHospitalLog.json</p>
+<p>  Gateway：</p>
+<p>  no.need.authenticate.urls: /api/era/utils<br>  filters.admin2.urls:/api/era/v1/admin/</p>
+<p>6、重启Gateway、Era</p>
+<p>7、调用 /api/era/utils/department-wife 接口将department.json中的科室信息入库</p>
+<p>  code : ekufgisdgfiu-gwe09r23r79g-fwr9fg9-23ygw9efuge8rv</p>
+<p>8、上线完毕，预计六小时</p>
+<h1 id="开发日志"><a href="#开发日志" class="headerlink" title="开发日志"></a>开发日志</h1><h3 id="2017-03-14"><a href="#2017-03-14" class="headerlink" title="2017-03-14"></a>2017-03-14</h3><p><strong>今日</strong></p>
+<ul>
+<li>科室完善前期调研</li>
+<li>科室完善初步方案</li>
+<li>科室完善prd文档第一版成稿</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>科室完善方案完成，进一步review，争取kick off</li>
+</ul>
+<h3 id="2017-03-15"><a href="#2017-03-15" class="headerlink" title="2017-03-15"></a>2017-03-15</h3><p><strong>今日</strong></p>
+<ul>
+<li>完善prd文档 </li>
+<li>与前端同学初步沟通方案和时间等问题</li>
+<li>与客户端同学初步沟通方案和时间等问题</li>
+<li>后台开发方案review</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>进一步review，抓紧开会，争取kick off</li>
+</ul>
+<h3 id="2017-03-16"><a href="#2017-03-16" class="headerlink" title="2017-03-16"></a>2017-03-16</h3><p><strong>今日</strong></p>
+<ul>
+<li>完善prd文档 </li>
+<li>review会议，和前端服务器同学沟通接口以及人员排期</li>
+<li>经mmliu桑同意，项目kick off</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>因为学校身份信息补录，开始休假。预计周一收假。</li>
+</ul>
+<h3 id="2017-03-21"><a href="#2017-03-21" class="headerlink" title="2017-03-21"></a>2017-03-21</h3><p><strong>今日</strong></p>
+<ul>
+<li>前期准备：数据库修改、生成实体类、protobuf对象生成 </li>
+<li>地理区域高德API调用</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>确认爬取的具体城市</li>
+<li>数据爬取、读取、入库</li>
+</ul>
+<h3 id="2017-03-22"><a href="#2017-03-22" class="headerlink" title="2017-03-22"></a>2017-03-22</h3><p><strong>今日</strong></p>
+<ul>
+<li>医院json文件的读取 整理 地图API调用 处理返回数据 入库的代码完成</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>测试今日代码的正确性</li>
+<li>如若正确 进度向前推进</li>
+</ul>
+<h3 id="2017-03-23"><a href="#2017-03-23" class="headerlink" title="2017-03-23"></a>2017-03-23</h3><p><strong>今日</strong></p>
+<ul>
+<li>北京、合肥医院科室信息已经全部进入yolar_dev库，高德地图API企业开发者账号申请中，进度乐观，具体了乐观到什么程度不告诉你们。</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>进度push push push！</li>
+</ul>
+<h3 id="2017-03-24"><a href="#2017-03-24" class="headerlink" title="2017-03-24"></a>2017-03-24</h3><p><strong>今日</strong></p>
+<ul>
+<li>后端开发进行到了era层面，哈哈哈哈哈哈哈</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>进度push push push！</li>
+</ul>
+<h3 id="2017-03-25"><a href="#2017-03-25" class="headerlink" title="2017-03-25"></a>2017-03-25</h3><p><strong>今日</strong></p>
+<ul>
+<li>era,halo,yolar三端不涉及权限的部分，搞定，期待袁鑫明天的加班</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>进度push push push！</li>
+</ul>
+<h3 id="2017-03-27"><a href="#2017-03-27" class="headerlink" title="2017-03-27"></a>2017-03-27</h3><p><strong>今日</strong></p>
+<ul>
+<li>自测完毕</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>进度push push push！</li>
+</ul>
+<h3 id="2017-03-28"><a href="#2017-03-28" class="headerlink" title="2017-03-28"></a>2017-03-28</h3><p><strong>今日</strong></p>
+<ul>
+<li>自测完毕</li>
+<li>添加完善现有医院的逻辑</li>
+<li>完成全国八万多家科室的入库，并发现一些脏数据</li>
+<li>确认前端客户端排期和联调时间</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>代码review</li>
+<li>客户端联调</li>
+</ul>
+<h3 id="2017-03-29"><a href="#2017-03-29" class="headerlink" title="2017-03-29"></a>2017-03-29</h3><p><strong>今日</strong></p>
+<ul>
+<li>客户端联调完成</li>
+<li>确认前端排期和联调时间</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>代码review</li>
+<li>配合前端开发</li>
+<li>熟悉新需求，准备下一阶段的开发</li>
+</ul>
+<h3 id="2017-03-30"><a href="#2017-03-30" class="headerlink" title="2017-03-30"></a>2017-03-30</h3><p><strong>今日</strong></p>
+<ul>
+<li>客户端联调完成</li>
+<li>前后端部分联调完成</li>
+<li>修改接口和和前端统一</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>代码review</li>
+<li>前后端联调</li>
+<li>熟悉新需求，准备下一阶段的开发</li>
+</ul>
+<h3 id="2017-03-31"><a href="#2017-03-31" class="headerlink" title="2017-03-31"></a>2017-03-31</h3><p><strong>今日</strong></p>
+<ul>
+<li>客户端联调完成</li>
+<li>前后端部分联调完成</li>
+<li>修改接口和和前端统一</li>
+</ul>
+<p><strong>明日</strong></p>
+<ul>
+<li>代码review</li>
+<li>前后端联调</li>
+<li>熟悉新需求，准备下一阶段的开发</li>
+</ul>
+<h3 id="2017-04-01"><a href="#2017-04-01" class="headerlink" title="2017-04-01"></a>2017-04-01</h3><p><strong>今日</strong></p>
+<ul>
+<li>终于上了dev</li>
+</ul>
+<p><strong>节后</strong></p>
+<ul>
+<li>代码review</li>
+<li>前后端联调，提测</li>
+<li>熟悉新需求，准备下一阶段的开发</li>
+</ul>
+<h3 id="2017-04-05"><a href="#2017-04-05" class="headerlink" title="2017-04-05"></a>2017-04-05</h3><p><strong>今日</strong></p>
+<ul>
+<li>项目冻结</li>
+</ul>
+<p><strong>明天</strong></p>
+<ul>
+<li>冻上了</li>
+</ul>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

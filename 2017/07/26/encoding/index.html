@@ -1,0 +1,509 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>encoding前传 | Clove</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Clove">
+    
+
+    
+    <meta name="description" content="字符集和编码开发过程中，字符编码始终是程序员绕不开的一个话题。以下是针对Unicode和UTF-8的区别，简要整理一下有关字符编码的内容。历史原因，在计算机的世界中，所有的信息都是0/1组合的二进制序列，计算机是无法直接识别和存储字符的。因此，字符必须经过编码才能被计算机处理。首先强调以下几个概念：    理解字符集和字符编码的区别   系统、终端、文件和程序不同概念上的编码   常见操作系统、文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="encoding前传">
+<meta property="og:url" content="http://yoursite.com/2017/07/26/encoding/index.html">
+<meta property="og:site_name" content="Clove">
+<meta property="og:description" content="字符集和编码开发过程中，字符编码始终是程序员绕不开的一个话题。以下是针对Unicode和UTF-8的区别，简要整理一下有关字符编码的内容。历史原因，在计算机的世界中，所有的信息都是0/1组合的二进制序列，计算机是无法直接识别和存储字符的。因此，字符必须经过编码才能被计算机处理。首先强调以下几个概念：    理解字符集和字符编码的区别   系统、终端、文件和程序不同概念上的编码   常见操作系统、文">
+<meta property="og:image" content="https://pic1.zhimg.com/50/bd3b6c7e4f432b6dfbf5838f8e62cd14_hd.png">
+<meta property="og:updated_time" content="2017-11-04T05:37:53.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="encoding前传">
+<meta name="twitter:description" content="字符集和编码开发过程中，字符编码始终是程序员绕不开的一个话题。以下是针对Unicode和UTF-8的区别，简要整理一下有关字符编码的内容。历史原因，在计算机的世界中，所有的信息都是0/1组合的二进制序列，计算机是无法直接识别和存储字符的。因此，字符必须经过编码才能被计算机处理。首先强调以下几个概念：    理解字符集和字符编码的区别   系统、终端、文件和程序不同概念上的编码   常见操作系统、文">
+<meta name="twitter:image" content="https://pic1.zhimg.com/50/bd3b6c7e4f432b6dfbf5838f8e62cd14_hd.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Clove" type="application/atom+xml">
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Clove">Clove</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/26/encoding/" title="encoding前传" itemprop="url">encoding前传</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Clove" target="_blank" itemprop="author">Clove</a>
+		
+  <p class="article-time">
+    <time datetime="2017-07-26T14:30:30.000Z" itemprop="datePublished"> Published 2017-07-26</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#字符集和编码"><span class="toc-number">1.</span> <span class="toc-text">字符集和编码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符集和字符编码的区别"><span class="toc-number">1.1.</span> <span class="toc-text">字符集和字符编码的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盘古开天辟地—ASCII编码"><span class="toc-number">1.1.1.</span> <span class="toc-text">盘古开天辟地—ASCII编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#膨胀的盘古—扩展ASCII"><span class="toc-number">1.1.2.</span> <span class="toc-text">膨胀的盘古—扩展ASCII</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#天朝母语—GB系列"><span class="toc-number">1.1.3.</span> <span class="toc-text">天朝母语—GB系列</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="字符集和编码"><a href="#字符集和编码" class="headerlink" title="字符集和编码"></a>字符集和编码</h1><p>开发过程中，字符编码始终是程序员绕不开的一个话题。以下是针对Unicode和UTF-8的区别，简要整理一下有关字符编码的内容。<br>历史原因，在计算机的世界中，所有的信息都是0/1组合的二进制序列，计算机是无法直接识别和存储字符的。因此，字符必须经过编码才能被计算机处理。首先强调以下几个概念：</p>
+<blockquote>
+<p>  理解字符集和字符编码的区别</p>
+<p>  系统、终端、文件和程序不同概念上的编码</p>
+<p>  常见操作系统、文本编辑器对字符编码的处理</p>
+</blockquote>
+<h2 id="字符集和字符编码的区别"><a href="#字符集和字符编码的区别" class="headerlink" title="字符集和字符编码的区别"></a>字符集和字符编码的区别</h2><p>如上所述，字符只有按照一定规则编码，最终表示为0/1二进制序列的形式，才能被计算机处理。问题来了，怎么定义这种编码映射呢？所以，要求大家按照相同的规则，规定好字符与二进制序列（表示为某个数值）的映射关系。然而，林子大了，什么鸟都有。由于历史和地域的原因，也就形成了等多种不同场合、语言的字符集，如ASCII、GBK、Unicode等。</p>
+<p>因此，某种意义上，可以理解为，字符集是一种协议，而字符编码是对字符集的一种实现。可以想到，最直接的编码方式，便是直接使用字符对应的二进制序列，这样就导致了字符集合字符编码看起来是一个东西，长此以往，可能就会对Unicode和UTF的区别有些困惑。</p>
+<h3 id="盘古开天辟地—ASCII编码"><a href="#盘古开天辟地—ASCII编码" class="headerlink" title="盘古开天辟地—ASCII编码"></a>盘古开天辟地—ASCII编码</h3><p>在计算机内部，所有信息最终都被表示为一个二进制序列。每一个二进制为有0和1两种状态，因此8个二进制为就可以组合出256（2^8）种状态，这被称为一个字节（byte）。即，一个字节一共可以表示256种不同的状态，每一个状态对应一个符号，共256个符号，0000 0000 - 1111 1111。</p>
+<p>强调一点，ASCII便是字符集和字符编码相同的情况，直接将字符对应的8位二进制数作为最终形式存储。因此，当我们提及ASCII，既表示了一种字符集，也代表了一种字符编码，即常说的“ASCII编码”。</p>
+<p>ASCII表如下图所示。</p>
+<p><img src="https://pic1.zhimg.com/50/bd3b6c7e4f432b6dfbf5838f8e62cd14_hd.png" alt="ASCII表"></p>
+<h3 id="膨胀的盘古—扩展ASCII"><a href="#膨胀的盘古—扩展ASCII" class="headerlink" title="膨胀的盘古—扩展ASCII"></a>膨胀的盘古—扩展ASCII</h3><p>英语有128个符号编码就够了，对于其他语言来说，128个符号是不够的。同时，1byte中，最高位还未投入使用，这能够再编码128个符号！于是乎，欧中国家决定利用闲置的最高位编入新的符号。这样一来，欧洲国家使用的编码体系，可以表示最多256个符号。从128到255这些字符被称为“扩展字符”。</p>
+<p>基于此，ISO组织在ASCII基础上又制定了一系列标准用来扩展ASCII编码，它们是ISO-8859-1~ISO-8859-15，其中ISO-8859-1（又称为Latin-1）涵盖了大多数西欧语言字符，被广泛应用。ISO-8859-1仍然是单字节编码，能表示256个字符。</p>
+<h3 id="天朝母语—GB系列"><a href="#天朝母语—GB系列" class="headerlink" title="天朝母语—GB系列"></a>天朝母语—GB系列</h3><p>西洋字符数量较少，一个byte（8bit）基本够用，然鹅我天朝文化博大精深0_0，光常用字就好几千呢！！但这难不倒我们勤劳勇敢的中国人，GB2312字符集诞生了！</p>
+<p>GB2312的思想其实很简单—既然一个byte不够用，正所谓，“没有1一个byte解决不了的问题，如果有，就2个byte”。理论上，2个字节便可以表示2^16=65536的字符。不过，GB2312被设计时，只规定了中文常见字，很多特殊字符还没有包含。GB2312共收录了7455个字符，包括6573个汉字和682个其他符号。</p>
+<p>尴尬的是，伟大的GB2312规定的字符太少，以致于有些国家领导人名字的汉字表示不出来！于是1995年，汉字扩展规范GBK1.0（《汉字内码扩展规范》），收录了21886个符号，它分为汉子去和符号区。GBK编码是GB2312编码的超集，向下完全兼容GB2312。</p>
+<p>2000年的GB18030是取代GBK1.0的正式国家标准。GB18030编码向下兼容GBK和GB2312。</p>
+<p>GBK和GB2312都是双字节等宽编码，如果算上为与ASCII兼容所支持的单字节，也可视为是单字节和双字节混合的变长编码。GB18030编码是变长编码，采用单字节、双字节和4字节方案，其中单字节、双字节和GBK是完全兼容的，4字节编码的码位就是收录了CJK扩展A的6582个汉字。</p>
+<p>从ASCII、GB2312、GBK到GB18030，这些编码方法是向下兼容的，即同一个字符在这些方案中总是有相同的编码，后面的标准支持更多的字符。在这些编码中，英文和中文可以统一处理，区分中文编码的方法是最高字节的最高位不为0。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/encoding/">encoding</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/07/26/encoding/" data-title="encoding前传 | Clove" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/30/Dpt-Content-Config/" title="C端科室展示内容编辑后台 技术文档">
+  <strong>上一篇：</strong><br/>
+  <span>
+  C端科室展示内容编辑后台 技术文档</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/07/20/Thread/"  title="thread-interview">
+ <strong>下一篇：</strong><br/> 
+ <span>thread-interview
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#字符集和编码"><span class="toc-number">1.</span> <span class="toc-text">字符集和编码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符集和字符编码的区别"><span class="toc-number">1.1.</span> <span class="toc-text">字符集和字符编码的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#盘古开天辟地—ASCII编码"><span class="toc-number">1.1.1.</span> <span class="toc-text">盘古开天辟地—ASCII编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#膨胀的盘古—扩展ASCII"><span class="toc-number">1.1.2.</span> <span class="toc-text">膨胀的盘古—扩展ASCII</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#天朝母语—GB系列"><span class="toc-number">1.1.3.</span> <span class="toc-text">天朝母语—GB系列</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/API设计/" title="API设计">API设计<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JWT/" title="JWT">JWT<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java8/" title="Java8">Java8<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/NIO/" title="NIO">NIO<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/encoding/" title="encoding">encoding<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/thread/" title="thread">thread<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/yhj/" title="yhj">yhj<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/开发总结/" title="开发总结">开发总结<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/死磕高并发/" title="死磕高并发">死磕高并发<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://clove506.github.io/" target="_blank" title="Clove&#39;s Blog">Clove&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Clove">Clove</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

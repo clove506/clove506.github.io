@@ -1,0 +1,635 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【优护助手1.4.1】日志 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="优护助手1.4.1开发日志2016.12.15Android:
+UI:
+完成Tabbar框架
+
+
+Service:
+完成患者列表接口
+完成同事列表接口iOS:
+
+
+UI:
+完成Tabbar框架
+
+
+Service:
+完成了Patient和Tag以及相关List与Result的Model
+
+
+
+201">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【优护助手1.4.1】日志"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【优护助手1.4.1】日志</h2>
+					
+					<div>
+						<span class="post-time">2016-12-06 11:44:13</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="优护助手1-4-1开发日志"><a href="#优护助手1-4-1开发日志" class="headerlink" title="优护助手1.4.1开发日志"></a>优护助手1.4.1开发日志</h1><h2 id="2016-12-15"><a href="#2016-12-15" class="headerlink" title="2016.12.15"></a>2016.12.15</h2><h3 id="Android"><a href="#Android" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>UI:<ul>
+<li>完成Tabbar框架</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成患者列表接口</li>
+<li>完成同事列表接口<h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>UI:<ul>
+<li>完成Tabbar框架</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成了Patient和Tag以及相关List与Result的Model</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-16"><a href="#2016-12-16" class="headerlink" title="2016.12.16"></a>2016.12.16</h2><h3 id="Android-1"><a href="#Android-1" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Service<ul>
+<li>完成登出接口</li>
+<li>完成单聊群聊接口<h3 id="iOS-1"><a href="#iOS-1" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>UI<ul>
+<li>完成静态患者列表</li>
+</ul>
+</li>
+<li>Service<ul>
+<li>完成患者列表接口</li>
+<li>完成同事列表接口</li>
+<li>完成Protobuf预编译调研</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-17"><a href="#2016-12-17" class="headerlink" title="2016.12.17"></a>2016.12.17</h2><h3 id="Android-2"><a href="#Android-2" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>UI:<br>  - </li>
+<li>Service:<ul>
+<li>腾讯云登录登出</li>
+<li>原生登录集成</li>
+<li>患者列表</li>
+<li>同事列表</li>
+</ul>
+</li>
+</ul>
+<h3 id="iOS-2"><a href="#iOS-2" class="headerlink" title="iOS:"></a>iOS:</h3><ul>
+<li>UI:<ul>
+<li>完成工具页面</li>
+<li>完成访客页面逻辑</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成集成腾讯云SDK</li>
+<li>完成测试工具页</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-18-xxx"><a href="#2016-12-18-xxx" class="headerlink" title="2016.12.18 xxx"></a>2016.12.18 xxx</h2><h2 id="2016-12-19"><a href="#2016-12-19" class="headerlink" title="2016.12.19"></a>2016.12.19</h2><h3 id="Android-3"><a href="#Android-3" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>患者列表+数据对接</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>调研腾讯云每次启动登录<h3 id="iOS-3"><a href="#iOS-3" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>完成患者列表数据对接</li>
+<li>完成静态同事列表</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成Protobuf SDK集成</li>
+<li>解决TIMSDK包体积过大上传Github的问题<h2 id="2016-12-20"><a href="#2016-12-20" class="headerlink" title="2016.12.20"></a>2016.12.20</h2><h3 id="Android-4"><a href="#Android-4" class="headerlink" title="Android:"></a>Android:</h3></li>
+</ul>
+</li>
+<li>Business:<br>  - </li>
+<li>Service:<ul>
+<li><h3 id="iOS-4"><a href="#iOS-4" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>完成同事列表数据对接</li>
+<li>树状显示暂时定为P2需求</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成Protobuf的数据，AFNetworking传输Protobuf的调研<h2 id="2016-12-21"><a href="#2016-12-21" class="headerlink" title="2016.12.21"></a>2016.12.21</h2><h3 id="Android-5"><a href="#Android-5" class="headerlink" title="Android:"></a>Android:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>同事列表</li>
+<li>选择沟通对象</li>
+<li>登出页面</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>聊天消息界面（拿消息需要时间） <h3 id="iOS-5"><a href="#iOS-5" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>登陆页面全部连通</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成Protobuf接收数据的调研</li>
+<li>Calendar的首页列表的接口</li>
+<li>护士认证接口<h2 id="2016-12-22"><a href="#2016-12-22" class="headerlink" title="2016.12.22"></a>2016.12.22</h2><h3 id="Android-6"><a href="#Android-6" class="headerlink" title="Android:"></a>Android:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>排班表选择班次 @qiuyu</li>
+<li>创建班次页面 @qiuyu</li>
+<li>首页聊天信息头像 @weiyu</li>
+<li>聊天页头像 @weiyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>创建排班和修改排版的接口 @weiyu<h3 id="iOS-6"><a href="#iOS-6" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>排版页大列表日历View封装（ongoing） @jingkai</li>
+<li>选择日期列表 @jingkai</li>
+<li>病人列表没数据的时候优化 @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成腾讯云登陆登出 @junchao</li>
+<li>完成腾讯云新建聊天调研 @junchao</li>
+<li>完成新建单对单聊天以及新建群聊的接口 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-23"><a href="#2016-12-23" class="headerlink" title="2016.12.23"></a>2016.12.23</h2><h3 id="Android-7"><a href="#Android-7" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>工具页面所有的二级页面 @qiuyu</li>
+<li>完成新建班次页面 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>排班的所有JSON接口封装完毕 @weiyu<h3 id="iOS-7"><a href="#iOS-7" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>工具页二级界面：管理、新建公告 @jingkai</li>
+<li>首页日程界面，排班界面，右上角菜单bug修复 @jingkai</li>
+<li>Profile页设置及登出界面完成 @jingkai</li>
+<li>完成了聊天界面的toolbar @junchao</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-24"><a href="#2016-12-24" class="headerlink" title="2016.12.24"></a>2016.12.24</h2><h3 id="Android-8"><a href="#Android-8" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>完成排班已完成界面的接口对接 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>调研腾讯云群聊过程中 @weiyu<h3 id="iOS-8"><a href="#iOS-8" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>大致完成排班表的静态主UI @jingkai</li>
+<li>完成新建排班，创建排班 @jingkai</li>
+<li>完成同事列表的二级菜单 @jingkai</li>
+<li>完成聊天ListCell UI框架 @junchao</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>调研单聊过程中 @ junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-25-xxx"><a href="#2016-12-25-xxx" class="headerlink" title="2016.12.25 xxx"></a>2016.12.25 xxx</h2><h2 id="2016-12-26"><a href="#2016-12-26" class="headerlink" title="2016.12.26"></a>2016.12.26</h2><h3 id="Android-9"><a href="#Android-9" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>排班表的日历栏封装</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>群聊的展示与测试调研<h3 id="iOS-9"><a href="#iOS-9" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>排班表的日历拦封装</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>首页聊天列表，聊天页的数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-27"><a href="#2016-12-27" class="headerlink" title="2016.12.27"></a>2016.12.27</h2><h3 id="Android-10"><a href="#Android-10" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>排班表日历栏封装完毕 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>群聊的发送与消息展示 @weiyu<h3 id="iOS-10"><a href="#iOS-10" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>修复同事列表问题 @jingkai</li>
+<li>重写创建排班 @jingkai</li>
+<li>排班表还剩下自适应高度 @jingkai</li>
+<li>主页的信息列完成 @junchao</li>
+<li>聊天页的列表框架完成 @junchao</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-28"><a href="#2016-12-28" class="headerlink" title="2016.12.28"></a>2016.12.28</h2><h3 id="Android-11"><a href="#Android-11" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>完成排班表静态页面 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>排班表所有的接口联调完成 @weiyu</li>
+<li>聊天那历史消息 @weiyu<h3 id="iOS-11"><a href="#iOS-11" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>排班静态页（需要集成）@jingkai</li>
+<li>发起沟通页面 @jingkai</li>
+<li>聊天接受新消息 @junchao</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>封了所有排班接口 @junchao</li>
+<li>封了所有开始沟通接口 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-29"><a href="#2016-12-29" class="headerlink" title="2016.12.29"></a>2016.12.29</h2><h3 id="Android-12"><a href="#Android-12" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>排班数据对接完成 @qiuyu</li>
+<li>批量排班正在做 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>聊天封装JSON</li>
+<li>首页聊天记录本地化正在做<h3 id="iOS-12"><a href="#iOS-12" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>批量排班数据对接完成 @jingkai</li>
+<li>UI调整中 @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>聊天封装JSON</li>
+<li>nurseProfile本地cache</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-30"><a href="#2016-12-30" class="headerlink" title="2016.12.30"></a>2016.12.30</h2><h3 id="Android-13"><a href="#Android-13" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>完成批量排班页面 （排班大功能基本完成）@qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>腾讯云断线重连完成 @weiyu</li>
+<li>聊天历史消息加载基本完成 @weiyu<h3 id="iOS-13"><a href="#iOS-13" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>完成了查看排班表的功能 @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成了开始病人和同事聊天 @junchao</li>
+<li>文章列表接口和UI基本完成 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2016-12-31-xxx"><a href="#2016-12-31-xxx" class="headerlink" title="2016.12.31 xxx"></a>2016.12.31 xxx</h2><h2 id="2017-01-01-xxx"><a href="#2017-01-01-xxx" class="headerlink" title="2017.01.01 xxx"></a>2017.01.01 xxx</h2><h2 id="2017-01-02-xxx"><a href="#2017-01-02-xxx" class="headerlink" title="2017.01.02 xxx"></a>2017.01.02 xxx</h2><h2 id="2017-01-03"><a href="#2017-01-03" class="headerlink" title="2017.01.03"></a>2017.01.03</h2><h3 id="Android-14"><a href="#Android-14" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>推送文章工具页面 @qiuyu</li>
+<li>调整UI细节 @qiuyu</li>
+<li>聊天气泡的细节 @weiyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>解析与发送文章 @weiyu<h3 id="iOS-14"><a href="#iOS-14" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>排班表UI基本完成 @jingkai</li>
+<li>聊天动态文本高度 @junchao</li>
+<li>气泡UI细节 @junchao</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-01-04"><a href="#2017-01-04" class="headerlink" title="2017.01.04"></a>2017.01.04</h2><h3 id="Android-15"><a href="#Android-15" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>新建公告页面 @qiuyu</li>
+<li>个人Profile页（50%）@qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>聊天界面头像变圆 @weiyu</li>
+<li>调研个推的Push Notification @weiyu<h3 id="iOS-15"><a href="#iOS-15" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>排班界面创建编辑班次（还剩下提交数据对接）@jingkai</li>
+<li>患者列表为空显示单图 @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>聊天信息的工具文章的JSON解析 @junchao</li>
+<li>批量发送文章 @junchao</li>
+<li>对方的聊天内容显示姓名和动态宽高 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-01-05"><a href="#2017-01-05" class="headerlink" title="2017.01.05"></a>2017.01.05</h2><h3 id="Android-16"><a href="#Android-16" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>个人资料页 ing… @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>获取用户信息接口 @weiyu</li>
+<li>更新用户信息接口 相关更新 @weiyu<h3 id="iOS-16"><a href="#iOS-16" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>批量排班的接口对接 @jingkai</li>
+<li>发起沟通页面完成 @junchao</li>
+<li>聊天页面适配群聊 @junchao</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>批量排版接口封装 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-01-06"><a href="#2017-01-06" class="headerlink" title="2017.01.06"></a>2017.01.06</h2><h3 id="Android-17"><a href="#Android-17" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>完成个人资料页 @qiuyu</li>
+<li>搭建标签页面   @qiuyu<br>-给activity添加loadig @weiyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>解决URL无法上传的bug @weiyu<h3 id="iOS-17"><a href="#iOS-17" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>批量排班和查看排班  @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>重写了批量排班表中添加排班接口 @jingkai</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-01-07"><a href="#2017-01-07" class="headerlink" title="2017.01.07"></a>2017.01.07</h2><h3 id="Android-18"><a href="#Android-18" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>设置标签页，及相关自定义控件  @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成标签相关的所有接口  @weiyu<h3 id="iOS-18"><a href="#iOS-18" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>调整UI @jingkai<br>— 调研HBuilder @jingkai</li>
+</ul>
+</li>
+<li>Service:<br>  -</li>
+</ul>
+<h2 id="2017-01-08-xxx"><a href="#2017-01-08-xxx" class="headerlink" title="2017.01.08 xxx"></a>2017.01.08 xxx</h2><h2 id="2017-01-09"><a href="#2017-01-09" class="headerlink" title="2017.01.09"></a>2017.01.09</h2><h3 id="Android-19"><a href="#Android-19" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>完成进入聊天前标签页 @qiuyu</li>
+<li>调研WebiView @qiuyu</li>
+<li>完成Getui集成（有小问题遗留） @weiyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成标签页接口 @weiyu<h3 id="iOS-19"><a href="#iOS-19" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>完成排班现存所有工作 @jingkai</li>
+<li>调研WebView @jingkai</li>
+<li>完成Profile页数据对接 @junchao</li>
+<li>完成Getui集成 @junchao</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-01-10"><a href="#2017-01-10" class="headerlink" title="2017.01.10"></a>2017.01.10</h2><h3 id="Android-20"><a href="#Android-20" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>调研WebView，已经能加载，但是传参数有问题 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>集成个推，有block问题：配置有问题需要解决 @weiyu<h3 id="iOS-20"><a href="#iOS-20" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>调研WebView，目前显示不出来 @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>集成了神策数据，还需要埋点设置 @junchao </li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-01-11"><a href="#2017-01-11" class="headerlink" title="2017.01.11"></a>2017.01.11</h2><h2 id="2017-01-12"><a href="#2017-01-12" class="headerlink" title="2017.01.12"></a>2017.01.12</h2><h2 id="2017-01-13"><a href="#2017-01-13" class="headerlink" title="2017.01.13"></a>2017.01.13</h2><h2 id="2017-01-14"><a href="#2017-01-14" class="headerlink" title="2017.01.14"></a>2017.01.14</h2><h2 id="2017-01-15"><a href="#2017-01-15" class="headerlink" title="2017.01.15"></a>2017.01.15</h2><h2 id="2017-01-16"><a href="#2017-01-16" class="headerlink" title="2017.01.16"></a>2017.01.16</h2><h2 id="2017-01-17"><a href="#2017-01-17" class="headerlink" title="2017.01.17"></a>2017.01.17</h2><h2 id="2017-01-18"><a href="#2017-01-18" class="headerlink" title="2017.01.18"></a>2017.01.18</h2><h2 id="2017-01-19"><a href="#2017-01-19" class="headerlink" title="2017.01.19"></a>2017.01.19</h2><hr>
+<h3 id="Android-21"><a href="#Android-21" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<br>  - </li>
+<li>Service:<ul>
+<li><h3 id="iOS-21"><a href="#iOS-21" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<br>  - </li>
+<li>Service:<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

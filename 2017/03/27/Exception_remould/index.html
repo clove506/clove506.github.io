@@ -1,0 +1,212 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【Exception】相关改造以及规范 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要Exception 相关改造以及抛错规范">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【Exception】相关改造以及规范"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【Exception】相关改造以及规范</h2>
+					
+					<div>
+						<span class="post-time">2017-03-27 12:10:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Exception 相关改造以及抛错规范</p>
+<a id="more"></a>
+<h2 id="WIKI维护人"><a href="#WIKI维护人" class="headerlink" title="WIKI维护人"></a>WIKI维护人</h2><p>黄  英</p>
+<h3 id="为什么要做"><a href="#为什么要做" class="headerlink" title="为什么要做"></a>为什么要做</h3><h4 id="显示给用户更合理："><a href="#显示给用户更合理：" class="headerlink" title="显示给用户更合理："></a>显示给用户更合理：</h4><p>为了给用户显示的异常显示更为合理，所以需要去掉异常信息的前缀，例如之前抛给用户的异常信息：参数错误，info：手机号码不能为空。这样看起来很不合理，所以现在改造为：手机号不能为空。</p>
+<h4 id="显示给开发人员更简明："><a href="#显示给开发人员更简明：" class="headerlink" title="显示给开发人员更简明："></a>显示给开发人员更简明：</h4><p>现在在一个项目调用另外一个项目的时候，我们都是通过halo项目调用的，在调用时我们做了一个抛错的处理，但是正式因为这样导致下层的错误会在这儿进行一次封装，导致如果是下层抛出错误时我们看到的错误都是经过包装的，要是项目之间一层调用一层的话，这样就会导致真正的错误信息被持续包裹，导致我们看错误时很难筛选出有用的信息。所以我们需要这儿进行处理让下层的错误能够很直观的一层接一层的抛出，最后直观的显示。</p>
+<h4 id="出现错误时能快速定位错误："><a href="#出现错误时能快速定位错误：" class="headerlink" title="出现错误时能快速定位错误："></a>出现错误时能快速定位错误：</h4><p>由于我们使用的是微服务架构，一个模块就是一个项目，所以导致项目的数量很多，排查问题很难定位。为了在出现异常信息的时候，我们开发人员能直接找到异常的根源所在，我们需要在异常信息前加一个标记。这个标记就是traceId，那么traceId又是什么呢，请看下面<br>随着微服务数量不断增长，需要跟踪一个请求从一个微服务到下一个微服务的传播过程， Spring Cloud Sleuth 正是解决这个问题，它在日志中引入唯一ID，以保证微服务调用之间的一致性，这样你就能跟踪某个请求是如何从一个微服务传递到下一个。Spring Cloud Sleuth在日志中增加两种ID 类型，一个是trace ID，另外一个是span ID，span ID代表工作基本单元，比如发送一个HTTP 请求；treace ID包含一系列span ID，形成一个树状结构。</p>
+<h3 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h3><h4 id="直接抛出底层错误信息"><a href="#直接抛出底层错误信息" class="headerlink" title="直接抛出底层错误信息"></a>直接抛出底层错误信息</h4><ol>
+<li>添加字段。现在的封装错误信息的result，其中的的字段都是进行过封装的，如果我们需要拿到原始信息就需要对result添加字段，添加的字段为：msgOnly4Log、msgOnly4Show、info</li>
+<li>重新封装result。在封装底层的result时，将其原始信息添加到result中。</li>
+<li>在halo中抛出指定的第三方异常（THE_THIRD_PARTY_EXCEPTION）。如果下层返回的result不为空并且success字段值为false时，会重新抛出异常，这时候抛出的异常我们指定抛出第三方异常。</li>
+<li>为第三方异常创建一个新的YHJException构造方法。因为在抛第三方异常的时候需要将下层的信息重新抛出，所以需要重新添加一个构造函数将下层错误信息抛出。</li>
+<li>在检测异常为第三方异常的时候，需要新添加一个新的result值的封装方法。因为第三方抛出的异常信息和其他异常信息封装的不同，所以需要重新添加一个方法。</li>
+</ol>
+<h4 id="展示给非用户的错误信息时，加上一个traceId"><a href="#展示给非用户的错误信息时，加上一个traceId" class="headerlink" title="展示给非用户的错误信息时，加上一个traceId"></a>展示给非用户的错误信息时，加上一个traceId</h4><ol>
+<li>处理Message4Show的时候，在其前面加上一个traceId，详情见代码块4</li>
+</ol>
+<h4 id="展示给用户时，直接显示最直观错误信息"><a href="#展示给用户时，直接显示最直观错误信息" class="headerlink" title="展示给用户时，直接显示最直观错误信息"></a>展示给用户时，直接显示最直观错误信息</h4><ol>
+<li>指定一个特定的展示给用户的异常：SHOW_EXCEPTION_INFO_TO_USER</li>
+<li>处理Message4Show的时候，根据是否是展示给用户的异常，来进行具体的处理，详情见代码块4</li>
+</ol>
+<h3 id="实现核心代码："><a href="#实现核心代码：" class="headerlink" title="实现核心代码："></a>实现核心代码：</h3><h4 id="代码块1-添加字段"><a href="#代码块1-添加字段" class="headerlink" title="代码块1:添加字段"></a>代码块1:添加字段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">message Result &#123;</div><div class="line">    optional bool success = 1;</div><div class="line">    optional int64 code = 2;</div><div class="line">    optional string msg = 3;</div><div class="line">    optional string displaymsg = 4;</div><div class="line">    optional string msgOnly4Log = 5;</div><div class="line">    optional string msgOnly4Show = 6;</div><div class="line">    optional string info = 7;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="代码块2-封装result"><a href="#代码块2-封装result" class="headerlink" title="代码块2:封装result"></a>代码块2:封装result</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">if (yhje.getCode() == code &amp;&amp; msgOnly4Log.equals(yhje.getMessage4Log()) &amp;&amp; msgOnly4Show.equals(yhje.getMessage4Show())) &#123;</div><div class="line">            return COMMON.Result.newBuilder()</div><div class="line">                .setSuccess(false)</div><div class="line">                .setCode(yhje.getRealCode())</div><div class="line">                .setMsg(yhje.getMessage4Log())</div><div class="line">                .setDisplaymsg(yhje.getMessage4Show())</div><div class="line">                .setInfo(yhje.getRealInfo())</div><div class="line">                .setMsgOnly4Log(yhje.getRealMsgOnly4Log())</div><div class="line">                .setMsgOnly4Show(yhje.getRealMsgOnly4Show())</div><div class="line">                .build();</div><div class="line">        &#125;</div><div class="line">        return COMMON.Result.newBuilder()</div><div class="line">            .setSuccess(false)</div><div class="line">            .setCode(yhje.getCode())</div><div class="line">            .setMsg(yhje.getMessage4Log())</div><div class="line">            .setDisplaymsg(yhje.getMessage4Show())</div><div class="line">            .setInfo(yhje.getRealInfo())</div><div class="line">            .setMsgOnly4Log(yhje.getRealMsgOnly4Log())</div><div class="line">            .setMsgOnly4Show(yhje.getRealMsgOnly4Show())</div><div class="line">            .build();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="代码块3-添加构造函数"><a href="#代码块3-添加构造函数" class="headerlink" title="代码块3:添加构造函数"></a>代码块3:添加构造函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public YHJException(YHJExceptionCode yhjExceptionCodeAction, Integer code, String otherMsg, String message4Log, String message4Show, String msgOnly4Log) &#123;</div><div class="line">        super();</div><div class="line">        this.yhjExceptionCodeAction = yhjExceptionCodeAction;</div><div class="line">        this.otherMsg = otherMsg;</div><div class="line">        this.realCode = code;</div><div class="line">        this.realMessage4Log = message4Log;</div><div class="line">        this.realMessage4Show = message4Show;</div><div class="line">        this.msgOnly4Log = msgOnly4Log;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="代码块4-设置Message4Show"><a href="#代码块4-设置Message4Show" class="headerlink" title="代码块4:设置Message4Show"></a>代码块4:设置Message4Show</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public String getMessage4Show() &#123;</div><div class="line">        Object tracedId = MDC.get(&quot;X-B3-TraceId&quot;);</div><div class="line">        StringBuilder builder = new StringBuilder();</div><div class="line">        if (yhjExceptionCodeAction == YHJExceptionCodeEnum.THE_THIRD_PARTY_EXCEPTION) &#123;</div><div class="line">            if (YHJExceptionCodeEnum.SHOW_EXCEPTION_INFO_TO_USER.getCode().equals(this.theThirdCode)) &#123;</div><div class="line">                builder.append(this.otherMsg);</div><div class="line">            &#125; else &#123;</div><div class="line">                builder.append(tracedId + &quot;，&quot;);</div><div class="line">                builder.append(this.theThirdMessage4Show);</div><div class="line">                if (this.otherMsg != null &amp;&amp; !this.otherMsg.isEmpty()) &#123;</div><div class="line">                    builder.append(&quot;，详情：&quot;);</div><div class="line">                    builder.append(this.otherMsg);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; else if (yhjExceptionCodeAction == YHJExceptionCodeEnum.SHOW_EXCEPTION_INFO_TO_USER) &#123;</div><div class="line">            builder.append(this.otherMsg);</div><div class="line">        &#125; else &#123;</div><div class="line">            builder.append(tracedId + &quot;，&quot;);</div><div class="line">            builder.append(yhjExceptionCodeAction.getMessage4Show());</div><div class="line">            if (this.otherMsg != null &amp;&amp; !this.otherMsg.isEmpty()) &#123;</div><div class="line">                builder.append(&quot;，详情：&quot;);</div><div class="line">                builder.append(this.otherMsg);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return builder.toString();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><h3 id="service层的项目："><a href="#service层的项目：" class="headerlink" title="service层的项目："></a>service层的项目：</h3><h4 id="1-统一抛YHJException，示例代码如下"><a href="#1-统一抛YHJException，示例代码如下" class="headerlink" title="1 统一抛YHJException，示例代码如下"></a>1 统一抛YHJException，示例代码如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">throw new YHJException(YHJExceptionCodeEnum.THIRD_SERVICE_EXCEPTION, logWhere + &quot;api result empty&quot;);</div></pre></td></tr></table></figure>
+<h4 id="2-异常的Enum可以YHJExceptionCodeEnum，也可以根据自己的需要设置，但是需要实现YHJExceptionCode这个类，示例代码如下"><a href="#2-异常的Enum可以YHJExceptionCodeEnum，也可以根据自己的需要设置，但是需要实现YHJExceptionCode这个类，示例代码如下" class="headerlink" title="2 异常的Enum可以YHJExceptionCodeEnum，也可以根据自己的需要设置，但是需要实现YHJExceptionCode这个类，示例代码如下"></a>2 异常的Enum可以YHJExceptionCodeEnum，也可以根据自己的需要设置，但是需要实现YHJExceptionCode这个类，示例代码如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">public enum OwlExceptionCodeEnum implements YHJExceptionCode &#123;</div><div class="line"></div><div class="line">    ORDER_NOT_FOUND(20000, &quot;order not found&quot;, &quot;订单找不到或已被删除&quot;);</div><div class="line"></div><div class="line">    private Integer code;</div><div class="line">    private String message4Log;</div><div class="line">    private String message4Show;</div><div class="line"></div><div class="line">    OwlExceptionCodeEnum(Integer code, String message4Log, String message4Show) &#123;</div><div class="line">        this.code = code;</div><div class="line">        this.message4Log = message4Log;</div><div class="line">        this.message4Show = message4Show;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public Integer getCode() &#123;</div><div class="line">        return this.code;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getMessage4Log() &#123;</div><div class="line">        return this.message4Log;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public String getMessage4Show() &#123;</div><div class="line">        return this.message4Show;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>备注：code不要和其他项目中已经存在的code重复，因为不同的code代表的是不同的异常，特别是和halo中的是真的不要重复了</p>
+<h4 id="3-设置错误的result值的时候统一用halo中baseController类中的handleException方法，示例代码如下"><a href="#3-设置错误的result值的时候统一用halo中baseController类中的handleException方法，示例代码如下" class="headerlink" title="3 设置错误的result值的时候统一用halo中baseController类中的handleException方法，示例代码如下"></a>3 设置错误的result值的时候统一用halo中baseController类中的handleException方法，示例代码如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">try &#123;</div><div class="line">        //具体的业务代码</div><div class="line">        &#125; catch (Exception e) &#123;</div><div class="line">            return handleException(a -&gt; Common.SimpleResponse.newBuilder().setResult(a).build(), e);</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<h4 id="4-可以预知是抛给用户显示的信息时，要抛halo中指定的异常（SHOW-EXCEPTION-INFO-TO-USER）例如，用户填写信息的时候填写不正确或没有填写时抛出的信息，示例代码如下"><a href="#4-可以预知是抛给用户显示的信息时，要抛halo中指定的异常（SHOW-EXCEPTION-INFO-TO-USER）例如，用户填写信息的时候填写不正确或没有填写时抛出的信息，示例代码如下" class="headerlink" title="4 可以预知是抛给用户显示的信息时，要抛halo中指定的异常（SHOW_EXCEPTION_INFO_TO_USER）例如，用户填写信息的时候填写不正确或没有填写时抛出的信息，示例代码如下"></a>4 可以预知是抛给用户显示的信息时，要抛halo中指定的异常（SHOW_EXCEPTION_INFO_TO_USER）例如，用户填写信息的时候填写不正确或没有填写时抛出的信息，示例代码如下</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">throw new YHJException(YHJExceptionCodeEnum.SHOW_EXCEPTION_INFO_TO_USER,&quot;请填写正确的手机号码！&quot;);</div></pre></td></tr></table></figure>
+<h3 id="halo"><a href="#halo" class="headerlink" title="halo"></a>halo</h3><h4 id="封装clientServiceWrap类中的方法时，当result中success字段的值为false时，需要抛出指定的异常，这里对抛这个异常的方法进行了封装，可以直接调用方法"><a href="#封装clientServiceWrap类中的方法时，当result中success字段的值为false时，需要抛出指定的异常，这里对抛这个异常的方法进行了封装，可以直接调用方法" class="headerlink" title="封装clientServiceWrap类中的方法时，当result中success字段的值为false时，需要抛出指定的异常，这里对抛这个异常的方法进行了封装，可以直接调用方法"></a>封装clientServiceWrap类中的方法时，当result中success字段的值为false时，需要抛出指定的异常，这里对抛这个异常的方法进行了封装，可以直接调用方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public TaskEngine.TaskEngineDTO addTask(TaskEngine.TaskAddOption addOption) &#123;</div><div class="line"></div><div class="line">    String where = &quot;SophonServiceWrap-&gt;addTask&quot;;</div><div class="line"></div><div class="line">    TaskEngine.TaskEngineDTO ret;</div><div class="line"></div><div class="line">    try &#123;</div><div class="line">        ret = sophonClient.addTask(addOption);</div><div class="line">    &#125; catch (Exception e) &#123;</div><div class="line">        //和原来代码一样</div><div class="line">    &#125;</div><div class="line">    if (!ret.hasResult()) &#123;</div><div class="line">        //和原来代码一样</div><div class="line">    &#125;</div><div class="line">    if (!ret.getResult().getSuccess()) &#123;</div><div class="line">        logger.error(LogInfoGenerator.generateErrorInfo(where, YHJExceptionCodeEnum.THE_THIRD_PARTY_EXCEPTION, &quot;not success&quot;, &quot;addOption&quot;, JsonFormat.printToString(addOption), &quot;ret&quot;, JsonFormat.printToString(ret)));</div><div class="line">        Helper.throwTheThirdPartyException(ret.getResult(), where);</div><div class="line">    &#125;</div><div class="line">    return ret;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="application层的项目"><a href="#application层的项目" class="headerlink" title="application层的项目"></a>application层的项目</h3><p>因为application层的protobuf文件一般都是直接写在其项目中，导致其result的类型和halo中的result类型不一致，所以不能直接调用halo的baseCotroller的handleException方法设置出现异常的result值，因此需要自己实现，示例代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">public class BaseController &#123;</div><div class="line"></div><div class="line">    final Logger logger = Logger.getLogger(getClass());</div><div class="line"></div><div class="line">    public FollowUp.Result buildHandleResult(YHJException re)&#123;</div><div class="line">        return  FollowUp.Result.newBuilder()</div><div class="line">                .setCode(re.getCode())</div><div class="line">                .setSuccess(false)</div><div class="line">                .setMsg(re.getMessge4Log())</div><div class="line">                .setDisplaymsg(re.getMessage4Show()).build();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public FollowUp.Result buildNotHandleResult(Exception e)&#123;</div><div class="line">        logger.error(RedCoastExceptionCodeEnum.UNKNOWN_ERROR.getMessage4Log(),e);</div><div class="line"></div><div class="line">        return  FollowUp.Result.newBuilder()</div><div class="line">                .setCode(RedCoastExceptionCodeEnum.UNKNOWN_ERROR.getCode())</div><div class="line">                .setSuccess(false)</div><div class="line">                .setDisplaymsg(addTraceId4UnKnowErrorDisplaymsg(RedCoastExceptionCodeEnum.UNKNOWN_ERROR.getMessage4Show())).build();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    private String addTraceId4UnKnowErrorDisplaymsg(String originMsg)&#123;</div><div class="line">        Object traceId = MDC.get(&quot;X-B3-TraceId&quot;);</div><div class="line">        StringBuilder builder = new StringBuilder();</div><div class="line">        builder.append(traceId + &quot;,&quot;);</div><div class="line">        if (!Utils.isEmpty(originMsg))&#123;</div><div class="line">            builder.append(originMsg);</div><div class="line">        &#125;</div><div class="line">        return builder.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

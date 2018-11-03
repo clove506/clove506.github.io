@@ -1,0 +1,332 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【合肥项目】支付系统设计概述 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="Payment Service 概述 好吧, 我叫 Midas业务背景
+在线支付是我们的业务需求，需要通过线上完成交易闭环
+
+做什么
+付款
+退款
+查询付款／退款
+提供回调接口，接收ping++回调事件
+
+不做什么
+注意，该服务不应直接包含与业务逻辑挂钩的内容。比如，记录订单支付历史。
+
+基本选型采用">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【合肥项目】支付系统设计概述"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【合肥项目】支付系统设计概述</h2>
+					
+					<div>
+						<span class="post-time">2016-12-11 00:00:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="Payment-Service-概述-好吧-我叫-Midas"><a href="#Payment-Service-概述-好吧-我叫-Midas" class="headerlink" title="Payment Service 概述 好吧, 我叫 Midas"></a>Payment Service 概述 <code>好吧, 我叫 Midas</code></h1><h2 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h2><ul>
+<li>在线支付是我们的业务需求，需要通过线上完成交易闭环</li>
+</ul>
+<h2 id="做什么"><a href="#做什么" class="headerlink" title="做什么"></a>做什么</h2><ul>
+<li>付款</li>
+<li>退款</li>
+<li>查询付款／退款</li>
+<li>提供回调接口，接收ping++回调事件</li>
+</ul>
+<h2 id="不做什么"><a href="#不做什么" class="headerlink" title="不做什么"></a>不做什么</h2><ul>
+<li>注意，该服务不应直接包含与业务逻辑挂钩的内容。比如，记录订单支付历史。</li>
+</ul>
+<h2 id="基本选型"><a href="#基本选型" class="headerlink" title="基本选型"></a>基本选型</h2><p>采用pingplusplus (www.pingxx.com) 第三方整合支付平台<br>Ping++优势  </p>
+<ul>
+<li>pingpp 对各个支付渠道皆有支持</li>
+<li>pingpp client/server sdk 封装较为完整，对各语言支持比较完善，相关文档及示例较完整。使用时无需太多关注渠道细节，实现及未来扩展渠道成本较小</li>
+<li>pingpp 平台本身价格策略符合需求</li>
+</ul>
+<hr>
+<h2 id="主要流程说明"><a href="#主要流程说明" class="headerlink" title="主要流程说明"></a>主要流程说明</h2><h3 id="支付流程"><a href="#支付流程" class="headerlink" title="支付流程"></a>支付流程</h3><p><img src="/media/payment_service_charge_flow.png" alt=""></p>
+<ul>
+<li>步骤（1）客户端使用pingpp sdk</li>
+<li>步骤（4）返回的支付Object格式</li>
+<li>注意（A）到（B）为同步过程</li>
+<li>在（B）时，将步骤（4）取得的charge_obj输入pingpp sdk，sdk将调用支付平台完成支付</li>
+<li>步骤（6）完成后，不保证立即在youhujia服务端中订单状态立即更新为已支付</li>
+<li>步骤（7），pingpp服务器回调webhook，返回event事件</li>
+</ul>
+<h3 id="退款流程"><a href="#退款流程" class="headerlink" title="退款流程"></a>退款流程</h3><p><img src="/media/payment_service_refund_flow.png" alt=""></p>
+<ul>
+<li>步骤（1），可以由客户端或者服务器发起退款</li>
+<li>在（A）处，需要先请求取回Charge对象</li>
+<li>注意在步骤（3）之后，需判定取回的Charge状态是否正常</li>
+<li>步骤（6）为异步回调</li>
+</ul>
+<h3 id="主动拉取支付和退款状态"><a href="#主动拉取支付和退款状态" class="headerlink" title="主动拉取支付和退款状态"></a>主动拉取支付和退款状态</h3><p>由于ping++异步回调有不确定性，不应完全依赖于它的回调状态更新机制，因此需要一个主动拉取状态的功能</p>
+<ul>
+<li>支付（Charge）的拉取，应该被 定时器服务 调用</li>
+<li>退款（Refund）的拉取，应该被 定时器服务 调用</li>
+</ul>
+<h3 id="Webhook-回调"><a href="#Webhook-回调" class="headerlink" title="Webhook 回调"></a>Webhook 回调</h3><p>用来接收ping++异步发送的状态更新</p>
+<ul>
+<li>首期需接收支付、退款的状态回调</li>
+<li>后期可考虑处理其他事件类型</li>
+<li>注意，需进行ping++ callback request签名验证，确保回调信息可靠</li>
+</ul>
+<hr>
+<h2 id="Mocking策略"><a href="#Mocking策略" class="headerlink" title="Mocking策略"></a>Mocking策略</h2><ul>
+<li>目的，保证其他依赖于此服务的模块在开发前期不被block</li>
+<li>仅包含对外API可以被call通</li>
+<li>不模拟时序与逻辑</li>
+</ul>
+<h2 id="Failing处理"><a href="#Failing处理" class="headerlink" title="Failing处理"></a>Failing处理</h2><ul>
+<li>ping++服务异常<ul>
+<li>将导致订单无法完成</li>
+<li>ping++工单反馈</li>
+<li><a href="https://www.pingxx.com/contact" target="_blank" rel="external">https://www.pingxx.com/contact</a></li>
+<li>目前ping++账号套餐不能得到1v1人工服务，若要1v1需升级。</li>
+</ul>
+</li>
+<li>midas服务异常<ul>
+<li>全部支付相关流程将受阻</li>
+<li>可通过log来确认问题来源</li>
+<li>作为对策，预先准备好已经过测试的docker image，若异常则回滚发布</li>
+</ul>
+</li>
+<li>ping++工具：pingpp dashboard提供了工具，可通过相应id找到对应的支付项目</li>
+</ul>
+<h2 id="Logging"><a href="#Logging" class="headerlink" title="Logging"></a>Logging</h2><ul>
+<li>service log</li>
+<li>交易流记录</li>
+</ul>
+<h2 id="Operation"><a href="#Operation" class="headerlink" title="Operation"></a>Operation</h2><p>对各操作，及异常，皆进行log记录，方便问题调研</p>
+<h2 id="Test-plan"><a href="#Test-plan" class="headerlink" title="Test plan"></a>Test plan</h2><ul>
+<li>本地测试，可测试场景有限，可模拟webhook回调</li>
+<li>联合测试，ping++ test mode</li>
+<li>必须进行ping++ live mode测试，进行真实付款，确认支付渠道流程正常</li>
+</ul>
+<h2 id="排期"><a href="#排期" class="headerlink" title="排期"></a>排期</h2><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Cost(Person.Day)</th>
+<th>Status</th>
+<th>Memo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工程搭建</td>
+<td>1</td>
+<td>O</td>
+<td></td>
+</tr>
+<tr>
+<td>支付流程/退款流程</td>
+<td>1</td>
+<td>O</td>
+<td></td>
+</tr>
+<tr>
+<td>拉取支付/退款信息</td>
+<td>1</td>
+<td>O</td>
+<td></td>
+</tr>
+<tr>
+<td>Webhook</td>
+<td>1</td>
+<td>O</td>
+<td></td>
+</tr>
+<tr>
+<td>Order集成／调试</td>
+<td>1</td>
+<td>O</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="微信端注意事项"><a href="#微信端注意事项" class="headerlink" title="微信端注意事项"></a>微信端注意事项</h2><ul>
+<li>需要注意支付授权目录的设置 <a href="https://help.pingxx.com/article/123339/" target="_blank" rel="external">https://help.pingxx.com/article/123339/</a></li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>后期对支付宝的支持（需要考虑前后端支持，支付宝特殊退款流程，渠道开通，账务等问题）</li>
+</ul>
+<h2 id="owl-midas-联合测试（Pingpp-Test-Mode）"><a href="#owl-midas-联合测试（Pingpp-Test-Mode）" class="headerlink" title="owl, midas 联合测试（Pingpp Test Mode）"></a>owl, midas 联合测试（Pingpp Test Mode）</h2><p>场景|期待结果|实际结果|备注<br>模拟用户发起支付-&gt;owl.payorder-&gt;midas.initCharge-&gt;确认/取消模拟支付|应有charge json保存至owl order记录，状态为 支付中|<br>确认模拟支付后-&gt;pingpp发起charge.succeeded-&gt;midas.webhook-&gt;owl.payOrderSuccess||</p>
+<p>确认模拟支付后-&gt;模拟未收到webhook-&gt;owl发起查询|| //todo</p>
+<p>取消模拟支付后-&gt;用户再次支付-&gt;用户模拟确认支付||<br>取消模拟支付后-&gt;模拟超时</p>
+<p>模拟发起退款-&gt;owl.userrefund-&gt;midas.initrefund<br>模拟发起退款后-&gt;pingpp发起refund.succeeded-&gt;midas.webhook-&gt;owl.refundSuccess||<br>模拟发起退款后-&gt;模拟未收到pingpp回调-&gt;owl.checkRefunding||</p>
+<h2 id="部署方法"><a href="#部署方法" class="headerlink" title="部署方法"></a>部署方法</h2><ul>
+<li>cd 到 代码目录下（一般是/opt/zhushou）</li>
+<li>git clone -o root git@github.com:youhujia/midas.git</li>
+<li>cd midas</li>
+<li>CONFIG_URL=http://&lt;本环境中config服务器IP地址:端口号&gt;/ IP=&lt;本环境中IP地址&gt; PORT=6011 MPORT=6012 ENV=development gradle go</li>
+<li>docker ps 确认运行状况</li>
+</ul>
+<h2 id="前置依赖"><a href="#前置依赖" class="headerlink" title="前置依赖"></a>前置依赖</h2><ul>
+<li>无</li>
+</ul>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,306 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>科室影子公众号 详细设计 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要科室影子公众号 详细设计">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="科室影子公众号 详细设计"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>科室影子公众号 详细设计</h2>
+					
+					<div>
+						<span class="post-time">2017-02-23 09:01:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>科室影子公众号 详细设计</p>
+<a id="more"></a>
+<h1 id="科室影子公众号-详细设计"><a href="#科室影子公众号-详细设计" class="headerlink" title="科室影子公众号 详细设计"></a>科室影子公众号 详细设计</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>现在我们的微信端用户有部分是从其他公众号导流而来，比如，很多用户通过合肥市一的公众号使用我们的微信端服务，这些用户很多只对我们的公众号做了登陆授权但并未关注我们，对这批用户，如果我们希望也能对他们推送消息，只能通过他已经关注的合肥市一的公众号来发送，由此产生了多公众号打通的需求。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ol>
+<li>影子公众号：除了我们的公众号，部分科室可以给出他们自有的公众号，这样对于一个用户，我们可以获取他在两个公众号的信息，我们的公众号用作登录，科室的公众号用作push。为了方便，将科室提供的公众号取名为影子公众号，所谓影子，即大部分场景下都不会使用到。</li>
+<li>appid：公众号的唯一标识</li>
+<li>secret：公众号的appsecret</li>
+<li>shadowId：影子公众号的Id</li>
+<li>state:微信认证后的redirectUrl中用来识别影子公众号的字段，与shadowId功能一样</li>
+<li>code：code作为换取access_token的票据，每次用户授权带上的code将不一样，code只能使用一次，5分钟未被使用自动过期。</li>
+<li>access_token：微信网页授权凭证</li>
+<li>openId：用户唯一标识</li>
+<li>transferUrl:用于获取code的中转页面</li>
+<li>destinationURL：数据库中与影子公众号一一匹配的指定用户最终访问的页面</li>
+</ol>
+<p><img src="/media/shadow_flow.png" alt="显示名"></p>
+<p>注：正常登录流程详见：<a href="http://wiki.office.test.youhujia.com/2017/02/21/The-Great-Migration/" target="_blank" rel="external">http://wiki.office.test.youhujia.com/2017/02/21/The-Great-Migration/</a></p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p><strong>访问页面/shadow-wx/check-existence?shadowId=XXX，调用接口:</strong></p>
+<p>POST /api/era/v1/users/shadow-wx/exist</p>
+<p>Response :</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span> : &#123;<span class="attr">"success"</span> : <span class="literal">true</span>,<span class="attr">"code"</span> : <span class="number">0</span>&#125;,</div><div class="line">  <span class="attr">"redirectUrl"</span> : <span class="string">"https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_URI&amp;response_type=code&amp;scope=snsapi_base&amp;state=STATE#wechat_redirect"</span>	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>获取code后跳转到页面/shadow-wx/submit，调用接口:</strong></p>
+<p>POST /api/era/v1/users/shadow-wx</p>
+<p>Response:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span> : &#123;<span class="attr">"success"</span> : <span class="literal">true</span>,<span class="attr">"code"</span> : <span class="number">0</span>&#125;,</div><div class="line">  <span class="attr">"redirectUrl"</span> : <span class="string">"destinationUrl"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ProtoBuf:</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ShadowInfoDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> destination_url = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> appid = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> secret = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> note = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">7</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">8</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ShadowUserDTO</span> </span>&#123;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int64</span> userId = <span class="number">2</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">string</span> openId = <span class="number">3</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int64</span> shadowWxAccountId = <span class="number">4</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">bool</span> isSubscribed = <span class="number">5</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">6</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">7</span>;</div><div class="line">	</div><div class="line">	<span class="keyword">optional</span> Result result = <span class="number">8</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">RedirectResponseDTO</span></span>&#123;</div><div class="line">	<span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">	<span class="keyword">optional</span> <span class="built_in">string</span> redirectUrl =<span class="number">2</span>;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h2 id="数据库修改"><a href="#数据库修改" class="headerlink" title="数据库修改"></a>数据库修改</h2><p><strong>添加 科室影子公众号表</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`yolar`</span>.<span class="string">`shadow_wx_account`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`destination_url`</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'影子公众号最终跳转页面'</span>,</div><div class="line">  <span class="string">`appid`</span> <span class="built_in">VARCHAR</span>(<span class="number">45</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'微信公众号 appID'</span>,</div><div class="line">  <span class="string">`secret`</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'微信公众号 secret'</span>,</div><div class="line">  <span class="string">`note`</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'影子公众号备注'</span>,</div><div class="line">  <span class="string">`created_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> ,</div><div class="line">  <span class="string">`updated_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>))</div><div class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>,</div><div class="line"><span class="keyword">COMMENT</span> = <span class="string">'影子公众号信息'</span>;</div></pre></td></tr></table></figure>
+<p><strong>添加 影子公众号下用户的微信信息</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`yolar`</span>.<span class="string">`shadow_wx_profile`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`user_id`</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`open_id`</span> <span class="built_in">VARCHAR</span>(<span class="number">128</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`shadow_wx_account_id`</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`is_subscribed`</span> TINYINT <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,</div><div class="line">  <span class="string">`created_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  <span class="string">`updated_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>))</div><div class="line"><span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span>,</div><div class="line"><span class="keyword">COMMENT</span> = <span class="string">'影子公众号下的用户微信记录'</span>;</div></pre></td></tr></table></figure>
+<h2 id="微信模版消息-发送策略更新-此功能计划下一期实现"><a href="#微信模版消息-发送策略更新-此功能计划下一期实现" class="headerlink" title="微信模版消息 发送策略更新(此功能计划下一期实现)"></a>微信模版消息 发送策略更新(此功能计划下一期实现)</h2><p>微信模版消息的策略需要更新，对用户发送模版消息时，需要查看该消息的产生科室，如果用户也关注了该科室提供的影子公众号账户，优先使用影子公众号进行发送。</p>
+<p>流程如下：</p>
+<ol>
+<li>查看消息产生的科室是否提供了影子公众号</li>
+<li>如果未提供，则尝试用优护家的公众号做消息发送（（说尝试是因为用户也可能未关注优护家的公众号））</li>
+<li>如果提供了，则检查该用户是否已关注该影子公众号<ol>
+<li>如果关注了，则使用影子公众号进行推送</li>
+<li>如果未关注，尝试使用优护家公众号进行推送</li>
+</ol>
+</li>
+</ol>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><p><a href="http://wiki.office.test.youhujia.com/2017/02/20/multi-wx-official-account/" target="_blank" rel="external">http://wiki.office.test.youhujia.com/2017/02/20/multi-wx-official-account/</a></p>
+<h2 id="排期"><a href="#排期" class="headerlink" title="排期"></a>排期</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>耗时/人日</th>
+<th>日期</th>
+<th>开发者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>页面开发</td>
+<td>0.5</td>
+<td>03.09</td>
+<td>董劭杰</td>
+</tr>
+<tr>
+<td>开发/api/era/shadowInfo接口</td>
+<td>1</td>
+<td>03.08</td>
+<td>丁天奇</td>
+</tr>
+<tr>
+<td>开发/api/era/shadowCode接口</td>
+<td>1</td>
+<td>03.09</td>
+<td>丁天奇</td>
+</tr>
+<tr>
+<td>联调</td>
+<td>2</td>
+<td>03.11</td>
+<td>丁天奇</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>1</td>
+<td>03.13</td>
+<td>郑旭红</td>
+</tr>
+<tr>
+<td>部署上线</td>
+<td>0.5</td>
+<td>03.14</td>
+<td>田学文</td>
+</tr>
+</tbody>
+</table>
+<h2 id="日报"><a href="#日报" class="headerlink" title="日报"></a>日报</h2><p><strong>2017-03-04</strong><br>今日工作：<br>•    完成了开发环境的配置<br>•    与前端对接了接口设计，确认了前端页面的需求<br>•    参与了赵蔺“优护家的CI&amp;CD系统介绍与开发规范”会议</p>
+<p>明日工作：<br>•    预计下周一KICKOFF，项目进入开发阶段</p>
+<p><strong>2017-03-06</strong><br>今日工作：<br>•    与明敏，邵杰讨论了项目流程并确认了页面的详细设计<br>•    完善了接口，数据库以及protobuf的设计并更新文档<br>•    项目前期准备已完成，等待KickOff</p>
+<p>明日工作：<br>•    完成项目kickoff会议，项目正式启动<br>•    项目进入开发阶段</p>
+<p>项目进度：<br>•    进度正常</p>
+<p><strong>2017-03-07</strong><br>今日工作：<br>•    举行项目KickOff 会议，项目顺利KickOff<br>•    帮助正宇生成北京口腔医院头颈肿瘤科的二维码</p>
+<p>明日工作：<br>•    按计划完成开发进度，基本完成接口的设计</p>
+<p>项目进度：<br>•    进度正常</p>
+<p><strong>2017-03-08</strong><br>•    妇女节快乐，身体GG了清了一天假</p>
+<p>项目进度：<br>•    由于健康原因，预计有延期一天风险</p>
+<p><strong>2017-03-09</strong><br>今日工作：<br>•    初步完成接口设计，逻辑代码完成。<br>•    协助圣阳生成新公众号的素材ID</p>
+<p>明日工作：<br>•    完善接口设计，开始与前端对接，准备联调</p>
+<p>项目进度：<br>•    由于请假原因，目前存在延期风险</p>
+<p><strong>2017-03-10</strong><br>今日工作：<br>•    代码优化完成并初步Review<br>•    部署到develop准备进行测试</p>
+<p>明日工作：<br>•    开始前后端联调</p>
+<p>项目进度：<br>•    测试环境拥堵，排号很辛苦</p>
+<p><strong>2017-03-11</strong><br>今日工作：<br>•    参与了全体会议，对优护家这个大家庭的了解更加深刻<br>•    前后端第一次联调，发现了一些交流上的问题，及时解决</p>
+<p>明日工作：<br>•    调BUG，并进行下一步联调</p>
+<p>项目进度：<br>•    测试环境拥堵，发现了几个BUG，已经初步定位</p>
+<p><strong>2017-03-13</strong><br>今日工作：<br>•    上周发现的BUG被成功KILL掉<br>•    明敏第一次Review代码，发现一些代码规范方面的问题，已解决<br>• 测试环境依然拥堵，定位了最后一个问题</p>
+<p>明日工作：<br>•    预计明日完成自测，发展顺利的话明日可提测</p>
+<p>项目进度：<br>•    测试环境拥堵，预计延期一天</p>
+<p><strong>2017-03-14</strong><br>今日工作：<br>•    进一步定位了问题的原因，提交了部分代码到DEV环境，准备进行更全面的测试<br>•    与敏哥一起Review了大部分代码，确认无误后提到测试环境<br>• 多个项目进入了联调阶段，故决定避开高峰期，明天起早来测试</p>
+<p>明日工作：<br>•    自测并解决问题，提测</p>
+<p>项目进度：<br>•    测试环境拥堵，预计延期</p>
+<p><strong>2017-03-15</strong><br>今日工作：<br>•  在拼命争取的测试时间内，发现了前端页面的问题，已与邵杰沟通解决<br>•  第一次跑通了功能代码，但是出现不明错误，由于测试环境拥堵，暂时无法定位<br>•  由于明天下午便要出发回学校信息采集，故明日依旧起早来公司干活</p>
+<p>明日工作：<br>•    解决所有问题，提测</p>
+<p>项目进度：<br>•    由于明日下午便要出发回学校采集信息，预计下周一返回公司，故项目进度将于明日暂停，待下周一重启</p>
+<p><strong>2017-03-24</strong><br>回归之后又遇到合肥PC项目要火速上线，本项目于今日测试完成，部署上线</p>
+<h2 id="预上线文档"><a href="#预上线文档" class="headerlink" title="预上线文档"></a>预上线文档</h2><p>&emsp;&emsp;本期项目【多微信公众号打通】的目标，是用户通过含有shadowId的给定URL进入优护家服务时，我们将获取该用户在指定影子公众号下的openId并存储到影子公众号用户表下面。</p>
+<p><strong>相关改动:</strong><br><strong>Web:</strong><br> &emsp;&emsp;add Website “/shadow-wx/check-existence” and “/shadow-wx/submit”</p>
+<p><strong>Era:</strong><br> &emsp;&emsp;add API “/shadow-wx/exist” and “/shadow-wx” in UserController<br> &emsp;&emsp;add Service “checkExistByShadowId” and “saveAndRedirect” in UserService</p>
+<p><strong>Yolar:</strong><br> &emsp;&emsp; create tables “shadow_wx_account” and “shadow_wx_profile”<br> &emsp;&emsp; add Model “ShadowWxProfile” and “ShadowWxAccount”<br> &emsp;&emsp; add DAO “ShadowWxProfileDAO” and “ShadowWxAccountDAO”<br> &emsp;&emsp; add Service “ShadowWxService”<br> &emsp;&emsp; add Controller “ShadowWxController”<br> &emsp;&emsp; add API “/api/yolar/v1/shadow/{shadowWxId}” and &emsp;&emsp;”/api/yolar/v1/shadow/{shadowWxId}/user/{userId}” and &emsp;&emsp;”/api/yolar/v1/shadow/{shadowWxId}/user/{userId}/{openId}”</p>
+<p><strong>PullRequest:</strong><br><strong>Era:</strong>   &emsp;&emsp;&emsp;<a href="https://github.com/Youhujia/era/pull/72" target="_blank" rel="external">https://github.com/Youhujia/era/pull/72</a><br><strong>Yolar:</strong> &emsp;&emsp;<a href="https://github.com/Youhujia/yolar/pull/134" target="_blank" rel="external">https://github.com/Youhujia/yolar/pull/134</a><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;reviewer:DiveInto(明敏)</p>
+<h2 id="项目总结"><a href="#项目总结" class="headerlink" title="项目总结"></a>项目总结</h2><p>&emsp;&emsp;这是来到公司之后第一次担任PM负责一个独立的项目，也是年后回到优护家接的第一个项目，由于是相隔一个多月回归，遇到了很多问题，例如项目流程，配置文件的改变，开发工具的更新，对之前工作流程的记忆变得模糊，导致上手较慢不太熟练等等问题，经过阿敏的悉心指导和战友们的倾情帮助，还是很快找到了工作状态，开发的过程中相对比较顺利，不过测试的过程比较坎坷，测试环境拥堵的问题短期内不太好解决，项目上线的优先级也不太好评判，所以在为着急上线的项目让路的同时，自己的项目也就无法避免的拖期了。这种项目穿插上线的情况导致了我在提交代码的时候将其他项目的废代码提交了上去，而其他项目上线的时候也上线了部分我还没有测试的代码，这就产生了近期发现的几个BUG，在大家的努力下也算是解决了，不过这种情况以后还是需要尽量避免的。总之本次项目在开发的过程中还算是较为顺利，也尝试着遇到问题先自己研究解决，对自己的能力有了不小的提升，也通过这个项目找回了自己的状态，感谢大家的支持和陪伴，路还很远，愿我们能一直相伴，看花落花开，云舒云卷。</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

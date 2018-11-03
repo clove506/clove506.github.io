@@ -1,0 +1,565 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C端2.0 Yolar Refactor | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="背景2016年的往事Yolar 在第一版设计的时候，有个 Person 表，初衷是为了方便统一人物模型，能够将 User, Nurse, Admin 统一为抽象的 Person,  能够将这三者的公共属性统一处理，比如：
+
+phone
+wechat_profile
+token
+
+同时，利用以上模型，">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C端2.0 Yolar Refactor"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>C端2.0 Yolar Refactor</h2>
+					
+					<div>
+						<span class="post-time">2017-04-15 14:20:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h3 id="2016年的往事"><a href="#2016年的往事" class="headerlink" title="2016年的往事"></a>2016年的往事</h3><p>Yolar 在第一版设计的时候，有个 Person 表，初衷是为了方便统一人物模型，能够将 <code>User</code>, <code>Nurse</code>, <code>Admin</code> 统一为抽象的 <code>Person</code>,  能够将这三者的公共属性统一处理，比如：</p>
+<ul>
+<li>phone</li>
+<li>wechat_profile</li>
+<li>token</li>
+</ul>
+<p>同时，利用以上模型，还完成了譬如访客科室的模型，即多个 <code>Nurse</code> 关联同一个 <code>Person</code>，可以认为同一个护士有多个科室的身份。</p>
+<p>这三个基本属性都能存储在 Person 表中。确实这个方案做到了，但是同时带来以下几个问题：</p>
+<ul>
+<li><code>Nurse</code> 和 <code>User</code> 手机一样时，头像和 <code>token</code> 是公用的。 会造成一个尴尬的现象：护士在 C 端登陆后，发现自己的头像变成了微信的头像</li>
+<li>患者如果完成个人信息，比如手机号，合并数据时，会带来一些意想不到的复杂情况，需要考虑的分支特别多，容易出 Bug</li>
+</ul>
+<p>所以，需要将<code>Person</code>的模型简化。</p>
+<h3 id="简化重构方案"><a href="#简化重构方案" class="headerlink" title="简化重构方案"></a>简化重构方案</h3><p>简单来说，就是移除 <code>Person</code>, 将原本 <code>Person</code> 中的数据转移到 <code>User</code>, <code>Nurse</code>, <code>Admin</code> 中去。然后删除 <code>wechat_profile</code></p>
+<p><strong>护士</strong><br>访客科室的逻辑不变，即护士更换科室就新建一个 Nurse 记录。</p>
+<p>更换科室的逻辑改为登录时选择科室，即带上科室信息。</p>
+<p><strong>患者</strong><br>患者关联科室由 <code>user_department</code> 表描述关系。</p>
+<h3 id="项目结构调整"><a href="#项目结构调整" class="headerlink" title="项目结构调整"></a>项目结构调整</h3><p>目前 Era 中，有太多的关于人的接口，压力比较重，需要 Era 拆分：</p>
+<ul>
+<li>关于患者的接口拆出来放到<strong>Shooter</strong>中去；</li>
+<li>关于 Nurse 端(B端) 的接口放到<strong>Farmer</strong>中去。</li>
+<li>将原 Era 中的 Admin相关接口放入<strong>Gravitation</strong> 中</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Era</td>
+<td>删除</td>
+</tr>
+<tr>
+<td>Yolar</td>
+<td>所有和患者、护士、管理员的底层接口，包括统一登录相关接口</td>
+</tr>
+<tr>
+<td>Solar</td>
+<td>所有科室接口</td>
+</tr>
+<tr>
+<td>Gravitation</td>
+<td>护士运营管理项目</td>
+</tr>
+<tr>
+<td>Shooter</td>
+<td>面向 C 端的业务系统</td>
+</tr>
+<tr>
+<td>Farmer</td>
+<td>面向护士端 B 端的业务系统</td>
+</tr>
+</tbody>
+</table>
+<h2 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h2><p><strong>person</strong></p>
+<ul>
+<li>name</li>
+<li>avatarUrl</li>
+<li>phone</li>
+<li>token</li>
+<li>gender</li>
+<li>birthday</li>
+</ul>
+<p><strong>User 患者</strong></p>
+<ul>
+<li>id， 即 user_id</li>
+<li>name 姓名</li>
+<li>phone 手机</li>
+<li>token</li>
+<li>gender 性别</li>
+<li>birthday 生日</li>
+<li>real name 真实姓名</li>
+<li>ID card 身份证号</li>
+<li>status 状态</li>
+<li>flag ???</li>
+</ul>
+<p><strong>Nurse 护士</strong></p>
+<ul>
+<li>id, 即 nurse_id</li>
+<li>organization_id</li>
+<li>department_id</li>
+<li>active 是不是激活</li>
+<li>name 姓名</li>
+<li>status 状态</li>
+<li>certs 职业证书</li>
+<li>title 职称</li>
+</ul>
+<p><strong>Wechat Profile 微信信息</strong></p>
+<p>删除原来的 <code>person_id</code> 字段，加入以下两个字段来定位一个患者、护士或者管理员。</p>
+<ul>
+<li>person_id</li>
+<li>person_type</li>
+</ul>
+<h2 id="Solar-项目"><a href="#Solar-项目" class="headerlink" title="Solar 项目"></a>Solar 项目</h2><p>将原来 Yolar 项目中的以下几个表和相关逻辑迁出，置于 Solar 项目。</p>
+<ul>
+<li><code>organization</code> 表</li>
+<li><code>department</code> 表</li>
+</ul>
+<h2 id="Era-项目"><a href="#Era-项目" class="headerlink" title="Era 项目"></a>Era 项目</h2><p>鉴于面向业务的部分功能更加明确，业务已经基本分为以下几类：</p>
+<ul>
+<li>面向患者（C 端）的业务接口，也就是现在的 Shooter</li>
+<li>面向护士的优护助手 App （Nurse）的业务接口，也就是 Farmer</li>
+<li>面向管理端（Admin）的业务接口，项目就比较多了</li>
+</ul>
+<h3 id="迁入到-Shooter-的接口"><a href="#迁入到-Shooter-的接口" class="headerlink" title="迁入到 Shooter 的接口"></a>迁入到 Shooter 的接口</h3><ul>
+<li>OrganizationController 删除，不需要，有 Solar 提供底层接口</li>
+<li>DepartmentController</li>
+<li>UserController</li>
+</ul>
+<h3 id="迁入到-Farmer-的接口"><a href="#迁入到-Farmer-的接口" class="headerlink" title="迁入到 Farmer 的接口"></a>迁入到 Farmer 的接口</h3><ul>
+<li>NurseController</li>
+</ul>
+<h3 id="迁入到-Gravitation-的接口"><a href="#迁入到-Gravitation-的接口" class="headerlink" title="迁入到 Gravitation 的接口"></a>迁入到 Gravitation 的接口</h3><ul>
+<li>AdminController</li>
+</ul>
+<h3 id="迁入到-Yolar-的接口"><a href="#迁入到-Yolar-的接口" class="headerlink" title="迁入到 Yolar 的接口"></a>迁入到 Yolar 的接口</h3><p>将 Era 中所有关于登录的接口迁移至 Yolar。</p>
+<h2 id="接口说明"><a href="#接口说明" class="headerlink" title="接口说明"></a>接口说明</h2><h3 id="Shooter"><a href="#Shooter" class="headerlink" title="Shooter"></a>Shooter</h3><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>内容</th>
+<th>Protobuf</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Protobuf</strong></p>
+<h3 id="Farmer"><a href="#Farmer" class="headerlink" title="Farmer"></a>Farmer</h3><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>内容</th>
+<th>Protobuf</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>登出</td>
+<td>登出</td>
+<td>COMMON.SimpleResponse</td>
+<td>POST /api/nurses/signout</td>
+</tr>
+<tr>
+<td>基本信息</td>
+<td>获取护士信息</td>
+<td>NurseInfoDTO</td>
+<td>GET /api/nurses//{id}/info</td>
+</tr>
+<tr>
+<td></td>
+<td>更新护士信息</td>
+<td>COMMON.SimpleResponse,NurseInfoOption</td>
+<td>PATCH /api/nurses/{nurseId}/info</td>
+</tr>
+<tr>
+<td></td>
+<td>发送邀请短信</td>
+<td>COMMON.SimpleResponse</td>
+<td>POST /api/nurses/{nurseId}/invite-via-sms</td>
+</tr>
+<tr>
+<td></td>
+<td>获取护士同事列表</td>
+<td>NursesClassfiedByTagDTO</td>
+<td>GET /api/nurses/{nurseId}/colleagues</td>
+</tr>
+<tr>
+<td></td>
+<td>获取患者列表</td>
+<td>UsersClassfiedByTitleDTO</td>
+<td>GET /api/nurses/{nurseId}/patients</td>
+</tr>
+<tr>
+<td></td>
+<td>获取黑名单列表</td>
+<td>TagAndCategoryDTO</td>
+<td>GET /api/nurses/{nurseId}/patients/blacklist</td>
+</tr>
+<tr>
+<td></td>
+<td>创建患者 Tag</td>
+<td>TagAndCategoryDTO,TagAndCategoryOption</td>
+<td>POST /api/nurses/users/tags</td>
+</tr>
+<tr>
+<td></td>
+<td>删除患者 Tag</td>
+<td>TagAndCategoryDTO,TagAndCategoryOption</td>
+<td>POST /api/nurses/users/tags/delete</td>
+</tr>
+<tr>
+<td></td>
+<td>更新患者 Tag</td>
+<td>TagAndCategoryDTO,TagAndCategoryOption</td>
+<td>PATCH /api/nurses/users/tags</td>
+</tr>
+<tr>
+<td></td>
+<td>创建患者 Tag 分组</td>
+<td>TagAndCategoryDTO,TagAndCategoryOption</td>
+<td>POST /api/nurses//users/tags/categories</td>
+</tr>
+<tr>
+<td></td>
+<td>更新患者关联的 Tag</td>
+<td>TagAndCategoryDTO,TagAndCategoryOption</td>
+<td>PATCH /api/nurses/users/{userId}/tags</td>
+</tr>
+<tr>
+<td></td>
+<td>批量更新患者 Tag</td>
+<td>BulkTagAndCategoryDTO,BulkTagAndCategoryOption</td>
+<td>PATCH /api/nurses/users/bulk/tags</td>
+</tr>
+<tr>
+<td></td>
+<td>获取患者信息</td>
+<td>UserInfoWithTagsDTO</td>
+<td>GET /api/nurses/users/{userId}/info</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Protobuf</strong><br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseSigninDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">bool</span> newly = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> NurseBasic nurse = <span class="number">3</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseInfoDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> NurseBasic basic = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> NurseOccupation occupation = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">TagAndCategoryDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> Tag tag = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> userId = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">TagAndCategoryOption</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> Tag tag = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> userId = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Tag</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> tagId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> tagName = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> tagCategoryId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> tagCategoryName = ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NursesClassfiedByTagDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> TagGroup nurse = <span class="number">1</span>;</div><div class="line">    <span class="keyword">repeated</span> NurseInfoWithTagsDTO all = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">3</span>;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">TagGroup</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> tagId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> tagName = <span class="number">2</span>;</div><div class="line">        <span class="keyword">repeated</span> NurseInfoWithTagsDTO member = <span class="number">3</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseInfoWithTagsDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> nurseId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> avatarUrl = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> identifier = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> professionalTitle = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> NurseOccupation occupation = <span class="number">6</span>;</div><div class="line">    <span class="keyword">repeated</span> Tag tag = <span class="number">7</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">8</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UserTagClassfiedDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> TagCategory tag = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UsersClassfiedByTitleDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> NameGroup user = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">NameGroup</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">        <span class="keyword">repeated</span> UserInfoWithTagsDTO member = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">TagAndCategoryUserDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">repeated</span> TagAndCategoryDTO userTag = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">TagAndCategoryUserOption</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> TagAndCategoryDTO userTag = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseTagAndCategoryDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> TagAndTagCategory tags = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">TagAndTagCategory</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> tagId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> tagName = <span class="number">2</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> tagCategoryId = <span class="number">3</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> tagCategoryName = <span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UserInfoWithTagsDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> userId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> status = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> statusName = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> avatarUrl = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> identifier = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> signature = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> PatientRecord patientRecord = <span class="number">8</span>;</div><div class="line">    <span class="keyword">repeated</span> Tag tag = <span class="number">9</span>;</div><div class="line">    <span class="keyword">optional</span> UserTagClassfiedDTO departmentTag = <span class="number">10</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">11</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">PhoneCaptchaOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> captcha = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseInfoOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> NurseBasic basic = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> NurseOccupation occupation = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Gravitation"><a href="#Gravitation" class="headerlink" title="Gravitation"></a>Gravitation</h3><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>内容</th>
+<th>Protobuf</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>组织机构</td>
+<td>创建医院</td>
+<td>OrganizationDTO</td>
+<td>POST /api/era/v1/admin/organizations</td>
+</tr>
+<tr>
+<td></td>
+<td>更新医院</td>
+<td>OrganizationDTO</td>
+<td>PATCH /api/era/v1/admin/organizations</td>
+</tr>
+<tr>
+<td></td>
+<td>创建科室</td>
+<td>DepartmentDTO</td>
+<td>POST /api/era/v1/admin/departments</td>
+</tr>
+<tr>
+<td></td>
+<td>更新科室</td>
+<td>DepartmentDTO</td>
+<td>PATCH /api/era/v1/admin/departments</td>
+</tr>
+<tr>
+<td></td>
+<td>获取所有科室</td>
+<td>OrganizationAndDepartmentListDTO</td>
+<td>GET /api/era/v1/admin/departments</td>
+</tr>
+<tr>
+<td></td>
+<td>获取科室活动护士</td>
+<td>NurseInfoListDTO</td>
+<td>GET /api/era/v1/admin/departments/{departmentId}/active-nurse</td>
+</tr>
+<tr>
+<td></td>
+<td>更新护士信息</td>
+<td>COMMON.SimpleResponse</td>
+<td>PATCH /api/era/v1/admin/nurses/{nurseId}</td>
+</tr>
+<tr>
+<td></td>
+<td>获取或创建科室二维码</td>
+<td>String</td>
+<td>POST /api/era/v1/admin/nurses/msg/wx/qrcode</td>
+</tr>
+<tr>
+<td></td>
+<td>获取科室二维码</td>
+<td>String</td>
+<td>GET /api/era/v1/admin/nurses/msg/wx/qrcode-list</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Protobuf</strong></p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">OrganizationDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> OrganizationOption organization = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">3</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">OrganizationOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> DepartmentOption department = <span class="number">5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> DepartmentOption department = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">3</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">6</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> departmentWxQrCode = <span class="number">7</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> <span class="built_in">bool</span> isGuest = <span class="number">8</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">OrganizationAndDepartmentListDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> OrganizationOption organization = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseInfoListDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> NurseInfoDTO nurse = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseInfoDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> NurseBasic basic = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> NurseOccupation occupation = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseBasic</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> avatarUrl = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> authorizedName = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> authorizedStatus = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">8</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">9</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">10</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> professionalTitle = <span class="number">11</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> qrImgUrl = <span class="number">12</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> identifier = <span class="number">13</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">14</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">15</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">bool</span> active = <span class="number">16</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseOccupation</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> IDNumber = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> certs = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> photocopy = <span class="number">3</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Yolar"><a href="#Yolar" class="headerlink" title="Yolar"></a>Yolar</h3><table>
+<thead>
+<tr>
+<th>接口</th>
+<th>内容</th>
+<th>Protobuf</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>验证码</td>
+<td>获取手机验证码</td>
+<td>COMMON.SimpleResponse,PhoneCaptchaOption,</td>
+<td>POST /api/yolar/v1/login/phone/captcha</td>
+</tr>
+<tr>
+<td>登录</td>
+<td>手机密码登录</td>
+<td>SimpleLoginDTO,SimpleLoginOption</td>
+<td>POST /api/yolar/v1/login/phone-password</td>
+</tr>
+<tr>
+<td></td>
+<td>手机验证码登录</td>
+<td>SimpleLoginDTO,SimpleLoginOption</td>
+<td>POST /api/yolar/v1/login/phone-captcha</td>
+</tr>
+<tr>
+<td></td>
+<td>手机密码重置</td>
+<td>COMMON.SimpleResponse,SimpleLoginOption</td>
+<td>POST /api/yolar/v1/login/reset-password</td>
+</tr>
+<tr>
+<td></td>
+<td>微信登录</td>
+<td>UserSignInDTO</td>
+<td>POST /api/era/v1/users/signin/{code}</td>
+</tr>
+<tr>
+<td></td>
+<td>微信账户迁移</td>
+<td>MigrateWxDTO</td>
+<td>POST /api/era/v1/users/migrate-old-wx/{code}</td>
+</tr>
+<tr>
+<td></td>
+<td>合肥用户登录</td>
+<td>HefeiUserDTO,HefeiLoginOption</td>
+<td>POST /api/era/v1/pc/user/hefei/login</td>
+</tr>
+<tr>
+<td></td>
+<td>检查影子公众号用户是否存在</td>
+<td>RedirectResponseDTO</td>
+<td>POST /api/era/v1/users/shadow-wx/exist</td>
+</tr>
+<tr>
+<td></td>
+<td>保存影子公众号的用户</td>
+<td>RedirectResponseDTO</td>
+<td>POST /api/era/v1/users/shadow-wx</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Protobuf</strong><br><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">PhoneCaptchaOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> captcha = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SimpleLoginOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> password = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> captcha = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int32</span> loginRole = <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">HefeiLoginOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> password = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> captcha = <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UpdateUserOption</span></span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> gender = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> birthday = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> captcha = <span class="number">5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UserSignInDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> redirectUrl = <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">MigrateWxDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">HefeiUserDTO</span></span>&#123;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> UserInfo userInfo = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">bool</span> needModify = <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UpdateUserDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> UserInfo userInfo = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Yolar</span>.RedirectResponseDTO </span>&#123;</div><div class="line">  	<span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">  	<span class="keyword">optional</span> <span class="built_in">string</span> redirectUrl =<span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UserInfo</span></span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> userId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> gender = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> birthday = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> idCard = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> Address address = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">8</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ol>
+<li>dpt 服务 tag</li>
+<li>护士提供服务 tag</li>
+<li>护士可选服务 tag</li>
+<li>护士通知 tag</li>
+</ol>
+<p>yolar dagon.x8 —&gt; tag</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

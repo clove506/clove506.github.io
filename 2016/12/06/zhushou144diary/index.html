@@ -1,0 +1,444 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【优护助手1.4.4】日志 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="优护助手1.4.4开发日志2017.02.06Android:
+Business:
+随访主界面 @qiuyu
+
+
+Service:
+完成三个随访接口封装 @weiyuiOS:
+
+
+Business:  - 
+Service:
+接口Refactoring，为以后做缓存以及Log做准备 @junchao">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【优护助手1.4.4】日志"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【优护助手1.4.4】日志</h2>
+					
+					<div>
+						<span class="post-time">2016-12-06 11:44:13</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="优护助手1-4-4开发日志"><a href="#优护助手1-4-4开发日志" class="headerlink" title="优护助手1.4.4开发日志"></a>优护助手1.4.4开发日志</h1><h2 id="2017-02-06"><a href="#2017-02-06" class="headerlink" title="2017.02.06"></a>2017.02.06</h2><h3 id="Android"><a href="#Android" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>随访主界面 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成三个随访接口封装 @weiyu<h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<br>  - </li>
+<li>Service:<ul>
+<li>接口Refactoring，为以后做缓存以及Log做准备 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-02-07"><a href="#2017-02-07" class="headerlink" title="2017.02.07"></a>2017.02.07</h2><h3 id="Android-1"><a href="#Android-1" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>301的需求 @weiyu</li>
+<li>随访的页面（剩下新建随访模版）@qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成随访接口 @weiyu<h3 id="iOS-1"><a href="#iOS-1" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>301的需求 @jingkai</li>
+<li>完成随访模块三个界面 @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成Protobuf通用的RequestUtil @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-02-08"><a href="#2017-02-08" class="headerlink" title="2017.02.08"></a>2017.02.08</h2><h3 id="Android-2"><a href="#Android-2" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>完成了所有的随访界面 @qiuyu </li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成随访界面对接 @weiyu</li>
+<li>日程提醒接口 @weiyu<h3 id="iOS-2"><a href="#iOS-2" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>随访界面静态（剩下三级界面） @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成所有随访接口 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-02-09"><a href="#2017-02-09" class="headerlink" title="2017.02.09"></a>2017.02.09</h2><h3 id="Android-3"><a href="#Android-3" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>日程提醒页面 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>缓存调研 @weiyu<h3 id="iOS-3"><a href="#iOS-3" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>随访数据对接 @jingkai</li>
+<li>工具页UI线程优化 @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成所有公告接口 @junchao</li>
+<li>缓存调研 @junchao</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-02-10"><a href="#2017-02-10" class="headerlink" title="2017.02.10"></a>2017.02.10</h2><h3 id="Android-4"><a href="#Android-4" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>正在做日程提醒页面 @qiuyu</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li><h3 id="iOS-4"><a href="#iOS-4" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+</ul>
+</li>
+<li>Business:<ul>
+<li>完成一个随访界面（还剩编辑随访界面） @jingkai</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li><h3 id="BugFix"><a href="#BugFix" class="headerlink" title="BugFix"></a>BugFix</h3></li>
+<li>修复ios头像圆角</li>
+<li>修复android几个UI Bug</li>
+<li>测通聊天，排除聊天问题</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-02-11"><a href="#2017-02-11" class="headerlink" title="2017.02.11"></a>2017.02.11</h2><h3 id="Android-5"><a href="#Android-5" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>日程提醒基本完成 90%</li>
+</ul>
+</li>
+<li><p>Service:</p>
+<ul>
+<li>完成了所有日程提醒的接口</li>
+</ul>
+</li>
+<li><p>UI Bug修复</p>
+</li>
+<li>完成日程提醒</li>
+</ul>
+<h3 id="iOS-5"><a href="#iOS-5" class="headerlink" title="iOS:"></a>iOS:</h3><ul>
+<li>Business:<ul>
+<li>对接合肥</li>
+<li>修复一些排班Bug</li>
+</ul>
+</li>
+<li><p>Service:</p>
+<ul>
+<li>修复一堆 bug</li>
+</ul>
+</li>
+<li><p>完成随访公告原生化</p>
+</li>
+<li><p>排班Bug至少完成至还剩一个</p>
+</li>
+<li><p>修复头像上传</p>
+</li>
+<li>个人页进一步完善</li>
+</ul>
+<h3 id="BugFix-1"><a href="#BugFix-1" class="headerlink" title="BugFix"></a>BugFix</h3><pre><code>- fix 排版提醒
+</code></pre><h2 id="2017-02-12"><a href="#2017-02-12" class="headerlink" title="2017.02.12"></a>2017.02.12</h2><h2 id="2017-02-13"><a href="#2017-02-13" class="headerlink" title="2017.02.13"></a>2017.02.13</h2><h3 id="Android-6"><a href="#Android-6" class="headerlink" title="Android"></a>Android</h3><ul>
+<li>完成所有日程提醒 @qiuyu</li>
+<li>修复个推icon @weiyu</li>
+<li>loading页改为半透明 </li>
+<li>修复部分UI bug<h3 id="iOS-6"><a href="#iOS-6" class="headerlink" title="iOS"></a>iOS</h3></li>
+<li>完成随访模板数据对接 @jingkai</li>
+<li>完成个人设置页 @junchao</li>
+<li>完成首页聊天头像与Android同样 @junchao</li>
+<li>聊天界面文章工具样式更新 @junchao</li>
+</ul>
+<h2 id="2017-02-14"><a href="#2017-02-14" class="headerlink" title="2017.02.14"></a>2017.02.14</h2><h3 id="Android-7"><a href="#Android-7" class="headerlink" title="Android"></a>Android</h3><ul>
+<li>完成功能性P0的Bug修复</li>
+<li>UI Bug修复P0的问题</li>
+</ul>
+<h3 id="iOS-7"><a href="#iOS-7" class="headerlink" title="iOS"></a>iOS</h3><ul>
+<li>完成大部分UI Bug的修复</li>
+<li>完成公告所有工作</li>
+<li>完成随访模块所有工作</li>
+<li>同时详情页标签完成50%</li>
+</ul>
+<h2 id="2017-02-15"><a href="#2017-02-15" class="headerlink" title="2017.02.15"></a>2017.02.15</h2><h2 id="2017-02-16"><a href="#2017-02-16" class="headerlink" title="2017.02.16"></a>2017.02.16</h2><h2 id="2017-02-17"><a href="#2017-02-17" class="headerlink" title="2017.02.17"></a>2017.02.17</h2><h2 id="2017-02-18"><a href="#2017-02-18" class="headerlink" title="2017.02.18"></a>2017.02.18</h2><h2 id="2017-02-19"><a href="#2017-02-19" class="headerlink" title="2017.02.19"></a>2017.02.19</h2><ul>
+<li>修bug</li>
+</ul>
+<h2 id="2017-02-20"><a href="#2017-02-20" class="headerlink" title="2017.02.20"></a>2017.02.20</h2><h3 id="Android-8"><a href="#Android-8" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>完成管理模版中随访模版和班次管理</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成Request内存缓存</li>
+</ul>
+</li>
+</ul>
+<h3 id="iOS-8"><a href="#iOS-8" class="headerlink" title="iOS:"></a>iOS:</h3><ul>
+<li>Business:<ul>
+<li>完成日程提醒页面逻辑</li>
+<li>完成日程提醒点击路径</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成了HTTP本地缓存模块并应用于患者列表</li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-02-21"><a href="#2017-02-21" class="headerlink" title="2017.02.21"></a>2017.02.21</h2><h3 id="Android-9"><a href="#Android-9" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>Business:<ul>
+<li>原生化了管理列表界面</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li>完成缓存策略功能模块</li>
+</ul>
+</li>
+</ul>
+<h3 id="iOS-9"><a href="#iOS-9" class="headerlink" title="iOS:"></a>iOS:</h3><ul>
+<li>Business:<ul>
+<li>日程提醒完成进度：剩余两个界面</li>
+<li>完成所有页面右滑返回</li>
+<li>完成聊天界面输入框弹出的界面修复</li>
+</ul>
+</li>
+<li>Service:<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="2017-02-22"><a href="#2017-02-22" class="headerlink" title="2017.02.22"></a>2017.02.22</h2><h3 id="Android-10"><a href="#Android-10" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>修复了页面之间切换可能出现的闪屏问题 @weiyu @qiuyu</li>
+<li>与后端联调随访模块中出现单个随访中的bug问题 @weiyu @qiuyu<h3 id="iOS-10"><a href="#iOS-10" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+<li>完成了日程提醒页面(进度为还剩一个查看随访页面） @jingkai</li>
+<li>修复了获取用户数据不完整可能导致的腾讯云SDK和神策SDK崩溃闪退的问题 @junchao</li>
+</ul>
+<h2 id="2017-02-23"><a href="#2017-02-23" class="headerlink" title="2017.02.23"></a>2017.02.23</h2><h3 id="Android-11"><a href="#Android-11" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>完成下拉刷新模块 @qiuyu</li>
+<li>完成新定义的缓存策略 @weiyu<h3 id="iOS-11"><a href="#iOS-11" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+<li>完成日程提醒已读接口 @jingkai</li>
+<li>完成下拉刷新集成 @junchao</li>
+</ul>
+<h2 id="2017-02-24"><a href="#2017-02-24" class="headerlink" title="2017.02.24"></a>2017.02.24</h2><h3 id="Android-12"><a href="#Android-12" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>完成缓存下拉刷新的自定义样式 @qiuyu </li>
+<li>缓存与业务层对接 @qiuyu @weiyu<h3 id="iOS-12"><a href="#iOS-12" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+<li>日程提醒的查看随访页面 @jingkai</li>
+<li>管理页面原生化 @jingkai</li>
+<li>完成缓存下拉刷新的自定义样式 @junchao</li>
+<li>完成日程提醒与科室公告页的缓存逻辑与下拉刷新 @junchao</li>
+</ul>
+<h2 id="2017-02-25"><a href="#2017-02-25" class="headerlink" title="2017.02.25"></a>2017.02.25</h2><h3 id="Android-13"><a href="#Android-13" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>修复所有ScrollView中可能会滑动不流畅的问题 @qiuyu</li>
+<li>完成首页断网提示 @weiyu</li>
+<li>完成同事列表和文章工具列表的缓存以及下拉刷新 @weiyu<h3 id="iOS-13"><a href="#iOS-13" class="headerlink" title="iOS:"></a>iOS:</h3></li>
+<li>完成所有日程提醒原生化 @jingkai</li>
+<li>完成首页断网提示 @junchao</li>
+<li>完成同事列表和文章工具列表的缓存以及下拉刷新 @junchao</li>
+</ul>
+<h2 id="2017-02-26"><a href="#2017-02-26" class="headerlink" title="2017.02.26"></a>2017.02.26</h2><h2 id="2017-02-27"><a href="#2017-02-27" class="headerlink" title="2017.02.27"></a>2017.02.27</h2><h3 id="Android-14"><a href="#Android-14" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>完成合肥工作台界面并对接服务控制台H5页面 @qiuyu</li>
+<li>完成订单管理页大部分接口确认 @weiyu</li>
+</ul>
+<h3 id="iOS-14"><a href="#iOS-14" class="headerlink" title="iOS:"></a>iOS:</h3><ul>
+<li>完成合肥工作台页面 @jingkai</li>
+<li>完成新的DataProvider及合肥一期原生的三个GET接口 @junchao</li>
+</ul>
+<h2 id="2017-02-28"><a href="#2017-02-28" class="headerlink" title="2017.02.28"></a>2017.02.28</h2><h3 id="Android-15"><a href="#Android-15" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>完成订单列表UI @qiuyu</li>
+<li>完成订单列表接口确认 @weiyu</li>
+</ul>
+<h3 id="iOS-15"><a href="#iOS-15" class="headerlink" title="iOS:"></a>iOS:</h3><ul>
+<li>完成订单列表UI @jingkai</li>
+<li>修复了AFNetworking的JSON解析问题 @junchao</li>
+<li>调研Ping++集成 @junchao</li>
+</ul>
+<h2 id="2017-03-01"><a href="#2017-03-01" class="headerlink" title="2017.03.01"></a>2017.03.01</h2><h3 id="Android-16"><a href="#Android-16" class="headerlink" title="Android:"></a>Android:</h3><ul>
+<li>完成辅助下单部分UI @qiuyu</li>
+<li>完成接单接口的功能对接 @qiuyu @weiyu</li>
+<li>完成时间控件 @weiyu</li>
+<li>Ping++调研 @weiyu</li>
+</ul>
+<h3 id="iOS-16"><a href="#iOS-16" class="headerlink" title="iOS:"></a>iOS:</h3><ul>
+<li>对接订单列表数据 @jingkai</li>
+<li>服务设置管理H5对接 @jingkai</li>
+<li>完成Ping++调研 @junchao</li>
+<li>完成现有合肥接口信息确认 @junchao</li>
+</ul>
+<h2 id="2017-03-02"><a href="#2017-03-02" class="headerlink" title="2017.03.02"></a>2017.03.02</h2><h2 id="2017-03-03"><a href="#2017-03-03" class="headerlink" title="2017.03.03"></a>2017.03.03</h2><h2 id="2017-03-04"><a href="#2017-03-04" class="headerlink" title="2017.03.04"></a>2017.03.04</h2><h2 id="2017-03-05"><a href="#2017-03-05" class="headerlink" title="2017.03.05"></a>2017.03.05</h2><h2 id="2017-03-06"><a href="#2017-03-06" class="headerlink" title="2017.03.06"></a>2017.03.06</h2><h2 id="2017-03-07"><a href="#2017-03-07" class="headerlink" title="2017.03.07"></a>2017.03.07</h2><h2 id="2017-03-08"><a href="#2017-03-08" class="headerlink" title="2017.03.08"></a>2017.03.08</h2><h2 id="2017-03-09"><a href="#2017-03-09" class="headerlink" title="2017.03.09"></a>2017.03.09</h2><hr>
+<h3 id="Android-17"><a href="#Android-17" class="headerlink" title="Android:"></a>Android:</h3><h3 id="iOS-17"><a href="#iOS-17" class="headerlink" title="iOS:"></a>iOS:</h3>
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,242 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>HighPriest项目（一期）详细设计 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要鉴于前次项目连夜上线的惨痛经历，HighPriest项目目的是建立一套持续测试集成，持续部署的系统。
+
+本期目标
+在阿里云容器服务上搭建开发，预发，生产环境
+Jenkins服务进行后端代码PR测试、Push的测试与部署
+git flow规范的全面普及
+
+待完成任务
+代码检查
+可视化开发页面
+通知">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="HighPriest项目（一期）详细设计"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>HighPriest项目（一期）详细设计</h2>
+					
+					<div>
+						<span class="post-time">2017-02-20 14:00:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>鉴于前次项目连夜上线的惨痛经历，HighPriest项目目的是建立一套持续测试集成，持续部署的系统。</p>
+<p><img src="/media/jenkins_top.png" alt="项目逻辑拓扑图"></p>
+<h3 id="本期目标"><a href="#本期目标" class="headerlink" title="本期目标"></a>本期目标</h3><ul>
+<li>在阿里云容器服务上搭建开发，预发，生产环境</li>
+<li>Jenkins服务进行后端代码PR测试、Push的测试与部署</li>
+<li>git flow规范的全面普及</li>
+</ul>
+<h3 id="待完成任务"><a href="#待完成任务" class="headerlink" title="待完成任务"></a>待完成任务</h3><ul>
+<li>代码检查</li>
+<li>可视化开发页面</li>
+<li>通知</li>
+<li>前端&amp;App项目部署</li>
+</ul>
+<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><ul>
+<li>gradle SNAPSHOT 的同步问题。</li>
+<li>Nexus&amp;Jenkins磁盘占用。</li>
+<li>大家的开发规范。</li>
+<li>Sleuth</li>
+</ul>
+<h2 id="CI-amp-CD"><a href="#CI-amp-CD" class="headerlink" title="CI&amp;CD"></a>CI&amp;CD</h2><p>采用Jenkins做CI，用脚本部署到容器服务做CD。</p>
+<h3 id="jenkins"><a href="#jenkins" class="headerlink" title="jenkins"></a>jenkins</h3><p>每一个服务需要有4个jenkins pipeline:</p>
+<ul>
+<li>project-dev:<br>  建立pipeline， copy from template-dev，从develop拉取代码，做build基本检查，构建image到aliyun镜像站，重新部署对应应用，</li>
+<li>project-staging:<br>  建立pipeline， copy from template-staging，增加当前tag的最后一位，添加为新的tag，push tag。构建镜像到aliyun镜像站，重新部署应用。</li>
+<li>project-pro:<br>  建立pipeline，copy from template-pro，更新线上项目。</li>
+<li>project-pr:<br>  建立pipeline， copy from template-staging。做代码检查，审核Pull Request。</li>
+</ul>
+<h3 id="镜像命名方案"><a href="#镜像命名方案" class="headerlink" title="镜像命名方案"></a>镜像命名方案</h3><p>dev：名字为每次提交hash前10位，并提交最新版本为latest到镜像库。<br>staging&amp;pro：名字为git tag version，并提交最新版本到镜像库。</p>
+<h2 id="迁移方案"><a href="#迁移方案" class="headerlink" title="迁移方案"></a>迁移方案</h2><h2 id="开发方案"><a href="#开发方案" class="headerlink" title="开发方案"></a>开发方案</h2><h3 id="halo"><a href="#halo" class="headerlink" title="halo"></a>halo</h3><p>通过gradle build，参数。</p>
+<ul>
+<li>develop: 部署到maven的SNAPSHOT库。</li>
+<li>staging，production: 上传maven的Release库。</li>
+</ul>
+<h3 id="其他项目"><a href="#其他项目" class="headerlink" title="其他项目"></a>其他项目</h3><ul>
+<li>用aliyun账户关停dev集群的服务，在本地通过参数建立服务。</li>
+<li>端口号暂时写死。<h3 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h3></li>
+</ul>
+<h2 id="上线方案"><a href="#上线方案" class="headerlink" title="上线方案"></a>上线方案</h2><p>staging和production采用一个compose来创建应用。</p>
+<h3 id="staging"><a href="#staging" class="headerlink" title="staging"></a>staging</h3><ul>
+<li>上线方式：rolling update。</li>
+<li>gateway: 蓝绿发布<h3 id="production"><a href="#production" class="headerlink" title="production"></a>production</h3></li>
+<li>首次：构建一套新环境，修改SLB流量。<h2 id="回滚方案"><a href="#回滚方案" class="headerlink" title="回滚方案"></a>回滚方案</h2></li>
+<li>develop环境：jenkins重新构建</li>
+<li>staging&amp;production：Jenkins重新提交</li>
+</ul>
+<h2 id="多容器部署"><a href="#多容器部署" class="headerlink" title="多容器部署"></a>多容器部署</h2><p>@袁鑫<br>改造，测试完毕。等待上线。</p>
+<h2 id="代码检查"><a href="#代码检查" class="headerlink" title="代码检查"></a>代码检查</h2><h3 id="checkstyle"><a href="#checkstyle" class="headerlink" title="checkstyle"></a>checkstyle</h3><h3 id="findbugs"><a href="#findbugs" class="headerlink" title="findbugs"></a>findbugs</h3><h2 id="阿里云运维改造"><a href="#阿里云运维改造" class="headerlink" title="阿里云运维改造"></a>阿里云运维改造</h2><h3 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h3><ul>
+<li>gw01:作为网关，用SNAT作为所有内部服务向外访问的出口。</li>
+<li>ssh01:作为跳板机，登录youhujia各种服务器，各人员权限通过user list定义。<br><img src="/media/aliyun_top.png" alt="运维改造"></li>
+</ul>
+<h2 id="线上事故预案"><a href="#线上事故预案" class="headerlink" title="线上事故预案"></a>线上事故预案</h2><h3 id="容器集群宕机"><a href="#容器集群宕机" class="headerlink" title="容器集群宕机"></a>容器集群宕机</h3><p>SLB改流量到staging环境，staging环境修改配置重新部署。</p>
+<h2 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h2><h3 id="E-Mail"><a href="#E-Mail" class="headerlink" title="E-Mail"></a>E-Mail</h3><h3 id="DingDing"><a href="#DingDing" class="headerlink" title="DingDing"></a>DingDing</h3><h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><h2 id="开发人员页面设计"><a href="#开发人员页面设计" class="headerlink" title="开发人员页面设计"></a>开发人员页面设计</h2><p>Shaman项目 <img src="http://wiki.office.test.youhujia.com/2017/02/28/Shaman_Detail_Design/" alt="wiki"></p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

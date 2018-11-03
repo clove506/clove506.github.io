@@ -1,0 +1,353 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Page 11 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/15/youhujia-mentalseal-project-prd-and-logs/">授权管理中心 MentalSeal 项目 PRD &amp; 开发日志</a>
+		              </h3>
+									<span class="post-time">2017-02-15</span>
+		              <div class="excerpt"><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>随着运营系统变多，登录、权限管理变得困难。目前迫切需要</p>
+<ul>
+<li>统一的权限管理</li>
+<li>统一的用户管理</li>
+</ul>
+<p>因此，将运营类系统分为两类：</p>
+<ul>
+<li>授权管理中心，也就是 MentaSeal，负责权限的管理</li>
+<li>各类运营管理系统，本文档表述为 App, 完成具体运营业务的逻辑实现，如：优护助手护士审核系统、订单运营系统</li>
+</ul>
+<p>现有的 Yolar 项目已经解决了部分「统一的用户管理」的问题，只需要再加入 <code>用户统一注册和登录</code> 即可。</p>
+<p>MentalSeal 项目(授权管理中心<sup>1</sup>)因运而生，除了「统一的权限管理」外，还提供了：</p>
+<ul>
+<li>与其他项目的运营管理系统对接，方便做权限校验</li>
+<li>一个全新的、重新设计的 WEB 界面</li>
+</ul>
+<p>在 MentalSeal 完成权限配置后，App 可以按照 RoleEnum 中的 <code>id</code> 完成对角色的定义，决定授予哪些权限。</p></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/15/youhujia-mentalseal-project-prd-and-logs/"> MORE... </a>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/15/android_ui_interaction/">android ui 交互网络请求的优化</a>
+		              </h3>
+									<span class="post-time">2017-02-15</span>
+		              <div class="excerpt"><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>在标签页面原来的交互逻辑可能和用户的操作不一致。</p></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/15/android_ui_interaction/"> MORE... </a>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/15/OrderDatabase/">android ui 交互网络请求的优化</a>
+		              </h3>
+									<span class="post-time">2017-02-15</span>
+		              <div class="excerpt"><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>在标签页面原来的交互逻辑可能和用户的操作不一致。</p></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/15/OrderDatabase/"> MORE... </a>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/15/youhujia-high-priest-project-scrum/">High Priest 项目 PRD 及开发日志</a>
+		              </h3>
+									<span class="post-time">2017-02-15</span>
+		              <div class="excerpt"></div>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/14/Service_Exception_List/">【上门护理二期】Exception集合</a>
+		              </h3>
+									<span class="post-time">2017-02-14</span>
+		              <div class="excerpt"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p> Shooter,Farmer,Halo,Owl Exception List</p></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/14/Service_Exception_List/"> MORE... </a>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/14/nursing_indoors_second/">上门护理二期PRD</a>
+		              </h3>
+									<span class="post-time">2017-02-14</span>
+		              <div class="excerpt"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>上门护理二期PRD</p></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/14/nursing_indoors_second/"> MORE... </a>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/11/HeiFei-2plan-owl/">【上门护理二期】合肥项目-owl项目API</a>
+		              </h3>
+									<span class="post-time">2017-02-11</span>
+		              <div class="excerpt"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>目前创建订单只能是用户进行创建，但是我们的用户都是中老年和需要护理人员，他们进行下单操作可能会不方便，因此需要添加辅助下单功能：</p>
+<ul>
+<li>护士辅助下单功能</li>
+</ul></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/11/HeiFei-2plan-owl/"> MORE... </a>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/10/nursing-item-publish-flow/">上门护理支撑子系统前期需求整理</a>
+		              </h3>
+									<span class="post-time">2017-02-10</span>
+		              <div class="excerpt"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>服务商品发布流程 + 上门护理支撑子系统拆分</p></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/10/nursing-item-publish-flow/"> MORE... </a>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/10/2017-02-10/">【优护助手】优护助手登录测试号码集</a>
+		              </h3>
+									<span class="post-time">2017-02-10</span>
+		              <div class="excerpt"></div>
+		              
+		            </div>
+				
+		            <div class="index-item-wrapper">
+		              <h3>
+		                <a class="post-title" href="/2017/02/10/HeFei_Alert/">【上门护理二期】订单项目二期报警支持</a>
+		              </h3>
+									<span class="post-time">2017-02-10</span>
+		              <div class="excerpt"><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>原有的系统中档退款异常和发起退款异常都是需要报警的，第一期没有实现。</p></div>
+		              
+		                  <a class="btn btn-default" href="/2017/02/10/HeFei_Alert/"> MORE... </a>
+		              
+		            </div>
+				
+				<!-- archives -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+			<div class="btn-group btn-group-justified">
+				
+
+					<a class="btn btn-default " href="/page/10/" >Prev</a>
+
+					<a class="btn btn-default" href="/">Home</a>
+
+					<a class="btn btn-default " href="/page/12/" >Next</a>
+
+	    	
+			</div>
+	  
+
+		<div class="comment-section">
+  
+
+</div>
+	</div>
+
+	
+		<div class="col-md-3">
+			<div id="sidebar">
+		</div>
+			
+					
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2017/11/01/thread/concurrent/"  > <i class="mdi-editor-insert-drive-file"></i>concurrent</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/01/java/JVM工作结构/"  > <i class="mdi-editor-insert-drive-file"></i>IO</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/01/TCP-status-transform/"  > <i class="mdi-editor-insert-drive-file"></i>TCP 状态转换</a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/01/HeFei-nurse &amp; operator new oders/"  > <i class="mdi-editor-insert-drive-file"></i></a>
+      </li>
+    
+      <li>
+        <a href="/2017/11/01/2017-06-20/"  > <i class="mdi-editor-insert-drive-file"></i></a>
+      </li>
+    
+  </ul>
+</div>
+
+
+				
+					
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li> <a href="http://www.github.com/wayou" title="码农之家" target="_blank"> <i class="mdi-action-launch"></i> GitHub</a></li>
+	
+		<li> <a href="http://www.weibo.com/liuwayong" title="twitter的本地化版本" target="_blank"> <i class="mdi-action-launch"></i> 微博</a></li>
+	
+	</ul>
+</div>
+
+
+				
+			</div>
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

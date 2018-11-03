@@ -1,0 +1,342 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JWT多端登录策略 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="背景
+目前，当以护士（以护士举例）身份登录web管理系统后，又以同一个护士账号登录APP，Web端会将强制退出该护士账号，也就是说，目前优护家Web管理系统和APP不支持同一个账号（护士）同时在线。
+
+通过调研，计划利用JWT（Java Web Token）来升级目前优护家Token登录策略。
+
+
+">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JWT多端登录策略"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>JWT多端登录策略</h2>
+					
+					<div>
+						<span class="post-time">2017-11-04 12:07:49</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
+<li><p>目前，当以护士（以护士举例）身份登录web管理系统后，又以同一个护士账号登录APP，Web端会将强制退出该护士账号，也就是说，目前优护家Web管理系统和APP不支持同一个账号（护士）同时在线。</p>
+</li>
+<li><p>通过调研，计划利用JWT（Java Web Token）来升级目前优护家Token登录策略。</p>
+</li>
+</ul>
+<p>需要更新的逻辑：登录相关（Nurse&amp;User&amp;Admin），主要涉及以下项目：</p>
+<ul>
+<li>Gateway</li>
+<li>Yolar</li>
+</ul>
+<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>以护士身份为例：</p>
+<p><img src="https://img.wkcontent.com/assets/2017-07-17/48d9789f-94fd-4913-bee2-ec1ba9af39a3.png" alt="接口请求流程"></p>
+<h2 id="Token校验"><a href="#Token校验" class="headerlink" title="Token校验"></a>Token校验</h2><p><img src="https://img.wkcontent.com/assets/2017-07-17/f45d7e7b-88c8-4f56-92f9-648fdc2ac57d.png" alt="Token校验"></p>
+<h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><ul>
+<li>护士</li>
+<li>患者</li>
+<li>管理员（admin）</li>
+</ul>
+<h2 id="Gateway"><a href="#Gateway" class="headerlink" title="Gateway"></a>Gateway</h2><p>主要涉及外部传入的Token Jwt解析和对比。</p>
+<ul>
+<li>反序列化Token成json</li>
+<li>调用yolar接口，获取保存在DB中的Token-json，进行对比，验证外部Token是否合法</li>
+</ul>
+<h2 id="Yolar"><a href="#Yolar" class="headerlink" title="Yolar"></a>Yolar</h2><p>主要涉及token JWT序列化，以及将Token-json信息存库。</p>
+<ul>
+<li>生产token-json信息，存库</li>
+<li>JWT序列化json信息作为token，返回APP或Web</li>
+</ul>
+<h2 id="底层设计"><a href="#底层设计" class="headerlink" title="底层设计"></a>底层设计</h2><h3 id="yolar"><a href="#yolar" class="headerlink" title="yolar"></a>yolar</h3><ul>
+<li><p>admin、nurse、user三表中的token字段改存json串，需要将三表的token字段进行扩容，见附录MySQL，json串内容为：</p>
+  <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">"tokenInfo": &#123;</div><div class="line">      "pd": 20286,</div><div class="line">      "pt": 0,</div><div class="line">      "wt": "s1TMmpuc7mcV7lKcbHt9ldKfE3siKUk1VG7m6fNhMX7mJKiTYqx3eQyHHpDwr8ohxXZwJq7h9xUxqaIJj0yhmneM2Yr2M1ShwAmjQz7fD6wqImQyK7lviNLjj77tbdA2",</div><div class="line">      "we":23232343433,</div><div class="line">      "at": "s1TMmpuc7mcV7lKcbHt9ldKfE3siKUk1VG7m6fNhMX7mJKiTYqx3eQyHHpDwr8ohxXZwJq7h9xUxqaIJj0yhmneM2Yr2M1ShwAmjQz7fD6wqImQyK7lviNLjj77tbdA2",</div><div class="line">      "ae":23232343334</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以下是「pType」的枚举类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> PersonTypeEnum &#123;</div><div class="line">    NURSE(<span class="number">0L</span>, <span class="string">"护士"</span>),</div><div class="line">    USER(<span class="number">1L</span>, <span class="string">"患者"</span>),</div><div class="line">    ADMIN(<span class="number">2L</span>, <span class="string">"管理员"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="涉及接口"><a href="#涉及接口" class="headerlink" title="涉及接口"></a>涉及接口</h3><ul>
+<li><p>根据手机号和密码登录</p>
+<blockquote>
+<p>POST  /api/yolar/v3/login/phone-password<br>Yolar.SimpleLoginDTO</p>
+</blockquote>
+</li>
+<li><p>根据手机号和验证码登录</p>
+<blockquote>
+<p>POST  /api/yolar/v3/login/phone-captcha<br>Yolar.SimpleLoginDTO</p>
+</blockquote>
+</li>
+<li><p>根据手机验证码重置密码</p>
+<blockquote>
+<p>POST  /api/yolar/v3/login/reset-password<br>Yolar.SimpleResponse</p>
+</blockquote>
+</li>
+<li><p>根据手机号和密码登录</p>
+<blockquote>
+<p>POST  /api/yolar/v3/login/phone-password<br>Yolar.SimpleLoginDTO</p>
+</blockquote>
+</li>
+<li><p>注销</p>
+<blockquote>
+<p>POST  /api/yolar/v3/logout<br>Yolar.SimpleResponse</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h2><p>编写Python脚本，进行数据迁移（针对admin、nurse、user三个表的token字段来进行编写脚本）</p>
+<h2 id="排期"><a href="#排期" class="headerlink" title="排期"></a>排期</h2><pre class="mermaid">
+gantt
+　　　dateFormat　YYYY-MM-DD
+　　　title 重点项目甘特图
+　　　
+　　　section 多端登录及TokenJWT生成策略　　　　　
+　　　PRD，设计，Kickoff :active, des1, 2017-07-17, 2017-07-17
+　　　Yolar开发 : des2, after des1, 2017-07-18
+　　　GateWay开发 : des3, after des2, 2017-07-19
+　　　数据迁移 : des4, after des3, 2017-07-20
+           测试&上线 : des5, after des4, 1d
+　　　
+</pre>
+
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="1-Protobuf-定义"><a href="#1-Protobuf-定义" class="headerlink" title="1. Protobuf 定义"></a>1. Protobuf 定义</h3><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">TokenInfo</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">TokenMetaData</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> pId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> pType = <span class="number">2</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> webToken = <span class="number">3</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> webTokenExpire = <span class="number">4</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> appToken = <span class="number">5</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> appTokenExpire = <span class="number">6</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> TokenMetaData tokenInfo = <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SimpleLoginDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Data data = <span class="number">1</span>;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">1</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">2</span>;</div><div class="line">        <span class="keyword">optional</span> LoginRole loginRole = <span class="number">3</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> redirectUrl = <span class="number">4</span>;</div><div class="line">        <span class="keyword">optional</span> TokenInfo tokenInfo = <span class="number">5</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Nurse</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> nurseId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> gender = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> birthday = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> avatarUrl = <span class="number">8</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">9</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> idCard = <span class="number">10</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> personType = <span class="number">11</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> status = <span class="number">12</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> certs = <span class="number">13</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> photos = <span class="number">14</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">15</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">16</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">17</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">bool</span> active = <span class="number">18</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">NurseDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> Nurse nurse = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-MySQL"><a href="#2-MySQL" class="headerlink" title="2. MySQL"></a>2. MySQL</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">alter table admin modify column token TEXT DEFAULT NULL COMMENT &apos;登录 TOKEN&apos;;</div><div class="line">alter table nurse modify column token TEXT DEFAULT NULL COMMENT &apos;登录 TOKEN&apos;;</div><div class="line">alter table user modify column token TEXT DEFAULT NULL COMMENT &apos;登录 TOKEN&apos;;</div></pre></td></tr></table></figure>
+<h3 id="3-引用参考"><a href="#3-引用参考" class="headerlink" title="3. 引用参考"></a>3. 引用参考</h3><ul>
+<li>[1], <a href="https://jwt.io/" target="_blank" rel="external">JWT官网</a></li>
+<li>[2], <a href="http://www.jianshu.com/p/576dbf44b2ae" target="_blank" rel="external">什么是 JWT – JSON WEB TOKEN</a></li>
+</ul>
+<h2 id="项目总结"><a href="#项目总结" class="headerlink" title="项目总结"></a>项目总结</h2><h3 id="项目复盘"><a href="#项目复盘" class="headerlink" title="项目复盘"></a>项目复盘</h3><ul>
+<li>7月15日Token JWT化生成策略项目落地，正式KickOff，在此之前，林慧芝和卢江对JWT进行了调研，进行设计</li>
+<li>7月17日林慧芝和卢江进入开发，涉及项目包括有Yolar、Gateway、Mentalseal、Shooter、Galaxy、Halo。</li>
+<li>7月21日项目部署至staging环境，提测。</li>
+<li>7月22日，在和学文Review代码后，发现问题，学文建议重构Gateway涉及的Token登录逻辑，修改底层Yolar服务，增加check-token接口。</li>
+<li>7月24日卢江开始重构yolar和gateway。</li>
+<li>7月25日dev环境回归测试。</li>
+<li>7月26日staging环境回归测试。</li>
+<li>7月27日修复staging环境回归测试发现的问题。</li>
+<li>7月28日上线。</li>
+</ul>
+<h3 id="时间统计"><a href="#时间统计" class="headerlink" title="时间统计"></a>时间统计</h3><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>开始时间</th>
+<th>结束时间</th>
+<th>天数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需求、设计、开发文档撰写</td>
+<td>0715</td>
+<td>0715</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>开发+自测</td>
+<td>0717</td>
+<td>0721</td>
+<td>3天</td>
+</tr>
+<tr>
+<td>dev + staging 环境测试</td>
+<td>0722</td>
+<td>0722</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>二期重构Yolar和Gateway</td>
+<td>0724</td>
+<td>0724</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>dev环境测试</td>
+<td>0725</td>
+<td>0725</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>staging环境测试 + 修复bug</td>
+<td>0726</td>
+<td>0727</td>
+<td>2天</td>
+</tr>
+<tr>
+<td>上线</td>
+<td>0728</td>
+<td>0728</td>
+<td>1天</td>
+</tr>
+</tbody>
+</table>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>PRD 设计时间太短，对接前端Web系统的Mentalseal逻辑有问题，没提前搞清前端Token逻辑<ul>
+<li>历史原因，前端请求后端接口携带的Token是登录成功之后获取角色信息中的Token。</li>
+</ul>
+</li>
+<li>开发阶段速度比较正常，但有不足：代码的逻辑没能及时 review，避免走弯路，比如Yolar中途增加接口，Gateway改调新接口。</li>
+</ol>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

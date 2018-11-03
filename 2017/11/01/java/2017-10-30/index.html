@@ -1,0 +1,256 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="概要为了照护服务项目落地，本期需要实现以下功能：
+
+服务类目模板化。类目下服务商品、商品标准服务步骤、服务使用方式（预约制、预付制）、支付方式（线上、线下）、订单服务周期（单次服务、一天多次、多天全时服务）、服务人员配置及权限（护工、评估师），抽象出类目模板对象。
+
+以上功能中提到的服务和订单和原合">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2></h2>
+					
+					<div>
+						<span class="post-time">2017-11-01 12:29:30</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><p>为了照护服务项目落地，本期需要实现以下功能：</p>
+<ol>
+<li>服务类目模板化。类目下服务商品、商品标准服务步骤、服务使用方式（预约制、预付制）、支付方式（线上、线下）、订单服务周期（单次服务、一天多次、多天全时服务）、服务人员配置及权限（护工、评估师），抽象出类目模板对象。</li>
+</ol>
+<p>以上功能中提到的服务和订单和原合肥上门护理服务没有关系，考虑兼容原有数据，本期设计开发基于原有模型进行改造开发。</p>
+<h2 id="服务类目模板化"><a href="#服务类目模板化" class="headerlink" title="服务类目模板化"></a>服务类目模板化</h2><p>在优护家现有服务类目中，针对各个类目下商品服务的属性，抽象出每个类目的共有属性，进行统一管理，商品模型的类目继承该类目。</p>
+<p>评估服务类目下的所有商品，都具有服务方式、支付方式、订单周期等属性，那么只要把这些属性关联到这些类目，那么其下面的商品自然就拥有这些属性。</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>服务类目模板采用tag的模型，可以创建一种新的tag，如<code>type=serviceCategory</code>，tag_property表存它的属性。</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li><p>基本属性<code>key=categoryProperty</code><br>  value:</p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"property"</span>: &#123;</div><div class="line">        <span class="attr">"subscribeType"</span>:[<span class="string">"预约"</span>, <span class="string">"预付"</span>],</div><div class="line">        <span class="attr">"payType"</span>: [<span class="string">"线上"</span>, <span class="string">"线下"</span>],</div><div class="line">        <span class="attr">"servicePeriods"</span>: [<span class="string">"单次"</span>, <span class="string">"一天3次"</span>, <span class="string">"多天全时"</span>]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="标准服务步骤"><a href="#标准服务步骤" class="headerlink" title="标准服务步骤"></a>标准服务步骤</h3><p>角色定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> UserTypeEnum &#123;</div><div class="line">    ADMIN(<span class="number">1</span>, <span class="string">"管理员"</span>),</div><div class="line">    ACCOUNTANT(<span class="number">2</span>, <span class="string">"财务"</span>),</div><div class="line">    MANAGER(<span class="number">3</span>, <span class="string">"客服经理"</span>),</div><div class="line">    SUPERVISOR(<span class="number">4</span>, <span class="string">"评估师"</span>),</div><div class="line">    USER(<span class="number">5</span>, <span class="string">"用户"</span>),</div><div class="line">    CAREWORKER(<span class="number">6</span>, <span class="string">"护工"</span>);</div><div class="line">    ADMIN(<span class="number">1</span>, <span class="string">"管理员"</span>),</div><div class="line">    ACCOUNTANT(<span class="number">2</span>, <span class="string">"财务"</span>),</div><div class="line">    MANAGER(<span class="number">3</span>, <span class="string">"客服经理"</span>),</div><div class="line">    SUPERVISOR(<span class="number">4</span>, <span class="string">"评估师"</span>),</div><div class="line">    USER(<span class="number">5</span>, <span class="string">"用户"</span>),</div><div class="line">    CAREWORKER(<span class="number">6</span>, <span class="string">"护工"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之前的服务步骤没有指定角色，本期商品服务的服务步骤中关系到护工任务只能由护工完成，评估只能由评估师完成，而且两者之间没有依赖,唯一需要改动的是可见性权限配置问题，即不同的服务步骤针对对应的服务人员可见。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"articleSection"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"title"</span>: <span class="string">"健康宣教知识"</span>,</div><div class="line">      <span class="attr">"desc"</span>: <span class="string">"下单后，系统自动向患者开放服务的健康宣教知识"</span>,</div><div class="line">      <span class="attr">"article"</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"id"</span>: <span class="number">20815</span>,</div><div class="line">          <span class="attr">"title"</span>: <span class="string">"幼儿基本服务包"</span>,</div><div class="line">          <span class="attr">"read"</span>: <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      <span class="attr">"order"</span>: <span class="number">1</span></div><div class="line">    &#125;,</div><div class="line">	 <span class="string">"role"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]	// 参考上述的UserTypeEnum，表示该部分对于role中代表的身份可见</div><div class="line">  ],</div><div class="line">  <span class="attr">"toolSection"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"title"</span>: <span class="string">"全面了解身体情况"</span>,</div><div class="line">      <span class="attr">"desc"</span>: <span class="string">"服务前患者进行自我测评"</span>,</div><div class="line">      <span class="attr">"tool"</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"id"</span>: <span class="number">50378</span>,</div><div class="line">          <span class="attr">"title"</span>: <span class="string">"简明版12项健康状况调查问卷SF-12"</span>,</div><div class="line">          <span class="attr">"summary"</span>: <span class="string">""</span></div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      <span class="attr">"order"</span>: <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">  ],</div><div class="line">  <span class="attr">"careSection"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"title"</span>: <span class="string">"基础评估"</span>,</div><div class="line">      <span class="attr">"desc"</span>: <span class="string">"评估客户基础情况"</span>,</div><div class="line">      <span class="attr">"evaluate"</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"id"</span>: <span class="number">50262</span>,</div><div class="line">          <span class="attr">"title"</span>: <span class="string">"简易营养状态评估（MNA）"</span>,</div><div class="line">          <span class="attr">"summary"</span>: <span class="string">""</span></div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      <span class="attr">"order"</span>: <span class="number">1</span></div><div class="line">    &#125;,</div><div class="line">	 <span class="string">"role"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]	// 参考上述的UserTypeEnum，表示该部分对于role中代表的身份可见</div><div class="line">  ],</div><div class="line">  <span class="attr">"evaluateSection"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"title"</span>: <span class="string">"基础评估"</span>,</div><div class="line">      <span class="attr">"desc"</span>: <span class="string">"评估客户基础情况"</span>,</div><div class="line">      <span class="attr">"evaluate"</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"id"</span>: <span class="number">50262</span>,</div><div class="line">          <span class="attr">"title"</span>: <span class="string">"简易营养状态评估（MNA）"</span>,</div><div class="line">          <span class="attr">"summary"</span>: <span class="string">""</span></div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      <span class="attr">"order"</span>: <span class="number">1</span></div><div class="line">    &#125;,</div><div class="line">   <span class="string">"role"</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]	// 参考上述的UserTypeEnum，表示该部分对于role中代表的身份可见</div><div class="line">  ],</div><div class="line">  <span class="attr">"stepSection"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"title"</span>: <span class="string">"签约步骤"</span>,</div><div class="line">      <span class="attr">"desc"</span>: <span class="string">"联系患者，进行签约"</span>,</div><div class="line">      <span class="attr">"order"</span>: <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">  ],</div><div class="line">  <span class="attr">"categoryId"</span>: <span class="number">16</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上，每个类目可能有不同的服务步骤。本期暂时提前录入各个类目对应的服务步骤，后期实现服务步骤的管理功能。</p>
+<p>此处涉及的executorType是用于产生新订单时判断是当前人是否有权限接单。这样一来，设计到服务商品的可服务人员信息配置。商品和服务人员关系暂由tag模型进行存储，本期暂时由后台操作配置服务人员信息，后期在商品服务发布系统中，根据服务商品的标准化服务步骤信息，来配置商品服务的服务人员。</p>
+<h2 id="服务商品模板化"><a href="#服务商品模板化" class="headerlink" title="服务商品模板化"></a>服务商品模板化</h2><h3 id="类模板属性"><a href="#类模板属性" class="headerlink" title="类模板属性"></a>类模板属性</h3><p>每个商品都有category, 这就间接的继承了类目模板的属性，这些信息可以从category的属性信息中获取。所以只要设计好类目模板模型就好了。</p>
+<h3 id="多服务属性"><a href="#多服务属性" class="headerlink" title="多服务属性"></a>多服务属性</h3><p>现有商品模型仅支持多属性单属性值，为了向C端用户提供更多选择，即需要支持多个属性多个属性值，再由属性值交叉生成不同的service_item, 患者在C端可以根据属性值去选择哪种服务商品。</p>
+<p>此处商品的属性和属性值是指包含继承自类模板的属性和属性值。</p>
+<h3 id="折扣设置"><a href="#折扣设置" class="headerlink" title="折扣设置"></a>折扣设置</h3><p>可以在item表添加一个字段，表示商品打几折，但该信息并不返回到C端，给用户展示，只是在用户付款的时候，进行价格折扣。</p>
+<p><del>## 工作职责</del></p>
+<h2 id="针对服务步骤的接单和服务设计"><a href="#针对服务步骤的接单和服务设计" class="headerlink" title="针对服务步骤的接单和服务设计"></a>针对服务步骤的接单和服务设计</h2><p>创建一个新的接单记录表：orderRecord</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>主键</td>
+<td>long</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td>订单的id</td>
+<td>long</td>
+</tr>
+<tr>
+<td>step_order</td>
+<td>服务步骤的顺序</td>
+<td>int</td>
+</tr>
+<tr>
+<td>role_id</td>
+<td>服务该步骤人的id</td>
+<td>long</td>
+</tr>
+<tr>
+<td>role_type</td>
+<td>服务该步骤人的类型</td>
+<td>int</td>
+</tr>
+<tr>
+<td>is_accepeted</td>
+<td>该服务步骤是否被接受（0：未接；1：已接）</td>
+<td>bit</td>
+</tr>
+<tr>
+<td>is_finished</td>
+<td>该服务步骤是否被完成（0：未完成；1：已完成）</td>
+<td>bit</td>
+</tr>
+</tbody>
+</table>
+<h3 id="接单时详情"><a href="#接单时详情" class="headerlink" title="接单时详情"></a>接单时详情</h3><p>由于服务步骤的每一步都有可能是需要不同角色去完成，所以在接单时，服务人员是去接的具体服务步骤：<br>例如：一个患者创建了一个订单，该订单的服务步骤有：（1）身体健康评估（服务角色：评估师）；（2）尿管护理（服务角色：护工）。<br>这个时候服务人员去接单的时候，是去接这个（1）（2）的步骤，且评估师只能接取（1）这个步骤，护工只能接取（2）这个步骤。当评估师或者护工接取该订单的步骤，该订单就不会显示给该类角色。只有当所有的服务步骤全部被接取患者端才能看见此订单被接收。</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

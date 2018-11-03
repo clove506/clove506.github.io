@@ -1,0 +1,225 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【上门护理二期】合肥项目-C端二期详细设计 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要合肥项目-患者端详细设计">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【上门护理二期】合肥项目-C端二期详细设计"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【上门护理二期】合肥项目-C端二期详细设计</h2>
+					
+					<div>
+						<span class="post-time">2017-02-18 13:00:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>合肥项目-患者端详细设计</p>
+<a id="more"></a>
+<h1 id="C端二期详细设计"><a href="#C端二期详细设计" class="headerlink" title="C端二期详细设计"></a>C端二期详细设计</h1><h2 id="类图概要设计"><a href="#类图概要设计" class="headerlink" title="类图概要设计"></a>类图概要设计</h2><p><img src="/media/c_two_detail_pic.png" alt=""></p>
+<h2 id="接口及接口详情"><a href="#接口及接口详情" class="headerlink" title="接口及接口详情"></a>接口及接口详情</h2><h3 id="服务详情接口"><a href="#服务详情接口" class="headerlink" title="服务详情接口"></a>服务详情接口</h3><p>接口没有改变，因为功能全部不变，只是添加了serviceDetail字段，所有信息通过CAItem注解得到，所以只需在BO里获取就行了。</p>
+<h4 id="QueryItemBO"><a href="#QueryItemBO" class="headerlink" title="QueryItemBO"></a>QueryItemBO</h4><p>获取item里对应的serviceDetail的信息。</p>
+<h3 id="用户下单前所需item、患者列表信息"><a href="#用户下单前所需item、患者列表信息" class="headerlink" title="用户下单前所需item、患者列表信息"></a>用户下单前所需item、患者列表信息</h3><p>接口没有改变，新增用户下拉列表功能，新增服务时间的重新设计。<br>其他功能不变，在OrderContextFactory里边调用yolar里的列表方法，在QueryOrderBO里返回列表信息。</p>
+<h4 id="QueryOrderBO"><a href="#QueryOrderBO" class="headerlink" title="QueryOrderBO"></a>QueryOrderBO</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">getItemAndUserAddressList(Map&lt;String, String&gt; queryMap)&#123;</div><div class="line">	<span class="comment">//1.填充patientList信息</span></div><div class="line">	<span class="comment">//2.填充item信息</span></div><div class="line">	<span class="comment">//3.填充服务时间信息</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//填充patientList信息</span></div><div class="line">buildUserAddressList(OrderContext context);</div><div class="line"><span class="comment">//从@CAItem注解中获取Item相关信息，填充item信息与服务时间</span></div><div class="line">buildOrderItem（OrderContext context);</div><div class="line">buildServingTime（OrderContext context);</div></pre></td></tr></table></figure>
+<h4 id="OrderContextFactory"><a href="#OrderContextFactory" class="headerlink" title="OrderContextFactory"></a>OrderContextFactory</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">getItemAndUserAddressList(Map&lt;String, String&gt; queryMap) &#123;</div><div class="line">	<span class="comment">//1.参数校验，检查queryMap里的userId、itemId是否存在</span></div><div class="line">	<span class="comment">//2.构建context</span></div><div class="line">	<span class="comment">//3.构建Item，通过@CAItem注解获得</span></div><div class="line">	<span class="comment">//4.构建Patient，通过@CAPatient注解获得</span></div><div class="line">	<span class="comment">//5.添加setPatientList的信息，方案：通过@CAPatient(needAddress = true)注解获得</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="修改前，查询患者信息"><a href="#修改前，查询患者信息" class="headerlink" title="修改前，查询患者信息"></a>修改前，查询患者信息</h3><p>新增接口：用户点击选择列表里的某个用户，通过patientId查询对应患者的具体信息。</p>
+<h4 id="QueryOrderBO-1"><a href="#QueryOrderBO-1" class="headerlink" title="QueryOrderBO"></a>QueryOrderBO</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">getUserAddressById(Long patientId)&#123;</div><div class="line">	<span class="comment">//1.填充UserAddress的基本信息</span></div><div class="line">	<span class="comment">//2.填充Address信息</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="OrderContextFactory-1"><a href="#OrderContextFactory-1" class="headerlink" title="OrderContextFactory"></a>OrderContextFactory</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">getUserAddressById(Long patientId)&#123;</div><div class="line">	<span class="comment">//1.校验userId与userAddressId参数</span></div><div class="line">	<span class="comment">//2.检验合法性：当前用户userId与查询的UserAddress中对应的userId是否相同</span></div><div class="line">	<span class="comment">//3.构建context</span></div><div class="line">	<span class="comment">//方案：调用halo，查询出来的结果，来构建context</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="提交修改的患者信息"><a href="#提交修改的患者信息" class="headerlink" title="提交修改的患者信息"></a>提交修改的患者信息</h3><p>新增接口：用户修改患者的信息。</p>
+<h4 id="UpdateUserAddressBO"><a href="#UpdateUserAddressBO" class="headerlink" title="UpdateUserAddressBO"></a>UpdateUserAddressBO</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">updateUserAddressMsg(Shooter.UserAddressUpdateOption option)&#123;</div><div class="line"></div><div class="line">	<span class="comment">//1.构建UserAddressUpdateOption</span></div><div class="line">	computerUserAddressUpdateContext();</div><div class="line">	<span class="comment">//2.调用Yolar中的updateUserAddress方法，执行更新动作</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="UpdateUserAddressFactory"><a href="#UpdateUserAddressFactory" class="headerlink" title="UpdateUserAddressFactory"></a>UpdateUserAddressFactory</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">updateUserAddressMsg(Shooter.UserAddressUpdateOption option)&#123;</div><div class="line">	<span class="comment">//1.校验参数</span></div><div class="line">	<span class="comment">//2.构建context</span></div><div class="line">	<span class="comment">//3.构建userAddress信息：根据userAddressId判断是否有对应的UserAddress存在</span></div><div class="line">	computerUserAddressContent();</div><div class="line">	<span class="comment">//4.权限判断：判断用户的userId与userAddress中的userId是否相等</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="新增患者信息"><a href="#新增患者信息" class="headerlink" title="新增患者信息"></a>新增患者信息</h3><p>新增接口：用户添加新的患者。</p>
+<h4 id="AddOrderBO"><a href="#AddOrderBO" class="headerlink" title="AddOrderBO"></a>AddOrderBO</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">addUserAddressMsg(Shooter.AddUserAddressMsgOption addUserAddressMsgOption)&#123;</div><div class="line">	<span class="comment">//1.构建UserAddressCreateOption</span></div><div class="line">	<span class="comment">//2.调用yolar中的createUserAddress方法，进行添加动作</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//构建患者信息的方法</span></div><div class="line">computerUserAddress(AddOrderContext context);</div></pre></td></tr></table></figure>
+<h4 id="AddOrderContextFactory"><a href="#AddOrderContextFactory" class="headerlink" title="AddOrderContextFactory"></a>AddOrderContextFactory</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">addUserAddressMsg(Shooter.AddUserAddressMsgOption option) &#123;</div><div class="line">	<span class="comment">//1.校验参数</span></div><div class="line">	<span class="comment">//2.构建context</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="删除当前患者"><a href="#删除当前患者" class="headerlink" title="删除当前患者"></a>删除当前患者</h3><p>新增接口：使用patientId删除当前患者。</p>
+<h4 id="DeleteBO"><a href="#DeleteBO" class="headerlink" title="DeleteBO"></a>DeleteBO</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deleteUserAddress(Long patientId)&#123;</div><div class="line">	<span class="comment">//1.参数,权限校验</span></div><div class="line">	checkDeleteLegal(userAddressId, queryMap)</div><div class="line">	<span class="comment">//2.调yolar中的deleteUserAddress方法执行删除操作</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="用户与患者的关系"><a href="#用户与患者的关系" class="headerlink" title="用户与患者的关系"></a>用户与患者的关系</h3><p>新增接口：新需求，用户下单要选择自己和患者的关系。<br>enum，shooter层调用enum，并返回给前端使用。</p>
+<h4 id="QueryOrderBO-2"><a href="#QueryOrderBO-2" class="headerlink" title="QueryOrderBO"></a>QueryOrderBO</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">relationList(Map&lt;String, String &gt; queryMap)&#123;</div><div class="line">	<span class="comment">//1.填充关系列表，并返回结果</span></div><div class="line">	<span class="comment">//2.取出context中的enum列表，遍历并添加列表信息</span></div><div class="line">	buildRelation(orderContext);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="OrderContextFactory-2"><a href="#OrderContextFactory-2" class="headerlink" title="OrderContextFactory"></a>OrderContextFactory</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">patientList(Map&lt;String, String &gt; queryMap)&#123;</div><div class="line">	<span class="comment">//1.构建context，即用户与患者的关系列表</span></div><div class="line">	<span class="comment">//2.添加关系列表enum，方案：从halo的RelationEnum中取出，并添加</span></div><div class="line">	computerRelation(context);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="提交订单"><a href="#提交订单" class="headerlink" title="提交订单"></a>提交订单</h3><p>接口没有改变：在原来的基础上，把对目前需求多余的字段去掉，添加新的字段，例：备注，服务时间，患者。</p>
+<h4 id="AddOrderBO-1"><a href="#AddOrderBO-1" class="headerlink" title="AddOrderBO"></a>AddOrderBO</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">addOrder(Shooter.OrderMsgAddOption orderMsgAddOption)&#123;</div><div class="line">	<span class="comment">//1.构建orderCreateOption</span></div><div class="line">	buildOrder(context);</div><div class="line">	<span class="comment">//2.调owl中的createOrder方法，执行创建订单操作</span></div><div class="line">&#125;</div><div class="line">buildOrder(AddOrderContext context)&#123;</div><div class="line">	<span class="comment">//1.填充患者信息</span></div><div class="line">	<span class="comment">//2.填充服务时间的信息</span></div><div class="line">	<span class="comment">//3.填充用户的备注</span></div><div class="line">	<span class="comment">//方案：在owl的proto里添加notes字段</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="AddOrderContextFactory-1"><a href="#AddOrderContextFactory-1" class="headerlink" title="AddOrderContextFactory"></a>AddOrderContextFactory</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">addOrderContext(Shooter.OrderMsgAddOption orderMsgAddOption) &#123;</div><div class="line">	<span class="comment">//1.校验参数</span></div><div class="line">	<span class="comment">//2.构建context</span></div><div class="line">	<span class="comment">//3.构建patient的信息</span></div><div class="line">	<span class="comment">//4.构建Item的信息</span></div><div class="line">	<span class="comment">//5.构建servingTime的信息。</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h4><p>解决方案：底层owl创建数据时，在proto添加notes字段</p>
+<h2 id="上线方案"><a href="#上线方案" class="headerlink" title="上线方案"></a>上线方案</h2><h3 id="staging环境"><a href="#staging环境" class="headerlink" title="staging环境"></a>staging环境</h3><p>1.依赖：config-repo、halo<br>2.config-repo线上配置文件<br>3.调用的服务：owl、dagon、cms、yolar、halo<br>4.使用的注解所在位置：authorization</p>
+<h3 id="staging操作步骤"><a href="#staging操作步骤" class="headerlink" title="staging操作步骤"></a>staging操作步骤</h3><h4 id="把最新代码提交到release分支"><a href="#把最新代码提交到release分支" class="headerlink" title="把最新代码提交到release分支"></a>把最新代码提交到release分支</h4><ol>
+<li>提交最新代码到develop分支</li>
+<li>在GitHub上，new pull request、create pull request 把develop分支刚提交的代码，发送到release分支</li>
+<li>merge request</li>
+</ol>
+<h4 id="在item中启动："><a href="#在item中启动：" class="headerlink" title="在item中启动："></a>在item中启动：</h4><ol>
+<li>ssh gw01</li>
+<li>ssh deploy@10.0.0.10</li>
+<li>cd /opt/zhushou</li>
+<li>cd /shooter</li>
+<li>git pull</li>
+<li>docker ps -a  查看所有</li>
+<li>docker rm -f “正在运行项目的版本号” 删除</li>
+<li>docker ps -a</li>
+<li>./bin/start.staging 启动项目</li>
+<li>docker ps -a </li>
+<li>docker logs -f “正在运行项目的版本号” 查看是否启动成功</li>
+</ol>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

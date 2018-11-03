@@ -1,0 +1,274 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端静态化 &amp; CDN 方案 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="前端静态化 &amp;amp; CDN 方案为什么要静态化？以 C 端2.0 方案举例，前端代码体积对比
+
+
+
+压缩方式
+体积大小
+
+
+
+
+无
+5MB
+
+
+uglify
+1MB
+
+
+uglify+gzip
+500KB
+
+
+
+采用 uglify + gzip 的好处显而易见，用户直观感受：快了！">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="前端静态化 &amp; CDN 方案"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>前端静态化 &amp; CDN 方案</h2>
+					
+					<div>
+						<span class="post-time">2017-05-27 09:39:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="前端静态化-amp-CDN-方案"><a href="#前端静态化-amp-CDN-方案" class="headerlink" title="前端静态化 &amp; CDN 方案"></a>前端静态化 &amp; CDN 方案</h1><h2 id="为什么要静态化？"><a href="#为什么要静态化？" class="headerlink" title="为什么要静态化？"></a>为什么要静态化？</h2><p>以 C 端2.0 方案举例，前端代码体积对比</p>
+<table>
+<thead>
+<tr>
+<th>压缩方式</th>
+<th>体积大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无</td>
+<td>5MB</td>
+</tr>
+<tr>
+<td>uglify</td>
+<td>1MB</td>
+</tr>
+<tr>
+<td>uglify+gzip</td>
+<td>500KB</td>
+</tr>
+</tbody>
+</table>
+<p>采用 <code>uglify</code> + <code>gzip</code> 的好处显而易见，用户直观感受：快了！</p>
+<a id="more"></a>
+<h2 id="为什么要用-CDN？"><a href="#为什么要用-CDN？" class="headerlink" title="为什么要用 CDN？"></a>为什么要用 CDN？</h2><p>以下是 CDN 的工作流程</p>
+<p><img src="http://static.wayknew.com/assets/2017-05-27/6e0084af-c995-4f0c-94e0-97ac052ea638.png" alt="file"></p>
+<p>关键技术是在解析 CDN 地址时，可以智能的根据用户所在地址，动态的解析就近的 IP。</p>
+<p>前端部署采用 CDN 技术的好处有以下几点：</p>
+<ul>
+<li>智能（重要）<br>根据用户所在区域分配 CDN 资源获取地址；</li>
+<li>性能（重要）<br>CDN 服务商按流量提供服务</li>
+<li>可用性<br>目前来讲，CDN 的可用性较高</li>
+<li>安全性<br>应对 DDOS 攻击，这点可以忽略不计</li>
+</ul>
+<p>采用 CDN 对用户来讲，提高非服务器所在地的用户的访问速度。</p>
+<h2 id="如何静态化"><a href="#如何静态化" class="headerlink" title="如何静态化"></a>如何静态化</h2><p>前端开发完毕后，执行编译并 <code>uglify</code> 命令，生成静态的 <code>html</code>, <code>js</code>, <code>css</code> 等文件。而非以往的通过运行一个 nodejs 服务器监听特定端口来提供服务。</p>
+<p>简单来说，就是前端以后交付运行的将是静态资源，而非一个 Node 服务。</p>
+<h2 id="CDN-部署"><a href="#CDN-部署" class="headerlink" title="CDN 部署"></a>CDN 部署</h2><p>CDN 使用阿里云的 CDN 服务。<br>主要步骤：</p>
+<ol>
+<li>将 <code>pub.youhujia.com</code> 设置为 CDN 域名，域名解析类型为 CNAME，指向一个 CDN 域名，例如 pub.youhujia.com.k.some-cdn.com；</li>
+<li>配置协议类型：HTTP/HTTPS 均可；</li>
+<li>设置源地址，例如 pub.static.youhujia.com，此为优护家提供的 NGINX 下的静态资源服务地址；</li>
+<li>部署 NGINX 静态资源服务器 <a href="http://pub.static.youhujia.com，注意这是" target="_blank" rel="external">http://pub.static.youhujia.com，注意这是</a> HTTP 协议；</li>
+<li>将前端的静态资源更新到 NGINX 下。</li>
+</ol>
+<h3 id="主要开源库分离"><a href="#主要开源库分离" class="headerlink" title="主要开源库分离"></a>主要开源库分离</h3><p>例如 angular, jquery, zeptojs 使用又拍云 CDN 源。</p>
+<h2 id="自动化方案（jenkins）"><a href="#自动化方案（jenkins）" class="headerlink" title="自动化方案（jenkins）"></a>自动化方案（jenkins）</h2><h3 id="配置-Dockefile"><a href="#配置-Dockefile" class="headerlink" title="配置 Dockefile"></a>配置 Dockefile</h3><p>在前端项目中加入以下 Dockerfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FROM nginx</div><div class="line">COPY dist /usr/share/nginx/html</div><div class="line">COPY nginx-conf /etc/nginx</div><div class="line">VOLUME /usr/share/nginx/html</div><div class="line">VOLUME /etc/nginx</div></pre></td></tr></table></figure>
+<h3 id="准备-NGINX-配置文件"><a href="#准备-NGINX-配置文件" class="headerlink" title="准备 NGINX 配置文件"></a>准备 NGINX 配置文件</h3><p>将完整的 NGINX 配置文件放入 nginx-conf 目录</p>
+<h3 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h3><p>以开发环境举例。<br>​        </p>
+<ol>
+<li>Developer 提交 commit，并 push 至 github</li>
+<li>Push 操作触发 Jenkins 的 Buiild 任务</li>
+<li>运行预定义好的 nodejs build 命令，生成 dist/ 文件夹，即编译后的静态资源</li>
+<li>build docker image, 将 dist 和 nginx-conf 复制到 docker 中</li>
+<li>push docker image 至阿里云容器服务</li>
+<li>重新部署</li>
+</ol>
+<h2 id="关键配置文件"><a href="#关键配置文件" class="headerlink" title="关键配置文件"></a>关键配置文件</h2><ul>
+<li><p>Dockerfile 见上文</p>
+</li>
+<li><p>nginx.conf</p>
+</li>
+</ul>
+<p>这里注意要开启 gzip 压缩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">user nginx;</div><div class="line">worker_processes auto;</div><div class="line">error_log /var/log/nginx/error.log;</div><div class="line">pid /run/nginx.pid;</div><div class="line"></div><div class="line"># Load dynamic modules. See /usr/share/nginx/README.dynamic.</div><div class="line">include /usr/share/nginx/modules/*.conf;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections 1024;</div><div class="line">&#125;</div><div class="line"></div><div class="line">http &#123;</div><div class="line">    log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</div><div class="line">                      &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</div><div class="line">                      &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</div><div class="line"></div><div class="line">    access_log  /var/log/nginx/access.log  main;</div><div class="line"></div><div class="line">    sendfile            on;</div><div class="line">    tcp_nopush          on;</div><div class="line">    tcp_nodelay         on;</div><div class="line">    keepalive_timeout   65;</div><div class="line">    types_hash_max_size 2048;</div><div class="line"></div><div class="line">    client_max_body_size 10G;</div><div class="line"></div><div class="line">    include             /etc/nginx/mime.types;</div><div class="line">    default_type        application/octet-stream;</div><div class="line"></div><div class="line">    include /etc/nginx/conf.d/*.conf;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>default.conf<br><code>/ns</code> 路径为 309 医院特别配置，跳转老页面用。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    server_name static.pubc.youhujia.com;</div><div class="line">    root /usr/share/nginx/html;</div><div class="line">    index index.html;</div><div class="line"></div><div class="line">    location /ns &#123;</div><div class="line">        expires -1;</div><div class="line">        add_header Pragma &quot;no-cache&quot;;</div><div class="line">        add_header Cache-Control &quot;no-store, no-cache, must-revalidate, post-check=0, pre-check=0&quot;;</div><div class="line">        try_files $uri $uri/ /ns/nurseindex.html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        expires -1;</div><div class="line">        add_header Pragma &quot;no-cache&quot;;</div><div class="line">        add_header Cache-Control &quot;no-store, no-cache, must-revalidate, post-check=0, pre-check=0&quot;;</div><div class="line">        try_files $uri $uri/ /index.html;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    access_log  /var/log/nginx/static.pub.youhujia.com_access.log;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

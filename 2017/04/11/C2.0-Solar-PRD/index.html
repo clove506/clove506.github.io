@@ -1,0 +1,428 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C端2.0 科室管理 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="科室管理模型设计通用科室采用对原有的 Department 模型增加一个 type 属性来完成区分。同时，更改现有对 Organization 和 Department 的接口进行过滤。Servce 迁移到 Solar 项目
+Department增加一个 type 字段，用以区分正常的 Department 和 虚拟 Department。
+另外需要一个增加一个Logo字段，存储科室 Logo，默认用优护家的 Logo。
+访客科室访客科室的逻辑不变。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C端2.0 科室管理"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>C端2.0 科室管理</h2>
+					
+					<div>
+						<span class="post-time">2017-04-11 10:40:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="科室管理"><a href="#科室管理" class="headerlink" title="科室管理"></a>科室管理</h1><h2 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h2><p>通用科室采用对原有的 <code>Department</code> 模型增加一个 <code>type</code> 属性来完成区分。同时，更改现有对 Organization 和 Department 的接口进行过滤。Servce 迁移到 Solar 项目</p>
+<p><strong>Department</strong><br>增加一个 <code>type</code> 字段，用以区分正常的 Department 和 虚拟 Department。</p>
+<p>另外需要一个增加一个<code>Logo</code>字段，存储科室 Logo，默认用优护家的 Logo。</p>
+<p><strong>访客科室</strong><br>访客科室的逻辑不变。</p>
+<a id="more"></a>
+<h3 id="普通科室"><a href="#普通科室" class="headerlink" title="普通科室"></a>普通科室</h3><ul>
+<li><code>type=COMMON</code> 普通科室的内容不变，增加 <code>type</code> 字段以区分「普通科室」和「通用科室」</li>
+<li>通用疾病属性：即内外妇儿等，现有科室都会关联一个通用的疾病，用来快速复制科室配置。</li>
+</ul>
+<h3 id="通用科室（虚拟科室）"><a href="#通用科室（虚拟科室）" class="headerlink" title="通用科室（虚拟科室）"></a>通用科室（虚拟科室）</h3><p><code>type=VIRTUAL</code></p>
+<p>虚拟科室的分为「内外妇儿」四大科，每个科下属又有若干疾病。这个传统疾病的分类，会用一个tag 树来展示。</p>
+<h3 id="优护家官方"><a href="#优护家官方" class="headerlink" title="优护家官方"></a>优护家官方</h3><p>优护家官方科室的 <code>type=COMMON</code> 但是会在普通科室中将其排除，将其 <code>departmentId</code> 固定，由单独的接口返回。</p>
+<p>优护家的官方科室，会将所有优护家的官方内容放入其中，实现：</p>
+<ul>
+<li>普通科室和虚拟科室通过疾病共享优护家内容</li>
+<li>普通科室可以发布该科室的自建内容到优护家</li>
+</ul>
+<p>优护家官方科室本质上和普通科室没区别，但是在接口上，将会把科室区分为三类：</p>
+<ol>
+<li>普通科室</li>
+<li>虚拟科室</li>
+<li>优护家官方科室</li>
+</ol>
+<h3 id="通用疾病分类-内外妇儿"><a href="#通用疾病分类-内外妇儿" class="headerlink" title="通用疾病分类(内外妇儿)"></a>通用疾病分类(内外妇儿)</h3><p>通用疾病分类树会用单独的一个 Tag System 中的 Tag 树来表示。</p>
+<ul>
+<li>虚拟科室会关联该树的一个节点，表示该虚拟科室是属于哪类模板科室</li>
+<li>普通科室也会关联该树的一个节点，表示该科室的配置应该从哪个虚拟科室复制。</li>
+</ul>
+<h3 id="科室和疾病的关联"><a href="#科室和疾病的关联" class="headerlink" title="科室和疾病的关联"></a>科室和疾病的关联</h3><p>科室和疾病的关联存储在「Tag 系统」中。</p>
+<p>其中：</p>
+<ul>
+<li>通用科室和疾病的关联 需要单独配置</li>
+<li>万家科室的配置<br>若为新科室，即该科室下没有护士管理员，需要将科室关联的通用疾病分类对应的「通用科室」配置复制到该科室下。</li>
+</ul>
+<h3 id="科室自建分类"><a href="#科室自建分类" class="headerlink" title="科室自建分类"></a>科室自建分类</h3><p>采用 Tag 模型实现。默认有一个根节点 Tag，<code>departmentId</code> 为当前科室 ID，<code>type</code> 为科室自建分类。科室的所有分类 Tag 是该 Tag 的子节点。</p>
+<h3 id="优护家官方分类"><a href="#优护家官方分类" class="headerlink" title="优护家官方分类"></a>优护家官方分类</h3><p>和科室自建分类一致，但是分级可以有三级。</p>
+<h3 id="科室-UI-配置树"><a href="#科室-UI-配置树" class="headerlink" title="科室 UI 配置树"></a>科室 UI 配置树</h3><p>采用三级 Tag 分类实现。其中第二、三级可以缺失。</p>
+<p>同样会有一个根节点 Tag，Type 为 UI 配置树类型。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"tag"</span>: &#123;</div><div class="line">    <span class="attr">"tagId"</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">"type"</span>: <span class="string">"UI配置树"</span>,</div><div class="line">    <span class="attr">"departmentId"</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">"props"</span>: &#123;</div><div class="line">      <span class="attr">"rank"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"element"</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以下是科室的 UI 配置的完整的举例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"tag"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"tagId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"UI配置树"</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_1"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"props"</span>: &#123;</div><div class="line">        <span class="attr">"rank"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"根节点"</span></div><div class="line">      &#125;</div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">"tagId"</span>: <span class="number">2</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"UI配置树"</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_1"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_2"</span>: <span class="number">2</span>,</div><div class="line">      <span class="attr">"props"</span>: &#123;</div><div class="line">        <span class="attr">"rank"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"一级节点"</span>,</div><div class="line">        <span class="attr">"content"</span>: &#123;</div><div class="line">          <span class="attr">"element"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"type"</span>: <span class="string">"UI-DepartmentTitle"</span>,</div><div class="line">              <span class="attr">"content"</span>: &#123;</div><div class="line">                <span class="attr">"bannerUrl"</span>: <span class="string">"http://xxx"</span>,</div><div class="line">                <span class="attr">"departmentName"</span>: <span class="string">"脊柱外科"</span>,</div><div class="line">                <span class="attr">"organizationName"</span>: <span class="string">"解放军309医院"</span></div><div class="line">              &#125;</div><div class="line">            &#125;, &#123;</div><div class="line">              <span class="attr">"type"</span>: <span class="string">"UI-ChatWithNurse"</span></div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">"tagId"</span>: <span class="number">5</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"UI配置树"</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_1"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_2"</span>: <span class="number">2</span>,</div><div class="line">      <span class="attr">"level_3"</span>: <span class="number">5</span>,</div><div class="line">      <span class="attr">"props"</span>: &#123;</div><div class="line">        <span class="attr">"rank"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"UI-DepartmentTitle"</span>,</div><div class="line">        <span class="attr">"content"</span>: &#123;</div><div class="line">          <span class="attr">"bannerUrl"</span>: <span class="string">"http://xxx"</span>,</div><div class="line">          <span class="attr">"departmentName"</span>: <span class="string">"脊柱外科"</span>,</div><div class="line">          <span class="attr">"organizationName"</span>: <span class="string">"解放军309医院"</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">"tagId"</span>: <span class="number">6</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"UI配置树"</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_1"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_2"</span>: <span class="number">2</span>,</div><div class="line">      <span class="attr">"level_3"</span>: <span class="number">6</span>,</div><div class="line">      <span class="attr">"props"</span>: &#123;</div><div class="line">        <span class="attr">"rank"</span>: <span class="number">2</span>,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"UI-DepartmentTitle"</span>,</div><div class="line">        <span class="attr">"content"</span>: &#123;</div><div class="line">          <span class="attr">"bannerUrl"</span>: <span class="string">"http://xxx"</span>,</div><div class="line">          <span class="attr">"departmentName"</span>: <span class="string">"脊柱外科"</span>,</div><div class="line">          <span class="attr">"organizationName"</span>: <span class="string">"解放军309医院"</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">"tagId"</span>: <span class="number">3</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"UI配置树"</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_1"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_2"</span>: <span class="number">3</span>,</div><div class="line">      <span class="attr">"props"</span>: &#123;</div><div class="line">        <span class="attr">"rank"</span>: <span class="number">2</span>,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"一级节点"</span>,</div><div class="line">        <span class="attr">"content"</span>: &#123;</div><div class="line">          <span class="attr">"element"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"type"</span>: <span class="string">"UI-SelfTest"</span>,</div><div class="line">              <span class="attr">"content"</span>: &#123;</div><div class="line">                <span class="attr">"evaluationId"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"evaluationName"</span>: <span class="string">"营养自测"</span>,</div><div class="line">                <span class="attr">"iconId"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"iconColor"</span>: <span class="string">"red"</span>,</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;, &#123;</div><div class="line">      <span class="attr">"tagId"</span>: <span class="number">4</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"UI配置树"</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_1"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"level_2"</span>: <span class="number">4</span>,</div><div class="line">      <span class="attr">"props"</span>: &#123;</div><div class="line">        <span class="attr">"rank"</span>: <span class="number">3</span>,</div><div class="line">        <span class="attr">"type"</span>: <span class="string">"一级节点"</span>,</div><div class="line">        <span class="attr">"content"</span>: &#123;</div><div class="line">          <span class="attr">"element"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"type"</span>: <span class="string">"UI-Service"</span>,</div><div class="line">              <span class="attr">"content"</span>: &#123;</div><div class="line">                <span class="attr">"itemId"</span>: <span class="number">1</span>,</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"尿管护理服务"</span>,</div><div class="line">                <span class="attr">"price"</span>: <span class="number">12000</span>,</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>根据以上的 Tag 模型，在给前端数据时，组织为一个完整的树型 JSON。给前端的 protobuf 见 Protobuf 部分。</p>
+<h2 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h2><p>有关人与组织机构的分为两个系统： Yolar &amp; Solar</p>
+<ul>
+<li>Yolar 底层的 Service，负责基本「人」和「机构科室」模型的基本操作</li>
+<li>Era 处理业务部分</li>
+</ul>
+<p>接口索引<br><strong>Yolar</strong></p>
+<p>将原有的科室相关接口迁移至 Solar 。</p>
+<p><strong>Solar</strong></p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>功能</th>
+<th>Request Method &amp; URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>创建医院</td>
+<td>POST /api/solar/v1/organizations</td>
+</tr>
+<tr>
+<td></td>
+<td>创建普通科室</td>
+<td>POST /api/solar/v1/departments</td>
+</tr>
+<tr>
+<td></td>
+<td>创建虚拟科室</td>
+<td>POST /api/solar/v1/departments/virtual</td>
+</tr>
+<tr>
+<td></td>
+<td>获取医院下普通科室</td>
+<td>GET /api/solar/v1/organizations/{organId}/departments</td>
+</tr>
+<tr>
+<td></td>
+<td>获取单个普通科室</td>
+<td>GET /api/solar/v1/departments/{departmentId}</td>
+</tr>
+<tr>
+<td></td>
+<td>获取所有虚拟科室</td>
+<td>GET /api/solar/v1/departments/virtual</td>
+</tr>
+<tr>
+<td></td>
+<td>获取优护家官方科室</td>
+<td>GET /api/solar/v1/departments/youhujia</td>
+</tr>
+<tr>
+<td></td>
+<td>更新科室</td>
+<td>PATCH /api/solar/v1/departments/{departmentId}</td>
+</tr>
+<tr>
+<td></td>
+<td>更新科室 UI 配置</td>
+<td>PATCH /api/solar/v1/departments/{departmentId}/ui-config</td>
+</tr>
+<tr>
+<td></td>
+<td>科室关联疾病</td>
+<td>PUT /api/solar/v1/departments/{departmentId}/diseases</td>
+</tr>
+<tr>
+<td></td>
+<td>查询科室相关疾病</td>
+<td>GET /api/solar/v1/departments/{departmentId}/diseases</td>
+</tr>
+<tr>
+<td></td>
+<td>复制科室 UI 配置</td>
+<td>POST /api/solar/v1/departments/duplicate-config-ui?from={dptId}&amp;to={dptId}</td>
+</tr>
+<tr>
+<td></td>
+<td>复制科室疾病关联配置</td>
+<td>POST /api/solar/v1/departments/duplicate-config-diseases?from={dptId}&amp;to={dptId}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-创建医院"><a href="#1-创建医院" class="headerlink" title="1. 创建医院"></a>1. 创建医院</h3><p><del>&gt; POST /api/solar/v1/organizations</del></p>
+<ul>
+<li>Request <code>OrganizationCreateOption</code></li>
+<li>Response <code>OrganizationDTO</code></li>
+</ul>
+<h3 id="2-创建普通科室"><a href="#2-创建普通科室" class="headerlink" title="2. 创建普通科室"></a>2. 创建普通科室</h3><p><del>&gt;  POST /api/solar/v1/departments</del></p>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="3-创建虚拟科室"><a href="#3-创建虚拟科室" class="headerlink" title="3. 创建虚拟科室"></a>3. 创建虚拟科室</h3><p><del>&gt;  POST /api/solar/v1/departments/virtual</del></p>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="4-获取医院下普通科室"><a href="#4-获取医院下普通科室" class="headerlink" title="4. 获取医院下普通科室"></a>4. 获取医院下普通科室</h3><p><del>&gt;  GET /api/solar/v1/organizations/{organId}/departments</del></p>
+<ul>
+<li>Response <code>DepartmentListDTO</code></li>
+</ul>
+<h3 id="5-获取单个普通科室"><a href="#5-获取单个普通科室" class="headerlink" title="5. 获取单个普通科室"></a>5. 获取单个普通科室</h3><p><del>&gt;  GET /api/solar/v1/departments/{departmentId}</del></p>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="6-获取所有虚拟科室"><a href="#6-获取所有虚拟科室" class="headerlink" title="6. 获取所有虚拟科室"></a>6. 获取所有虚拟科室</h3><blockquote>
+<p> GET /api/solar/v1/departments/virtual</p>
+</blockquote>
+<ul>
+<li>Response <code>DepartmentListDTO</code></li>
+</ul>
+<h3 id="7-获取优护家官方科室"><a href="#7-获取优护家官方科室" class="headerlink" title="7. 获取优护家官方科室"></a>7. 获取优护家官方科室</h3><blockquote>
+<p> GET /api/solar/v1/departments/youhujia</p>
+</blockquote>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="8-更新科室"><a href="#8-更新科室" class="headerlink" title="8. 更新科室"></a>8. 更新科室</h3><p><del>&gt;  PATCH /api/solar/v1/departments/{departmentId}</del></p>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="9-更新科室-UI-配置"><a href="#9-更新科室-UI-配置" class="headerlink" title="9. 更新科室 UI 配置"></a>9. 更新科室 UI 配置</h3><blockquote>
+<p> PATCH /api/solar/v1/departments/{departmentId}/ui-config</p>
+</blockquote>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="10-科室关联疾病"><a href="#10-科室关联疾病" class="headerlink" title="10. 科室关联疾病"></a>10. 科室关联疾病</h3><blockquote>
+<p> PUT /api/solar/v1/departments/{departmentId}/diseases</p>
+</blockquote>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="11-查询科室相关疾病"><a href="#11-查询科室相关疾病" class="headerlink" title="11. 查询科室相关疾病"></a>11. 查询科室相关疾病</h3><blockquote>
+<p> GET /api/solar/v1/departments/{departmentId}/diseases</p>
+</blockquote>
+<ul>
+<li>Response <code>DepartmentDTO</code></li>
+</ul>
+<h3 id="12-复制科室-UI-配置"><a href="#12-复制科室-UI-配置" class="headerlink" title="12. 复制科室 UI 配置"></a>12. 复制科室 UI 配置</h3><blockquote>
+<p> POST /api/solar/v1/departments/duplicate-config-ui?from={dptId}&amp;to={dptId}</p>
+</blockquote>
+<ul>
+<li>Response <code>SimpleResponse</code></li>
+</ul>
+<h3 id="13-复制科室疾病关联配置"><a href="#13-复制科室疾病关联配置" class="headerlink" title="13. 复制科室疾病关联配置"></a>13. 复制科室疾病关联配置</h3><blockquote>
+<p> POST /api/solar/v1/departments/duplicate-config-diseases?from={dptId}&amp;to={dptId}</p>
+</blockquote>
+<ul>
+<li>Response <code>SimpleResponse</code></li>
+</ul>
+<h2 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h2><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Type</span> </span>&#123;</div><div class="line">  COMMON = <span class="number">1</span>;</div><div class="line">  VIRTUAL = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Organization</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> address = <span class="number">3</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">OrganizationCreateOption</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> address = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">OrganizationDTO</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> Data data = <span class="number">2</span>;</div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Organization organization = <span class="number">1</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Department</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">3</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">4</span>;</div><div class="line">  <span class="keyword">optional</span> Type type = <span class="number">5</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> logo = <span class="number">6</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> commonDiseaseId = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentCreateOption</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> Type type = <span class="number">3</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> logo = <span class="number">4</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> commonDiseaseId = <span class="number">5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentUpdateOption</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> commonDiseaseId = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentDTO</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> Data data = <span class="number">2</span>;</div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Department department;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentDTO</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> Data data = <span class="number">2</span>;</div><div class="line"></div><div class="line">  <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">    <span class="keyword">repeated</span> Department department;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">UIConfigType</span> </span>&#123;</div><div class="line">  ROOT = <span class="number">1</span>;</div><div class="line">  LEVEL_ONE = <span class="number">2</span>;</div><div class="line">  LEVEL_TWO = <span class="number">3</span>;</div><div class="line">  LEVEL_THREE = <span class="number">4</span>;</div><div class="line">  SELF_TEST = <span class="number">5</span>;</div><div class="line">  SERVICE_ITEM = <span class="number">6</span>;``</div><div class="line">  CHAT_WITH_NURSE = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">UIConfig</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> UIConfigType type = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">2</span>;</div><div class="line">  <span class="keyword">repeated</span> UIConfiguration child = <span class="number">2</span>;</div><div class="line">  <span class="keyword">repeated</span> UIConfig element = <span class="number">3</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Solar-排期"><a href="#Solar-排期" class="headerlink" title="Solar 排期"></a>Solar 排期</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>开发者</th>
+<th>时间安排</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>虚拟科室</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>现有接口改造，支持虚拟、优护家、普通科室</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>优护家官方科室相关接口</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>通用疾病(内外妇儿)相关接口</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>科室和优护家疾病树相关接口</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>UI配置树底层 Tag 系统实现</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>UI配置树接口</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+<tr>
+<td>科室配置复制接口</td>
+<td>李江明</td>
+<td>1天</td>
+</tr>
+</tbody>
+</table>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

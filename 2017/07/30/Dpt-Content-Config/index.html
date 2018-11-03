@@ -1,0 +1,543 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>C端科室展示内容编辑后台 技术文档 | Clove</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Clove">
+    
+
+    
+    <meta name="description" content="摘要C端科室展示内容编辑后台 技术文档 C端科室展示内容编辑后台 详细设计背景prd 见：[「C端科室展示内容编辑后台PRD」https://wayknew.com/articles/343] 主要涉及以下项目：  Evans HdFragments Civilization Dagon Solar  Evans已有接口机构列表，登录之后进入机构和科室名称搜索页面调用接口: GET /api/ev">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C端科室展示内容编辑后台 技术文档">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/Dpt-Content-Config/index.html">
+<meta property="og:site_name" content="Clove">
+<meta property="og:description" content="摘要C端科室展示内容编辑后台 技术文档 C端科室展示内容编辑后台 详细设计背景prd 见：[「C端科室展示内容编辑后台PRD」https://wayknew.com/articles/343] 主要涉及以下项目：  Evans HdFragments Civilization Dagon Solar  Evans已有接口机构列表，登录之后进入机构和科室名称搜索页面调用接口: GET /api/ev">
+<meta property="og:updated_time" content="2017-11-05T06:27:37.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C端科室展示内容编辑后台 技术文档">
+<meta name="twitter:description" content="摘要C端科室展示内容编辑后台 技术文档 C端科室展示内容编辑后台 详细设计背景prd 见：[「C端科室展示内容编辑后台PRD」https://wayknew.com/articles/343] 主要涉及以下项目：  Evans HdFragments Civilization Dagon Solar  Evans已有接口机构列表，登录之后进入机构和科室名称搜索页面调用接口: GET /api/ev">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Clove" type="application/atom+xml">
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Clove">Clove</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/07/30/Dpt-Content-Config/" title="C端科室展示内容编辑后台 技术文档" itemprop="url">C端科室展示内容编辑后台 技术文档</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Clove" target="_blank" itemprop="author">Clove</a>
+		
+  <p class="article-time">
+    <time datetime="2017-07-29T16:00:00.000Z" itemprop="datePublished"> Published 2017-07-30</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#摘要"><span class="toc-number">1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C端科室展示内容编辑后台-详细设计"><span class="toc-number">2.</span> <span class="toc-text">C端科室展示内容编辑后台 详细设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evans已有接口"><span class="toc-number">2.2.</span> <span class="toc-text">Evans已有接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evans新增部分"><span class="toc-number">2.3.</span> <span class="toc-text">Evans新增部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#protobuf定义"><span class="toc-number">2.3.1.</span> <span class="toc-text">protobuf定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增接口详情："><span class="toc-number">2.3.2.</span> <span class="toc-text">新增接口详情：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evans新增部分-1"><span class="toc-number">2.4.</span> <span class="toc-text">Evans新增部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#protobuf定义-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">protobuf定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增接口详情：-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">新增接口详情：</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>C端科室展示内容编辑后台 技术文档</p>
+<h1 id="C端科室展示内容编辑后台-详细设计"><a href="#C端科室展示内容编辑后台-详细设计" class="headerlink" title="C端科室展示内容编辑后台 详细设计"></a>C端科室展示内容编辑后台 详细设计</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>prd 见：[「C端科室展示内容编辑后台PRD」<a href="https://wayknew.com/articles/343" target="_blank" rel="external">https://wayknew.com/articles/343</a>]</p>
+<p>主要涉及以下项目：</p>
+<ul>
+<li>Evans</li>
+<li>HdFragments</li>
+<li>Civilization</li>
+<li>Dagon</li>
+<li>Solar</li>
+</ul>
+<h2 id="Evans已有接口"><a href="#Evans已有接口" class="headerlink" title="Evans已有接口"></a>Evans已有接口</h2><p><strong>机构列表，登录之后进入机构和科室名称搜索页面调用接口:</strong></p>
+<p>GET /api/evans/v1/admin/all-organizations</p>
+<p>Response :</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">OrganizationListDTO</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Organization</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">repeated</span> Organization organization = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span>  Data data = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>科室列表，选择机构名称之后返回机构下所有科室:</strong></p>
+<p>GET /api/evans/v1/admin/departments?organizationId=1</p>
+<p>Response :</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentListDTO</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">DepartmentOption</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">2</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">3</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">repeated</span> Department department = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span>  Data data = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Evans新增部分"><a href="#Evans新增部分" class="headerlink" title="Evans新增部分"></a>Evans新增部分</h2><h3 id="protobuf定义"><a href="#protobuf定义" class="headerlink" title="protobuf定义"></a>protobuf定义</h3><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ComponentOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">repeated</span> Component component = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ComponentDTO</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">repeated</span> Component component = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span>  Data data = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> type = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> ArticleGroup articleGroup = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> SelfEvaluation selfEvaluation = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> ServiceItem serviceItem = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> ArticleList articleList = <span class="number">5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ArticleGroup</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> Group <span class="keyword">group</span> = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Group</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> icon = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> iconColor = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> Article article = <span class="number">5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SelfEvaluation</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> SelfEvaluationData selfEvaluationData = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SelfEvaluationData</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ServiceItem</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> ServiceItemData serviceItemData = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ServiceItemListDTO</span> </span>&#123;</div><div class="line">   <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">      <span class="keyword">repeated</span> ServiceItemData serviceItemData = <span class="number">1</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">   <span class="keyword">optional</span> Data data = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ServiceItemData</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ArticleList</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> Article article = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">GetEvaluationListDTO</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">repeated</span> EvaluationBaseInfo evaluation = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> Data data = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">EvaluationBaseInfo</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> evaluationId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> evaluationName = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> iconColor = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> icon = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updateAt = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> groupName = <span class="number">8</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> author = <span class="number">9</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> status = <span class="number">10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="新增接口详情："><a href="#新增接口详情：" class="headerlink" title="新增接口详情："></a>新增接口详情：</h3><p>除admin登录之后，选择科室之后搜索接口，evas本次主要提供根据科室Id查询所有UI配置信息接口（GET）、增加UI配置信息接口（POST）、修改UI配置信息接口（PATCH），以下是接口详情：</p>
+<p><strong>获取科室下所有UI配置:</strong></p>
+<p>GET /api/evans/v1/admin/department/component/{departmentId}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Evans.<span class="function">ComponentDTO <span class="title">getCompentByDptId</span><span class="params">(@PathVariable Long departmentId)</span></span></div></pre></td></tr></table></figure>
+<p><strong>向科室增加一个栏目</strong></p>
+<p>POST /api/evans/v1/admin/department/component</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Common.<span class="function">Result <span class="title">addComponent</span><span class="params">(@ResponseBody Evans.ComponentOption option)</span></span></div></pre></td></tr></table></figure>
+<p><strong>向科室修改或删除一个栏目</strong></p>
+<p>PATCH /api/evans/v1/admin/department/component</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Common.<span class="function">Result <span class="title">updateComponent</span><span class="params">(@ResponseBody Evans.ComponentOption option)</span></span></div></pre></td></tr></table></figure>
+<p><strong>获取科室下所有自测</strong></p>
+<p>GET /api/evans/v1/admin/evaluations?departmentId={departmentId}&amp;type={type}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Evans.<span class="function">GetEvaluationListDTO <span class="title">GetEvaluationListDTOByDptId</span><span class="params">(@ParamMap map)</span></span></div></pre></td></tr></table></figure>
+<p><strong>获取科室下所有服务</strong></p>
+<p>GET /api/evans/v1/admin/department/component/services/{departmentId}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Evans.<span class="function">ServiceItemListDTO <span class="title">getServiceItemListByDptId</span><span class="params">(@PathVariable(<span class="string">"departmentId"</span>)</span> Long departmentId)</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">```# 摘要</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">C端科室展示内容编辑后台 技术文档</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">&lt;!-- more --&gt;</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"># C端科室展示内容编辑后台 详细设计</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">## 背景</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">prd 见：[「C端科室展示内容编辑后台PRD」https:<span class="comment">//wayknew.com/articles/343]</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">主要涉及以下项目：</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">- Evans</span></div><div class="line"><span class="function">- HdFragments</span></div><div class="line"><span class="function">- Civilization</span></div><div class="line"><span class="function">- Dagon</span></div><div class="line"><span class="function">- Solar</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">## Evans已有接口</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">**机构列表，登录之后进入机构和科室名称搜索页面调用接口:**</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">GET /api/evans/v1/admin/all-organizations</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">Response :</span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">```protobuf</span></div><div class="line"><span class="function">message OrganizationListDTO </span>&#123;</div><div class="line">    message Organization &#123;</div><div class="line">        optional int64 organizationId = <span class="number">1</span>;</div><div class="line">        optional string organizationName = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    message Data &#123;</div><div class="line">        repeated Organization organization = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    optional  Data data = <span class="number">1</span>;</div><div class="line">    optional Result result = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>科室列表，选择机构名称之后返回机构下所有科室:</strong></p>
+<p>GET /api/evans/v1/admin/departments?organizationId=1</p>
+<p>Response :</p>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DepartmentListDTO</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">DepartmentOption</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">2</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> organizationId = <span class="number">3</span>;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">4</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">repeated</span> Department department = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span>  Data data = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Evans新增部分-1"><a href="#Evans新增部分-1" class="headerlink" title="Evans新增部分"></a>Evans新增部分</h2><h3 id="protobuf定义-1"><a href="#protobuf定义-1" class="headerlink" title="protobuf定义"></a>protobuf定义</h3><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ComponentOption</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">repeated</span> Component component = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ComponentDTO</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">1</span>;</div><div class="line">        <span class="keyword">repeated</span> Component component = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span>  Data data = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> type = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> ArticleGroup articleGroup = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> SelfEvaluation selfEvaluation = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> ServiceItem serviceItem = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> ArticleList articleList = <span class="number">5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ArticleGroup</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> Group <span class="keyword">group</span> = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Group</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> icon = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> iconColor = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> Article article = <span class="number">5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SelfEvaluation</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> SelfEvaluationData selfEvaluationData = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">SelfEvaluationData</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ServiceItem</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> ServiceItemData serviceItemData = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ServiceItemListDTO</span> </span>&#123;</div><div class="line">   <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">      <span class="keyword">repeated</span> ServiceItemData serviceItemData = <span class="number">1</span>;</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">   <span class="keyword">optional</span> Data data = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ServiceItemData</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> id = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">ArticleList</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> title = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> componentId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> creatorId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> departmentId = <span class="number">4</span>;</div><div class="line">    <span class="keyword">repeated</span> Article article = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> categoryId = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> rank = <span class="number">7</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">GetEvaluationListDTO</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">message</span> <span class="title">Data</span> </span>&#123;</div><div class="line">        <span class="keyword">repeated</span> EvaluationBaseInfo evaluation = <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> Data data = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">EvaluationBaseInfo</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> evaluationId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> evaluationName = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> iconColor = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> icon = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> organizationName = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> departmentName = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> updateAt = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> groupName = <span class="number">8</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> author = <span class="number">9</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> status = <span class="number">10</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="新增接口详情：-1"><a href="#新增接口详情：-1" class="headerlink" title="新增接口详情："></a>新增接口详情：</h3><p>除admin登录之后，选择科室之后搜索接口，evas本次主要提供根据科室Id查询所有UI配置信息接口（GET）、增加UI配置信息接口（POST）、修改UI配置信息接口（PATCH），以下是接口详情：</p>
+<p><strong>获取科室下所有UI配置:</strong></p>
+<p>GET /api/evans/v1/admin/department/component/{departmentId}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Evans.<span class="function">ComponentDTO <span class="title">getCompentByDptId</span><span class="params">(@PathVariable Long departmentId)</span></span></div></pre></td></tr></table></figure>
+<p><strong>向科室增加一个栏目</strong></p>
+<p>POST /api/evans/v1/admin/department/component</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Common.<span class="function">Result <span class="title">addComponent</span><span class="params">(@ResponseBody Evans.ComponentOption option)</span></span></div></pre></td></tr></table></figure>
+<p><strong>向科室修改或删除一个栏目</strong></p>
+<p>PATCH /api/evans/v1/admin/department/component</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Common.<span class="function">Result <span class="title">updateComponent</span><span class="params">(@ResponseBody Evans.ComponentOption option)</span></span></div></pre></td></tr></table></figure>
+<p><strong>获取科室下所有自测</strong></p>
+<p>GET /api/evans/v1/admin/evaluations?departmentId={departmentId}&amp;type={type}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Evans.<span class="function">GetEvaluationListDTO <span class="title">GetEvaluationListDTOByDptId</span><span class="params">(@ParamMap map)</span></span></div></pre></td></tr></table></figure>
+<p><strong>获取科室下所有服务</strong></p>
+<p>GET /api/evans/v1/admin/department/component/services/{departmentId}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">Evans.<span class="function">ServiceItemListDTO <span class="title">getServiceItemListByDptId</span><span class="params">(@PathVariable(<span class="string">"departmentId"</span>)</span> Long departmentId)</span></div></pre></td></tr></table></figure>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/API设计/">API设计</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/07/30/Dpt-Content-Config/" data-title="C端科室展示内容编辑后台 技术文档 | Clove" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/30/equals&hashcode/" title="equals&amp;hashcode">
+  <strong>上一篇：</strong><br/>
+  <span>
+  equals&amp;hashcode</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/07/26/encoding/"  title="encoding前传">
+ <strong>下一篇：</strong><br/> 
+ <span>encoding前传
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#摘要"><span class="toc-number">1.</span> <span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C端科室展示内容编辑后台-详细设计"><span class="toc-number">2.</span> <span class="toc-text">C端科室展示内容编辑后台 详细设计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">2.1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evans已有接口"><span class="toc-number">2.2.</span> <span class="toc-text">Evans已有接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evans新增部分"><span class="toc-number">2.3.</span> <span class="toc-text">Evans新增部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#protobuf定义"><span class="toc-number">2.3.1.</span> <span class="toc-text">protobuf定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增接口详情："><span class="toc-number">2.3.2.</span> <span class="toc-text">新增接口详情：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evans新增部分-1"><span class="toc-number">2.4.</span> <span class="toc-text">Evans新增部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#protobuf定义-1"><span class="toc-number">2.4.1.</span> <span class="toc-text">protobuf定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新增接口详情：-1"><span class="toc-number">2.4.2.</span> <span class="toc-text">新增接口详情：</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/API设计/" title="API设计">API设计<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JWT/" title="JWT">JWT<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java8/" title="Java8">Java8<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/NIO/" title="NIO">NIO<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/encoding/" title="encoding">encoding<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/thread/" title="thread">thread<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/yhj/" title="yhj">yhj<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/开发总结/" title="开发总结">开发总结<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/死磕高并发/" title="死磕高并发">死磕高并发<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://clove506.github.io/" target="_blank" title="Clove&#39;s Blog">Clove&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Clove">Clove</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

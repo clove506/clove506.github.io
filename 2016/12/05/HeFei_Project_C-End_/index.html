@@ -1,0 +1,578 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【优护患者-合肥】患者端 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要合肥项目C端交互逻辑与内容显示">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【优护患者-合肥】患者端"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【优护患者-合肥】患者端</h2>
+					
+					<div>
+						<span class="post-time">2016-12-05 11:30:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>合肥项目C端交互逻辑与内容显示<br><a id="more"></a></p>
+<h2 id="C端状态流转"><a href="#C端状态流转" class="headerlink" title="C端状态流转"></a>C端状态流转</h2><ul>
+<li>患者端状态流转比较完整，请直接参考订单完整的状态流转图</li>
+<li>状态对应： <ul>
+<li>待支付：待支付，支付状态待确认</li>
+<li>待接单：待接单，高优先待接单，派单待确认</li>
+<li>服务中：待服务，服务中，服务超时，服务异常</li>
+<li>退款中：待退款，退款异常,发起退款异常，退款成功，退款中</li>
+<li>退款申请中：退款申请中，服务纠纷</li>
+<li>运营介入中：服务纠纷，，服务后纠纷</li>
+<li>已取消：关闭状态（接单前）</li>
+<li>已完成：订单结束，结算状态</li>
+<li>待评价：服务完成</li>
+<li>已关闭：关闭状态（接单后，平台无收入）</li>
+</ul>
+</li>
+</ul>
+<h2 id="典型交互流程【具体页面内容请查看下面页面，此处主要演示交互逻辑】"><a href="#典型交互流程【具体页面内容请查看下面页面，此处主要演示交互逻辑】" class="headerlink" title="典型交互流程【具体页面内容请查看下面页面，此处主要演示交互逻辑】"></a>典型交互流程【具体页面内容请查看下面页面，此处主要演示交互逻辑】</h2><p>合肥项目C端sketch设计稿：<br>[ownCloud: Public@Youhujia／产品设计／合肥项目／C端／合肥项目C端.sketch]</p>
+<ul>
+<li>Typical流程01:首页至下单流程</li>
+</ul>
+<p><img src="/media/%E9%A6%96%E9%A1%B5%E8%87%B3%E4%B8%8B%E5%8D%95-2.png" alt="首页至下单-2"></p>
+<ul>
+<li>Typical流程02:待支付待接单已取消</li>
+</ul>
+<p><img src="/media/%E5%BE%85%E6%94%AF%E4%BB%98%E5%BE%85%E6%8E%A5%E5%8D%95%E5%B7%B2%E5%8F%96%E6%B6%88-2.png" alt="待支付待接单已取消-2"></p>
+<ul>
+<li>Typical流程03:服务中退款流程</li>
+</ul>
+<p><img src="/media/%E6%9C%8D%E5%8A%A1%E4%B8%AD%E9%80%80%E6%AC%BE-2.png" alt="服务中退款-2"></p>
+<h2 id="具体页面信息"><a href="#具体页面信息" class="headerlink" title="具体页面信息"></a>具体页面信息</h2><ul>
+<li><strong>服务列表页</strong><ul>
+<li>功能交互如上面01流程所示</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/00%E9%A6%96%E9%A1%B5.png" alt="00首页"></p>
+<ul>
+<li><strong>服务列表页</strong><ul>
+<li>点击服务进入服务详情页</li>
+<li>点击订单进入订单列表页</li>
+<li>点击康复服务刷新此页</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/01%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8.png" alt="01服务列表"></p>
+<ul>
+<li><strong>服务详情页</strong><ul>
+<li>点击预约进入下单页<br><img src="/media/02%E6%9C%8D%E5%8A%A1%E8%AF%A6%E6%83%85png.png" alt="02服务详情png"></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>订单列表页</strong></p>
+<ul>
+<li><p>分类与排序规则：</p>
+<ul>
+<li><p>按状态类型分4栏，3种状态分类+一栏全部订单顺序依次为：<br>进行中（待支付，待接单，服务中，待评价）<br>退款中（退款中、退款申请中、运营介入中 ）<br>已完成（已完成，已取消，已关闭）<br>全部订单</p>
+<p>注：3类状态3种颜色，待支付单独给色</p>
+</li>
+<li>类别内按下单时间倒序排列，最近最上显示</li>
+</ul>
+</li>
+<li>内容说明：<ul>
+<li>订单预览内容：<ul>
+<li>服务的图片、名称、金额</li>
+<li>服订单状态（点击进入订单详情）</li>
+<li>患者姓名性别年龄、订单时间、地址</li>
+</ul>
+</li>
+<li>最上方显示客服电话</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/021%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8.png" alt="021订单列表"></p>
+<ul>
+<li><strong>订单详情页典型页面</strong><ul>
+<li>支付前无患者信息，支付后均有患者信息（图片姓名性别年龄）</li>
+<li>接单后的状态均显示护士信息（图片姓名医院职位），仅待评价状态有去评价按钮，其余均一致</li>
+<li>状态显示，服务信息右上方显示</li>
+<li>操作按钮，中部右侧放置</li>
+<li>其他订单信息：<ul>
+<li>服务概览（图片名称金额介绍）</li>
+<li>订单基础信息（服务时间服务地址）</li>
+<li>耗时</li>
+<li>服务步骤</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/21%E6%9C%8D%E5%8A%A1%E4%B8%AD.png" alt="21服务中"></p>
+<ul>
+<li><strong>患者信息填写页</strong><ul>
+<li>填写信息包括：姓名，性别，年龄，手机号，服务时间，服务地址<ol>
+<li>手机号不为空（不做短信验证，位数限制只能为11位）</li>
+<li>姓名不为空，5字符以内</li>
+<li>性别，选框，默认男，可选男／女</li>
+<li>年龄在0-150之间</li>
+<li>服务时间选框</li>
+<li>服务地址调高德地图获取（点击第一栏选择地址至小区级别，第二栏自己填写至门牌号）</li>
+</ol>
+</li>
+<li>服务时间设置：<ol>
+<li>年月日时分选框，选择至分</li>
+<li>未来一周内时间可选，包括当日在内。如今日2016-12-05，则2016-12-05 ～ 2016-12-11 可选；今日2016-12-31，则2016-12-31 ～ 2017-01-06可选</li>
+<li>当前时间后，90分钟后开始可选。</li>
+<li>每日可选开始时间06:00，可选结束时间21:00</li>
+</ol>
+</li>
+<li>用户信息管理：<ol>
+<li>进入公众号还是原来逻辑，收集用户信息</li>
+<li>加载用户手机号，不更新用户信息</li>
+<li>以上逻辑基于 不开发地址簿管理功能</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/03%E6%9C%8D%E5%8A%A1%E8%AF%A6%E6%83%85-%E4%B8%8B%E5%8D%95.png" alt="03服务详情-下单"></p>
+<ul>
+<li><strong>待支付页面</strong><ul>
+<li>15分钟可支付时间，超时自动取消</li>
+<li>可取消订单，弹框确认后进入已取消页面</li>
+<li>只有微信支付一个可选项</li>
+<li>不论支付成功还是失败，都进入到订单详情页（成功入待接单，失败进待支付）<br><img src="/media/11%E5%BE%85%E6%94%AF%E4%BB%98.png" alt="11待支付"></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>已取消页面</strong><ul>
+<li>显示已取消的可能原因</li>
+<li>点击重新下单，返回服务列表页</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/13%E5%B7%B2%E5%8F%96%E6%B6%88.png" alt="13已取消"></p>
+<ul>
+<li><p><strong>待接单页面</strong></p>
+<ul>
+<li>点击取消订单，进入退款中状态（直接全额退款）<br><img src="/media/12%E5%BE%85%E6%8E%A5%E5%8D%95.png" alt="12待接单"></li>
+</ul>
+</li>
+<li><p><strong>服务中状态</strong></p>
+<ul>
+<li>点击退款，即将进入退款申请中状态（因为已经接单，所以需要护士运营做判断）</li>
+<li>进入退款申请中之前，先要填写退款信息<br><img src="/media/21%E6%9C%8D%E5%8A%A1%E4%B8%AD-1.png" alt="21服务中"></li>
+</ul>
+</li>
+<li><p><strong>退款信息提交页</strong></p>
+<ul>
+<li>退款原因必选，暂列以下几项：<ul>
+<li>不需要此单服务</li>
+<li>下错了单</li>
+<li>服务人员未上门 </li>
+<li>服务人员态度差</li>
+<li>服务质量不好</li>
+<li>服务后出现问题</li>
+<li>其他</li>
+</ul>
+</li>
+<li>退款金额必填，最高值为其实际支付金额（amount），大于0的整数，小数均可，可精确到小数点后两位</li>
+<li>退款说明可不填，字数上限200，超过限制给出提示，保留原文本框字符</li>
+<li>提交后进入退款申请中状态</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/310%E9%80%80%E6%AC%BE%E4%BF%A1%E6%81%AF.png" alt="310退款信息"><br><img src="/media/311%E9%80%80%E6%AC%BE%E4%BF%A1%E6%81%AF.png" alt="311退款信息"></p>
+<ul>
+<li><strong>退款申请中页面</strong><ul>
+<li>需显示当前退款申请中的状态：待护士确认／待运营人员确认</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/31%E9%80%80%E6%AC%BE%E7%94%B3%E8%AF%B7%E4%B8%AD.png" alt="31退款申请中"></p>
+<ul>
+<li><strong>退款中页面</strong><ul>
+<li>需显示退款金额，无操作按钮</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/32%E9%80%80%E6%AC%BE%E4%B8%AD.png" alt="32退款中"></p>
+<ul>
+<li><strong>已关闭页面</strong><ul>
+<li>进入过退款中状态的订单终结于此</li>
+<li>显示订单关闭的可能原因</li>
+<li><strong>显示退款金额</strong></li>
+<li>点击重新下单，进入服务列表页</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/33%E5%B7%B2%E5%85%B3%E9%97%AD.png" alt="33已关闭"></p>
+<ul>
+<li><strong>待评价状态</strong><ul>
+<li>服务中的订单，服务正常完成即进入待评价状态</li>
+<li>待评价订单可进行退款，走退款申请流程</li>
+<li>可点击进行评价，只有此页可评价，其他页不可评价，护士信息亦不可查看</li>
+<li>评价完成进入已完成页面</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/22%E5%BE%85%E8%AF%84%E4%BB%B7.jpg" alt="22待评价"></p>
+<ul>
+<li><strong>评价页面</strong><ol>
+<li>可进行星级选择，默认5星，最低1星</li>
+<li>可写评论，可不写，字数上限200，超过限制给出提示，保留原文本框字符</li>
+<li>提交评论按钮，进入订单详情页（已完成） </li>
+</ol>
+</li>
+</ul>
+<p><img src="/media/221%E8%AF%84%E4%BB%B7.jpg" alt="221评价"></p>
+<ul>
+<li><strong>已完成页面</strong><ul>
+<li>点击申诉，弹窗显示联系方式，点击号码调用系统拨号 </li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/23%E5%B7%B2%E5%AE%8C%E6%88%90.jpg" alt="23已完成"></p>
+<p><img src="/media/24%E7%94%B3%E8%AF%89%E5%BC%B9%E7%AA%97.png" alt="24申诉弹窗"></p>
+<ul>
+<li><strong>关于服务步骤</strong><ul>
+<li>三类步骤：宣教、评估、护士服务</li>
+<li>所有步骤从接单后（待服务）开始放开</li>
+<li>宣教从接单开始可查看，后面一直可查看（除已关闭）</li>
+<li>评估一直可点，未完成（提交之前）进入评估，已完成进入查看结果</li>
+<li>评估完成与否依据是是否点击提交，宣教完成与否的依据是是否点开查看</li>
+<li>护士服务不可点击，只可查看状态</li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/41%E6%9C%8D%E5%8A%A1%E5%86%85%E5%AE%B9.png" alt="41服务内容"></p>
+<h2 id="其他补充"><a href="#其他补充" class="headerlink" title="其他补充"></a>其他补充</h2><ul>
+<li><strong>push总结</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>push场景</th>
+<th>push对象（接收者）</th>
+<th>push内容</th>
+<th>push方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>患者支付成功</td>
+<td>护士端</td>
+<td>您有一个新订单</td>
+<td>App提醒&amp;短信提醒</td>
+</tr>
+<tr>
+<td>患者申请退款，提交退款信息</td>
+<td>护士端</td>
+<td>退款信息</td>
+<td>App提醒&amp;短信提醒&amp;页面显示</td>
+</tr>
+<tr>
+<td>患者取消退款</td>
+<td>护士端</td>
+<td>您的订单患者已取消退款</td>
+<td>App提醒&amp;短信提醒</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>push场景</th>
+<th>push对象（接收者）</th>
+<th>push内容</th>
+<th>push方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>护士接单</td>
+<td>患者端</td>
+<td>您的订单已接单，点击查看订单详情</td>
+<td>微信内推送</td>
+</tr>
+<tr>
+<td>接单后患者发起退款，护士同意（包括同意和拒绝后再同意）</td>
+<td>患者端</td>
+<td>您的退款申请护士已同意，点击查看订单详情</td>
+<td>微信内推送</td>
+</tr>
+<tr>
+<td>接单后患者发起退款，护士拒绝</td>
+<td>患者端</td>
+<td>您的退款申请护士已拒绝，等待运营人员处理，点击查看订单详情</td>
+<td>微信内推送</td>
+</tr>
+<tr>
+<td>接单后患者发起退款，运营同意</td>
+<td>患者端</td>
+<td>您的退款申请运营人员已同意，点击查看订单详情</td>
+<td>微信内推送</td>
+</tr>
+<tr>
+<td>接单后患者发起退款，运营拒绝</td>
+<td>患者端</td>
+<td>您的退款申请运营人员已拒绝，点击查看订单详情</td>
+<td>微信内推送</td>
+</tr>
+<tr>
+<td>服务中，护士进入纠纷</td>
+<td>患者端</td>
+<td>护士选择进入纠纷，点击查看订单详情</td>
+<td>微信内推送</td>
+</tr>
+<tr>
+<td>除宣教推送外，每个服务步骤完成（护士触发）时【最后一个步骤完成，同时告知患者服务已完成】</td>
+<td>患者端</td>
+<td>您好，XXX（步骤名）已完成，服务结束，点击查看订单详情</td>
+<td>微信内推送</td>
+</tr>
+<tr>
+<td>护士取消订单</td>
+<td>患者</td>
+<td>抱歉！为您服务的护士已取消订单，理由为：……点击查看退款信息</td>
+<td>微信内推送</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Update-2016-12-21"><a href="#Update-2016-12-21" class="headerlink" title="Update 2016.12.21"></a>Update 2016.12.21</h2><h3 id="系统派单规则"><a href="#系统派单规则" class="headerlink" title="系统派单规则"></a>系统派单规则</h3><ul>
+<li>服务范围覆盖患者所在区域的机构下的护士</li>
+<li>时间不冲突规则<ul>
+<li>订单服务之间前2h[完成前一服务时间],后2h[完成此服务时间]有订单的护士不派单</li>
+</ul>
+</li>
+<li>星级符合<ul>
+<li>星级前N%（暂定前100%）的护士才派单[即本期全部推送]</li>
+</ul>
+</li>
+<li>一次推送<ul>
+<li>系统暂时只推送一次[以后可能会按时间段推送]</li>
+</ul>
+</li>
+</ul>
+<h2 id="Update-2016-12-24"><a href="#Update-2016-12-24" class="headerlink" title="Update 2016.12.24"></a>Update 2016.12.24</h2><h3 id="明确患者端对“服务中纠纷”状态的展示-不同进入路径，显示状态不同"><a href="#明确患者端对“服务中纠纷”状态的展示-不同进入路径，显示状态不同" class="headerlink" title="明确患者端对“服务中纠纷”状态的展示[不同进入路径，显示状态不同]"></a>明确患者端对“服务中纠纷”状态的展示[不同进入路径，显示状态不同]</h3><ul>
+<li>对于患者申请退款进入此状态的订单：<ul>
+<li>显示为“退款申请中”状态，状态下方显示退款申请进展[待护士确认 或 待运营确认]</li>
+</ul>
+</li>
+<li>对于护士申请纠纷进入此状态的订单：<ul>
+<li>显示为“运营介入中”状态，状态下方显示进入状态原因[护士已申请运营介入]「订单列表中-退款中分类下」</li>
+<li>此状态下点击退款无响应[或隐藏退款按钮，或点击退款提示此状态下无法申请退款]</li>
+</ul>
+</li>
+</ul>
+<h3 id="订单结束状态下显示退款金额详解："><a href="#订单结束状态下显示退款金额详解：" class="headerlink" title="订单结束状态下显示退款金额详解："></a>订单结束状态下显示退款金额详解：</h3><ul>
+<li>服务中退款只有1次，运营人为限制订单结束后只能申请进入纠纷（退款）1次，即每个订单最多只会退款两次；<ul>
+<li>B端：所有给用户退款的信息，在已完成页面中，“已完成”状态下方显示退款信息：“用户获得退款：152.00元”；</li>
+<li>C端：订单结束状态下退款信息，在已完成页面中，“已完成”状态下方显示退款信息：“退款金额152.00元”；</li>
+</ul>
+</li>
+<li>C端已关闭状态下订单，下方文案取消退款金额的显示</li>
+</ul>
+<h2 id="Update-2016-12-26"><a href="#Update-2016-12-26" class="headerlink" title="Update 2016.12.26"></a>Update 2016.12.26</h2><ul>
+<li><p>更新交互图，更换原型为UI图 ing</p>
+</li>
+<li><p>前端feature：订单列表，各item热区可点[进入订单详情页]</p>
+</li>
+</ul>
+<h2 id="Update-2016-12-27"><a href="#Update-2016-12-27" class="headerlink" title="Update 2016.12.27"></a>Update 2016.12.27</h2><ul>
+<li>所有退款金额的显示均需精确到小数点后两位</li>
+</ul>
+<h2 id="Update-2016-12-28"><a href="#Update-2016-12-28" class="headerlink" title="Update 2016.12.28"></a>Update 2016.12.28</h2><ul>
+<li>页面显示订单编号，包括订单列表页（每一项）和订单详情页（待支付、待接单、已取消、退款中、已关闭、服务中、待评价、退款申请中、运营介入中、已完成、）均在患者信息上方显示</li>
+</ul>
+<h2 id="Update-2016-12-30"><a href="#Update-2016-12-30" class="headerlink" title="Update 2016.12.30"></a>Update 2016.12.30</h2><ul>
+<li>退款原因更新（只有三项）：<ul>
+<li>不需要此单服务</li>
+<li>下错单了</li>
+<li>服务人员为上门</li>
+<li>其他</li>
+</ul>
+</li>
+</ul>
+<h2 id="Update-2017-01-03"><a href="#Update-2017-01-03" class="headerlink" title="Update 2017.01.03"></a>Update 2017.01.03</h2><ul>
+<li>加入用户协议与服务协议<ul>
+<li>默认同意两个协议</li>
+<li>用户可点击取消同意，同时提交订单按钮置灰&amp;点击无效</li>
+<li>点击《用户协议》&amp;《服务协议》进入相应协议页面<br><img src="/media/%E9%A2%84%E7%BA%A6%E6%9C%8D%E5%8A%A1-%E9%BB%98%E8%AE%A4%E5%90%8C%E6%84%8F%E5%8D%8F%E8%AE%AE.png" alt="预约服务-默认同意协议"><br><img src="/media/%E9%A2%84%E7%BA%A6%E6%9C%8D%E5%8A%A1-%E6%9C%AA%E5%90%8C%E6%84%8F%E5%8D%8F%E8%AE%AE.png" alt="预约服务-未同意协议"></li>
+</ul>
+</li>
+</ul>
+<p><img src="/media/%E7%94%A8%E6%88%B7%E5%8D%8F%E8%AE%AE.png" alt="用户协议"><br><img src="/media/%E6%9C%8D%E5%8A%A1%E5%8D%8F%E8%AE%AE.png" alt="服务协议"></p>
+<h2 id="Update-2017-01-08"><a href="#Update-2017-01-08" class="headerlink" title="Update 2017.01.08"></a>Update 2017.01.08</h2><ul>
+<li>护士发起的纠纷，患者不能对订单进行操作</li>
+<li>护士发起的纠纷，患者端护士端均无显示退款详情</li>
+</ul>
+<h2 id="Update-2017-01-09"><a href="#Update-2017-01-09" class="headerlink" title="Update 2017.01.09"></a>Update 2017.01.09</h2><ul>
+<li>护士取消订单，患者端不能显示退款原因【只要不是患者发起退款，填写退款原因，就不能显示退款详情】</li>
+<li>交互：<br><img src="/media/%E9%80%80%E6%AC%BE%E4%B8%AD-%E6%9B%B4%E6%96%B0.png" alt="退款中-更新"></li>
+</ul>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

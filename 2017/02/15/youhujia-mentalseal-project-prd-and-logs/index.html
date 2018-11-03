@@ -1,0 +1,548 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>授权管理中心 MentalSeal 项目 PRD &amp; 开发日志 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要随着运营系统变多，登录、权限管理变得困难。目前迫切需要
+
+统一的权限管理
+统一的用户管理
+
+因此，将运营类系统分为两类：
+
+授权管理中心，也就是 MentaSeal，负责权限的管理
+各类运营管理系统，本文档表述为 App, 完成具体运营业务的逻辑实现，如：优护助手护士审核系统、订单运营系统
+
+现有的 Yolar 项目已经解决了部分「统一的用户管理」的问题，只需要再加入 用户统一注册和登录 即可。
+MentalSeal 项目(授权管理中心1)因运而生，除了「统一的权限管理」外，还提供了：
+
+与其他项目的运营管理系统对接，方便做权限校验
+一个全新的、重新设计的 WEB 界面
+
+在 MentalSeal 完成权限配置后，App 可以按照 RoleEnum 中的 id 完成对角色的定义，决定授予哪些权限。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="授权管理中心 MentalSeal 项目 PRD &amp; 开发日志"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>授权管理中心 MentalSeal 项目 PRD &amp; 开发日志</h2>
+					
+					<div>
+						<span class="post-time">2017-02-15 21:20:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>随着运营系统变多，登录、权限管理变得困难。目前迫切需要</p>
+<ul>
+<li>统一的权限管理</li>
+<li>统一的用户管理</li>
+</ul>
+<p>因此，将运营类系统分为两类：</p>
+<ul>
+<li>授权管理中心，也就是 MentaSeal，负责权限的管理</li>
+<li>各类运营管理系统，本文档表述为 App, 完成具体运营业务的逻辑实现，如：优护助手护士审核系统、订单运营系统</li>
+</ul>
+<p>现有的 Yolar 项目已经解决了部分「统一的用户管理」的问题，只需要再加入 <code>用户统一注册和登录</code> 即可。</p>
+<p>MentalSeal 项目(授权管理中心<sup>1</sup>)因运而生，除了「统一的权限管理」外，还提供了：</p>
+<ul>
+<li>与其他项目的运营管理系统对接，方便做权限校验</li>
+<li>一个全新的、重新设计的 WEB 界面</li>
+</ul>
+<p>在 MentalSeal 完成权限配置后，App 可以按照 RoleEnum 中的 <code>id</code> 完成对角色的定义，决定授予哪些权限。</p>
+<a id="more"></a>
+<h3 id="文档更新"><a href="#文档更新" class="headerlink" title="文档更新"></a>文档更新</h3><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>内容</th>
+<th>维护人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017-2-16</td>
+<td>创建文档</td>
+<td>田学文</td>
+</tr>
+<tr>
+<td>2017-2-22</td>
+<td>更新文档</td>
+<td>袁鑫</td>
+</tr>
+<tr>
+<td>2017-2-23</td>
+<td>更新接口</td>
+<td>田学文</td>
+</tr>
+<tr>
+<td>2017-3-2</td>
+<td>review 后修改</td>
+<td>田学文</td>
+</tr>
+<tr>
+<td>2017-3-6</td>
+<td>kick off</td>
+<td>袁鑫</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设计使用场景"><a href="#设计使用场景" class="headerlink" title="设计使用场景"></a>设计使用场景</h3><p>比如「优护助手人员审核」项目需要针对运营人员作权限控制，实现不同角色的运营人员操作权限不同。</p>
+<p><strong>预配置</strong></p>
+<ol>
+<li>Admin 注册</li>
+<li>创建 App 属性有 name, path, description</li>
+<li>创建 Role 属性有 name, remark</li>
+<li>给Admin分配权限</li>
+<li>完成预配置<br><img src="/media/mentalseal.png" alt=""></li>
+</ol>
+<p><strong>App中权限校验</strong></p>
+<ol>
+<li>App 对用户权限校验时，向 MentalSeal 请求当前 admin 的权限信息？</li>
+<li>App 自行判定该用户权限</li>
+<li>执行业务逻辑</li>
+</ol>
+<h3 id="设计模型"><a href="#设计模型" class="headerlink" title="设计模型"></a>设计模型</h3><p><strong>Admin(yolar 中 admin)</strong><br>用户，描述用户基本信息。</p>
+<ul>
+<li>id 用户ID</li>
+<li>name 用户名称</li>
+<li>phone 用户手机</li>
+<li>password 密码</li>
+</ul>
+<p><strong>Role</strong><br>角色，描述用户的角色身份信息，比如「运营专员」、「运营主管」等</p>
+<ul>
+<li>id 角色 ID</li>
+<li>appId 应用 ID</li>
+<li>name 角色名称</li>
+<li>description 角色详细描述，包括详细的权限描述</li>
+<li>remark 角色备注</li>
+</ul>
+<p>备注：Role 中的每个记录都对应 RoleEnum 中的一个成员。</p>
+<p><strong>AdminRole Mapping</strong></p>
+<ul>
+<li>admin</li>
+<li>role</li>
+</ul>
+<p><strong>App</strong><br>系统，二方管理系统，需要使用 MentalSeal 中的用户、角色、权限信息的系统。描述某个用户是否有权限接入系统的管理页面。</p>
+<ul>
+<li>id</li>
+<li>name 二方管理系统名称</li>
+<li>description</li>
+<li>path</li>
+<li>app_secret</li>
+</ul>
+<p><strong>统一登录</strong><br><img src="/media/yolarloginclass.png" alt=""></p>
+<h3 id="Talk-is-Cheap-Show-Me-the-Code"><a href="#Talk-is-Cheap-Show-Me-the-Code" class="headerlink" title="Talk is Cheap, Show Me the Code"></a>Talk is Cheap, Show Me the Code</h3><p>演示代码</p>
+<p><strong>用户登录后显示运营入口</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Admin = Admin.getByPhone</div><div class="line">List&lt;App&gt; appList = appBO.findByAdminId(Admin.getId)</div></pre></td></tr></table></figure></p>
+<p><strong>权限校验</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">message AdminDTO &#123;</div><div class="line">  optional int64 id;</div><div class="line">  optional string name;</div><div class="line">  optional string phone;</div><div class="line">  optional Role role;</div><div class="line"></div><div class="line">  message Role &#123;</div><div class="line">    optional int64 id;</div><div class="line">    optional string name;</div><div class="line">    optional string description;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">MentalSeal.AdminDTO</div><div class="line">currentAdmin = MentalSealClient.getAdminByAdminIdAndAppId(AdminId,appId,appSecret)</div><div class="line"></div><div class="line"><span class="keyword">if</span> (currentAdmin.hasRole(ADMIN_ROLE)) &#123;</div><div class="line">    <span class="comment">// do something</span></div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> YHJException(FooSystemException.NoPermitException);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h3><p><strong>admin2 (yolar.admin)</strong><br>与 SwordKeeper 中涉及到的Admin表冲突，yolar中的原有 Admin 的迁移分为四步：</p>
+<ol>
+<li>先临时把表名定位Admin2，开发统一登录逻辑</li>
+<li>重构 SwordKeeper 使其使用 MentalSeal 的权限管理</li>
+<li>删除 Admin 表相关的逻辑</li>
+<li>将 Admin2 表 改为 Admin</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`Admin2`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'姓名'</span>,</div><div class="line">  <span class="string">`token`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'token'</span>,</div><div class="line">  <span class="string">`phone`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'电话'</span>,</div><div class="line">  <span class="string">`remark`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'备注'</span>,</div><div class="line">  <span class="string">`type`</span> TINYINT <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> <span class="keyword">COMMENT</span> <span class="string">'人员类型, 如运营、管理员'</span>,</div><div class="line">  <span class="string">`status`</span> TINYINT <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span> <span class="keyword">COMMENT</span> <span class="string">'状态, 见 Admin 状态枚举'</span>,</div><div class="line">  <span class="string">`password`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'加密后的密码'</span>,</div><div class="line">  <span class="string">`salt`</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'加密参数'</span>,</div><div class="line">  <span class="string">`avatar_url`</span> <span class="built_in">varchar</span>(<span class="number">512</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`created_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  <span class="string">`updated_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</div><div class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`Admin_phone_uiq`</span> (<span class="string">`phone`</span>)</div><div class="line">）<span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure>
+<p><strong>admin_role</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`admin_role`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`admin_id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`role_id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</div><div class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">KEY</span> <span class="string">`admin_role_unique_idx`</span> (<span class="string">`admin_id`</span>,<span class="string">`role_id`</span>),</div><div class="line">  <span class="keyword">KEY</span> <span class="string">`admin_role_role_id_fk_idx`</span> (<span class="string">`role_id`</span>),</div><div class="line">  <span class="keyword">CONSTRAINT</span> <span class="string">`admin_role_role_id_fk`</span> FOREIGN <span class="keyword">KEY</span> (<span class="string">`role_id`</span>) <span class="keyword">REFERENCES</span> <span class="string">`role`</span> (<span class="string">`id`</span>) <span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">NO</span> <span class="keyword">ACTION</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">NO</span> <span class="keyword">ACTION</span></div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure></p>
+<p><strong>role</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`role`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'角色名称'</span>,</div><div class="line">  <span class="string">`description`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'权限详细描述'</span>,</div><div class="line">  <span class="string">`app_id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`created_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  <span class="string">`updated_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>),</div><div class="line">  <span class="keyword">KEY</span> <span class="string">`role_app_id_fk_idx`</span> (<span class="string">`app_id`</span>),</div><div class="line">  <span class="keyword">CONSTRAINT</span> <span class="string">`role_app_id_fk`</span> FOREIGN <span class="keyword">KEY</span> (<span class="string">`app_id`</span>) <span class="keyword">REFERENCES</span> <span class="string">`app`</span> (<span class="string">`id`</span>) <span class="keyword">ON</span> <span class="keyword">DELETE</span> <span class="keyword">NO</span> <span class="keyword">ACTION</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">NO</span> <span class="keyword">ACTION</span></div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure></p>
+<p><strong>app</strong><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="string">`app`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">BIGINT</span> <span class="keyword">UNSIGNED</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`secret`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'app secret'</span>,</div><div class="line">  <span class="string">`name`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'应用系统名称'</span>,</div><div class="line">  <span class="string">`description`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'应用详细描述'</span>,</div><div class="line">  <span class="string">`path`</span> <span class="built_in">VARCHAR</span>(<span class="number">512</span>) <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'子页面跳转路径'</span>,</div><div class="line">  <span class="string">`created_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  <span class="string">`updated_at`</span> <span class="keyword">TIMESTAMP</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="keyword">CURRENT_TIMESTAMP</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</div><div class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure></p>
+<h3 id="类模型"><a href="#类模型" class="headerlink" title="类模型"></a>类模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">com.youhujia.mentalseal</div><div class="line">    |- MentalSealController</div><div class="line">        |=&gt; public MentalSeal.RoleList getAdminByAdminIdAndAppId()</div><div class="line">    |- MentalSealBO</div><div class="line">        |=&gt; public MentalSeal.RoleList getAdminByAdminIdAndAppId()</div><div class="line">        |=&gt; private List&lt;Role&gt; getRoleListByAdminIdAndAppId()</div><div class="line">    |- role</div><div class="line">        |- AdminRoleBO</div><div class="line">        |- RoleBO</div><div class="line">        |- Role</div><div class="line">        |- RoleContext</div><div class="line">        |- RoleDAO</div><div class="line">        |- RoleController</div><div class="line">            |=&gt; addRoleToApp</div><div class="line">            |=&gt; getRolesByAppId(getAppByAppId)</div><div class="line">            |=&gt; addRoleToAdmin(updateAdmin)</div><div class="line">            |=&gt; updateRolesToAdmin(updateAdmin)</div><div class="line">    |- app</div><div class="line">        |- AppBO</div><div class="line">        |- App</div><div class="line">        |- AppContext</div><div class="line">        |- AppDAO</div><div class="line">        |- AppController</div><div class="line">            |=&gt; createApp</div><div class="line">            |=&gt; updateApp</div><div class="line">            |=&gt; getAppByAppId</div><div class="line">            |=&gt; getAllApp</div><div class="line"></div><div class="line">com.youhujia.yolar</div><div class="line">    |- admin</div><div class="line">        |- AdminBO</div><div class="line">            |=&gt; createAdmin</div><div class="line">            |=&gt; getAdminById</div><div class="line">            |=&gt; updateAdminById</div><div class="line">            |=&gt; getAdminByPhone</div><div class="line">            |=&gt; resetToken</div><div class="line"></div><div class="line">        |- Admin</div><div class="line">        |- AdminDAO</div><div class="line">        |- AdminController</div><div class="line">            |=&gt; Admin2DTO createAdmin(Admin2AddOption option)</div><div class="line">            |=&gt; Admin2DTO getAdminById(Long adminId)</div><div class="line">            |=&gt; Admin2DTO updateAdminById(Long adminId, Admin2UpdateOption option)</div><div class="line">            |=&gt; Admin2DTO getAdminByPhone()</div><div class="line">            |=&gt; Admin2DTO resetToken()</div><div class="line"></div><div class="line">com.youhujia.era</div><div class="line">    |- phone</div><div class="line">        |- captcha</div><div class="line">            |- CaptchaBO</div><div class="line">            |- CaptchaController</div><div class="line">                |=&gt; sendPhoneCaptcha</div><div class="line">    |- login</div><div class="line">        |- LoginBO</div><div class="line">            |=&gt; adminLoginByPhoneAndPassword</div><div class="line">            |=&gt; adminLoginByPhoneAndCaptcha</div><div class="line">            |=&gt; resetPasswordByPhoneCaptcha</div><div class="line">        |- LoginContext</div><div class="line">        |- LoginController</div><div class="line">            |=&gt; adminLoginByPhoneAndPassword</div><div class="line">            |=&gt; adminLoginByPhoneAndCaptcha</div><div class="line">            |=&gt; resetPasswordByPhoneCaptcha            </div><div class="line">    |- signup</div><div class="line">        |- SignupBO</div><div class="line">            |=&gt; adminSignupByPhoneAndPassword</div><div class="line">            |=&gt; adminSignupByPhoneAndCaptcha</div></pre></td></tr></table></figure>
+<h3 id="Yolar-相关接口"><a href="#Yolar-相关接口" class="headerlink" title="Yolar 相关接口"></a>Yolar 相关接口</h3><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Admin2AddOption</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> remark = <span class="number">3</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> avatarUrl = <span class="number">4</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Admin2UpdateOption</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> adminId = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> remark = <span class="number">3</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> avatarUrl = <span class="number">4</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">5</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> type = <span class="number">6</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> status = <span class="number">7</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> password = <span class="number">8</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">Admin2DTO</span> </span>&#123;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> adminId = <span class="number">1</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> name = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> phone = <span class="number">3</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> token = <span class="number">4</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> remark = <span class="number">5</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> type = <span class="number">6</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> status = <span class="number">7</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> password = <span class="number">8</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> salt = <span class="number">9</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> avatarUrl = <span class="number">10</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> createdAt = <span class="number">11</span>;</div><div class="line">  <span class="keyword">optional</span> <span class="built_in">int64</span> updatedAt = <span class="number">12</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="前端页面接口"><a href="#前端页面接口" class="headerlink" title="前端页面接口"></a>前端页面接口</h3><p><strong>1. App 相关</strong></p>
+<h4 id="1-1-App-列表"><a href="#1-1-App-列表" class="headerlink" title="1.1 App 列表"></a>1.1 App 列表</h4><p>GET /api/mentalseal/v1/app</p>
+<ul>
+<li>response<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">      <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">      <span class="attr">"app"</span>:[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">          <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">          <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">          <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span>,</div><div class="line">          <span class="attr">"role"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">              <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">              <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-2-App-创建"><a href="#1-2-App-创建" class="headerlink" title="1.2 App 创建"></a>1.2 App 创建</h4><p>POST /api/mentalseal/v1/app</p>
+<ul>
+<li><p>request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">  <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">  <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"app"</span>:&#123;</div><div class="line">        <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">        <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">        <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">        <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span></div><div class="line">      &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-3-获取单个-App"><a href="#1-3-获取单个-App" class="headerlink" title="1.3 获取单个 App"></a>1.3 获取单个 App</h4><p>GET /api/mentalseal/v1/app/{id}</p>
+<ul>
+<li>response<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"app"</span>:&#123;</div><div class="line">      <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">      <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">      <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">      <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span>,</div><div class="line">      <span class="attr">"role"</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">          <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">      <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-4-App-更新"><a href="#1-4-App-更新" class="headerlink" title="1.4 App 更新"></a>1.4 App 更新</h4><p>PUT /api/mentalseal/v1/app/{id}</p>
+<ul>
+<li><p>request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">  <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">  <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"app"</span>:&#123;</div><div class="line">      <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">      <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">      <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">      <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span>,</div><div class="line">      <span class="attr">"role"</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">          <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">      <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="1-5-App-添加角色"><a href="#1-5-App-添加角色" class="headerlink" title="1.5 App 添加角色"></a>1.5 App 添加角色</h4><p>POST /api/mentalseal/v1/app/{id}/role</p>
+<ul>
+<li><p>request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">  <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>: &#123;</div><div class="line">    <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">    <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>2. 运营人员相关</strong></p>
+<h4 id="运营人员列表，包括搜索"><a href="#运营人员列表，包括搜索" class="headerlink" title="运营人员列表，包括搜索"></a>运营人员列表，包括搜索</h4><p>GET /api/mentalseal/v1/admin?phone=18614041815&amp;appId=1</p>
+<blockquote>
+<p>参数 phone 和 appId 可选</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"draw"</span>:<span class="number">1</span></div><div class="line">    <span class="string">"recordsTotal"</span>:<span class="number">241</span>,</div><div class="line">    <span class="attr">"recordsFiltered"</span>:<span class="number">5</span>,</div><div class="line">    <span class="attr">"admin"</span>: [</div><div class="line">      &#123;</div><div class="line">        <span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"刘李"</span>,</div><div class="line">        <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">        "status": 0, // 0 禁用 1 激活</div><div class="line">        "remark": "xxxxx",</div><div class="line">        "avatarUrl": "http://xxx",</div><div class="line">        "updatedAt": 1487839654,</div><div class="line">        "createdAt": 1487839654</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  "result": &#123;</div><div class="line">    "success": true,</div><div class="line">    "code": 0</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-3-新建运营人员"><a href="#2-3-新建运营人员" class="headerlink" title="2.3 新建运营人员"></a>2.3 新建运营人员</h4><p>POST /api/mentalseal/v1/admin</p>
+<ul>
+<li><p>Request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"刘莉"</span>,</div><div class="line">  <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>，</div><div class="line">  <span class="string">"remark"</span>: <span class="string">"xxxxxxxxx"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"admin"</span>:&#123;</div><div class="line">      <span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"刘李"</span>,</div><div class="line">      <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">      "status": 1, // 0 禁用 1 激活</div><div class="line">      "remark": "xxxxxxxxx",</div><div class="line">      "avatarUrl": "http://xxx",</div><div class="line">      "updatedAt": 1487839654,</div><div class="line">      "createdAt": 1487839654</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  "result": &#123;</div><div class="line">    "success": true,</div><div class="line">    "code": 0</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-4-获取运营人员信息-包括-App-权限信息"><a href="#2-4-获取运营人员信息-包括-App-权限信息" class="headerlink" title="2.4 获取运营人员信息, 包括 App 权限信息"></a>2.4 获取运营人员信息, 包括 App 权限信息</h4><p>GET /api/mentalseal/v1/admin/{id}</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"admin"</span>:&#123;</div><div class="line">      <span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"刘李"</span>,</div><div class="line">      <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">      "status": 1, // 0 禁用 1 激活</div><div class="line">      "remark": "xxxxxxxxx",</div><div class="line">      "avatarUrl": "http://xxx",</div><div class="line">      "updatedAt": 1487839654,</div><div class="line">      "createdAt": 1487839654,</div><div class="line">      "app":[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">          <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">          <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">          <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span>,</div><div class="line">          <span class="attr">"role"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">              <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">              <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  "result": &#123;</div><div class="line">    "success": true,</div><div class="line">    "code": 0</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-5-0-更新运营人员（基本信息、App-角色）"><a href="#2-5-0-更新运营人员（基本信息、App-角色）" class="headerlink" title="2.5.0 更新运营人员（基本信息、App 角色）"></a>2.5.0 更新运营人员（基本信息、App 角色）</h4><p>PUT /api/mentalseal/v1/admin/{id}</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"刘李"</span>,</div><div class="line">  <span class="attr">"remark"</span>: <span class="string">"xxxxxxxxx"</span>,</div><div class="line">  <span class="attr">"avatarUrl"</span>: <span class="string">"http://xxx"</span>,</div><div class="line">  <span class="attr">"app"</span>:[</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"appId"</span>:<span class="number">1</span>,</div><div class="line">      <span class="attr">"role"</span>:[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"roleId"</span>:<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Response</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"admin"</span>:&#123;</div><div class="line">      <span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"刘李"</span>,</div><div class="line">      <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">      "status": 1, // 0 禁用 1 激活</div><div class="line">      "remark": "xxxxxxxxx",</div><div class="line">      "avatarUrl": "http://xxx",</div><div class="line">      "updatedAt": 1487839654,</div><div class="line">      "createdAt": 1487839654,</div><div class="line">      "app":[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">          <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">          <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">          <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span>,</div><div class="line">          <span class="attr">"role"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">              <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">              <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  "result": &#123;</div><div class="line">    "success": true,</div><div class="line">    "code": 0</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-5-1-更新运营人员（状态）"><a href="#2-5-1-更新运营人员（状态）" class="headerlink" title="2.5.1 更新运营人员（状态）"></a>2.5.1 更新运营人员（状态）</h4><p>PATCH /api/mentalseal/v1/admin/{id}/</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"status"</span>: <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Response</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"admin"</span>:&#123;</div><div class="line">      <span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"刘李"</span>,</div><div class="line">      <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">      "status": 1, // 0 禁用 1 激活</div><div class="line">      "remark": "xxxxxxxxx",</div><div class="line">      "avatarUrl": "http://xxx",</div><div class="line">      "updatedAt": 1487839654,</div><div class="line">      "createdAt": 1487839654,</div><div class="line">      "app":[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">          <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">          <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">          <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span>,</div><div class="line">          <span class="attr">"role"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">              <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">              <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  "result": &#123;</div><div class="line">    "success": true,</div><div class="line">    "code": 0</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-6-登录"><a href="#2-6-登录" class="headerlink" title="2.6 登录"></a>2.6 登录</h4><p>登录时， <code>password</code> 字段的值为密文</p>
+<p>POST /api/mentalseal/v1/login/password</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">  <span class="attr">"password"</span>: <span class="string">"asdanbdskjahj2h3kjh1ufbsdl/"</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Response</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>:&#123;</div><div class="line">    <span class="attr">"admin"</span>:&#123;</div><div class="line">      <span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"刘李"</span>,</div><div class="line">      <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">      "status": 1, // 0 禁用 1 激活</div><div class="line">      "remark": "xxxxxxxxx",</div><div class="line">      "avatarUrl": "http://xxx",</div><div class="line">      "token": "dasdasdasdasd",</div><div class="line">      "updatedAt": 1487839654,</div><div class="line">      "createdAt": 1487839654,</div><div class="line">      "app":[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"appId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"appName"</span>: <span class="string">"优护助手注册审核"</span>,</div><div class="line">          <span class="attr">"appSecret"</span>: <span class="string">"JFaBmcoJgspap1esX6pYY9Z6"</span>,</div><div class="line">          <span class="attr">"appPath"</span>: <span class="string">"order-management-system"</span>,</div><div class="line">          <span class="attr">"appDescription"</span>: <span class="string">"运营管理系统详细描述"</span>,</div><div class="line">          <span class="attr">"role"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"roleId"</span>: <span class="number">1</span>,</div><div class="line">              <span class="attr">"roleName"</span>: <span class="string">"管理员"</span>,</div><div class="line">              <span class="attr">"roleDescription"</span>: <span class="string">"拥有所以权限"</span></div><div class="line">            &#125;</div><div class="line">          ]</div><div class="line">        &#125;</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  "result": &#123;</div><div class="line">    "success": true,</div><div class="line">    "code": 0</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-7-发送验证码"><a href="#2-7-发送验证码" class="headerlink" title="2.7 发送验证码"></a>2.7 发送验证码</h4><p>POST /api/era/v1/phone/captcha</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"phone"</span>: <span class="string">"18614041815"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Response<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-8-重置密码"><a href="#2-8-重置密码" class="headerlink" title="2.8 重置密码"></a>2.8 重置密码</h4><p><strong>loginRole:Admin 0 USER 1 NURSE 2 登录角色</strong></p>
+<p>POST /api/era/v1/login/reset-password</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"phone"</span>: <span class="string">"18614041815"</span>,</div><div class="line">  <span class="attr">"captcha"</span>: <span class="string">"1234"</span>,</div><div class="line">  <span class="attr">"password"</span>: <span class="string">"密码密文"</span>,</div><div class="line">  <span class="attr">"loginRole"</span>: <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Response</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="开发排期"><a href="#开发排期" class="headerlink" title="开发排期"></a>开发排期</h3><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>耗时</th>
+<th>开发</th>
+<th>进度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yolar 统一登录 接口开发</td>
+<td>1</td>
+<td>袁鑫</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>era 统一登录 接口开发</td>
+<td>1</td>
+<td>袁鑫</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>mentalseal app CRUD 操作</td>
+<td>1</td>
+<td>袁鑫</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>mentalseal role CRUD 操作</td>
+<td>1</td>
+<td>袁鑫</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>Admin 权限 查询 接口</td>
+<td>0.5</td>
+<td>袁鑫</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>后端接口 统一测试</td>
+<td>1</td>
+<td>袁鑫</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>前端页面开发</td>
+<td>2</td>
+<td>前端同学</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>前端接口开发</td>
+<td>3</td>
+<td>前端同学</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>前后端联调</td>
+<td>1</td>
+<td>袁鑫&amp;前端同学</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>testing</td>
+<td>2</td>
+<td>郑旭红</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Staging &amp; Production</td>
+<td>1</td>
+<td>郑旭红</td>
+<td>0%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="开发日志"><a href="#开发日志" class="headerlink" title="开发日志"></a>开发日志</h3><h4 id="2017-3-7"><a href="#2017-3-7" class="headerlink" title="2017-3-7"></a>2017-3-7</h4><p><strong>今日进度</strong></p>
+<ul>
+<li>完成yolar统一登录 接口开发</li>
+<li>mentalseal app &amp; role CRUD 操作完成50%</li>
+</ul>
+<p><strong>明日安排</strong></p>
+<ul>
+<li>完成mentalseal app &amp; role CRUD 操作</li>
+<li>配合前端做接口Mock测试</li>
+</ul>
+<h4 id="2017-3-8"><a href="#2017-3-8" class="headerlink" title="2017-3-8"></a>2017-3-8</h4><p><strong>今日进度</strong></p>
+<ul>
+<li>测试护士辅助下单功能的dimension和dna</li>
+<li>完成mentalseal app &amp; role CRUD 操作</li>
+<li>完成mentalseal admin的操作</li>
+</ul>
+<p><strong>明日安排</strong></p>
+<ul>
+<li>mentalseal自测(除登录)</li>
+<li>era的登录开发</li>
+<li>配合前端做接口Mock测试</li>
+</ul>
+<h4 id="2017-3-9"><a href="#2017-3-9" class="headerlink" title="2017-3-9"></a>2017-3-9</h4><p><strong>今日进度</strong></p>
+<ul>
+<li>mentalseal自测</li>
+<li>era的登录开发</li>
+<li>gataway中mentalseal的配置开发及测试</li>
+</ul>
+<p><strong>明日安排</strong></p>
+<ul>
+<li>mentalseal admin 权限查询接口</li>
+<li>配合前端做接口Mock测试</li>
+</ul>
+<h4 id="2017-3-10"><a href="#2017-3-10" class="headerlink" title="2017-3-10"></a>2017-3-10</h4><p><strong>今日进度</strong></p>
+<ul>
+<li>修复PUSH系统BUG</li>
+<li>era的登录完善</li>
+<li>配合前端做接口Mock测试</li>
+</ul>
+<p><strong>明日安排</strong></p>
+<ul>
+<li>mentalseal admin 权限查询接口</li>
+<li>自测</li>
+</ul>
+<h4 id="2017-3-11"><a href="#2017-3-11" class="headerlink" title="2017-3-11"></a>2017-3-11</h4><p><strong>今日进度</strong></p>
+<ul>
+<li>mentalseal admin 权限查询接口</li>
+<li>自测</li>
+</ul>
+<p><strong>明日安排</strong></p>
+<ul>
+<li>前后端联调</li>
+</ul>
+<h4 id="2017-3-13"><a href="#2017-3-13" class="headerlink" title="2017-3-13"></a>2017-3-13</h4><p><strong>今日进度</strong></p>
+<ul>
+<li>前后端联调50%</li>
+</ul>
+<p><strong>明日安排</strong></p>
+<ul>
+<li>前后端联调</li>
+<li>develop环境测试</li>
+</ul>
+<h4 id="2017-3-14"><a href="#2017-3-14" class="headerlink" title="2017-3-14"></a>2017-3-14</h4><p>总体延期一天，因多项目开发，测试人员排期较满，可能会延期<br><strong>今日进度</strong></p>
+<ul>
+<li>前后端联调75%</li>
+<li>代码重构</li>
+</ul>
+<p><strong>明日安排</strong></p>
+<ul>
+<li>前后端联调</li>
+<li>develop环境测试</li>
+</ul>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

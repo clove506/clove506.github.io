@@ -1,0 +1,228 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【合肥项目】对admin相关操作API设计 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要 合肥项目-admin CRUD 和adminTag CURD">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【合肥项目】对admin相关操作API设计"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【合肥项目】对admin相关操作API设计</h2>
+					
+					<div>
+						<span class="post-time">2017-01-13 17:00:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p> 合肥项目-admin CRUD 和adminTag CURD<br> <a id="more"></a></p>
+<h2 id="WIKI维护人"><a href="#WIKI维护人" class="headerlink" title="WIKI维护人"></a>WIKI维护人</h2><p>李江明</p>
+<h1 id="admin-CRUD-API详细设计i"><a href="#admin-CRUD-API详细设计i" class="headerlink" title="admin CRUD API详细设计i"></a>admin CRUD API详细设计i</h1><h2 id="新建一个admin的接口设计"><a href="#新建一个admin的接口设计" class="headerlink" title="新建一个admin的接口设计"></a>新建一个admin的接口设计</h2><p>POST /api/yolar/v1/admins</p>
+<h2 id="接口描述"><a href="#接口描述" class="headerlink" title="接口描述"></a>接口描述</h2><p>新建一个admin的操作</p>
+<h2 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"name"</span> :<span class="string">"youhujia"</span>,</div><div class="line">	<span class="attr">"phone"</span>: <span class="string">"13170800999"</span>,</div><div class="line">	<span class="attr">"system"</span>:<span class="string">"orderSystem"</span>,</div><div class="line">	<span class="attr">"avatarUrl"</span>:<span class="string">"aaa.jpg"</span>,</div><div class="line">	<span class="attr">"idCard"</span>:<span class="string">"01012222222222222222"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h2><p>token由后台程序自动生成<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    	<span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    	<span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"admin"</span>: &#123;</div><div class="line">    	<span class="attr">"adminId"</span>: <span class="number">16</span>,</div><div class="line">    	<span class="attr">"name"</span>: <span class="string">"youhujia"</span>,</div><div class="line">    	<span class="attr">"phone"</span>: <span class="string">"13170800999"</span>,</div><div class="line">    	<span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">    	<span class="attr">"system"</span>: <span class="string">"orderSystem"</span>,</div><div class="line">    	<span class="attr">"title"</span>: <span class="number">1</span>,</div><div class="line">    	<span class="attr">"avatarUrl"</span>: <span class="string">"aaa.jpg"</span>,</div><div class="line">		<span class="attr">"token"</span>:<span class="string">"PGrSgP3KJ81GaaeiJN6BjR1PZ56QFZk4ALTtbTNhRZRqLRsLJEgcw2OVsFxRewXHJK5XRXjDNh9S7zlDpJWvidmafqkxF9C6rwWcm257Zoe5DHODyu0vpxMdLrFbn6wM"</span>,</div><div class="line">    	<span class="attr">"idCard"</span>: <span class="string">"01012222222222222222"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="实现设计"><a href="#实现设计" class="headerlink" title="实现设计"></a>实现设计</h2><p>前端传入要添加的admin的信息，数据合法则保存到数据库。</p>
+<h2 id="更新admin信息接口设计"><a href="#更新admin信息接口设计" class="headerlink" title="更新admin信息接口设计"></a>更新admin信息接口设计</h2><p>PATCH /api/yolar/v1/admins/{adminId}</p>
+<h2 id="接口描述-1"><a href="#接口描述-1" class="headerlink" title="接口描述"></a>接口描述</h2><p>根据adminId,将该admin的信息更新为传入的数据</p>
+<h2 id="Request-1"><a href="#Request-1" class="headerlink" title="Request"></a>Request</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"adminId"</span>:<span class="number">19</span>	,</div><div class="line">	<span class="attr">"name"</span>:<span class="string">"Beyond_19"</span>,</div><div class="line">	<span class="attr">"phone"</span>:<span class="string">"18370600889"</span>,</div><div class="line">	<span class="attr">"system"</span>:<span class="string">"orderSystem"</span>,</div><div class="line">	<span class="attr">"avatarUrl"</span>:<span class="string">"bbb.jpg"</span>,</div><div class="line">	<span class="attr">"idCard"</span>:<span class="string">"011666666666666666666"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Response-1"><a href="#Response-1" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    	<span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    	<span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-1"><a href="#实现设计-1" class="headerlink" title="实现设计"></a>实现设计</h2><p>在前端传入要更新的adminId和需要更新的内容，根据adminId查询到该admin，将原始数据更改为新数据，然后保存到数据库中。</p>
+<h2 id="根据adminId查询admin信息的接口设计"><a href="#根据adminId查询admin信息的接口设计" class="headerlink" title="根据adminId查询admin信息的接口设计"></a>根据adminId查询admin信息的接口设计</h2><p>GET /api/yolar/v1/admins/{adminId}</p>
+<h2 id="接口描述-2"><a href="#接口描述-2" class="headerlink" title="接口描述"></a>接口描述</h2><p>传入adminId，查询出admin的详细信息</p>
+<h2 id="Request-2"><a href="#Request-2" class="headerlink" title="Request"></a>Request</h2><p>/api/admins/yolar/v1/admins/1</p>
+<h2 id="Response-2"><a href="#Response-2" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">  		<span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">  		<span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"admin"</span>: &#123;</div><div class="line">  		<span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">    	<span class="attr">"name"</span>: <span class="string">"李江明"</span>,</div><div class="line">    	<span class="attr">"phone"</span>: <span class="string">"18370600881"</span>,</div><div class="line">    	<span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">    	<span class="attr">"createdAt"</span>: <span class="number">1483801922000</span>,</div><div class="line">    	<span class="attr">"updatedAt"</span>: <span class="number">1483801922000</span>,</div><div class="line">    	<span class="attr">"system"</span>: <span class="string">"orderSystem"</span>,</div><div class="line">		<span class="attr">"token"</span>:<span class="string">"PGrSgP3KJ81GaaeiJN6BjR1PZ56QFZk4ALTtbTNhRZRqLRsLJEgcw2OVsFxRewXHJK5XRXjDNh9S7zlDpJWvidmafqkxF9C6rwWcm257Zoe5DHODyu0vpxMdLrFbn6wM"</span>,</div><div class="line">		<span class="attr">"title"</span>: <span class="number">1</span>,</div><div class="line">		<span class="attr">"avatarUrl"</span>: <span class="string">"aa.jpg"</span>,</div><div class="line">		<span class="attr">"idCard"</span>: <span class="string">"010888888888"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-2"><a href="#实现设计-2" class="headerlink" title="实现设计"></a>实现设计</h2><p>根据传入的adminId，从数据库中将对应的admin信息返回。</p>
+<h2 id="删除一个admin的接口设计"><a href="#删除一个admin的接口设计" class="headerlink" title="删除一个admin的接口设计"></a>删除一个admin的接口设计</h2><p>DELETE /api/yolar/v1/admins/{id}</p>
+<h2 id="接口描述-3"><a href="#接口描述-3" class="headerlink" title="接口描述"></a>接口描述</h2><p>目前只提供该接口，接口在实现的时候，抛出一个异常，实际并不删除数据库中的数据。</p>
+<h2 id="根据phone查询admin的接口"><a href="#根据phone查询admin的接口" class="headerlink" title="根据phone查询admin的接口"></a>根据phone查询admin的接口</h2><p>GET /api/yolar/v1/admins/phone/{phone}</p>
+<h2 id="接口描述-4"><a href="#接口描述-4" class="headerlink" title="接口描述"></a>接口描述</h2><p>传入手机号，根据手机号查询出对应的admin记录</p>
+<h2 id="Request-3"><a href="#Request-3" class="headerlink" title="Request"></a>Request</h2><p>/api/yoar/v1/admins/phone/18370600881</p>
+<h2 id="Response-3"><a href="#Response-3" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    	<span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    	<span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"admin"</span>: &#123;</div><div class="line">    	<span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">    	<span class="attr">"name"</span>: <span class="string">"李江明"</span>,</div><div class="line">    	<span class="attr">"phone"</span>: <span class="string">"18370600881"</span>,</div><div class="line">    	<span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">    	<span class="attr">"createdAt"</span>: <span class="number">1483801922000</span>,</div><div class="line">    	<span class="attr">"updatedAt"</span>: <span class="number">1483801922000</span>,</div><div class="line">    	<span class="attr">"system"</span>: <span class="string">"orderSystem"</span>,</div><div class="line">		<span class="attr">"token"</span>:<span class="string">"PGrSgP3KJ81GaaeiJN6BjR1PZ56QFZk4ALTtbTNhRZRqLRsLJEgcw2OVsFxRewXHJK5XRXjDNh9S7zlDpJWvidmafqkxF9C6rwWcm257Zoe5DHODyu0vpxMdLrFbn6wM"</span>,</div><div class="line">    	<span class="attr">"title"</span>: <span class="number">1</span>,</div><div class="line">    	<span class="attr">"avatarUrl"</span>: <span class="string">"aa.jpg"</span>,</div><div class="line">    	<span class="attr">"idCard"</span>: <span class="string">"010888888888"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-3"><a href="#实现设计-3" class="headerlink" title="实现设计"></a>实现设计</h2><p>根据传入的手机，手机号在库中是唯一确定的，所以一个手机号只能查询出一个条对应的记录。</p>
+<h2 id="更新admin-token的接口设计"><a href="#更新admin-token的接口设计" class="headerlink" title="更新admin token的接口设计"></a>更新admin token的接口设计</h2><p>POST /api/yolar/v1/admins/{admins}/reset-token</p>
+<h2 id="接口描述-5"><a href="#接口描述-5" class="headerlink" title="接口描述"></a>接口描述</h2><p>传入要更新token的adminId，给这个admin随机生成一个token，并保存到数据库</p>
+<h2 id="Request-4"><a href="#Request-4" class="headerlink" title="Request"></a>Request</h2><p>/api/yolar/v1/admins/1/reset-token</p>
+<h2 id="Response-4"><a href="#Response-4" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"result"</span>:&#123;</div><div class="line">		<span class="attr">"success"</span>:<span class="literal">true</span>,</div><div class="line">		<span class="attr">"code"</span>:<span class="number">0</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-4"><a href="#实现设计-4" class="headerlink" title="实现设计"></a>实现设计</h2><p>通过adminId查找出要更新token的admin,然后程序自动生成一个token，然后保存到数据库中。</p>
+<h2 id="根据tagId查询admin的接口设计"><a href="#根据tagId查询admin的接口设计" class="headerlink" title="根据tagId查询admin的接口设计"></a>根据tagId查询admin的接口设计</h2><p>GET /api/yolar/v1/tags/{tagId}/admins</p>
+<h2 id="接口描述-6"><a href="#接口描述-6" class="headerlink" title="接口描述"></a>接口描述</h2><p>根据tagId，查询出有该tag的所有admin</p>
+<h2 id="Request-5"><a href="#Request-5" class="headerlink" title="Request"></a>Request</h2><p>/api/yolar/v1/tags/1/admins/</p>
+<h2 id="Response-5"><a href="#Response-5" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"result"</span>:&#123;</div><div class="line">		<span class="attr">"success"</span>:<span class="literal">true</span>,</div><div class="line">		<span class="attr">"code"</span>:<span class="number">0</span></div><div class="line">	&#125;</div><div class="line">	<span class="string">"admin"</span>:&#123;</div><div class="line">   		<span class="attr">"adminId"</span>: <span class="number">1</span>,</div><div class="line">   		<span class="attr">"name"</span>: <span class="string">"李江明"</span>,</div><div class="line">   		<span class="attr">"phone"</span>: <span class="string">"18370600881"</span>,</div><div class="line">   		<span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">   		<span class="attr">"createdAt"</span>: <span class="number">1483801922000</span>,</div><div class="line">   		<span class="attr">"updatedAt"</span>: <span class="number">1483801922000</span>,</div><div class="line">   		<span class="attr">"system"</span>: <span class="string">"orderSystem"</span>,</div><div class="line">		<span class="attr">"token"</span>:<span class="string">"PGrSgP3KJ81GaaeiJN6BjR1PZ56QFZk4ALTtbTNhRZRqLRsLJEgcw2OVsFxRewXHJK5XRXjDNh9S7zlDpJWvidmafqkxF9C6rwWcm257Zoe5DHODyu0vpxMdLrFbn6wM"</span>,</div><div class="line">   		<span class="attr">"title"</span>: <span class="number">1</span>,</div><div class="line">   		<span class="attr">"avatarUrl"</span>: <span class="string">"aa.jpg"</span>,</div><div class="line">   		<span class="attr">"idCard"</span>: <span class="string">"010888888888"</span></div><div class="line"> 		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-5"><a href="#实现设计-5" class="headerlink" title="实现设计"></a>实现设计</h2><p>传入tagId,然后根据tagId从adminTag表中查询出和与之对应的adminId，然后根据adminId查询出admin信息。</p>
+<h2 id="根据adminId，查询出该admin下的所有tag的接口设计"><a href="#根据adminId，查询出该admin下的所有tag的接口设计" class="headerlink" title="根据adminId，查询出该admin下的所有tag的接口设计"></a>根据adminId，查询出该admin下的所有tag的接口设计</h2><p>GET /api/yolar/v1/tags/admins/{adminId}</p>
+<h2 id="接口描述-7"><a href="#接口描述-7" class="headerlink" title="接口描述"></a>接口描述</h2><p>传入adminId，根据该id查询出admin下的所有tag</p>
+<h2 id="Request-6"><a href="#Request-6" class="headerlink" title="Request"></a>Request</h2><p>/api/yolar/v1/tags/admins/1</p>
+<h2 id="Response-6"><a href="#Response-6" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"result"</span>:&#123;</div><div class="line">		<span class="attr">"success"</span>:<span class="literal">true</span>,</div><div class="line">		<span class="attr">"code"</span>:<span class="number">0</span></div><div class="line">	&#125;</div><div class="line">	&#123;</div><div class="line">  <span class="attr">"tag"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"耳朵变长了"</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"creatorId"</span>: <span class="number">2</span>,</div><div class="line">      <span class="attr">"organizationId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">13</span>,</div><div class="line">      <span class="attr">"tagCategoryId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"tagCategoryName"</span>: <span class="string">"耳朵"</span>,</div><div class="line">      <span class="attr">"createdAt"</span>: <span class="number">1477381354000</span>,</div><div class="line">      <span class="attr">"updatedAt"</span>: <span class="number">1477381354000</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"id"</span>: <span class="number">16</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"爱上杜甫"</span>,</div><div class="line">      <span class="attr">"type"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"creatorId"</span>: <span class="number">2</span>,</div><div class="line">      <span class="attr">"organizationId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"departmentId"</span>: <span class="number">13</span>,</div><div class="line">      <span class="attr">"tagCategoryId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"tagCategoryName"</span>: <span class="string">"耳朵"</span>,</div><div class="line">      <span class="attr">"createdAt"</span>: <span class="number">1477410542000</span>,</div><div class="line">      <span class="attr">"updatedAt"</span>: <span class="number">1477410542000</span></div><div class="line">    &#125;</div><div class="line">  ],</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-6"><a href="#实现设计-6" class="headerlink" title="实现设计"></a>实现设计</h2><p>传入adminId，根据adminId从adminTag表中与之对应的tagId，然后根据tagId查询出tag的信息。</p>
+<h2 id="为admin添加tag的接口设计"><a href="#为admin添加tag的接口设计" class="headerlink" title="为admin添加tag的接口设计"></a>为admin添加tag的接口设计</h2><p>POST /api/yolar/v1/tags/admins/{admins}</p>
+<h2 id="接口描述-8"><a href="#接口描述-8" class="headerlink" title="接口描述"></a>接口描述</h2><p>为admin添加tag</p>
+<h2 id="Request-7"><a href="#Request-7" class="headerlink" title="Request"></a>Request</h2><p>/api/yolar/v1/tags/admins/1<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"tagId"</span>:<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Response-7"><a href="#Response-7" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"result"</span>:&#123;</div><div class="line">		<span class="attr">"code"</span>:<span class="number">0</span>,</div><div class="line">		<span class="attr">"result"</span>:<span class="literal">true</span></div><div class="line">	&#125;</div><div class="line">	&#123;</div><div class="line">		<span class="attr">"id"</span>:<span class="number">1</span>,</div><div class="line">		<span class="attr">"name"</span>:<span class="string">"耳朵变长了"</span>,</div><div class="line">		<span class="attr">"type"</span>:<span class="number">1</span>,</div><div class="line">		<span class="attr">"creatorId"</span>:<span class="number">1</span>,</div><div class="line">		<span class="attr">"organizationId"</span>:<span class="number">1</span>,</div><div class="line">		<span class="attr">"departmentId"</span>:<span class="number">13</span>,</div><div class="line">		<span class="attr">"tagCategoryId"</span>:<span class="number">1</span>,</div><div class="line">		<span class="attr">"tagCategoryName"</span>:<span class="string">"耳朵"</span>,</div><div class="line">		<span class="attr">"createdAt"</span>:<span class="number">1483801922000</span>,</div><div class="line">		<span class="attr">"updatedAt"</span>:<span class="number">1483801922000</span> </div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-7"><a href="#实现设计-7" class="headerlink" title="实现设计"></a>实现设计</h2><h2 id="将admin下所有的tag都删除的接口设计"><a href="#将admin下所有的tag都删除的接口设计" class="headerlink" title="将admin下所有的tag都删除的接口设计"></a>将admin下所有的tag都删除的接口设计</h2><p>DELETE /api/yolar/v1/tags/admins/{adminId}</p>
+<h2 id="接口描述-9"><a href="#接口描述-9" class="headerlink" title="接口描述"></a>接口描述</h2><p>根据adminId，删除该admin下的所有的tag</p>
+<h2 id="Request-8"><a href="#Request-8" class="headerlink" title="Request"></a>Request</h2><p>/api/yolar/v1/tags/admins/1</p>
+<h2 id="Response-8"><a href="#Response-8" class="headerlink" title="Response"></a>Response</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"result"</span>:&#123;</div><div class="line">		<span class="attr">"success"</span>:<span class="literal">true</span>,</div><div class="line">		<span class="attr">"code"</span>:<span class="number">0</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现设计-8"><a href="#实现设计-8" class="headerlink" title="实现设计"></a>实现设计</h2><p>传入adminId,根据adminId找到adminTag表中的对应记录，然后将其删除。</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

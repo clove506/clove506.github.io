@@ -1,0 +1,227 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【合肥项目】用户中心三期-提供科室权限/护士接单权限/护士服务权限/用户体系迁移 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="背景Wiki 维护人ListenYoung
+内容定义科室是否提供服务：加入新的tagType: DepartmentProvideService，类型为此类的tag的name和departmentId属性均为对应department的id，使用时，通过提供的get方法是否可以寻找到tag对象来确认d">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【合肥项目】用户中心三期-提供科室权限/护士接单权限/护士服务权限/用户体系迁移"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【合肥项目】用户中心三期-提供科室权限/护士接单权限/护士服务权限/用户体系迁移</h2>
+					
+					<div>
+						<span class="post-time">2016-12-14 16:40:05</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><h2 id="Wiki-维护人"><a href="#Wiki-维护人" class="headerlink" title="Wiki 维护人"></a>Wiki 维护人</h2><p>ListenYoung</p>
+<h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><h3 id="定义科室是否提供服务："><a href="#定义科室是否提供服务：" class="headerlink" title="定义科室是否提供服务："></a>定义科室是否提供服务：</h3><p>加入新的tagType: DepartmentProvideService，类型为此类的tag的name和departmentId属性均为对应department的id，使用时，通过提供的get方法是否可以寻找到tag对象来确认department是否可以提供服务；同时提供了此类tag的增、删（tagId, departmentId）、查(tagId, departmentId),以及isSupportedService接口。<br>详见halo工程下YolarClient：</p>
+<p>/api/departments/{departmentId}/provide-service<br>创建一个tag，标识此科室提供服务</p>
+<p>/api/departments/{departmentId}/provide-service/{id}<br>通过tagId删除此tag（科室取消提供服务）</p>
+<p>/api/departments/{departmentId}/provide-service<br>通过departmentId删除此tag（科室取消提供服务）</p>
+<p>/api/departments/{departmentId}/provide-service/{id}<br>通过tagId获取该tag</p>
+<p>/api/departments/{departmentId}/provide-service<br>通过departmentId获取此tag</p>
+<p>/api/departments/{departmentId}/provide-service/isSupportedService<br>通过departmentId来得知该科室是否对外提供服务</p>
+<h3 id="护士是否能被派单："><a href="#护士是否能被派单：" class="headerlink" title="护士是否能被派单："></a>护士是否能被派单：</h3><p>加入新的tagType为：</p>
+<p>Notification（接收通知），用来标识护士可以被派单</p>
+<p>通过查询是否存在type 为Notification的tag来标识该护士是否接收提醒</p>
+<p>上述操作均可以通过之前的接口进行实现，护士是否能被派单并没有新增对外接口</p>
+<h3 id="护士提供服务："><a href="#护士提供服务：" class="headerlink" title="护士提供服务："></a>护士提供服务：</h3><p>加入新的tagType分别为：<br>NurseService（护士提供服务），其name对应为服务的itemId；</p>
+<p>通过遍历该department下type 为 NurseService 的所有tag 可以获知该科室可以提供的所有的服务（getTagsByDepartmentIdAndTagType）；</p>
+<p>护士能提供的服务通过关联表nurse_tag来保存，通过增加1条记录表示该护士可以提供这项服务；删除一条记录表示护士不再提供这项服务。</p>
+<p>科室是否对外提供某项服务通过添加或删除tag来完成，添加/删除的逻辑和之前的一样，走之前的老接口</p>
+<h2 id="时间排期"><a href="#时间排期" class="headerlink" title="时间排期"></a>时间排期</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>详情</th>
+<th>人日</th>
+<th>完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Era Nurse 服务模型</td>
+<td>1. department tag 定义科室是否提供服务</td>
+<td>1</td>
+<td>ok</td>
+</tr>
+<tr>
+<td></td>
+<td>2. nurse tag 实现护士是否能提供服务</td>
+<td>1</td>
+<td>ok</td>
+</tr>
+<tr>
+<td></td>
+<td>3. nurse tag 实现护士是否被派单</td>
+<td>1</td>
+<td>ok</td>
+</tr>
+</tbody>
+</table>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

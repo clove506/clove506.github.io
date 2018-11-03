@@ -1,0 +1,628 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>泰乐城六月项目 产品断点修复技术文档 | Clove</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Clove">
+    
+
+    
+    <meta name="description" content="背景关于影子公众号，见文档：https://wayknew.com/articles/222 之前已经实现了影子公众号的部分逻辑，主要是可以获取用户在影子公众号下的 openId，但是未实现后续通过该影子公众号给用户下发微信模板消息。现在需要完善该逻辑。 prd 见：「泰乐城六月项目」产品断点修复PRD 需要更新的逻辑：微信扫码和模板消息相关，主要涉及三个项目：  Era Difoil Singe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="泰乐城六月项目 产品断点修复技术文档">
+<meta property="og:url" content="http://yoursite.com/2017/06/30/tlc断点修复技术文档/index.html">
+<meta property="og:site_name" content="Clove">
+<meta property="og:description" content="背景关于影子公众号，见文档：https://wayknew.com/articles/222 之前已经实现了影子公众号的部分逻辑，主要是可以获取用户在影子公众号下的 openId，但是未实现后续通过该影子公众号给用户下发微信模板消息。现在需要完善该逻辑。 prd 见：「泰乐城六月项目」产品断点修复PRD 需要更新的逻辑：微信扫码和模板消息相关，主要涉及三个项目：  Era Difoil Singe">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fgniblha12j30fx0mi3zm.jpg">
+<meta property="og:updated_time" content="2017-11-05T06:27:37.484Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="泰乐城六月项目 产品断点修复技术文档">
+<meta name="twitter:description" content="背景关于影子公众号，见文档：https://wayknew.com/articles/222 之前已经实现了影子公众号的部分逻辑，主要是可以获取用户在影子公众号下的 openId，但是未实现后续通过该影子公众号给用户下发微信模板消息。现在需要完善该逻辑。 prd 见：「泰乐城六月项目」产品断点修复PRD 需要更新的逻辑：微信扫码和模板消息相关，主要涉及三个项目：  Era Difoil Singe">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fgniblha12j30fx0mi3zm.jpg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Clove" type="application/atom+xml">
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Clove">Clove</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/06/30/tlc断点修复技术文档/" title="泰乐城六月项目 产品断点修复技术文档" itemprop="url">泰乐城六月项目 产品断点修复技术文档</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Clove" target="_blank" itemprop="author">Clove</a>
+		
+  <p class="article-time">
+    <time datetime="2017-06-29T16:00:00.000Z" itemprop="datePublished"> Published 2017-06-30</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Era"><span class="toc-number">2.</span> <span class="toc-text">Era</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Difoil"><span class="toc-number">3.</span> <span class="toc-text">Difoil</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Singer"><span class="toc-number">4.</span> <span class="toc-text">Singer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#增加影子公众号和科室的关联"><span class="toc-number">4.1.</span> <span class="toc-text">增加影子公众号和科室的关联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板-id-统一管理"><span class="toc-number">4.2.</span> <span class="toc-text">模板 id 统一管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Singer-添加新的模板消息发送接口"><span class="toc-number">4.3.</span> <span class="toc-text">Singer 添加新的模板消息发送接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用方使用新的接口发送模板消息"><span class="toc-number">4.4.</span> <span class="toc-text">调用方使用新的接口发送模板消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体排期"><span class="toc-number">4.5.</span> <span class="toc-text">具体排期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进度日志"><span class="toc-number">4.6.</span> <span class="toc-text">进度日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6月20日"><span class="toc-number">4.6.1.</span> <span class="toc-text">6月20日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月21日"><span class="toc-number">4.6.2.</span> <span class="toc-text">6月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月22日"><span class="toc-number">4.6.3.</span> <span class="toc-text">6月22日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月23日"><span class="toc-number">4.6.4.</span> <span class="toc-text">6月23日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月24日"><span class="toc-number">4.6.5.</span> <span class="toc-text">6月24日</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>关于影子公众号，见文档：<a href="https://wayknew.com/articles/222" target="_blank" rel="external">https://wayknew.com/articles/222</a></p>
+<p>之前已经实现了影子公众号的部分逻辑，主要是可以获取用户在影子公众号下的 openId，但是未实现后续通过该影子公众号给用户下发微信模板消息。<br>现在需要完善该逻辑。</p>
+<p>prd 见：<a href="https://wayknew.com/articles/264" target="_blank" rel="external">「泰乐城六月项目」产品断点修复PRD</a></p>
+<p>需要更新的逻辑：微信扫码和模板消息相关，主要涉及三个项目：</p>
+<ul>
+<li>Era</li>
+<li>Difoil</li>
+<li>Singer</li>
+</ul>
+<h1 id="Era"><a href="#Era" class="headerlink" title="Era"></a>Era</h1><p>主要涉及影子公众号功能的恢复。</p>
+<p>之前影子公众号的逻辑放在 Era 中，现在 Era 项目已经废弃，需要迁移相关代码到 Yolar。<br>影子公众号设计文档：<a href="https://wayknew.com/articles/222" target="_blank" rel="external">https://wayknew.com/articles/222</a></p>
+<h1 id="Difoil"><a href="#Difoil" class="headerlink" title="Difoil"></a>Difoil</h1><p>主要涉及微信扫码后的 callback 处理。</p>
+<p>对启用影子公众号的科室，二维码需要配置特殊参数，以方便后台区别对待:</p>
+<ul>
+<li>现有普通科室科室的二维码参数形如：<code>departmentId_&lt;211&gt;</code>，后缀为科室 id。</li>
+<li>对于启用影子公众号的科室，需使用如下参数：<code>shadow_&lt;311&gt;</code>， 后缀为影子公众号id。</li>
+</ul>
+<p>对于微信扫码的 callback，检查到此类参数后，返回的欢迎语中，携带链接为影子公众号专用链接。</p>
+<p>点击之后，走之前影子公众号的流程（<a href="https://wayknew.com/articles/222），以获取该用户在影子公众号的" target="_blank" rel="external">https://wayknew.com/articles/222），以获取该用户在影子公众号的</a> openId。</p>
+<p>配合 C 端逻辑，需要在该流程中增加两个操作：</p>
+<ul>
+<li>给用户关联上科室</li>
+<li>给用户关联上相应的疾病</li>
+</ul>
+<p>以保证用户进入 C 端后，已经被关联上了相关科室。</p>
+<h1 id="Singer"><a href="#Singer" class="headerlink" title="Singer"></a>Singer</h1><p>涉及微信模板消息的下发。</p>
+<p>现有的微信模板消息，都是通过优护家公众号下发的，现在则优先通过影子公众号下发模板消息，需要 Singer 提供新接口。</p>
+<p>涉及的修改 ：</p>
+<ul>
+<li>增加影子公众号和科室的关联</li>
+<li>统一微信模板的 id</li>
+<li>Singer 添加新的模板消息发送接口</li>
+<li>调用方使用新的接口发送模板消息</li>
+</ul>
+<h2 id="增加影子公众号和科室的关联"><a href="#增加影子公众号和科室的关联" class="headerlink" title="增加影子公众号和科室的关联"></a>增加影子公众号和科室的关联</h2><p>现在影子公众号（shadow_wx_account）没有关联科室信息，科室产生消息后，无法确认对应的公众号是哪一个，该对应信息需要加上。</p>
+<h2 id="模板-id-统一管理"><a href="#模板-id-统一管理" class="headerlink" title="模板 id 统一管理"></a>模板 id 统一管理</h2><p>之前发送模板消息时，需要业务方指明 templateID，现在对应不同的微信账号，templateId 各不相同，交给业务方显得太过繁琐，所以在 singer 中统一模板消息，业务方只需指定模板的 enum 即可。</p>
+<p><strong>模板消息 Enum在 Halo 中定义</strong>：</p>
+<ul>
+<li>FollowUpNotify</li>
+<li>NewIMMsg</li>
+<li>NewOrderInfo</li>
+</ul>
+<p><strong>数据库添加模板 id 信息</strong>：</p>
+<p>各账号下模板消息配置信息统一在数据库中管理，给 <code>shadow_wx_account</code> 表添加字段：<code>wx_template_info</code>。</p>
+<p>示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"FollowUpNotify"</span> : <span class="string">"UFHEoI6BVlNizJ2bvNA49YRHtLs0GG4dM1ROVg6DFkA"</span>,</div><div class="line">  <span class="attr">"NewIMMsg"</span> : <span class="string">"foo"</span>,</div><div class="line">  <span class="attr">"NewOrderInfo"</span> : <span class="string">"bar"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Singer-添加新的模板消息发送接口"><a href="#Singer-添加新的模板消息发送接口" class="headerlink" title="Singer 添加新的模板消息发送接口"></a>Singer 添加新的模板消息发送接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ReqeustMapping</span>(<span class="string">"/wechat-template-msg/shadow-account-first"</span>)</div><div class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">SimpleResponse <span class="title">sendWechatTmplMsgShodowAccountFirst</span><span class="params">(@RequestBody WechatTmplMsgOpt msgOpt)</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">WechatTmplMsgOpt</span></span>&#123;</div><div class="line">  <span class="keyword">optional</span> int templateEnumId = <span class="number">1</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">optional</span> int userId = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> int dptId = <span class="number">3</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> payload = <span class="number">4</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>发送模板消息的逻辑如下：</p>
+<p><a href="https://www.processon.com/view/link/59425f9fe4b04d4c799d1c7c" target="_blank" rel="external">LINK</a></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fgniblha12j30fx0mi3zm.jpg" alt=""></p>
+<h2 id="调用方使用新的接口发送模板消息"><a href="#调用方使用新的接口发送模板消息" class="headerlink" title="调用方使用新的接口发送模板消息"></a>调用方使用新的接口发送模板消息</h2><p>已知的调用方：</p>
+<ul>
+<li>difoil</li>
+<li>dimension</li>
+</ul>
+<h2 id="具体排期"><a href="#具体排期" class="headerlink" title="具体排期"></a>具体排期</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>耗时/人日</th>
+<th>开始日期</th>
+<th>实现者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C端优护家公众号授权页面和后端逻辑开发、自测</td>
+<td>2</td>
+<td>0618</td>
+<td>擎祖&amp;CC</td>
+</tr>
+<tr>
+<td>di-foil扫码逻辑开发、自测</td>
+<td>0.5</td>
+<td>0620</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>yolar影子公众号和科室管理底层逻辑开发、自测</td>
+<td>0.5</td>
+<td>0620</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>singer模板信息推送开发、自测</td>
+<td>1</td>
+<td>0621</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>C端随访、新消息Push接口改造、自测</td>
+<td>1</td>
+<td>0622</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>C端订单Push接口改造、自测</td>
+<td>1</td>
+<td>0623</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>staging环境测试</td>
+<td>1</td>
+<td>0624</td>
+<td>旭红&amp;奥伟</td>
+</tr>
+<tr>
+<td>上线</td>
+<td>1</td>
+<td>0626</td>
+<td>赵蔺Or明敏</td>
+</tr>
+</tbody>
+</table>
+<h2 id="进度日志"><a href="#进度日志" class="headerlink" title="进度日志"></a>进度日志</h2><h3 id="6月20日"><a href="#6月20日" class="headerlink" title="6月20日"></a>6月20日</h3><ul>
+<li>kick off</li>
+<li>yolar底层逻辑开发（泰乐城公众号和科室进行关联）</li>
+<li>泰乐城公众号授权页面和后端逻辑开发</li>
+</ul>
+<h3 id="6月21日"><a href="#6月21日" class="headerlink" title="6月21日"></a>6月21日</h3><ul>
+<li>影子公众号和科室关联</li>
+<li>通过科室Id查找影子公众号接口</li>
+<li>用户和影子公众号下科室关联并为用户添加关注疾病</li>
+<li>Singer统一微信模板消息接口</li>
+</ul>
+<h3 id="6月22日"><a href="#6月22日" class="headerlink" title="6月22日"></a>6月22日</h3><ul>
+<li>生成影子公众号下科室二维码接口</li>
+<li>改造di-foil扫码接口，加入影子公众号扫码逻辑</li>
+<li>测试影子公众号科室扫码逻辑及正确跳转C端科室首页</li>
+</ul>
+<h3 id="6月23日"><a href="#6月23日" class="headerlink" title="6月23日"></a>6月23日</h3><ul>
+<li>Singer统一微信模板消息接口测试（Push Push Push~）</li>
+<li>修改di-foil和dimension微信模板消息逻辑，调动Singer新增统一微信模板消息接口及测试</li>
+</ul>
+<h3 id="6月24日"><a href="#6月24日" class="headerlink" title="6月24日"></a>6月24日</h3><ul>
+<li>staging环境验收（由于网络、bug等各方面原因，预计延期一天，今日上dev）</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/API设计/">API设计</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/06/30/tlc断点修复技术文档/" data-title="泰乐城六月项目 产品断点修复技术文档 | Clove" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/07/20/NIO/" title="nio">
+  <strong>上一篇：</strong><br/>
+  <span>
+  nio</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/06/18/tlc产品断点修复PRD/"  title="泰乐城六月项目 产品断点修复PRD">
+ <strong>下一篇：</strong><br/> 
+ <span>泰乐城六月项目 产品断点修复PRD
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Era"><span class="toc-number">2.</span> <span class="toc-text">Era</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Difoil"><span class="toc-number">3.</span> <span class="toc-text">Difoil</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Singer"><span class="toc-number">4.</span> <span class="toc-text">Singer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#增加影子公众号和科室的关联"><span class="toc-number">4.1.</span> <span class="toc-text">增加影子公众号和科室的关联</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板-id-统一管理"><span class="toc-number">4.2.</span> <span class="toc-text">模板 id 统一管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Singer-添加新的模板消息发送接口"><span class="toc-number">4.3.</span> <span class="toc-text">Singer 添加新的模板消息发送接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用方使用新的接口发送模板消息"><span class="toc-number">4.4.</span> <span class="toc-text">调用方使用新的接口发送模板消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体排期"><span class="toc-number">4.5.</span> <span class="toc-text">具体排期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#进度日志"><span class="toc-number">4.6.</span> <span class="toc-text">进度日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6月20日"><span class="toc-number">4.6.1.</span> <span class="toc-text">6月20日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月21日"><span class="toc-number">4.6.2.</span> <span class="toc-text">6月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月22日"><span class="toc-number">4.6.3.</span> <span class="toc-text">6月22日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月23日"><span class="toc-number">4.6.4.</span> <span class="toc-text">6月23日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6月24日"><span class="toc-number">4.6.5.</span> <span class="toc-text">6月24日</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/API设计/" title="API设计">API设计<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JWT/" title="JWT">JWT<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java8/" title="Java8">Java8<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/NIO/" title="NIO">NIO<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/encoding/" title="encoding">encoding<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/thread/" title="thread">thread<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/yhj/" title="yhj">yhj<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/开发总结/" title="开发总结">开发总结<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/死磕高并发/" title="死磕高并发">死磕高并发<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://clove506.github.io/" target="_blank" title="Clove&#39;s Blog">Clove&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Clove">Clove</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

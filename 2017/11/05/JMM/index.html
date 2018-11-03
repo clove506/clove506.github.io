@@ -1,0 +1,542 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JMM | Clove</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Clove">
+    
+
+    
+    <meta name="description" content="内存模型 如图所示，在多线程运行时，在多核 CPU 中，每条线程可能运行在不同的 CPU 中，即每个线程运行时有自己的高速缓存。而共享变量存于主存，当程序运行时，会从主存读取共享变量的值，然后复制一份到高速缓存当中，然后 CPU 执行指令对共享变量进行操作，然后将数据写入高速缓存，最后将高速缓存中最新的变量值刷新到主存当中。 如此一来，当多个线程在多核 CPU 中并发执行时，会存在竞态条件（当两个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMM">
+<meta property="og:url" content="http://yoursite.com/2017/11/05/JMM/index.html">
+<meta property="og:site_name" content="Clove">
+<meta property="og:description" content="内存模型 如图所示，在多线程运行时，在多核 CPU 中，每条线程可能运行在不同的 CPU 中，即每个线程运行时有自己的高速缓存。而共享变量存于主存，当程序运行时，会从主存读取共享变量的值，然后复制一份到高速缓存当中，然后 CPU 执行指令对共享变量进行操作，然后将数据写入高速缓存，最后将高速缓存中最新的变量值刷新到主存当中。 如此一来，当多个线程在多核 CPU 中并发执行时，会存在竞态条件（当两个">
+<meta property="og:image" content="http://images.cnitblog.com/blog/288799/201408/212219343783699.jpg">
+<meta property="og:updated_time" content="2017-11-15T07:43:42.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JMM">
+<meta name="twitter:description" content="内存模型 如图所示，在多线程运行时，在多核 CPU 中，每条线程可能运行在不同的 CPU 中，即每个线程运行时有自己的高速缓存。而共享变量存于主存，当程序运行时，会从主存读取共享变量的值，然后复制一份到高速缓存当中，然后 CPU 执行指令对共享变量进行操作，然后将数据写入高速缓存，最后将高速缓存中最新的变量值刷新到主存当中。 如此一来，当多个线程在多核 CPU 中并发执行时，会存在竞态条件（当两个">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/288799/201408/212219343783699.jpg">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Clove" type="application/atom+xml">
+    
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Clove">Clove</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/11/05/JMM/" title="JMM" itemprop="url">JMM</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Clove" target="_blank" itemprop="author">Clove</a>
+		
+  <p class="article-time">
+    <time datetime="2017-11-04T16:00:00.000Z" itemprop="datePublished"> Published 2017-11-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存模型"><span class="toc-number">1.</span> <span class="toc-text">内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不一致性问题解决方式"><span class="toc-number">1.1.</span> <span class="toc-text">不一致性问题解决方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发"><span class="toc-number">2.</span> <span class="toc-text">并发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可见性"><span class="toc-number">2.1.</span> <span class="toc-text">可见性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序性"><span class="toc-number">2.2.</span> <span class="toc-text">有序性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子性"><span class="toc-number">2.3.</span> <span class="toc-text">原子性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文档"><span class="toc-number">2.3.1.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><p><img src="http://images.cnitblog.com/blog/288799/201408/212219343783699.jpg" alt=""></p>
+<p>如图所示，在多线程运行时，在多核 CPU 中，每条线程可能运行在不同的 CPU 中，即每个线程运行时有自己的高速缓存。而共享变量存于主存，当程序运行时，会从主存读取共享变量的值，然后复制一份到高速缓存当中，然后 CPU 执行指令对共享变量进行操作，然后将数据写入高速缓存，最后将高速缓存中最新的变量值刷新到主存当中。</p>
+<p>如此一来，当多个线程在多核 CPU 中并发执行时，会存在竞态条件（当两个线程竞争同一资源时，如果对资源的访问顺序敏感，就称存在竞态条件。 导致竞态条件发生的代码区称作临界区），也就是说，如果一个变量在多个 CPU 中存在缓存，将导致线程不安全。</p>
+<p>为保证程序的线程安全，实际上就是需要对多线程的同步，而多线程的同步本质上就是多线程通信的问题。操作系统里面定义了几种进程通信的方式：</p>
+<ol>
+<li>管道 pipeline</li>
+<li>信号 signal</li>
+<li>消息队列 messsage queue</li>
+<li>共享内存 shared memory</li>
+<li>信号量 semaphore</li>
+<li>套接字 Socket</li>
+</ol>
+<h3 id="不一致性问题解决方式"><a href="#不一致性问题解决方式" class="headerlink" title="不一致性问题解决方式"></a>不一致性问题解决方式</h3><p>　　为了解决缓存不一致性问题，通常来说有以下2种解决方法：</p>
+<p>　　1）通过在总线加LOCK#锁的方式</p>
+<p>　　2）通过缓存一致性协议</p>
+<p>这两者都是硬件层面上提供的方式。</p>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p>Java里面进行多线程通信的主要方式就是共享内存的方式，共享内存主要的关注点有两个：可见性和有序性。加上复合操作的原子性，我们可以认为Java的线程安全性问题主要关注点有3个：</p>
+<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>可见性指的是一个线程对变量的写操作对其他线程后续的读操作可见。由于现代CPU都有多级缓存，CPU的操作都是基于高速缓存的，而线程通信是基于内存的，这中间有一个 Gap, 可见性的关键还是在对变量的写操作之后能够在某个时间点显示地写回到主内存，这样其他线程就能从主内存中看到最新的写的值。volatile 和 synchronized 及显式锁，原子变量这些同步手段都可以保证可见性。可见性底层的实现是通过加<strong>内存屏障</strong>（埋坑）实现的：</p>
+<ul>
+<li>写变量后加写屏障，保证 CPU 写缓冲区的值强制刷新回主内存 </li>
+<li>读变量之前加读屏障，使缓存失效，从而强制从主内存读取变量最新值</li>
+</ul>
+<h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><p>有序性指的是数据不相关的变量在并发的情况下，实际执行的结果和单线程的执行结果是一样的，不会因为重排序的问题导致结果不可预知。volatile、final、synchronized，显式锁都可以保证有序性。</p>
+<p>有序性的语意有几层，</p>
+<ol>
+<li><p>最常见的就是保证多线程执行的串行顺序</p>
+</li>
+<li><p>防止重排序引起的问题</p>
+</li>
+<li><p>程序执行的先后顺序，比如JMM定义的一些Happens-before规则</p>
+</li>
+</ol>
+<p>重排序的问题是一个单独的主题，常见的重排序有3个层面:</p>
+<ol>
+<li><p>编译级别的重排序，比如编译器的优化</p>
+</li>
+<li><p>指令级重排序，比如CPU指令执行的重排序</p>
+</li>
+<li><p>内存系统的重排序，比如缓存和读写缓冲区导致的重排序</p>
+</li>
+</ol>
+<h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>Java内存模型JMM解决了可见性和有序性的问题，而锁解决了原子性的问题。</p>
+<p>原子性是指某个(些)操作在语意上是原子的。比如读操作，写操作，CAS(compare and set)操作在机器指令级别是原子的，又比如一些复合操作在语义上也是原子的，如先检查后操作if(xxx == null){}</p>
+<p>有个专有名词竞态条件来描述原子性的问题。</p>
+<p>竞态条件(racing condition)是指某个操作由于不同的执行时序而出现不同的结果，比如先检查后操作。</p>
+<p>volatile变量只保证了可见性，不保证原子性， 比如a++这种操作在编译后实际是多条语句，比如先读a的值，再加1操作，再写操作，执行了3个原子操作，如果并发情况下，另外一个线程很有可能读到了中间状态，从而导致程序语意上的不正确。所以a++实际是一个复合操作。</p>
+<p>加锁可以保证复合语句的原子性，sychronized可以保证多条语句在synchronized块中语意上是原子的。显式锁保证临界区的原子性。原子变量也封装了对变量的原子操作。非阻塞容器也提供了原子操作的接口，比如putIfAbsent。</p>
+<p>理解可见性，有序性，原子性是理解并发编程的一个重要基础。</p>
+<h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><ol>
+<li><a href="http://www.cnblogs.com/dolphin0520/p/3920373.html#!comments" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920373.html#!comments</a></li>
+<li><a href="http://www.infoq.com/cn/articles/java-memory-model-1" target="_blank" rel="external">http://www.infoq.com/cn/articles/java-memory-model-1</a></li>
+<li><a href="https://ress.infoq.com/minibooks/java_memory_model/zh/pdf/think_deep_in_java_mem_model.pdf" target="_blank" rel="external">https://ress.infoq.com/minibooks/java_memory_model/zh/pdf/think_deep_in_java_mem_model.pdf</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/死磕高并发/">死磕高并发</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/11/05/JMM/" data-title="JMM | Clove" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/11/15/Exception/" title="异常处理">
+  <strong>上一篇：</strong><br/>
+  <span>
+  异常处理</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/11/04/java8/"  title="Java8">
+ <strong>下一篇：</strong><br/> 
+ <span>Java8
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内存模型"><span class="toc-number">1.</span> <span class="toc-text">内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不一致性问题解决方式"><span class="toc-number">1.1.</span> <span class="toc-text">不一致性问题解决方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#并发"><span class="toc-number">2.</span> <span class="toc-text">并发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#可见性"><span class="toc-number">2.1.</span> <span class="toc-text">可见性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序性"><span class="toc-number">2.2.</span> <span class="toc-text">有序性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原子性"><span class="toc-number">2.3.</span> <span class="toc-text">原子性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文档"><span class="toc-number">2.3.1.</span> <span class="toc-text">参考文档</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/API设计/" title="API设计">API设计<sup>5</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/JVM/" title="JVM">JVM<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JWT/" title="JWT">JWT<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java8/" title="Java8">Java8<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/NIO/" title="NIO">NIO<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/encoding/" title="encoding">encoding<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/thread/" title="thread">thread<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/yhj/" title="yhj">yhj<sup>1</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/开发总结/" title="开发总结">开发总结<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/死磕高并发/" title="死磕高并发">死磕高并发<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">Links</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://clove506.github.io/" target="_blank" title="Clove&#39;s Blog">Clove&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">Weibo</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=&verifier=b3593ceb&dpc=1"></iframe>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="Clove">Clove</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

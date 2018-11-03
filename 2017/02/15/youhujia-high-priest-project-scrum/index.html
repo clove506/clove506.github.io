@@ -1,0 +1,315 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>High Priest 项目 PRD 及开发日志 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要High Priest 项目分两期做，包括：
+
+迁移现有服务到「阿里云容器服务」；
+开发自动化管理平台，完成自动测试、部署、上线、监控等。
+
+Wiki 维护人田学文
+1. 迁移服务到阿里云容器服务这部分内容包括两部分：
+
+自动部署依赖服务
+阿里云容器服务迁移
+
+具体如下。
+1.1 自动部署依赖服">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="High Priest 项目 PRD 及开发日志"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>High Priest 项目 PRD 及开发日志</h2>
+					
+					<div>
+						<span class="post-time">2017-02-15 16:00:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>High Priest 项目分两期做，包括：</p>
+<ul>
+<li>迁移现有服务到「阿里云容器服务」；</li>
+<li>开发自动化管理平台，完成自动测试、部署、上线、监控等。</li>
+</ul>
+<h3 id="Wiki-维护人"><a href="#Wiki-维护人" class="headerlink" title="Wiki 维护人"></a>Wiki 维护人</h3><p>田学文</p>
+<h3 id="1-迁移服务到阿里云容器服务"><a href="#1-迁移服务到阿里云容器服务" class="headerlink" title="1. 迁移服务到阿里云容器服务"></a>1. 迁移服务到阿里云容器服务</h3><p>这部分内容包括两部分：</p>
+<ol>
+<li>自动部署依赖服务</li>
+<li>阿里云容器服务迁移</li>
+</ol>
+<p>具体如下。</p>
+<h4 id="1-1-自动部署依赖服务"><a href="#1-1-自动部署依赖服务" class="headerlink" title="1.1 自动部署依赖服务"></a>1.1 自动部署依赖服务</h4><ul>
+<li>Maven 私有源部署，发布例如 youhujia-halo 到私有源，方便自动化部署。</li>
+</ul>
+<h4 id="1-2-阿里云容器服务迁移"><a href="#1-2-阿里云容器服务迁移" class="headerlink" title="1.2 阿里云容器服务迁移"></a>1.2 阿里云容器服务迁移</h4><ul>
+<li><code>build.gradle</code> 重构;</li>
+<li>将 docker image 部署到容器中，提供可用的<strong>服务</strong>；</li>
+<li>调度服务，实现服务数量可横向扩展</li>
+<li>开发者日程开发、调试支持</li>
+<li>服务升级版本</li>
+<li>服务版本回滚</li>
+<li>线上环境迁移</li>
+</ul>
+<p><strong>build.gradle</strong>重构<br>在项目开发完毕后，可以通过运行</p>
+<ul>
+<li>gradle buildDocker</li>
+<li>gradle pushDocker</li>
+</ul>
+<p>完成对 Docker 化的代码交付，即交付项目的 <em>docker image</em></p>
+<p><strong>image 部署</strong><br>项目的第一次部署手动完成。通过编辑「编排模板」来完成容器服务从「模板」到节点运行「容器实例」的部署过程。</p>
+<p>其实就是 docker compose/swarm</p>
+<p>包括：</p>
+<ul>
+<li>模板编写</li>
+<li>参数定制</li>
+<li>容器运行参数定制</li>
+<li>部署</li>
+</ul>
+<p><strong>服务数量调度</strong><br>修改容器服务的数量，例如 <code>owl</code> 服务由1个实例扩展为3个，反之亦然。</p>
+<p><strong>开发者日程开发、调试支持</strong><br>支持日常环境开发，主要实现：</p>
+<ul>
+<li>服务本地运行，配合在阿里云容器服务中运行的其他服务一起联调，即实现 mac 下运行服务和阿里云服务的互通；</li>
+<li>完全关闭阿里云容器服务中的某个服务，完全由本地的 java 实例提供服务。</li>
+</ul>
+<p><strong>服务升级版本</strong><br>即使用 rolling update 完成服务版本升级，使用新的 image 替换现有的服务。</p>
+<p><strong>服务版本回滚</strong><br>回滚服务到老版本，应对线上紧急情况。通 rolling update，即使用老的 image 替换现有的服务。</p>
+<p><strong>线上环境迁移</strong><br>将现有的 center01 上的所有服务迁移到阿里云容器服务下。步骤如下：</p>
+<ul>
+<li>迁移 staging 环境并测试</li>
+<li>部署 production 环境</li>
+<li>利用SLB将流量导入至容器服务环境</li>
+<li>测试，有问题立即将流量全部导至原有环境，实现及时回滚</li>
+</ul>
+<p><strong>Maven 源</strong></p>
+<ul>
+<li>自动发布 jar</li>
+<li>CI 自动 生成 tag， version++</li>
+</ul>
+<p><strong>上线流程</strong><br>容器环境 &amp; CI 环境下，新的上线流程。</p>
+<p><strong>潜在问题</strong></p>
+<ul>
+<li>DNA 多实例冲突</li>
+</ul>
+<h3 id="2-自动化平台"><a href="#2-自动化平台" class="headerlink" title="2. 自动化平台"></a>2. 自动化平台</h3><p>实现以下功能的自动化。</p>
+<ul>
+<li>代码检查</li>
+<li>代码测试</li>
+<li>代码交付</li>
+<li>测试环境调试、测试</li>
+<li>预演环境发布、回滚</li>
+<li>线上环境发布、回滚</li>
+<li>前端 CI+CD 方案</li>
+<li>App 测试、集成、发布方案</li>
+</ul>
+<p>第二期做。</p>
+<h3 id="3-排期"><a href="#3-排期" class="headerlink" title="3. 排期"></a>3. 排期</h3><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>耗时/人日</th>
+<th>人员</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>私有源 &amp; build.gradle 重构</td>
+<td>1</td>
+<td>田学文</td>
+</tr>
+<tr>
+<td>image 部署</td>
+<td>0.5</td>
+<td>赵蔺</td>
+</tr>
+<tr>
+<td>服务数量调度</td>
+<td>0.5</td>
+<td>赵蔺</td>
+</tr>
+<tr>
+<td>开发者日程开发、调试支持</td>
+<td>1</td>
+<td>赵蔺</td>
+</tr>
+<tr>
+<td>服务升级版本、服务版本回滚</td>
+<td>1</td>
+<td>赵蔺</td>
+</tr>
+<tr>
+<td>线上环境迁移</td>
+<td>2</td>
+<td>赵蔺、田学文</td>
+</tr>
+<tr>
+<td>上线流程</td>
+<td>1</td>
+<td>赵蔺</td>
+</tr>
+</tbody>
+</table>
+<p>总计7人日</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,389 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【优护助手1.2】公告板-工作提醒设计（日程模块升级） | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要公告板-工作提醒设计（日程模块升级）">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【优护助手1.2】公告板-工作提醒设计（日程模块升级）"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【优护助手1.2】公告板-工作提醒设计（日程模块升级）</h2>
+					
+					<div>
+						<span class="post-time">2016-11-22 20:44:13</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>公告板-工作提醒设计（日程模块升级）<br><a id="more"></a></p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><ol>
+<li>将原有的“日程提醒”功能，进行新的定义：凡是和工作相关的提醒都可以放在这个模块，所以更名为“工作提醒”</li>
+<li>本次更新新增“科室公告”功能</li>
+<li>整个提醒页面时按照时间维度进行规划。详解如下：<ol>
+<li>所有的任务都拥有相关的具体截止时间，所以提醒依然保留：“今日日程”和“近期的工作”两项工作</li>
+<li>科室公告属于低频次，全科室共享的通知，所以将其收纳为一个“科室公告栏”的功能</li>
+<li>将科室公告置于工作提醒中，可以有效唤起护士对其他工作内容的查看</li>
+</ol>
+</li>
+</ol>
+<h2 id="交互设计"><a href="#交互设计" class="headerlink" title="交互设计"></a>交互设计</h2><h3 id="关键交互逻辑"><a href="#关键交互逻辑" class="headerlink" title="关键交互逻辑"></a>关键交互逻辑</h3><ol>
+<li>科室公告栏展示逻辑<ol>
+<li>科室公告栏位于“工作提醒”中，在工作提醒的右上角“+”号中，新增“新建科室公告”一项。</li>
+<li>公告展示逻辑<ol>
+<li>公告拥有展示时段，过期则不提醒。</li>
+<li>当所有公告已过期时，可点击“全部公告”查看所有已过期公告。</li>
+<li>当有未读公告时，在“工作提醒”处显示“NEW”进行提示。点击进入后，公告板处显示正在展示的公告数量，如“5条 展示中”。</li>
+<li>如果没有未读公告，则显示任务项提醒数量。</li>
+<li>前端在列表中，结合UI，默认显示先280个字。</li>
+</ol>
+</li>
+<li>公告板内逻辑<ol>
+<li>所有公告默认全文展示，无下一级页面。</li>
+<li>公告由“名称”、“创建人”、“展示时段（按天）”、“公告内容”构成。其中“公告内容”限制280字。</li>
+<li>对于展示中的公告，无数量限制。</li>
+<li>点击公告板列表中的某个公告，可进入公告详情，展示“已读”情况，详见设计图。</li>
+<li>列表中的已过期公告，不可点击查看详情。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>科室公告新建入口<ol>
+<li>工作提醒的右上角“+”处。</li>
+<li>科室公告板内右上角“新建”。</li>
+<li>工具页面中“新建科室公告”。</li>
+</ol>
+</li>
+<li>修改公告<ol>
+<li>在公告详情页中，有“修改”按钮。点击修改按钮，进入修改页面，修改页面与新建页面一致，但修改页面中显示当前公告详情。</li>
+<li>修改完成后，点击“发布”后，该公告的创建者将被改为修改者。</li>
+<li>自己只能修改自己创建的公告。</li>
+<li>管理员可以修改所有的公告。</li>
+<li>只有展示中的公告可被修改，已过期的公告不可修改。</li>
+</ol>
+</li>
+</ol>
+<h3 id="交互设计图"><a href="#交互设计图" class="headerlink" title="交互设计图"></a>交互设计图</h3><p><img src="/media/14793154691945.jpg" alt=""><br><img src="/media/14798006071330.jpg" alt=""><br><img src="/media/14793154981734.jpg" alt=""></p>
+<p>最新的交互图在OWNCLOUD中：<br>/Users/cman/ownCloud/Public@Youhujia/【UI设计】/优护助手v1.2/公告详细流程图</p>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><h4 id="什么是新公告"><a href="#什么是新公告" class="headerlink" title="什么是新公告"></a>什么是新公告</h4><p>未读+未过期 </p>
+<p>A: 展示中未读的公告，定义为为未读公告</p>
+<h4 id="什么是新任务"><a href="#什么是新任务" class="headerlink" title="什么是新任务"></a>什么是新任务</h4><p>没有完成<br>排班算任务嘛？如果算，怎么算新？<br>随访算任务嘛？如果算，怎么算新？</p>
+<p>A：若没有展示中的公告时，则展示任务数量</p>
+<h4 id="对于展示中的公告，无数量限制。"><a href="#对于展示中的公告，无数量限制。" class="headerlink" title="对于展示中的公告，无数量限制。"></a>对于展示中的公告，无数量限制。</h4><p>无数量限制的意思是：有个很难触达的大数。这个数多少合适。</p>
+<p>A：无数量限制</p>
+<h4 id="“全部公告”查看所有已过期公告。"><a href="#“全部公告”查看所有已过期公告。" class="headerlink" title="“全部公告”查看所有已过期公告。"></a>“全部公告”查看所有已过期公告。</h4><p>这个需要数量限制。现在后台数据默认展示90天，这是时间限制，数量限制也需要考虑，比如200？</p>
+<p>A：OK</p>
+<h4 id="过期的任务不允许点击详情"><a href="#过期的任务不允许点击详情" class="headerlink" title="过期的任务不允许点击详情"></a>过期的任务不允许点击详情</h4><p>即不允许修改，只允许查看。</p>
+<p>A：OK</p>
+<h4 id="对于已读的公告如果被编辑了对于已读的用户改如何操作"><a href="#对于已读的公告如果被编辑了对于已读的用户改如何操作" class="headerlink" title="对于已读的公告如果被编辑了对于已读的用户改如何操作"></a>对于已读的公告如果被编辑了对于已读的用户改如何操作</h4><p>A：已读与编辑是不相关的，未过期的公告都可以被有权限者编辑，与多少人、哪些人已读无关。</p>
+<p>陈晨：举个例子，赵帅这个护士对要修改的公告已经做了已读操作，修改公告后并不会重置赵帅的已读信息。</p>
+<h4 id="科秘的修改的权限是否等于管理员"><a href="#科秘的修改的权限是否等于管理员" class="headerlink" title="科秘的修改的权限是否等于管理员"></a>科秘的修改的权限是否等于管理员</h4><p>A：Yes</p>
+<h4 id="详情页面的新建按钮是否应该取消，前端建议修改成修改按钮"><a href="#详情页面的新建按钮是否应该取消，前端建议修改成修改按钮" class="headerlink" title="详情页面的新建按钮是否应该取消，前端建议修改成修改按钮"></a>详情页面的新建按钮是否应该取消，前端建议修改成修改按钮</h4><p>A：OK</p>
+<h4 id="公告标题能否重复"><a href="#公告标题能否重复" class="headerlink" title="公告标题能否重复"></a>公告标题能否重复</h4><p>A：可以</p>
+<h4 id="标题的长度要做限制，长度是多少"><a href="#标题的长度要做限制，长度是多少" class="headerlink" title="标题的长度要做限制，长度是多少"></a>标题的长度要做限制，长度是多少</h4><p>A：暂时可以限制为50个字符</p>
+<h4 id="所有公告默认全文展示，无下一级页面。"><a href="#所有公告默认全文展示，无下一级页面。" class="headerlink" title="所有公告默认全文展示，无下一级页面。"></a>所有公告默认全文展示，无下一级页面。</h4><p>280个字是怎么确定的？交互上是否对280个字的全文显示做校验？是否需要前端根据屏幕尺寸动态调节。</p>
+<p>A：暂时限制为1000字符。</p>
+<h4 id="新建公告开始时间的逻辑是否是默认当天，但是可以设置成未来的时间，是否限制不能创建开始时间是之前的，如果能，如果处理过期问题。"><a href="#新建公告开始时间的逻辑是否是默认当天，但是可以设置成未来的时间，是否限制不能创建开始时间是之前的，如果能，如果处理过期问题。" class="headerlink" title="新建公告开始时间的逻辑是否是默认当天，但是可以设置成未来的时间，是否限制不能创建开始时间是之前的，如果能，如果处理过期问题。"></a>新建公告开始时间的逻辑是否是默认当天，但是可以设置成未来的时间，是否限制不能创建开始时间是之前的，如果能，如果处理过期问题。</h4><p>A：不做限制</p>
+<h4 id="工具页面本期上线的版本是？"><a href="#工具页面本期上线的版本是？" class="headerlink" title="工具页面本期上线的版本是？"></a>工具页面本期上线的版本是？</h4><p>A：v1.1.1</p>
+<p>陈晨： 工具页面本期用的是苗苗的交互，版本暂定1.2 ，新工具页面的上线日期产品经理在确定新的节奏。</p>
+<h2 id="详细方案"><a href="#详细方案" class="headerlink" title="详细方案"></a>详细方案</h2><h3 id="后端方案"><a href="#后端方案" class="headerlink" title="后端方案"></a>后端方案</h3><h4 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h4><p>整体的模型如下图：<br><img src="/media/14797008838557.jpg" alt=""></p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><h5 id="FAQ-1"><a href="#FAQ-1" class="headerlink" title="FAQ"></a>FAQ</h5><ul>
+<li>所有的字段如果空，则没有该项。如果是数组也会没有，而不会返回空数组（臣妾做不到。。）。<h5 id="需求确认"><a href="#需求确认" class="headerlink" title="需求确认"></a>需求确认</h5>各方都已经确认<h5 id="Get-Query-API-For-Announcement-in-Message-List"><a href="#Get-Query-API-For-Announcement-in-Message-List" class="headerlink" title="Get/Query API For Announcement in Message List"></a>Get/Query API For Announcement in Message List</h5></li>
+</ul>
+<p>GET /api/nurses/calendars/v2/events?scenario=messageCenter</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">1</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"new"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"announcement"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"eventId"</span>: <span class="number">998</span>,</div><div class="line">            <span class="attr">"title"</span>: <span class="string">"本周重要新闻"</span>,</div><div class="line">            <span class="attr">"author"</span>: &#123;</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"王梦超"</span>,</div><div class="line">                <span class="attr">"nurseId"</span>: <span class="number">13414</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">"startTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">            <span class="attr">"endTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">            <span class="attr">"content"</span>: <span class="string">"习近平在讲话中指出，今年9月"</span>,</div><div class="line">            <span class="attr">"readPerson"</span>: [&#123;</div><div class="line">              <span class="attr">"name"</span>:<span class="string">"郭苗"</span>,</div><div class="line">              <span class="attr">"avatarUrl"</span> : <span class="string">"http://xxx.com/me.jpg"</span></div><div class="line">            &#125;],    </div><div class="line">            <span class="attr">"departmentNurseNum"</span>: <span class="number">100</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"announcementExpire"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"eventId"</span>: <span class="number">999</span>,</div><div class="line">            <span class="attr">"title"</span>: <span class="string">"本周重要新闻"</span>,</div><div class="line">            <span class="attr">"author"</span>: &#123;</div><div class="line">                <span class="attr">"name"</span>: <span class="string">"王梦超"</span>,</div><div class="line">                <span class="attr">"nurseId"</span>: <span class="number">13414</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">"startTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">            <span class="attr">"endTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">            <span class="attr">"content"</span>: <span class="string">"习近平在讲话中指出，今年9月"</span>,</div><div class="line">            <span class="attr">"readPerson"</span>: [&#123;</div><div class="line">                <span class="attr">"name"</span>:<span class="string">"郭苗"</span>,</div><div class="line">                <span class="attr">"avatarUrl"</span> : <span class="string">"http://xxx.com/me.jpg"</span></div><div class="line">              &#125;],</div><div class="line">            <span class="attr">"departmentNurseNum"</span>: <span class="number">100</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"today"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"eventId"</span>: <span class="number">234</span>,</div><div class="line">            <span class="attr">"type"</span>:<span class="number">1</span>,</div><div class="line">            <span class="attr">"title"</span>: <span class="string">"张秋丽 第1次随访"</span>,</div><div class="line">            <span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">            <span class="attr">"startTime"</span>: <span class="number">1475769600000</span>,</div><div class="line">            <span class="attr">"endTime"</span>: <span class="number">1475855999000</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"future"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"eventId"</span>: <span class="number">236</span>,</div><div class="line">            <span class="attr">"type"</span>:<span class="number">2</span>,</div><div class="line">            <span class="attr">"title"</span>:<span class="string">"早班"</span>,</div><div class="line">            <span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">            <span class="attr">"startTime"</span>: <span class="number">1475856000000</span>,</div><div class="line">            <span class="attr">"endTime"</span>: <span class="number">1475942399000</span>,</div><div class="line">            <span class="attr">"content"</span>:<span class="string">"&#123;\"rosterId\":32,\"rosterName\":\"早班\"&#125;"</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"expire"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"eventId"</span>: <span class="number">23</span>,</div><div class="line">            <span class="attr">"type"</span>:<span class="number">1</span>,</div><div class="line">            <span class="attr">"title"</span>: <span class="string">"橘子 第10次随访"</span>,</div><div class="line">            <span class="attr">"status"</span>: <span class="number">1</span>,</div><div class="line">            <span class="attr">"startTime"</span>: <span class="number">1475251200000</span>,</div><div class="line">            <span class="attr">"endTime"</span>: <span class="number">1475337599000</span></div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"roster"</span>: [</div><div class="line">      &#123;</div><div class="line">        <span class="attr">"rosterId"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"startTime"</span>: <span class="number">1475769600000</span>,</div><div class="line">        <span class="attr">"endTime"</span>: <span class="number">1475820000000</span>,</div><div class="line">        <span class="attr">"title"</span>: <span class="string">"早中班"</span></div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">"rosterId"</span>: <span class="number">2</span>,</div><div class="line">        <span class="attr">"startTime"</span>: <span class="number">1475820000000</span>,</div><div class="line">        <span class="attr">"endTime"</span>: <span class="number">1475838000000</span>,</div><div class="line">        <span class="attr">"title"</span>: <span class="string">"中班"</span></div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="Add-announcement"><a href="#Add-announcement" class="headerlink" title="Add announcement"></a>Add announcement</h5><p>POST /api/nurses/calendars/events/announcement/v1/</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"title"</span>: <span class="string">"本周重要新闻"</span>,</div><div class="line">  <span class="attr">"startTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">  <span class="attr">"day"</span>: <span class="number">5</span>,</div><div class="line">  <span class="attr">"content"</span>: <span class="string">"习近平在讲话中指出，今年9月"</span></div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h5 id="Get-calendar-announcement-event"><a href="#Get-calendar-announcement-event" class="headerlink" title="Get calendar announcement event"></a>Get calendar announcement event</h5><p>GET /api/nurses/calendars/events/announcement/v1/{1}</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">"code"</span>: <span class="number">1</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"eventId"</span>: <span class="number">998</span>,</div><div class="line">  <span class="attr">"title"</span>: <span class="string">"本周重要新闻"</span>,</div><div class="line">  <span class="attr">"author"</span>: &#123;</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"王梦超"</span>,</div><div class="line">    <span class="attr">"nurseId"</span>: <span class="number">13414</span>       </div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"startTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">  <span class="attr">"endTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">  <span class="attr">"content"</span>: <span class="string">"习近平在讲话中指出，今年9月"</span>,</div><div class="line">  <span class="attr">"readPerson"</span>: [&#123;</div><div class="line">    <span class="attr">"name"</span> : <span class="string">"郭苗"</span>,</div><div class="line">    <span class="attr">"avatarUrl"</span> : <span class="string">"http://xxx.com/me.jpg"</span></div><div class="line">  &#125;],</div><div class="line">  <span class="attr">"read"</span>:<span class="literal">false</span>,</div><div class="line"> <span class="attr">"departmentNurseNum"</span>: <span class="number">100</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="Update-calendar-announcement-event"><a href="#Update-calendar-announcement-event" class="headerlink" title="Update calendar announcement event"></a>Update calendar announcement event</h5><p>PATCH /api/nurses/calendars/events/announcement/v1/{id}</p>
+<p>Input:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"eventId"</span>: <span class="number">3</span>,</div><div class="line">  <span class="attr">"title"</span>:<span class="string">"Changed Title"</span>,</div><div class="line">  <span class="attr">"content"</span>:<span class="string">"近平在讲话中指举行的二十国集团"</span>,</div><div class="line">  <span class="attr">"startTime"</span>: <span class="number">1479712913000</span>,</div><div class="line">  <span class="attr">"day"</span>: <span class="number">5</span>,</div><div class="line">  <span class="attr">"read"</span>: <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Output:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">1</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="delete-calendar-announcement-event"><a href="#delete-calendar-announcement-event" class="headerlink" title="delete calendar announcement event"></a>delete calendar announcement event</h5><p>DELETE /api/nurses/calendars/events/announcement/1/{id}</p>
+<p>OUTPUT:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">"result": &#123;</div><div class="line">    "success": true,</div><div class="line">    "code": 1</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h3><h4 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h4><ol>
+<li>原接口废弃，需要停机发布（理论上不影响之前的接口）。</li>
+<li>发布新应用，存放Momentum相关</li>
+</ol>
+<h2 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h2><h3 id="风险点"><a href="#风险点" class="headerlink" title="风险点"></a>风险点</h3><ul>
+<li>实习生了解程度</li>
+</ul>
+<h3 id="排期"><a href="#排期" class="headerlink" title="排期"></a>排期</h3><h4 id="总体时间"><a href="#总体时间" class="headerlink" title="总体时间"></a>总体时间</h4><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>时间点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>详细设计制定及Review</td>
+<td>2016-11-23</td>
+</tr>
+<tr>
+<td>前后端开发</td>
+<td>2016-11-26</td>
+</tr>
+<tr>
+<td>测试联调</td>
+<td>2016-11-28</td>
+</tr>
+<tr>
+<td>上线</td>
+<td>2016-11-29</td>
+</tr>
+</tbody>
+</table>
+<p>受优护助手1.1发布影响等其他综合因素，现调整时间安排如下：</p>
+<p><strong>调整后：</strong></p>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>时间点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>详细设计制定及Review</td>
+<td>2016-11-23</td>
+</tr>
+<tr>
+<td>前后端开发</td>
+<td>2016-11-29</td>
+</tr>
+<tr>
+<td>测试联调</td>
+<td>2016-11-30</td>
+</tr>
+<tr>
+<td>上线</td>
+<td>2016-12-1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>备注：</strong></p>
+<ul>
+<li>后端29号内部联调。</li>
+</ul>
+<h4 id="后端详细内容"><a href="#后端详细内容" class="headerlink" title="后端详细内容"></a>后端详细内容</h4><p><strong>注意：以下详细内容包含功能设计，功能设计Review，开发，自测。</strong><br><strong>注意：请务必重视项目设计和Review，交叉检查。</strong></p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>内容</th>
+<th>人日</th>
+<th>人员</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Momentum应用搭建</td>
+<td>1. 框架实现</td>
+<td>1人日</td>
+<td>陈晨</td>
+</tr>
+<tr>
+<td>Galaxy 接口</td>
+<td>1. 增删</td>
+<td>4人日</td>
+<td>杨淑婷</td>
+</tr>
+<tr>
+<td>Galaxy 接口</td>
+<td>1. 改查</td>
+<td>4人日</td>
+<td>袁鑫</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>1. 增删</td>
+<td>4人日</td>
+<td>王梦超</td>
+</tr>
+<tr>
+<td>Momentum</td>
+<td>1. 改查</td>
+<td>4人日</td>
+<td>程冲</td>
+</tr>
+<tr>
+<td>Sophon</td>
+<td>1. 增删</td>
+<td>2人日</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>Sophon</td>
+<td>1. 改查</td>
+<td>2人日</td>
+<td>林慧芝</td>
+</tr>
+</tbody>
+</table>
+<h4 id="前端排期"><a href="#前端排期" class="headerlink" title="前端排期"></a>前端排期</h4><p>None</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

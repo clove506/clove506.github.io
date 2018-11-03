@@ -1,0 +1,390 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【优护助手】启动页项目PRD及其开发日志 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要目前优护助手的启动页比较单一，为了使之多样化、可配置、预发布，此项目应运而生。为提供功能
+
+配置静态页、引导页、广告页的启动页面
+设定启动页面的样式（静态页、引导页、广告页三选一）
+
+其中，App 启动页的具体逻辑流程如下：">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【优护助手】启动页项目PRD及其开发日志"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【优护助手】启动页项目PRD及其开发日志</h2>
+					
+					<div>
+						<span class="post-time">2017-02-21 17:20:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>目前优护助手的启动页比较单一，为了使之多样化、可配置、预发布，此项目应运而生。为提供功能</p>
+<ul>
+<li>配置静态页、引导页、广告页的启动页面</li>
+<li>设定启动页面的样式（静态页、引导页、广告页三选一）</li>
+</ul>
+<p>其中，App 启动页的具体逻辑流程如下：</p>
+<a id="more"></a>
+<p><img src="/media/AppLauncherDiagram.svg" alt=""></p>
+<h3 id="文档更新"><a href="#文档更新" class="headerlink" title="文档更新"></a>文档更新</h3><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>内容</th>
+<th>维护人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017-2-21</td>
+<td>创建文档</td>
+<td>田学文</td>
+</tr>
+<tr>
+<td>2017-2-23</td>
+<td>更新文档</td>
+<td>袁鑫</td>
+</tr>
+<tr>
+<td>2017-3-1</td>
+<td>更新配置中心部分</td>
+<td>田学文</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设计使用场景"><a href="#设计使用场景" class="headerlink" title="设计使用场景"></a>设计使用场景</h3><p><strong>App 客户端配置</strong></p>
+<ol>
+<li>向服务器请求 App 配置中心</li>
+<li>比较各项配置版本和本地配置版本是否一致</li>
+<li>对于配置版本不一致的部分，请求该配置对应接口，重新获取数据，重置版本</li>
+</ol>
+<p><strong>启动页面配置</strong></p>
+<ol>
+<li>确定启动页面样式, 如：<ul>
+<li>静态 logo &amp; slogan(DEFAULT)<br><img src="/media/defalutStartPage.png" alt=""></li>
+<li>多张图片引导<br><img src="/media/activeStartPage.png" alt=""></li>
+<li>广告页面<br><img src="/media/adStartPage.png" alt=""></li>
+</ul>
+</li>
+<li>选定启动页面</li>
+</ol>
+<p><strong>App 启动</strong></p>
+<ol>
+<li>App 第一次启动后，加载本地启动页配置</li>
+<li>请求服务器获取启动页配置</li>
+<li>时间满足配置「生效时间」 后，修改下一次启动配置</li>
+<li>App 第二次启动加载当前配置</li>
+</ol>
+<p><strong>创建流程</strong><br><img src="/media/launcher.png" alt=""></p>
+<h3 id="交互设计"><a href="#交互设计" class="headerlink" title="交互设计"></a>交互设计</h3><p><img src="/media/单页.jpg" alt=""><br><img src="/media/多图.jpg" alt=""><br><img src="/media/链接.jpg" alt=""><br><img src="/media/启动页列表.jpg" alt=""></p>
+<h3 id="设计模型"><a href="#设计模型" class="headerlink" title="设计模型"></a>设计模型</h3><h4 id="类模型"><a href="#类模型" class="headerlink" title="类模型"></a>类模型</h4><p><strong>Launch</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">com.youhujia.galaxy.launcher</div><div class="line">    |- LauncherController</div><div class="line">        |=&gt; public getStartPageInfo()</div><div class="line">        |=&gt; public saveStartPage()</div><div class="line">        |=&gt; public updateStartPageDefault()</div><div class="line">        |=&gt; public updateStartPageActive()</div><div class="line">    |- LauncherBO</div><div class="line">    |- StyleEnum</div><div class="line">        |=&gt; SINGLE_IMG(1)</div><div class="line">        |=&gt; AD(2)</div><div class="line">        |=&gt; MULT_IMG(3)</div></pre></td></tr></table></figure>
+<h4 id="配置中心-数据库设计"><a href="#配置中心-数据库设计" class="headerlink" title="配置中心 数据库设计"></a>配置中心 数据库设计</h4><p>不需要数据库，直接存储在 CMS 中的 temlate 中，将上述 JSON 直接存储在 template 中的 <code>content</code> 字段中。如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"appLauncherVersion"</span>: <span class="string">"1487831349"</span>,</div><div class="line">      <span class="attr">"appVersionManagerVersion"</span>: <span class="string">"1487831349"</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>appLauncherVersion</code> 是 App 启动页配置的版本</li>
+<li><code>appVersionManagerVersion</code> 是 App 版本配置接口的版本</li>
+</ul>
+<p>当客户端请求配置中心拿到所有的配置项版本后， 比对每一项的版本和本地配置的版本，不一致时，去相应的接口请求最新的配置版本。</p>
+<p>当具体的配置，比如<strong>App Launcher</strong>配置改动后，主动去「配置中心」修改对应版本。</p>
+<h4 id="App-Launcher-数据库设计"><a href="#App-Launcher-数据库设计" class="headerlink" title="App Launcher 数据库设计"></a>App Launcher 数据库设计</h4><p>不需要数据库，直接存储在 CMS 中的 temlate 中，将上述 JSON 直接存储在 template 中的 <code>content</code> 字段中。如下：</p>
+<p><strong>version: 为更新时间戳，做版本标识，用于客服端版本识别</strong><br><strong>style: 为当前设定的启动页样式（见类模型的StyleEnum）</strong><br><strong>launcherId: 为标识每一个launcher，比如设置默认启动项，在default中存的就是launcherId</strong><br><strong>card: 单个启动页模板，可以组成多种启动页样式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">enum Style &#123;</div><div class="line">    SINGEL = 0;</div><div class="line">    MULTI = 1;</div><div class="line">    AD = 2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"id"</span>: <span class="number">24</span>,</div><div class="line">  <span class="attr">"type"</span>: <span class="number">10</span>,</div><div class="line">  <span class="attr">"content"</span>: &#123;</div><div class="line">      <span class="attr">"launcher"</span>:[</div><div class="line">          &#123;</div><div class="line">            <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">            <span class="attr">"card"</span>: [</div><div class="line">              &#123;</div><div class="line">                <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">                <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">                <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">              &#125;</div><div class="line">            ],</div><div class="line">            <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">            <span class="attr">"active"</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">            <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">          &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"defaultLauncherId"</span>:<span class="number">1</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对配置的修改则通过修改 CMS 模板来完成。</p>
+<h4 id="客户端接口数据展示"><a href="#客户端接口数据展示" class="headerlink" title="客户端接口数据展示"></a>客户端接口数据展示</h4><p><strong>获取launcher列表</strong><br><strong>GET /api/galaxy/v1/version</strong></p>
+<ul>
+<li>response<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"appLauncherVersion"</span>: <span class="number">1487831349</span>,</div><div class="line">      <span class="attr">"appVersionManagerVersion"</span>: <span class="number">1487831349</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="前端接口数据展示"><a href="#前端接口数据展示" class="headerlink" title="前端接口数据展示"></a>前端接口数据展示</h4><p><strong>获取launcher列表</strong><br><strong>GET /api/galaxy/v1/launcher/zhushou/info</strong></p>
+<ul>
+<li>response<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">        <span class="attr">"launcher"</span>:[</div><div class="line">          &#123;</div><div class="line">            <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">            <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">            <span class="attr">"card"</span>: [</div><div class="line">              &#123;</div><div class="line">                <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">                <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">                <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">              &#125;</div><div class="line">            ],</div><div class="line">            <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">            <span class="attr">"active"</span>: <span class="literal">true</span>,</div><div class="line">            <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">            <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">          &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"defaultLauncherId"</span>:<span class="number">1</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>添加新launcher</strong><br><strong>POST /api/galaxy/v1/launcher/zhushou</strong></p>
+<ul>
+<li><p>request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">    <span class="attr">"card"</span>: [</div><div class="line">      &#123;</div><div class="line">        <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">        <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">        <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">      &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">    <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"launcher"</span>:&#123;</div><div class="line">        <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">        <span class="attr">"card"</span>: [</div><div class="line">          &#123;</div><div class="line">            <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">            <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">            <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">          &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"active"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">        <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>获取launcher</strong><br><strong>GET /api/galaxy/v1/launcher/zhushou/{id}</strong></p>
+<ul>
+<li>response<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"launcher"</span>:&#123;</div><div class="line">        <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">        <span class="attr">"card"</span>: [</div><div class="line">          &#123;</div><div class="line">            <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">            <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">            <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">          &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"active"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">        <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>修改launcher</strong><br><strong>PUT /api/galaxy/v1/launcher/zhushou/{id}</strong></p>
+<ul>
+<li><p>request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">    <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">    <span class="attr">"card"</span>: [</div><div class="line">      &#123;</div><div class="line">        <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">        <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">        <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">      &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">    <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"launcher"</span>:&#123;</div><div class="line">        <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">        <span class="attr">"card"</span>: [</div><div class="line">          &#123;</div><div class="line">            <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">            <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">            <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">          &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"active"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">        <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>设置默认launcher</strong><br><strong>PATCH /api/galaxy/v1/launcher/zhushou/default/{id}</strong></p>
+<ul>
+<li><p>request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"defaultLauncherId"</span>:<span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"launcher"</span>:[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">          <span class="attr">"card"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">              <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">              <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">            &#125;</div><div class="line">          ],</div><div class="line">          <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"active"</span>: <span class="literal">true</span>,</div><div class="line">          <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">          <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      <span class="attr">"defaultLauncherId"</span>:<span class="number">1</span></div><div class="line">  &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>启动launcher</strong><br><strong>PATCH /api/galaxy/v1/launcher/zhushou/{id}</strong></p>
+<ul>
+<li><p>request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"active"</span>:<span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"launcher"</span>:&#123;</div><div class="line">          <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">          <span class="attr">"card"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">              <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">              <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">            &#125;</div><div class="line">          ],</div><div class="line">          <span class="attr">"active"</span>: <span class="literal">false</span>,</div><div class="line">          <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">          <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"result"</span>: &#123;</div><div class="line">        <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>删除launcher</strong><br><strong>DELETE /api/galaxy/v1/launcher/zhushou/{id}</strong></p>
+<ul>
+<li>response<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>: &#123;</div><div class="line">      <span class="attr">"launcher"</span>:[</div><div class="line">        &#123;</div><div class="line">          <span class="attr">"launcherId"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"name"</span>: <span class="string">"春节"</span>,</div><div class="line">          <span class="attr">"card"</span>: [</div><div class="line">            &#123;</div><div class="line">              <span class="attr">"image"</span>: <span class="string">"http://youhujia.com/image.jpeg"</span>,</div><div class="line">              <span class="attr">"iosLink"</span>: <span class="string">"schema://app/path/to/page"</span>,</div><div class="line">              <span class="attr">"androidLink"</span>: <span class="string">"schema://app/path/to/page"</span></div><div class="line">            &#125;</div><div class="line">          ],</div><div class="line">          <span class="attr">"style"</span>: <span class="number">1</span>,</div><div class="line">          <span class="attr">"active"</span>: <span class="literal">true</span>,</div><div class="line">          <span class="attr">"startTime"</span>:<span class="number">1487831349000</span>,</div><div class="line">          <span class="attr">"endTime"</span>:<span class="number">1487831388000</span></div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      <span class="attr">"defaultLauncherId"</span>:<span class="number">1</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">      <span class="attr">"success"</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">"code"</span>: <span class="number">0</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><h4 id="APP首次启动时的新手引导页，是否会和其他引导页冲突"><a href="#APP首次启动时的新手引导页，是否会和其他引导页冲突" class="headerlink" title="APP首次启动时的新手引导页，是否会和其他引导页冲突"></a>APP首次启动时的新手引导页，是否会和其他引导页冲突</h4><p>答：本次开发的启动页配置，是在APP启动后获取启动页信息，为下次启动做配置。所以首次启动时，还未加载新启动页信息，只会用新手引导页。</p>
+<h3 id="开发排期"><a href="#开发排期" class="headerlink" title="开发排期"></a>开发排期</h3><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>耗时</th>
+<th>开发</th>
+<th>进度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>权限配置 开发</td>
+<td>0.5</td>
+<td>袁鑫</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>客户端配置接口 开发</td>
+<td>0.5</td>
+<td>袁鑫</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>原有的Version接口重构</td>
+<td>0.5</td>
+<td>袁鑫</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>launcher启动页 开发</td>
+<td>1</td>
+<td>袁鑫</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>前端开发</td>
+<td>1</td>
+<td>李少华</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>前端测试</td>
+<td>1</td>
+<td>李少华</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>后端自测</td>
+<td>1</td>
+<td>袁鑫</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>客户端&amp;后端联调</td>
+<td>1</td>
+<td>袁鑫&amp;李少华</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>testing</td>
+<td>0.5</td>
+<td>郑旭红</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Staging &amp; Production</td>
+<td>0.5</td>
+<td>郑旭红</td>
+<td>0%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="开发日志"><a href="#开发日志" class="headerlink" title="开发日志"></a>开发日志</h3><p>TBD</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

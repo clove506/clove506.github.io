@@ -1,0 +1,289 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>上门护理支撑子系统前期需求整理 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要服务商品发布流程 + 上门护理支撑子系统拆分">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="上门护理支撑子系统前期需求整理"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>上门护理支撑子系统前期需求整理</h2>
+					
+					<div>
+						<span class="post-time">2017-02-10 23:59:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>服务商品发布流程 + 上门护理支撑子系统拆分</p>
+<a id="more"></a>
+<h2 id="Wiki维护人"><a href="#Wiki维护人" class="headerlink" title="Wiki维护人"></a>Wiki维护人</h2><p>黄丹<br>张正宇<br>张跃超<br>陈晨</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上门护理整个系统在合肥落地的是护士上门护理，对应的服务端是医院护士。</p>
+<p>未来扩展来看，整体模型可以支撑的场景可以非常广泛：</p>
+<ul>
+<li>护士上门护理（尿管，造口）</li>
+<li>护理员上门护理（洗头）</li>
+<li>医院陪护（院内护理）</li>
+<li>评估师上门评估 </li>
+<li>护理员上门</li>
+<li>销售康复护理产品。（血压计 血糖仪 只能硬件）</li>
+</ul>
+<p>总体而言，只要业务涉及到订单服务都可以通过该系统做支持。</p>
+<p>就整个数据模型抽象来看：</p>
+<p>主要涉及 “商品” + “订单” </p>
+<p>本篇主要讲解“商品”模型和发布管理子系统的设计重点。</p>
+<h3 id="服务单元模型（“商品”）"><a href="#服务单元模型（“商品”）" class="headerlink" title="服务单元模型（“商品”）"></a>服务单元模型（“商品”）</h3><p>关系：类目 -&gt;  Item(检索展现的实体) -&gt; ServiceItem(最终购买实体)</p>
+<p>举例：尿管服务</p>
+<p>xx一级类目 -&gt; xx二级类目 -&gt; xx三级类目 -&gt; 尿管服务 （Item） -&gt; 单次服务（ServiceItem1） &amp;  三月护理包 （ServiceItem2）</p>
+<p>从概念上我们做如下约定：</p>
+<p>服务商品：Item</p>
+<p>服务单元：ServiceItem</p>
+<p>注意：这两个概念在各子系统中需要统一（UI &amp; 代码 &amp; 对外说明）。</p>
+<h4 id="Category-要素"><a href="#Category-要素" class="headerlink" title="Category 要素"></a>Category 要素</h4><p>目前是五级类目，优护家制定，确定后原则上只增不改。</p>
+<p>目前合肥上线的所有服务都已经确认类目，后续发布的服务也是要按照这个类目来发布。</p>
+<h4 id="Item-要素"><a href="#Item-要素" class="headerlink" title="Item 要素"></a>Item 要素</h4><p>Title：标题，单品的标题。<br>Desc：商品简述。<br>Picture：商品主图，可以多张。<br>Detail：商品详情介绍，目前是HTML文本，需要支持多场景。<br>ItemProp：  商品属性 如颜色，是否要求自带尿管</p>
+<p>注意：Item并无价格，其对外提供的价格来源于ServiceItem。</p>
+<h4 id="ServiceItem-要素"><a href="#ServiceItem-要素" class="headerlink" title="ServiceItem 要素"></a>ServiceItem 要素</h4><p>Price：价格<br>Picture：图片</p>
+<h3 id="服务流程标准模型"><a href="#服务流程标准模型" class="headerlink" title="服务流程标准模型"></a>服务流程标准模型</h3><p>如果提供内容不止简单的商品，而是服务，则不同的商品有不同的服务流程。</p>
+<p>服务流程的设计是绑定到服务商品，而非服务单元。</p>
+<p>整个服务流程的标准模型目前可以提供的内容包括：</p>
+<p>宣教：相关内容介绍。</p>
+<p>自测：下单用户的主动自评。</p>
+<p>评估：服务人员的评估。</p>
+<p>服务步骤设置：设计服务步骤周期。</p>
+<h3 id="服务商品状态"><a href="#服务商品状态" class="headerlink" title="服务商品状态"></a>服务商品状态</h3><p>系统对外提供的检索单元是服务商品，不会提供服务单元的检索，为此围绕展现的各类功能需要通过服务商品承载。</p>
+<p>具体的落实到服务商品，各功能通过服务商品的状态展开。</p>
+<p>服务商品的状态有：</p>
+<p>草稿：商品的编辑状态。<br>编辑完成状态：编辑完成主要是为了标识服务商品在初期的编辑状态，也方便了状态机的状态跳转。<br>审核中：编辑完成状态的服务商品可以提交审核，提交后进入该状态，运营人员进行审核。<br>审核失败：如果商品信息出现问题，则进入审核失败状态，待服务机构做更新。<br>待上线：审核成功后进入待上线状态，该状态下，服务机构可以随时上线，或者修改。<br>上线：上线状态的服务商品会被应用系统对外投放。<br>异常：xx TODO</p>
+<h4 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h4><p><img src="/media/item_state.jpeg" alt=""></p>
+<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2><p>系统组成如下：</p>
+<ul>
+<li>服务商商品管理子系统。</li>
+<li>服务商品审核子系统。</li>
+<li>服务流程标准CMS子系统。</li>
+</ul>
+<p>服务商审核子系统和服务流程标准CMS子系统逻辑上属于优护家内部系统，对应统一后台运营系统。</p>
+<h3 id="服务商管理子系统"><a href="#服务商管理子系统" class="headerlink" title="服务商管理子系统"></a>服务商管理子系统</h3><h4 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h4><ul>
+<li>机构种类支持多种（支持多种业务场景）</li>
+</ul>
+<h4 id="详细设计-1"><a href="#详细设计-1" class="headerlink" title="详细设计"></a>详细设计</h4><h4 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h4><h5 id="通用信息"><a href="#通用信息" class="headerlink" title="通用信息"></a>通用信息</h5><p>页头： 登录人信息  消息入口（站内信） 退出</p>
+<h5 id="列表页面"><a href="#列表页面" class="headerlink" title="列表页面"></a>列表页面</h5><p>包含信息： 商品ID 商品名称  提供服务人员个数（点击可查看详情） 目前状态 创建人 创建时间 最后修改时间 可选操作（下拉列表 上/下架 服务配置 查看详情 编辑 删除）</p>
+<h5 id="详情页面（只读）"><a href="#详情页面（只读）" class="headerlink" title="详情页面（只读）"></a>详情页面（只读）</h5><p>定位：查看 只读</p>
+<ul>
+<li>类目信息。（多级，需要按照层级显示）</li>
+<li>基本信息。参考编辑页面。</li>
+<li>审核信息。</li>
+<li>商品详情页链接。单独跳转。 </li>
+<li>服务流程信息。单独跳转。</li>
+<li>服务单元（ServiceItem）信息。原价，折扣价 描述(optional) 图片（optional）</li>
+</ul>
+<h5 id="服务详情页面（只读）"><a href="#服务详情页面（只读）" class="headerlink" title="服务详情页面（只读）"></a>服务详情页面（只读）</h5><p>HTML渲染</p>
+<h5 id="服务设置页面"><a href="#服务设置页面" class="headerlink" title="服务设置页面"></a>服务设置页面</h5><p>服务时间 一天24小时 选择时间段（可以多段）<br>服务人员  当前科室，默认选中全部 （逻辑后续整理 @张正宇）</p>
+<h5 id="编辑页面"><a href="#编辑页面" class="headerlink" title="编辑页面"></a>编辑页面</h5><p>编辑页面多个步骤，建议多个“页面”（向导式）承载。</p>
+<p>下面每个步骤需要单独调用接口保存，服务单元设置完成才会进入编辑完成状态。</p>
+<ul>
+<li>类目设置。</li>
+<li>基本信息设置。 商品名称 商品主图 （上传多张9张） 商品简介 </li>
+<li>商品详情页设置。HTML CMS支撑 </li>
+<li>服务流程设置。</li>
+<li>服务单元（ServiceItem）设置。原价，折扣价 描述(optional) 图片（optional）</li>
+</ul>
+<h6 id="服务流程设置页面（隶属于编辑页面）"><a href="#服务流程设置页面（隶属于编辑页面）" class="headerlink" title="服务流程设置页面（隶属于编辑页面）"></a>服务流程设置页面（隶属于编辑页面）</h6><p>注意： 后续可以开放给服务商自己设置。本期不开放。</p>
+<p>所有的宣教、自测、评估 、服务步骤设置为服务流程标准。不允许服务商编辑（新建，修改，删除）</p>
+<p>服务流程标准名称（@张跃超 斟酌名称）</p>
+<p>宣教：相关内容介绍。</p>
+<p>自测：下单用户的主动自评。</p>
+<p>评估：服务人员的评估。</p>
+<p>服务步骤设置：设计服务步骤周期。</p>
+<p>需要提示：可以联系客服设置专属。电话xxx。</p>
+<h6 id="服务流程标准详情页面"><a href="#服务流程标准详情页面" class="headerlink" title="服务流程标准详情页面"></a>服务流程标准详情页面</h6><p>展示具体的宣教、自测、评估和服务流程步骤。</p>
+<h4 id="服务商品审核子系统"><a href="#服务商品审核子系统" class="headerlink" title="服务商品审核子系统"></a>服务商品审核子系统</h4><h5 id="设计原则-1"><a href="#设计原则-1" class="headerlink" title="设计原则"></a>设计原则</h5><ul>
+<li>审核支持多种（多场景）</li>
+</ul>
+<p>TODO 产品交互 </p>
+<h3 id="服务流程标准CMS子系统"><a href="#服务流程标准CMS子系统" class="headerlink" title="服务流程标准CMS子系统"></a>服务流程标准CMS子系统</h3><h4 id="设计原则-2"><a href="#设计原则-2" class="headerlink" title="设计原则"></a>设计原则</h4><ul>
+<li>内容多级支持。优护家（通用）-&gt; 机构-&gt; 科室</li>
+</ul>
+<p>TODO 产品交互</p>
+<h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><h4 id="审核内容"><a href="#审核内容" class="headerlink" title="审核内容"></a>审核内容</h4><ol>
+<li>服务商品图片是否符合要求。图片清晰度，大小等。</li>
+<li>商品描述，服务标准模板设置等。</li>
+</ol>
+<h3 id="会议纪要"><a href="#会议纪要" class="headerlink" title="会议纪要"></a>会议纪要</h3><h4 id="0211会议纪要"><a href="#0211会议纪要" class="headerlink" title="0211会议纪要"></a>0211会议纪要</h4><ul>
+<li>关于属性规范（名称），通过设置审核标准来约束，这里需要制定属性规范。 @张跃超</li>
+<li>草稿状态需要分步骤，避免数据丢失。 @陈晨</li>
+<li>待上线状态允许服务商编辑，编辑后进入草稿状态。 @陈晨</li>
+<li>服务商品&amp;服务单元，名字斟酌。 @张跃超</li>
+<li>Sketch服务商标红，思考处理逻辑。 @张跃超</li>
+</ul>
+<p><strong>TODO：</strong></p>
+<ul>
+<li>张智慧来整理初步交互。（张跃超辅助） 郭苗周三跟进。</li>
+<li>@ALL 整理产品逻辑（接口 产品限制（例如：不许发布超过100个商品））。</li>
+<li>审核系统交互&amp;产品逻辑 @张跃超 @陈晨辅助接口</li>
+</ul>
+<p>待思考交流：如何支持多场景，例如在登录的时候选择场景。</p>
+<p><strong>下周四过交互@All</strong></p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

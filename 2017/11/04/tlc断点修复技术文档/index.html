@@ -1,0 +1,321 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>泰乐城六月项目 产品断点修复技术文档 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="背景关于影子公众号，见文档：https://wayknew.com/articles/222
+之前已经实现了影子公众号的部分逻辑，主要是可以获取用户在影子公众号下的 openId，但是未实现后续通过该影子公众号给用户下发微信模板消息。现在需要完善该逻辑。
+prd 见：「泰乐城六月项目」产品断点修复P">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="泰乐城六月项目 产品断点修复技术文档"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>泰乐城六月项目 产品断点修复技术文档</h2>
+					
+					<div>
+						<span class="post-time">2017-11-04 12:07:49</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>关于影子公众号，见文档：<a href="https://wayknew.com/articles/222" target="_blank" rel="external">https://wayknew.com/articles/222</a></p>
+<p>之前已经实现了影子公众号的部分逻辑，主要是可以获取用户在影子公众号下的 openId，但是未实现后续通过该影子公众号给用户下发微信模板消息。<br>现在需要完善该逻辑。</p>
+<p>prd 见：<a href="https://wayknew.com/articles/264" target="_blank" rel="external">「泰乐城六月项目」产品断点修复PRD</a></p>
+<p>需要更新的逻辑：微信扫码和模板消息相关，主要涉及三个项目：</p>
+<ul>
+<li>Era</li>
+<li>Difoil</li>
+<li>Singer</li>
+</ul>
+<h1 id="Era"><a href="#Era" class="headerlink" title="Era"></a>Era</h1><p>主要涉及影子公众号功能的恢复。</p>
+<p>之前影子公众号的逻辑放在 Era 中，现在 Era 项目已经废弃，需要迁移相关代码到 Yolar。<br>影子公众号设计文档：<a href="https://wayknew.com/articles/222" target="_blank" rel="external">https://wayknew.com/articles/222</a></p>
+<h1 id="Difoil"><a href="#Difoil" class="headerlink" title="Difoil"></a>Difoil</h1><p>主要涉及微信扫码后的 callback 处理。</p>
+<p>对启用影子公众号的科室，二维码需要配置特殊参数，以方便后台区别对待:</p>
+<ul>
+<li>现有普通科室科室的二维码参数形如：<code>departmentId_&lt;211&gt;</code>，后缀为科室 id。</li>
+<li>对于启用影子公众号的科室，需使用如下参数：<code>shadow_&lt;311&gt;</code>， 后缀为影子公众号id。</li>
+</ul>
+<p>对于微信扫码的 callback，检查到此类参数后，返回的欢迎语中，携带链接为影子公众号专用链接。</p>
+<p>点击之后，走之前影子公众号的流程（<a href="https://wayknew.com/articles/222），以获取该用户在影子公众号的" target="_blank" rel="external">https://wayknew.com/articles/222），以获取该用户在影子公众号的</a> openId。</p>
+<p>配合 C 端逻辑，需要在该流程中增加两个操作：</p>
+<ul>
+<li>给用户关联上科室</li>
+<li>给用户关联上相应的疾病</li>
+</ul>
+<p>以保证用户进入 C 端后，已经被关联上了相关科室。</p>
+<h1 id="Singer"><a href="#Singer" class="headerlink" title="Singer"></a>Singer</h1><p>涉及微信模板消息的下发。</p>
+<p>现有的微信模板消息，都是通过优护家公众号下发的，现在则优先通过影子公众号下发模板消息，需要 Singer 提供新接口。</p>
+<p>涉及的修改 ：</p>
+<ul>
+<li>增加影子公众号和科室的关联</li>
+<li>统一微信模板的 id</li>
+<li>Singer 添加新的模板消息发送接口</li>
+<li>调用方使用新的接口发送模板消息</li>
+</ul>
+<h2 id="增加影子公众号和科室的关联"><a href="#增加影子公众号和科室的关联" class="headerlink" title="增加影子公众号和科室的关联"></a>增加影子公众号和科室的关联</h2><p>现在影子公众号（shadow_wx_account）没有关联科室信息，科室产生消息后，无法确认对应的公众号是哪一个，该对应信息需要加上。</p>
+<h2 id="模板-id-统一管理"><a href="#模板-id-统一管理" class="headerlink" title="模板 id 统一管理"></a>模板 id 统一管理</h2><p>之前发送模板消息时，需要业务方指明 templateID，现在对应不同的微信账号，templateId 各不相同，交给业务方显得太过繁琐，所以在 singer 中统一模板消息，业务方只需指定模板的 enum 即可。</p>
+<p><strong>模板消息 Enum在 Halo 中定义</strong>：</p>
+<ul>
+<li>FollowUpNotify</li>
+<li>NewIMMsg</li>
+<li>NewOrderInfo</li>
+</ul>
+<p><strong>数据库添加模板 id 信息</strong>：</p>
+<p>各账号下模板消息配置信息统一在数据库中管理，给 <code>shadow_wx_account</code> 表添加字段：<code>wx_template_info</code>。</p>
+<p>示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"FollowUpNotify"</span> : <span class="string">"UFHEoI6BVlNizJ2bvNA49YRHtLs0GG4dM1ROVg6DFkA"</span>,</div><div class="line">  <span class="attr">"NewIMMsg"</span> : <span class="string">"foo"</span>,</div><div class="line">  <span class="attr">"NewOrderInfo"</span> : <span class="string">"bar"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Singer-添加新的模板消息发送接口"><a href="#Singer-添加新的模板消息发送接口" class="headerlink" title="Singer 添加新的模板消息发送接口"></a>Singer 添加新的模板消息发送接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ReqeustMapping</span>(<span class="string">"/wechat-template-msg/shadow-account-first"</span>)</div><div class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span> <span class="function">SimpleResponse <span class="title">sendWechatTmplMsgShodowAccountFirst</span><span class="params">(@RequestBody WechatTmplMsgOpt msgOpt)</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">WechatTmplMsgOpt</span></span>&#123;</div><div class="line">  <span class="keyword">optional</span> int templateEnumId = <span class="number">1</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">optional</span> int userId = <span class="number">2</span>;</div><div class="line">  <span class="keyword">optional</span> int dptId = <span class="number">3</span>;</div><div class="line">  </div><div class="line">  <span class="keyword">optional</span> <span class="built_in">string</span> payload = <span class="number">4</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>发送模板消息的逻辑如下：</p>
+<p><a href="https://www.processon.com/view/link/59425f9fe4b04d4c799d1c7c" target="_blank" rel="external">LINK</a></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fgniblha12j30fx0mi3zm.jpg" alt=""></p>
+<h2 id="调用方使用新的接口发送模板消息"><a href="#调用方使用新的接口发送模板消息" class="headerlink" title="调用方使用新的接口发送模板消息"></a>调用方使用新的接口发送模板消息</h2><p>已知的调用方：</p>
+<ul>
+<li>difoil</li>
+<li>dimension</li>
+</ul>
+<h2 id="具体排期"><a href="#具体排期" class="headerlink" title="具体排期"></a>具体排期</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>耗时/人日</th>
+<th>开始日期</th>
+<th>实现者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C端优护家公众号授权页面和后端逻辑开发、自测</td>
+<td>2</td>
+<td>0618</td>
+<td>擎祖&amp;CC</td>
+</tr>
+<tr>
+<td>di-foil扫码逻辑开发、自测</td>
+<td>0.5</td>
+<td>0620</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>yolar影子公众号和科室管理底层逻辑开发、自测</td>
+<td>0.5</td>
+<td>0620</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>singer模板信息推送开发、自测</td>
+<td>1</td>
+<td>0621</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>C端随访、新消息Push接口改造、自测</td>
+<td>1</td>
+<td>0622</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>C端订单Push接口改造、自测</td>
+<td>1</td>
+<td>0623</td>
+<td>卢江</td>
+</tr>
+<tr>
+<td>staging环境测试</td>
+<td>1</td>
+<td>0624</td>
+<td>旭红&amp;奥伟</td>
+</tr>
+<tr>
+<td>上线</td>
+<td>1</td>
+<td>0626</td>
+<td>赵蔺Or明敏</td>
+</tr>
+</tbody>
+</table>
+<h2 id="进度日志"><a href="#进度日志" class="headerlink" title="进度日志"></a>进度日志</h2><h3 id="6月20日"><a href="#6月20日" class="headerlink" title="6月20日"></a>6月20日</h3><ul>
+<li>kick off</li>
+<li>yolar底层逻辑开发（泰乐城公众号和科室进行关联）</li>
+<li>泰乐城公众号授权页面和后端逻辑开发</li>
+</ul>
+<h3 id="6月21日"><a href="#6月21日" class="headerlink" title="6月21日"></a>6月21日</h3><ul>
+<li>影子公众号和科室关联</li>
+<li>通过科室Id查找影子公众号接口</li>
+<li>用户和影子公众号下科室关联并为用户添加关注疾病</li>
+<li>Singer统一微信模板消息接口</li>
+</ul>
+<h3 id="6月22日"><a href="#6月22日" class="headerlink" title="6月22日"></a>6月22日</h3><ul>
+<li>生成影子公众号下科室二维码接口</li>
+<li>改造di-foil扫码接口，加入影子公众号扫码逻辑</li>
+<li>测试影子公众号科室扫码逻辑及正确跳转C端科室首页</li>
+</ul>
+<h3 id="6月23日"><a href="#6月23日" class="headerlink" title="6月23日"></a>6月23日</h3><ul>
+<li>Singer统一微信模板消息接口测试（Push Push Push~）</li>
+<li>修改di-foil和dimension微信模板消息逻辑，调动Singer新增统一微信模板消息接口及测试</li>
+</ul>
+<h3 id="6月24日"><a href="#6月24日" class="headerlink" title="6月24日"></a>6月24日</h3><ul>
+<li>staging环境验收（由于网络、bug等各方面原因，预计延期一天，今日上dev）</li>
+</ul>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

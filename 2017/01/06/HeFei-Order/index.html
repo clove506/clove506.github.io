@@ -1,0 +1,212 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【合肥项目】OWl-Order | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要 合肥项目-订单系统相关">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【合肥项目】OWl-Order"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【合肥项目】OWl-Order</h2>
+					
+					<div>
+						<span class="post-time">2017-01-06 12:00:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p> 合肥项目-订单系统相关</p>
+<a id="more"></a>
+<h2 id="WIKI维护人"><a href="#WIKI维护人" class="headerlink" title="WIKI维护人"></a>WIKI维护人</h2><p>田学文<br>黄  英</p>
+<h2 id="说在前面"><a href="#说在前面" class="headerlink" title="说在前面"></a>说在前面</h2><p>因为这次项目主要就是针对于接单服务这么一个项目，所依订单有着举足轻重的性质。贯穿了整个下单、接单、服务、结算这么一个整体的流程。每一步操作都需要限制在特定的状态，详情请查看状态流转图。根据此需求我们设计了状态机，从而来实现状态对操作的限制。其他的订单的详细设计不在多说，详情请看下面的订单服务详细设计。</p>
+<h1 id="订单服务详细设计"><a href="#订单服务详细设计" class="headerlink" title="订单服务详细设计"></a>订单服务详细设计</h1><p>订单API详细设计，请点击——&gt;  <a href="https://github.com/Youhujia/docs/blob/master/backend/product_order/OwlAPI.md" target="_blank" rel="external">订单系统 API</a></p>
+<p>订单数据库设计，请点击——&gt;  <a href="https://github.com/Youhujia/docs/blob/master/backend/product_order/OrderDatabase.md" target="_blank" rel="external">订单数据库表设计</a></p>
+<h1 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h1><h2 id="staging环境："><a href="#staging环境：" class="headerlink" title="staging环境："></a>staging环境：</h2><p>1、依赖：config-repo、 halo（上线必要支持）<br>config-repo线上配置文件：<a href="https://github.com/Youhujia/config-repo/blob/master/owl-staging.yml" target="_blank" rel="external">owl-staging.yml</a><br>2、建立数据库：owl<br>3、调用服务：dagon、midas、sophon（上线时不影响）</p>
+<h2 id="正式环境："><a href="#正式环境：" class="headerlink" title="正式环境："></a>正式环境：</h2><p>操作之前：<br>依赖：config-repo、 halo（上线必要支持）<br>config-repo线上配置文件：<a href="https://github.com/Youhujia/config-repo/blob/master/owl-production.yml" target="_blank" rel="external">owl-production.yml</a></p>
+<p>正式操作步骤<br>1、登陆center 01服务器<br>2、切换到/opt/zhushou/目录下<br>3、克隆线上owl项目：git clone git@github.com:Youhujia/owl.git<br>4、git log查确认是否为最新项目<br>4、确认项目为最新切正确，将项目打包<br>5、将./bin/start.production 文件权限设置为可执行文件<br>6、启动项目<br>7、启动完毕，查看是否启动成功</p>
+<h1 id="项目回顾总结"><a href="#项目回顾总结" class="headerlink" title="项目回顾总结"></a>项目回顾总结</h1><h2 id="完成流程："><a href="#完成流程：" class="headerlink" title="完成流程："></a>完成流程：</h2><h3 id="设计："><a href="#设计：" class="headerlink" title="设计："></a>设计：</h3><p>时间点：（2017-12-15～2017-12-16）</p>
+<p>1、根据需求来设计商品模型，数据库字段。<br>2、设计API以及接口的请求和返回内容。<br>3、根据业务流转状态设计orderState枚举、orderAction枚举以及orderRefundState枚举<br>4、设计state之间互相转换的模型，限制每个状态下能进行的操作。<br>5、最后进行每个action操作具体内容进行填充。</p>
+<h3 id="代码书写："><a href="#代码书写：" class="headerlink" title="代码书写："></a>代码书写：</h3><p>时间点：（2017-12-17～2017-12-24）</p>
+<p>1、进行项目创建以及环境的搭建。<br>2、对项目的主要框架进行搭建。<br>3、书写数据库和order 对象。<br>4、书写状态机，也就是状态的流转框架。<br>5、对主体的业务代码进行填充书写。<br>6、添加订单退款的日志代码的书写。<br>7、书写订单的操作日志代码。<br>8、对出现的可以重构的代码进行了重构。</p>
+<h3 id="自我内部测试："><a href="#自我内部测试：" class="headerlink" title="自我内部测试："></a>自我内部测试：</h3><p>时间点：（2017-12-25～2017-01-05）</p>
+<p>1、进行接口请求联通测试，确定请求能正常运行。<br>2、在允许可操作状态和不允许操作状态下进行操作测试，检验限制设置。<br>3、和dagon接口、sophon接口测试，确定创建订单的正确性。<br>3、和midas接口联合测试，确定支付和退款相关接口。<br>4、和B、C两端联合测试，确定业务逻辑的正确性。</p>
+<h3 id="联合测试参与验收："><a href="#联合测试参与验收：" class="headerlink" title="联合测试参与验收："></a>联合测试参与验收：</h3><p>时间点：（2017-01-06～2017-01-10）</p>
+<p>1、和订单相关的项目，以及前端一起联合测试。<br>2、修改测试中出现的bug。</p>
+<h2 id="项目亮点："><a href="#项目亮点：" class="headerlink" title="项目亮点："></a>项目亮点：</h2><h3 id="1、组合查询"><a href="#1、组合查询" class="headerlink" title="1、组合查询"></a>1、组合查询</h3><p>可以查询多个状态的下的订单，订单状态个数不限，状态之间可依随意组合。</p>
+<h4 id="组合查询使用范例代码："><a href="#组合查询使用范例代码：" class="headerlink" title="组合查询使用范例代码："></a>组合查询使用范例代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">String select = &quot;select o from Order o&quot;;</div><div class="line">   String count = &quot;select count(o) from Order o&quot;;</div><div class="line"></div><div class="line">   String query = &quot; where o.del = :delete &quot;</div><div class="line">       + &quot;AND (:hasState is null OR o.status in (:statusList)) &quot;</div><div class="line">       + &quot;AND (:nurseId is null OR o.nurseId = :nurseId) &quot;</div><div class="line">       + &quot;AND (:userId is null OR o.userId = :userId) &quot;</div><div class="line">       + &quot;AND (:departmentId is null OR o.departmentId = :departmentId) &quot;</div><div class="line">       + &quot;order by o.id&quot;;</div><div class="line"></div><div class="line">   @Query(value = select + query,</div><div class="line">       countQuery = count + query)</div><div class="line">   Page&lt;Order&gt; query(@Param(&quot;delete&quot;) Boolean delete,</div><div class="line">                     @Param(&quot;hasState&quot;) Boolean hasState,</div><div class="line">                     @Param(&quot;statusList&quot;) List&lt;Long&gt; statusList,</div><div class="line">                     @Param(&quot;nurseId&quot;) Long nurseId,</div><div class="line">                     @Param(&quot;userId&quot;) Long userId,</div><div class="line">                     @Param(&quot;departmentId&quot;) Long departmentId,</div><div class="line">                     Pageable pageable);</div></pre></td></tr></table></figure>
+<p>说明：如代码:hasState is null OR o.status in (:statusList)，当hasState为空的时候，则查询所有状态的记录，否则（OR）则在statusList这些状态之中。</p>
+<h4 id="分页Pageable代码："><a href="#分页Pageable代码：" class="headerlink" title="分页Pageable代码："></a>分页Pageable代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Pageable pageable = new PageRequest(</div><div class="line">            queryContext.getIndex(), queryContext.getSize(), Sort.Direction.DESC, &quot;id&quot;);</div></pre></td></tr></table></figure>
+<p>说明：index 为页码下标，从0开始<br>        size 为每页数量<br>        Sort.Direction.DESC 该例为按照id倒序。</p>
+<h3 id="2、状态机"><a href="#2、状态机" class="headerlink" title="2、状态机"></a>2、状态机</h3><p>因为对订单的每个操作都是限定在特定的状态下的，所以设计了状态机来实现，状态机也是本次项目的一个亮点。<br>实现方式以及相关中心代码：</p>
+<h4 id="创建一个OrderStateEnum列举出所有的状态枚举："><a href="#创建一个OrderStateEnum列举出所有的状态枚举：" class="headerlink" title="创建一个OrderStateEnum列举出所有的状态枚举："></a>创建一个OrderStateEnum列举出所有的状态枚举：</h4><p>将现有的状态进行列举，如果有新加的状态只需要加入该枚举，从而实现对状态的控制。<br>具体枚举：<a href="https://github.com/Youhujia/docs/blob/master/backend/product_order/OwlAPI.md" target="_blank" rel="external">state 枚举</a></p>
+<h4 id="创建一个OrderActionEnum列举出所有的状态枚举："><a href="#创建一个OrderActionEnum列举出所有的状态枚举：" class="headerlink" title="创建一个OrderActionEnum列举出所有的状态枚举："></a>创建一个OrderActionEnum列举出所有的状态枚举：</h4><p>将现有的动作进行列举，如果有新加的动作只需要加入该枚举，从而对动作实现控制。<br>具体枚举：<a href="https://github.com/Youhujia/docs/blob/master/backend/product_order/OwlAPI.md" target="_blank" rel="external">action 枚举</a></p>
+<h4 id="创建一个StateActionUnit-接口："><a href="#创建一个StateActionUnit-接口：" class="headerlink" title="创建一个StateActionUnit 接口："></a>创建一个StateActionUnit 接口：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public interface StateActionUnit &#123;</div><div class="line"></div><div class="line">    void invoke(OrderContext context, OrderActionEnum orderActionEnum);</div><div class="line"></div><div class="line">    OrderState getUnitOrderState(OrderContext context);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="实现基类"><a href="#实现基类" class="headerlink" title="实现基类"></a>实现基类</h4><p>然后创建一个BaseUnitInvoker的抽象类来实现StateActionUnit接口，从而从整体控制全部状态，我们首先会取到操作的该订单的状态，该状态在orderStateEnum枚举状态内，我们才会执行接下来的动作，否则返回错误信息：“state is not in states”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public abstract class BaseUnitInvoker implements StateActionUnit &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void invoke(OrderContext context, OrderActionEnum orderActionEnum) &#123;</div><div class="line">        if (context.getOrderState() != getUnitOrderState(context)) &#123;</div><div class="line">            throw new YHJException(OwlExceptionCodeEnum.STATE_NOT_EXIST, &quot;Not in state&quot;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        context.setOrderActionEnum(orderActionEnum);</div><div class="line">        actualInvoke(context, orderActionEnum);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    abstract public void actualInvoke(OrderContext context, OrderActionEnum orderActionEnum);</div></pre></td></tr></table></figure>
+<h4 id="创建具体状态的类实现BaseUnitInvoker类"><a href="#创建具体状态的类实现BaseUnitInvoker类" class="headerlink" title="创建具体状态的类实现BaseUnitInvoker类"></a>创建具体状态的类实现BaseUnitInvoker类</h4><p>例如：（payingUnit）未支付状态的具体实现类：<br>未支付状态下只能发起的动作USER_PAY、USER_CANCEL、UNPAID_TIMEOUT如果在该状态下的执行的动作不在这三个动作内，则会返回错误，错误信息为“state do not allow current action”。正确的话，就会根据动作执行相应的操作，从而对订单进行操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">public class PayingUnit extends BaseUnitInvoker &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public OrderState getUnitOrderState(OrderContext context) &#123;</div><div class="line">        return OrderState.PAYING;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void actualInvoke(OrderContext context, OrderActionEnum orderActionEnum) &#123;</div><div class="line">        String where = &quot;PayingUnit-&gt;actualInvoke&quot;;</div><div class="line"></div><div class="line">        switch (orderActionEnum) &#123;</div><div class="line">            case PAY_SUCCESS:</div><div class="line">                paySuccess(context);</div><div class="line">                break;</div><div class="line">            case USER_PAY:</div><div class="line">                handlePay(context);</div><div class="line">                break;</div><div class="line">            case USER_CANCEL:</div><div class="line">                userCancelOrder(context);</div><div class="line">                break;</div><div class="line">            case UNPAID_TIMEOUT:</div><div class="line">                unpaidTimeout(context);</div><div class="line">                break;</div><div class="line">            default:</div><div class="line">                logger.error(LogInfoGenerator.generateErrorInfo(where, OwlExceptionCodeEnum.ACTION_NOT_ALLOWD, &quot;PAYING &quot; + orderActionEnum.name(), &quot;order&quot;, context.getOrder()));</div><div class="line">                throw new YHJException(OwlExceptionCodeEnum.ACTION_NOT_ALLOWD, &quot;PAYING &quot; + orderActionEnum.name());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Transactional</div><div class="line">    private void handlePay(OrderContext context) &#123;</div><div class="line">    //具体操作</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void paySuccess(OrderContext context) &#123;</div><div class="line">    //具体操作</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void userCancelOrder(OrderContext context) &#123;</div><div class="line">    //具体操作</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private void unpaidTimeout(OrderContext context) &#123;</div><div class="line">    //具体操作</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><h3 id="项目总结："><a href="#项目总结：" class="headerlink" title="项目总结："></a>项目总结：</h3><p>针对owl工程总体来说，完成的过程总体比较平稳，完成的效果和预期基本一致，虽然完成的时间比预计的多用了一天时间，但是所差的都是一些内部代码，不耽误总体项目的进度，所以总体还是可以接受的。<br>详细的来说在开发的过程中还是存在一些问题，具体如下：<br>1、在状态的流转设计和书写中，因为开始针对于state具体跳转的设计有不同意见，导致状态机的产出时间较晚，进而影响了项目的开发时间。<br>2、设计时考虑的不够完善，导致在开发中，会加入一些那些没有考虑完备的东西，所以有时候会导致代码结构的变动，或者部分代码的重写。<br>以上的问题，通过仔细的考虑设计和对项目的业务细节进行仔细了解以及良好的沟通，就可以有效的降低，所以以后能从此借鉴，能更好更快的完成。</p>
+<h3 id="个人总结："><a href="#个人总结：" class="headerlink" title="个人总结："></a>个人总结：</h3><p>对于自己来说这是个人时加入公司开始的第一个项目，在项目开始的时候，感觉到有对于开发未知的紧张压迫也有开始新项目的期待。继而在学文哥指导下开始了对项目的开发，在开发过程中，自己也遇到了大大小小的问题，下面记录几个印象较为深刻的，<br>自己完成项目过程的问题：<br>1、refundCord，退款各个的过程自己考虑的不是周全，所以导致refundCord设计不够完善，最后在学文哥和深入开发中逐渐解决。<br>2、operationLog，自己没有考虑到要记录动作之前的状态和动作后的状态，最后在晨哥和学文哥指导下完善。<br>3、组合查询，开始自己是根据请求的参数来判断，从而进行查询，这种方法是是最笨的方法，因为随着参数个数的增加，判断条件会几何增长，所以是不可取的。最后学文哥采取了query注解加入sql语句的in语法，直接很好的解决了这个问题。<br>最后，通过此次开发自己感觉到了成长，同时也感觉到了自我价值的实现，总体完成了自己的任务。</p>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,389 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C端2.0改版 Hibernation PRD | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="自然人概述什么是自然人，百度上给出的解释是：自然人（natural person） 是在自然状态下出生的人。是不是感觉说了和没说没区别。那我们这个这次项目所需要设计的自然人模型又是什么呢？首先说一下我们这个自然人是针对优护家的患者，而自然人模型则是自然人的我们所需的病人所有信息数据的集合，是基于数据战略沉淀的一套用来多角度描述患者的数据模型。设计用户的内容也不只是简单的姓名、性别等这些基本信息，而是包括病人的身体健康情况、疾病历史、出入院信息以及科研信息等这些由患者身体将康以及所衍生出来的信息。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="C端2.0改版 Hibernation PRD"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>C端2.0改版 Hibernation PRD</h2>
+					
+					<div>
+						<span class="post-time">2017-04-11 17:30:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="自然人"><a href="#自然人" class="headerlink" title="自然人"></a>自然人</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>什么是自然人，百度上给出的解释是：自然人（natural person） 是在自然状态下出生的人。是不是感觉说了和没说没区别。那我们这个这次项目所需要设计的自然人模型又是什么呢？首先说一下我们这个自然人是针对优护家的患者，而自然人模型则是自然人的我们所需的病人所有信息数据的集合，是基于数据战略沉淀的一套用来多角度描述患者的数据模型。设计用户的内容也不只是简单的姓名、性别等这些基本信息，而是包括病人的身体健康情况、疾病历史、出入院信息以及科研信息等这些由患者身体将康以及所衍生出来的信息。</p>
+<a id="more"></a>
+<h2 id="自然人模型"><a href="#自然人模型" class="headerlink" title="自然人模型"></a>自然人模型</h2><p>自然人模型个人理解即为自然人信息数据模型，而自然人的数据模型可以将其看成一个信息树，一个患者可以看成是一棵树，而他的信息可以看成是树叶，一片树叶是一个人的某个特定的信息，每个人的信息具体数值可能都有不同，但是叶子的信息指的是什么这是一定的。例如，这片叶子代表的是身高，那么每个人的这片叶子都是身高，但是身高是多少，则根据每个人的具体值而定。而这个每一片叶子代表什么也需要我们去定义，具体如何定义的参见如下</p>
+<p>结构定义如下图</p>
+<p><img src="/media/自然人结构图.png" alt=""></p>
+<p>而这些标准都是需要存入数据中，具体存入结构如何，参见下面<strong>数据库设计df_metadata表</strong></p>
+<h2 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h2><p>由上面的描述我们知道了自然人的数据的节点的定义需要落地到数据库中，这些定义数据则是为元数据，那么存储数据的表则叫元数据表</p>
+<h3 id="元数据表：df-metadata"><a href="#元数据表：df-metadata" class="headerlink" title="元数据表：df_metadata"></a>元数据表：df_metadata</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>long</td>
+<td>唯一标志</td>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>优护家唯一编码</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>元数据名称</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>元数据描述</td>
+</tr>
+<tr>
+<td>data_type</td>
+<td>long</td>
+<td>数据项数据类型:枚举值，具体代表含义 1. string 2. int 3. float 4. bool 5. unary 6. date</td>
+</tr>
+<tr>
+<td>expiration</td>
+<td>long</td>
+<td>数据项数据失效时间，是一个相对时间，相对于df_data_item.generated_at （数据真实产生时间），单位，毫秒</td>
+</tr>
+<tr>
+<td>standard_display_format</td>
+<td>string</td>
+<td>数据项数据标准显示格式</td>
+</tr>
+<tr>
+<td>standard_unit</td>
+<td>string</td>
+<td>数据项数据标准单位（如kg、g等）</td>
+</tr>
+<tr>
+<td>standard_mapping</td>
+<td>string</td>
+<td>元数据和其他国际标准对应的编码 json 格式 例如： {“icd-10”:”A03-1”}</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>TIMESTAMP</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>TIMESTAMP</td>
+<td>修改时间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="元数据数据落地："><a href="#元数据数据落地：" class="headerlink" title="元数据数据落地："></a>元数据数据落地：</h3><ol>
+<li><p>优护家元数据唯一code编码确定：<br>一级：YHJ、<br>二级：YHJ.AA——YHJ.ZZ、<br>三级：YHJ.AA.001——YHJ.ZZ.999、<br>四级：YHJ.AA.001.001——YHJ.ZZ.999.999、<br>…..<br>十级：YHJ.AA.001.001.001.001.001.001.001.001——YHJ.ZZ.999.999.999.999.999.999.999.999</p>
+</li>
+<li><p>需要整理自然人的所有数据，以及入库。</p>
+</li>
+</ol>
+<p>数据库数据示例：</p>
+<p><img src="/media/元数据数据库实例数据.png" alt=""></p>
+<h3 id="自然人数据项：-df-data-item"><a href="#自然人数据项：-df-data-item" class="headerlink" title="自然人数据项： df_data_item"></a>自然人数据项： df_data_item</h3><p>自然人的数据：由自然人的唯一标志符和数据项的集合组成，唯一标志符即下面的user_id，一个user_id会对应多条数据项</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>long</td>
+<td>该条数据的唯一标志</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>long</td>
+<td>自然人的id</td>
+</tr>
+<tr>
+<td>df_metadata_code</td>
+<td>string</td>
+<td>元数据编码</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>具体的值，应该是经过序列化的</td>
+</tr>
+<tr>
+<td>is_valid</td>
+<td>bit</td>
+<td>默认为1，1:为有效,2:无效</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>long</td>
+<td>数据收集方</td>
+</tr>
+<tr>
+<td>collecting_method</td>
+<td>long</td>
+<td>数据收集方法</td>
+</tr>
+<tr>
+<td>collector</td>
+<td>long</td>
+<td>数据收集器</td>
+</tr>
+<tr>
+<td>generated_at</td>
+<td>TimeStamp</td>
+<td>数据真实产生的时间</td>
+</tr>
+<tr>
+<td>collected_at</td>
+<td>TimeStamp</td>
+<td>收集器收集数据时间</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>TimeStamp</td>
+<td>入库时间</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>TimeStamp</td>
+<td>修改时间</td>
+</tr>
+</tbody>
+</table>
+<h4 id="字段补充说明："><a href="#字段补充说明：" class="headerlink" title="字段补充说明："></a>字段补充说明：</h4><p><strong>provider:</strong> 数据的提供方，现在已知的枚举如下，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ProviderEnum &#123;</div><div class="line">    OTHER(<span class="number">1</span>, <span class="string">"其他"</span>),</div><div class="line">    YHJ(<span class="number">2</span>, <span class="string">"优护家"</span>),</div><div class="line">    WN(<span class="number">3</span>, <span class="string">"卫宁"</span>);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p><strong>collecting_method:</strong> 数据的收集方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> CollectingMethodEnum &#123;</div><div class="line">    OTHER(<span class="number">1</span>, <span class="string">"其他"</span>),</div><div class="line">    SYSTEM(<span class="number">2</span>, <span class="string">"系统录入"</span>),</div><div class="line">    NURSE_EVALUATION(<span class="number">3</span>, <span class="string">"护士评估"</span>),</div><div class="line">    SELF_TEST_EVALUATION(<span class="number">4</span>, <span class="string">"自测评估"</span>),</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>collector:</strong> 数据的收集器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> CollectorEnum &#123;</div><div class="line">  OTHER(<span class="number">1</span>, <span class="string">"其他"</span>),</div><div class="line">  YHJ_WEXIN_PUB_C_END(<span class="number">2</span>, <span class="string">"优护C端"</span>),</div><div class="line">  YHJ_APP_END(<span class="number">3</span>, <span class="string">"优护助手"</span>),</div><div class="line">  SPHYGMOMANOMETER(<span class="number">4</span>, <span class="string">"血压计"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="MySQL-Migration"><a href="#MySQL-Migration" class="headerlink" title="MySQL Migration"></a>MySQL Migration</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE IF NOT EXISTS `df_metadata` (</div><div class="line">  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,</div><div class="line">  `code` VARCHAR(255) NOT NULL COMMENT &apos;优护家元数据唯一编码&apos;,</div><div class="line">  `name` VARCHAR(512) NOT NULL COMMENT &apos;元数据名称&apos;,</div><div class="line">  `description` LONGTEXT NOT NULL COMMENT &apos;元数据描述&apos;,</div><div class="line">  `data_type` BIGINT NOT NULL COMMENT &apos;数据项数据类型, 见 DateTypeEnum&apos;,</div><div class="line">  `expiration` BIGINT NULL COMMENT &apos;数据项数据失效时间，是一个相对时间，相对于 df_data.generated_at（数据真实产生时间），单位，毫秒&apos;,</div><div class="line">  `standard_display_format` VARCHAR(512) NULL COMMENT &apos;数据项数据标准显示格式&apos;,</div><div class="line">  `standard_unit` VARCHAR(512) NULL COMMENT &apos;数据项数据标准单位（如kg、g等）&apos;,</div><div class="line">  `standard_mapping` VARCHAR(512) NULL COMMENT &apos;元数据和其他国际标准对应的编码 json 格式 例如：&quot;icd-10&quot;=&gt;&quot;A03-1&quot;&apos;,</div><div class="line">  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,</div><div class="line">  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT,</div><div class="line">  PRIMARY KEY (`id`),</div><div class="line">  INDEX `df_metadata_code_idx` (`code` ASC),</div><div class="line">  INDEX `df_metadata_data_type_idx` (`data_type` ASC),</div><div class="line">  INDEX `df_metadata_expiration_idx` (`expiration` ASC)</div><div class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8;</div><div class="line"></div><div class="line"></div><div class="line">CREATE TABLE `df_data`(</div><div class="line">  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,</div><div class="line">  `user_id` BIGINT UNSIGNED NOT NULL COMMENT &apos;数据项主键&apos;,</div><div class="line">  `df_metadata_code` VARCHAR(255) NOT NULL COMMENT &apos;元数据编码&apos;,</div><div class="line">  `value` LONGTEXT NULL COMMENT &apos;具体的值，可能是经过序列化的&apos;,</div><div class="line">  `is_valid` BIT NOT NULL DEFAULT 1 COMMENT &apos;默认为1，0:无效,1:有效&apos;,</div><div class="line">  `provider` BIGINT NOT NULL COMMENT &apos;数据收集方&apos;,</div><div class="line">  `collecting_method` BIGINT  NOT NULL COMMENT &apos;数据收集方法&apos;,</div><div class="line">  `collector` BIGINT NOT NULL COMMENT &apos;数据收集器&apos;,</div><div class="line">  `generated_at` TIMESTAMP NOT NULL COMMENT &apos;数据真实产生时间&apos;,</div><div class="line">  `collected_at` TIMESTAMP NOT NULL COMMENT &apos;收集器时间&apos;,</div><div class="line">  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,</div><div class="line">  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,</div><div class="line">  PRIMARY KEY (`id`),</div><div class="line">  INDEX `df_data_user_id_idx` (`user_id` ASC),</div><div class="line">  INDEX `df_data_df_metadata_code_idx` (`df_metadata_code` ASC),</div><div class="line">  INDEX `df_data_is_valid_idx` (`is_valid` ASC),</div><div class="line">  INDEX `df_data_provider_idx` (`provider` ASC),</div><div class="line">  INDEX `df_data_collecting_method_idx` (`collecting_method` ASC),</div><div class="line">  INDEX `df_data_collector_idx` (`collector` ASC),</div><div class="line">  INDEX `df_data_generated_at_idx` (`generated_at` ASC)</div><div class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8;</div></pre></td></tr></table></figure>
+<h3 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h3><p>暂不提供查询接口，只提供一个批量写入接口。</p>
+<h4 id="1-批量录入数据项"><a href="#1-批量录入数据项" class="headerlink" title="1. 批量录入数据项"></a>1. 批量录入数据项</h4><blockquote>
+<p>POST /api/hibernation/v1/data/bulk</p>
+</blockquote>
+<ul>
+<li><p>Request</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"data"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"userId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"DFMetadataCode"</span>: <span class="string">"YHJAA.001.001"</span>,</div><div class="line">      <span class="attr">"value"</span>: <span class="string">"路过"</span>,</div><div class="line">      <span class="attr">"provider"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"collecting_method"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"collector"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"generatedAt"</span>: <span class="string">"1491041660000"</span>,</div><div class="line">      <span class="attr">"collectedAt"</span>: <span class="string">"1491041660000"</span></div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Response</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"result"</span>: &#123;</div><div class="line">    <span class="attr">"code"</span>: <span class="number">0</span>,</div><div class="line">    <span class="attr">"success"</span>: <span class="literal">true</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"data"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"DFDataId"</span>: <span class="number">1</span></div><div class="line">      <span class="string">"userId"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"DFMetadataCode"</span>: <span class="string">"YHJAA.001.001"</span>,</div><div class="line">      <span class="attr">"value"</span>: <span class="string">"路过"</span>,</div><div class="line">      <span class="attr">"provider"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"collecting_method"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"collector"</span>: <span class="number">1</span>,</div><div class="line">      <span class="attr">"generatedAt"</span>: <span class="string">"1491041660000"</span>,</div><div class="line">      <span class="attr">"collectedAt"</span>: <span class="string">"1491041660000"</span></div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Protobuf-定义"><a href="#Protobuf-定义" class="headerlink" title="Protobuf 定义"></a>Protobuf 定义</h4><figure class="highlight protobuf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DFData</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> dataId = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> userId = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> DFMetadataCode = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> value = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> ProviderEnum provider = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> CollectingMethodEnum collectingMethod = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> CollectorEnum collector = <span class="number">8</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> generatedAt = <span class="number">9</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> collectedAt = <span class="number">10</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">DataListDTO</span> </span>&#123;</div><div class="line">    <span class="keyword">optional</span> Result result = <span class="number">1</span>;</div><div class="line">    <span class="keyword">repeated</span> DFData data = <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">message</span> <span class="title">BulkCreateDataOption</span> </span>&#123;</div><div class="line">  <span class="keyword">repeated</span> BulkCreateData data = <span class="number">1</span>;</div><div class="line"></div><div class="line">  <span class="keyword">repeated</span> BulkCreateData &#123;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> userId = <span class="number">1</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> DFMetadataCode = <span class="number">2</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">string</span> DFDataItemValue = <span class="number">3</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> provider = <span class="number">4</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> collectingMethod = <span class="number">5</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> collector = <span class="number">6</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> generatedAt = <span class="number">7</span>;</div><div class="line">    <span class="keyword">optional</span> <span class="built_in">int64</span> collectedAt = <span class="number">8</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">DataTypeEnum</span> </span>&#123;</div><div class="line">  STRING = <span class="number">1</span>;</div><div class="line">  INT = <span class="number">2</span>;</div><div class="line">  FLOAT = <span class="number">3</span>;</div><div class="line">  BOOL = <span class="number">4</span>;</div><div class="line">  UNARY = <span class="number">5</span>;</div><div class="line">  DATE = <span class="number">6</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">ProviderEnum</span> </span>&#123;</div><div class="line">  YHJ = <span class="number">1</span>; <span class="comment">// 优护家</span></div><div class="line">  WEI_NING = <span class="number">2</span>; <span class="comment">// 卫宁</span></div><div class="line">  OTHER = <span class="number">3</span>; <span class="comment">// 其它</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CollectingMethodEnum</span> </span>&#123;</div><div class="line">  SYSTEM = <span class="number">1</span>; <span class="comment">// 系统</span></div><div class="line">  NURSE_EVALUATION = <span class="number">2</span>; <span class="comment">// 护士评估</span></div><div class="line">  SELF_TEST_EVALUATION = <span class="number">3</span>; <span class="comment">// 自测评估</span></div><div class="line">  OTHER = <span class="number">4</span>; <span class="comment">// 其它</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CollectorEnum</span> </span>&#123;</div><div class="line">  YHJ_APP_NURSE_END = <span class="number">1</span>; <span class="comment">// 优护助手护士端</span></div><div class="line">  YHJ_WEXIN_PUB_C_END = <span class="number">2</span>; <span class="comment">// 优护助手微信公众号C端</span></div><div class="line">  SPHYGMOMANOMETER = <span class="number">3</span>; <span class="comment">// 血压计</span></div><div class="line">  OTHER = <span class="number">4</span>; <span class="comment">// 其它</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Hibernation-开发排期"><a href="#Hibernation-开发排期" class="headerlink" title="Hibernation 开发排期"></a>Hibernation 开发排期</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>时间</th>
+<th>开发者</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Metadata 相关接口开发</td>
+<td>1</td>
+<td>黄英</td>
+</tr>
+<tr>
+<td>Data 相关接口开发</td>
+<td>1</td>
+<td>黄英</td>
+</tr>
+<tr>
+<td>录入数据接口</td>
+<td>1</td>
+<td>黄英</td>
+</tr>
+<tr>
+<td>自然人模型数据录入（不包括 ICD10)</td>
+<td>1</td>
+<td>黄英</td>
+</tr>
+<tr>
+<td>ICD10 疾病树 数据录入「/</td>
+<td>1</td>
+<td>黄英</td>
+</tr>
+</tbody>
+</table>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

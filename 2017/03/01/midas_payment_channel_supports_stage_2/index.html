@@ -1,0 +1,263 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>护士上门辅助下单支付支持 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要护士上门辅助下单，需要通过客户端（ios, android）进行付款操作。本文档描述支付系统相关的功能设计">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="护士上门辅助下单支付支持"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>护士上门辅助下单支付支持</h2>
+					
+					<div>
+						<span class="post-time">2017-03-01 14:00:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>护士上门辅助下单，需要通过客户端（ios, android）进行付款操作。本文档描述支付系统相关的功能设计</p>
+<a id="more"></a>
+<h1 id="WIKI-维护人"><a href="#WIKI-维护人" class="headerlink" title="WIKI 维护人"></a>WIKI 维护人</h1><p>黄丹</p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>客户端选择支付方式（微信，或 支付宝），点击支付需要调起支付，从而完成交易。在该操作过程中，涉及到的支付渠道（微信app支付，支付宝app支付）与已有系统（现在支持 微信公众号 支付）并不相同。而不同渠道可能需要不同的支付参数。</p>
+<h1 id="支付库支撑"><a href="#支付库支撑" class="headerlink" title="支付库支撑"></a>支付库支撑</h1><ul>
+<li><code>ping++ ios sdk</code> : <a href="https://github.com/PingPlusPlus/pingpp-ios" target="_blank" rel="external">https://github.com/PingPlusPlus/pingpp-ios</a></li>
+<li><code>ping++ android sdk</code> : <a href="https://github.com/PingPlusPlus/pingpp-android" target="_blank" rel="external">https://github.com/PingPlusPlus/pingpp-android</a></li>
+<li><code>支付流程说明</code> : <a href="https://www.pingxx.com/docs/overview/flow/charge" target="_blank" rel="external">https://www.pingxx.com/docs/overview/flow/charge</a></li>
+<li><code>支付系统设计</code> : <a href="http://wiki.office.test.youhujia.com/2016/12/11/payment_overview/" target="_blank" rel="external">http://wiki.office.test.youhujia.com/2016/12/11/payment_overview/</a></li>
+</ul>
+<h1 id="支付渠道属性"><a href="#支付渠道属性" class="headerlink" title="支付渠道属性"></a>支付渠道属性</h1><p>参见：<a href="https://www.pingxx.com/api#支付渠道-extra-参数说明" target="_blank" rel="external">https://www.pingxx.com/api#支付渠道-extra-参数说明</a></p>
+<p><code>微信支付</code><br><img src="/media/payment_channel_wx.jpg" alt=""></p>
+<p><code>支付宝支付</code><br><img src="/media/payment_channel_alipay.jpg" alt=""></p>
+<p><code>退款相关</code> 退款时需要注意 退款资金来源 参数的处理<br><img src="/media/refund_funding_source.jpg" alt=""></p>
+<p><code>注意</code> 按照以上文档定义，并不要求客户端传入任何特有的 extra 参数</p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><h2 id="状态流转更新"><a href="#状态流转更新" class="headerlink" title="状态流转更新"></a>状态流转更新</h2><ul>
+<li>不需要任何状态更新</li>
+</ul>
+<h2 id="客户端更新"><a href="#客户端更新" class="headerlink" title="客户端更新"></a>客户端更新</h2><ul>
+<li>ios, android 需要引入ping++ ios/android sdk</li>
+<li>具体 call flow 详见上文提到的设计文档</li>
+<li>需要向 youhujia 后端传入渠道名称参数 <code>wx</code> 或 <code>alipay</code></li>
+</ul>
+<h2 id="Midas-支付系统更新"><a href="#Midas-支付系统更新" class="headerlink" title="Midas 支付系统更新"></a>Midas 支付系统更新</h2><ul>
+<li>增加渠道参数 <code>wx</code>, <code>alipay</code></li>
+<li>原先的 <code>wx_pub</code> 会传入extra参数，新的 <code>wx</code>, <code>alipay</code> 并不需要</li>
+<li>按照以上，midas应该已经支持，需确认按照渠道来出来extra参数的逻辑</li>
+<li>退款部分，需要确认funding_source的逻辑，详见本文前部分</li>
+</ul>
+<h2 id="Farmer-API-更新"><a href="#Farmer-API-更新" class="headerlink" title="Farmer API 更新"></a>Farmer API 更新</h2><ul>
+<li>注意 <code>wx</code> 或 <code>alipay</code> 并不需要传入 <code>open_id</code></li>
+</ul>
+<h2 id="owl-更新"><a href="#owl-更新" class="headerlink" title="owl 更新"></a>owl 更新</h2><ul>
+<li>无需增加接口</li>
+<li>确认可以接收渠道名称参数 <code>wx</code> 或 <code>alipay</code>，并且不影响原先的 <code>wx_pub</code></li>
+<li>类似ToC API，注意确认渠道参数的处理</li>
+</ul>
+<h2 id="测试总体方案"><a href="#测试总体方案" class="headerlink" title="测试总体方案"></a>测试总体方案</h2><ul>
+<li>ios, android 测试 支付、退款 流程</li>
+<li>原有H5端的支付、退款需要回归</li>
+</ul>
+<h2 id="开发排期"><a href="#开发排期" class="headerlink" title="开发排期"></a>开发排期</h2><p><code>注意</code> 应先快速构建一个demo确认ping++支付流程</p>
+<table>
+<thead>
+<tr>
+<th>module</th>
+<th>owner</th>
+<th>schedule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户端与后端联合demo</td>
+<td>于俊超</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Midas支付流程</td>
+<td>黄英</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Midas退款流程</td>
+<td>黄英</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Farmer API端</td>
+<td>黄英</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Owl端</td>
+<td>黄英</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>端到端联调</td>
+<td>黄英</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

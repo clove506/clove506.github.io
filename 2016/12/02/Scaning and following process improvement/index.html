@@ -1,0 +1,332 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>扫码关注流程改进 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要扫码关注流程改进改进">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="扫码关注流程改进"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>扫码关注流程改进</h2>
+					
+					<div>
+						<span class="post-time">2016-12-02 17:09:00</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>扫码关注流程改进改进<br><a id="more"></a></p>
+<h2 id="详情"><a href="#详情" class="headerlink" title="详情"></a>详情</h2><ul>
+<li><p><strong>需求原因</strong></p>
+<ul>
+<li>目前扫码流程是：扫码进科室，操作触发关注，扫码关注，再进入科室，操作触发自评，完成自评；</li>
+<li>这个过程较为复杂，运营演示时十分不便，给护士及患者的体验欠佳；</li>
+<li>扫码关注自评是患者端进行后续操作的第一步，用户操作成本很高，不利于提升关注和信息收集。</li>
+</ul>
+</li>
+<li><p><strong>改动简述</strong></p>
+<pre><code>将原先流程
+【 *扫码进科室，操作触发关注，扫码关注，再进入科室，操作触发自评，完成自评* 】
+简化为
+【 *扫码关注（推送科室），点击科室链接（提示进入自评），完成自评* 】
+</code></pre></li>
+<li><p><strong>设计理念</strong></p>
+<ul>
+<li>让用户以最简洁的操作步骤，完成其必须的操作（关注优护家公众号，填写个人信息作为账号依据）</li>
+</ul>
+</li>
+<li><p><strong>业务逻辑</strong></p>
+<ul>
+<li>基本不涉及业务逻辑的变化，只是改变了操作的顺序</li>
+<li>主要是二维码内含信息的变化，需含：优护家公众号&amp;所在科室 </li>
+</ul>
+</li>
+<li><p><strong>扫码关注流程的状态图</strong></p>
+<pre><code>![状态图01](/media/%E7%8A%B6%E6%80%81%E5%9B%BE01-1.png)
+</code></pre></li>
+</ul>
+<ul>
+<li><strong>视觉&amp;交互稿</strong></li>
+</ul>
+<p>关键流程：扫码关注=&gt;关注界面=&gt;公众号欢迎页=&gt;科室自评提示页<br>[ownCloud: Public@Youhujia／产品文档／C端Feature Design／C端PRD图片-wiki同步／扫码流程优化161130.png]<br><img src="/media/%E6%89%AB%E7%A0%81%E6%B5%81%E7%A8%8B%E4%BC%98%E5%8C%96161130.png" alt="扫码流程优化161130"></p>
+<p>后续流程（与之前一致，基本信息填写的提示文案稍有改动）：<br>[ownCloud: Public@Youhujia／产品文档／C端Feature Design／C端PRD图片-wiki同步／基本信息及自评填写过程161130.png]<br><img src="/media/%E8%87%AA%E8%AF%84%E5%8F%8A%E4%BF%A1%E6%81%AF%E5%A1%AB%E5%86%99%E8%BF%87%E7%A8%8B-1.png" alt="基本信息及自评填写过程161130"></p>
+<hr>
+<hr>
+<pre><code>20161201更新：
+</code></pre><p>1.原有触发关注公众号和采集手机号的触发逻辑均不变，保持原有功能；<br>2.不是扫码进入（搜索公众号，公众号推荐等），则推送一条含有所有科室链接的消息[即点击菜单栏优护助手进入的页面，这也是现有的逻辑]；<br>P.S.暂不该动运营反馈的只显示自己所在科室而不显示其他科室的需求，目的是为非扫码进入的用户留下科室选择的入口</p>
+<p>通过搜索公众号，公众号推荐，公众号二维码进入的路径示例：<br>[ownCloud: Public@Youhujia／产品文档／C端Feature Design／C端PRD图片-wiki同步／搜索公众号进入161201.png]<br><img src="/media/%E6%90%9C%E7%B4%A2%E5%85%AC%E4%BC%97%E5%8F%B7%E8%BF%9B%E5%85%A5161201.png" alt="搜索公众号进入161201"></p>
+<h2 id="12月2日会议纪要"><a href="#12月2日会议纪要" class="headerlink" title="12月2日会议纪要"></a>12月2日会议纪要</h2><ul>
+<li>收集用户信息（手机号，姓名等）要提示醒目，表示是用于和护士沟通。</li>
+<li>原来的各种入口（扫码关注等）的逻辑不做调整。</li>
+<li>所有科室的二维码都要替换，需要列节奏。<ul>
+<li>武汉协和今天（2016.12.02）需要生成完</li>
+</ul>
+</li>
+<li>12月2号替换的运营工作就要开始，后端需要配合优先生成相关的二维码，另需要提供给合肥相关医院二维码。</li>
+</ul>
+<h2 id="流程改动小结"><a href="#流程改动小结" class="headerlink" title="流程改动小结"></a>流程改动小结</h2><ol>
+<li>改动交互时，不仅要考虑改动后的好处，还要考虑改动后有在哪些方面有哪些损失，会出现哪些情况，应该怎么去解决</li>
+<li>本次改动中，扫码后出现的第一个界面是优护家公众号而非科室页面，点击进入后也只是自评页面，设计和流程上的确解决了操作繁琐的问题，符合增加关注和收集用户信息的设计初衷，BUT，不可避免的置后了科室的页面，造成用户的不理解或未能看到科室页面的其他疑惑</li>
+<li>目前的弥补点有二：<ul>
+<li>关注后推送文本含有科室链接，文字形式告知用户我们即将进入科室</li>
+<li>醒目填写用户信息时的提示，让用户尽可能理解收集其个人信息的原因</li>
+</ul>
+</li>
+<li>或许可行的进一步增强可信度的措施【非本次改动内容】：<ul>
+<li>在提示自评页，注入科室信息（图片，文案），并以科室的名义引导用户操作，如：武汉协和医院邀请您完成对身体状况的基本评测</li>
+</ul>
+</li>
+<li>若部分科室仍不能接受：<ul>
+<li>先用原来二维码作为缓冲，待护士理解新流程的好处再更换新的二维码</li>
+<li>为科室新开公众号（优护家持有），提供服务</li>
+</ul>
+</li>
+</ol>
+<h2 id="测试case"><a href="#测试case" class="headerlink" title="测试case"></a>测试case</h2><h4 id="一、测试内容："><a href="#一、测试内容：" class="headerlink" title="一、测试内容："></a>一、测试内容：</h4><ol>
+<li>点击事件：点击+返回</li>
+<li>信息输入：无输入</li>
+<li>测试范围：从扫码开始到显示自评页结束</li>
+</ol>
+<h4 id="二、测试流程"><a href="#二、测试流程" class="headerlink" title="二、测试流程"></a>二、测试流程</h4><ol>
+<li>正常流程</li>
+<li>正常流程分支</li>
+<li>回退分支</li>
+<li>异常流程（非本流程的测试）</li>
+</ol>
+<h4 id="三、测试维度："><a href="#三、测试维度：" class="headerlink" title="三、测试维度："></a>三、测试维度：</h4><ol>
+<li>平台【Android &amp; IOS】</li>
+<li>二维码【每个科室的二维码均需要测试】</li>
+</ol>
+<h4 id="四、测试路径图"><a href="#四、测试路径图" class="headerlink" title="四、测试路径图"></a>四、测试路径图</h4><p><img src="/media/%E6%89%AB%E7%A0%81%E6%B5%81%E7%A8%8B%E6%94%B9%E8%BF%9B-%E6%B5%8B%E8%AF%95%E8%B7%AF%E5%BE%84%E5%9B%BE.png" alt="扫码流程改进-测试路径图"></p>
+<h4 id="五、测试case"><a href="#五、测试case" class="headerlink" title="五、测试case"></a>五、测试case</h4><ul>
+<li>根据流程将其分为四条路径，正常路径Android &amp; IOS均需测试，其他路径选测；<br>选择部分科室测试，运营上线前所有科室均需测试。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>医院</th>
+<th>科室</th>
+<th>流程</th>
+<th>系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>北京市和平里医院</td>
+<td>心肾科</td>
+<td>正常路径</td>
+<td>Android &amp; IOS</td>
+</tr>
+<tr>
+<td>北京市和平里医院</td>
+<td>心肾科</td>
+<td>回退路径</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>北京市和平里医院</td>
+<td>心肾科</td>
+<td>正常流程分支1</td>
+<td>IOS</td>
+</tr>
+<tr>
+<td>北京市和平里医院</td>
+<td>心肾科</td>
+<td>正常流程分支2</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>北京市和平里医院</td>
+<td>内分泌</td>
+<td>正常路径</td>
+<td>Android &amp; IOS</td>
+</tr>
+<tr>
+<td>北京市和平里医院</td>
+<td>内分泌</td>
+<td>回退路径</td>
+<td>IOS</td>
+</tr>
+<tr>
+<td>北京市和平里医院</td>
+<td>内分泌</td>
+<td>正常流程分支1</td>
+<td>Android</td>
+</tr>
+<tr>
+<td>北京市和平里医院</td>
+<td>内分泌</td>
+<td>正常流程分支2</td>
+<td>IOS</td>
+</tr>
+<tr>
+<td>….</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>

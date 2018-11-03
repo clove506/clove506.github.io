@@ -1,0 +1,390 @@
+	<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【上门护理二期】C端地址子模块详细设计 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="摘要C端地址子模块详细设计">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="【上门护理二期】C端地址子模块详细设计"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+  
+		<!-- favicon -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#009688">
+		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+		<meta name="theme-color" content="#009688">
+		<!-- favicon end -->
+    <!-- <link href="/favicon.ico" rel="icon"> -->
+  
+
+  <!-- toc -->
+  <link rel="stylesheet" href="/libs/tocify/jquery.tocify.css" media="screen" type="text/css">
+
+  <!-- <link rel="stylesheet" href="/libs/bs/css/bootstrap.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" media="screen" type="text/css">
+
+  <!-- material design -->
+	<!-- <link rel="stylesheet" href="/libs/bs-material/css/ripples.min.css" media="screen" type="text/css"> -->
+  <link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/ripples.min.css" media="screen" type="text/css">
+  <!-- <link rel="stylesheet" href="/libs/bs-material/css/material.min.css" media="screen" type="text/css"> -->
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap-material/0.3.0/css/material.min.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/highlight.light.css" media="screen" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+  
+
+  
+
+  <script src="//apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/libs/jquery-2.0.3.min.js" type="text/javascript"><\/script>')</script>
+
+</head>
+
+ 	<body>
+	  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">菜单</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Hexo</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="/" title="">
+                    <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/archives" title="">
+                    <i class="fa fa-list"></i>存档
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/about" title="">
+                    <i class="fa fa-info-circle"></i>关于
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/atom.xml" title="这是一个订阅源">
+                    <i class="fa fa-rss"></i>RSS
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+	  <div class="container" >
+	    <div class="row">
+	
+	<div class="col-md-9 center-content">
+	
+
+		<div class="content">
+			<!-- index -->
+		   
+
+			  		<h2>【上门护理二期】C端地址子模块详细设计</h2>
+					
+					<div>
+						<span class="post-time">2017-02-24 14:16:13</span>
+					</div>	
+					
+
+					<div class="article-content">
+						<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>C端地址子模块详细设计</p>
+<a id="more"></a>
+<h2 id="详细设计"><a href="#详细设计" class="headerlink" title="详细设计"></a>详细设计</h2><h3 id="需求：一个用户（user）可以有多个地址-userAddress"><a href="#需求：一个用户（user）可以有多个地址-userAddress" class="headerlink" title="需求：一个用户（user）可以有多个地址(userAddress)"></a>需求：一个用户（user）可以有多个地址(userAddress)</h3><h3 id="表结构："><a href="#表结构：" class="headerlink" title="表结构："></a>表结构：</h3><p>表名：user_address</p>
+<table>
+<thead>
+<tr>
+<th>字段名</th>
+<th>类型</th>
+<th>字段详解</th>
+<th>是否允许为空</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>int</td>
+<td>userAddress的Id</td>
+<td>主键，不可为空，自增项</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>姓名</td>
+<td>不可以为空</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>int</td>
+<td>性别（0代表女，1代表男）</td>
+<td>不允许为空 </td>
+</tr>
+<tr>
+<td>birthday</td>
+<td>bigint</td>
+<td>出生年月日，数据库存的是时间戳</td>
+<td>不允许为空 </td>
+</tr>
+<tr>
+<td>relation</td>
+<td>int</td>
+<td>关系（对应Enum对象）</td>
+<td>不可以为空 </td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>地址，会在上层将json格式转化为string格式存在数据库中</td>
+<td>不允许为空</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>用户的电话</td>
+<td>不允许为空</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>int</td>
+<td>userId</td>
+<td>不允许为空，根据此项判断user是否存在</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>timestamp</td>
+<td>记录创建时间，只在数据库中显示</td>
+<td>不可允许为空</td>
+</tr>
+<tr>
+<td>updated_at</td>
+<td>timestamp</td>
+<td>记录每一次修改的时间，只在数据库中显示</td>
+<td>不允许为空</td>
+</tr>
+<tr>
+<td>is_deleted</td>
+<td>Boolean</td>
+<td>代表数据是否删除（0-false,1-true）</td>
+<td>允许为空</td>
+</tr>
+<tr>
+<td>id_card</td>
+<td>string</td>
+<td>身份证号（注：这期不需要）</td>
+<td>这期允许为空，以后不确定</td>
+</tr>
+<tr>
+<td>is_default</td>
+<td>Boolean</td>
+<td>设置默认值，每次排序将它放在第一个(0-false,1-true)</td>
+<td>允许为空</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api设计"><a href="#api设计" class="headerlink" title="api设计"></a>api设计</h3><h4 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h4><p><img src="/media/C_Two_under_detailed_design.png" alt=""></p>
+<h4 id="增加userAddress"><a href="#增加userAddress" class="headerlink" title="增加userAddress"></a>增加userAddress</h4><p>POST /api/yolar/v1/user-addresses   返回值：Yolar.UserAddressDTO</p>
+<h4 id="根据userAddressId获得详细信息"><a href="#根据userAddressId获得详细信息" class="headerlink" title="根据userAddressId获得详细信息"></a>根据userAddressId获得详细信息</h4><p> GET /api/yolar/v1/user-addresses/{userAddressId}<br> 参数：userAddressId<br> 返回值：Yolar.UserAddressDTO</p>
+<h4 id="根据userAddressId修改信息"><a href="#根据userAddressId修改信息" class="headerlink" title="根据userAddressId修改信息"></a>根据userAddressId修改信息</h4><p>PATCH /api/yolar/v1/user-addresses/{userAddressId}<br>参数：userAddressId<br>返回值：Yolar.UserAddressResultDTO</p>
+<h4 id="根据userAddress删除某条信息"><a href="#根据userAddress删除某条信息" class="headerlink" title="根据userAddress删除某条信息"></a>根据userAddress删除某条信息</h4><p>DELETE /api/yolar/v1/user-addresses/{userAddressId}<br>参数：userAddressId<br>返回值：COMMON.SimpleResponse</p>
+<h4 id="根据userAddressId修改is-default字段"><a href="#根据userAddressId修改is-default字段" class="headerlink" title="根据userAddressId修改is_default字段"></a>根据userAddressId修改is_default字段</h4><p>PATCH /api/yolar/v1/user-addresses/{userAddressId}/set-default<br>参数：userAddressId<br>返回值：COMMON.SimpleResponse</p>
+<h4 id="根据userId获得userAddressList"><a href="#根据userId获得userAddressList" class="headerlink" title="根据userId获得userAddressList"></a>根据userId获得userAddressList</h4><p>GET /api/yolar/v1/users/{userId}/user-addresses<br>参数：userId<br>返回值：Yolar.UserAddressListDTO</p>
+<h3 id="具体设计"><a href="#具体设计" class="headerlink" title="具体设计"></a>具体设计</h3><h4 id="1-UserAddressController"><a href="#1-UserAddressController" class="headerlink" title="1.UserAddressController"></a>1.UserAddressController</h4><p>封装UserAddressBO  userAddressBO;</p>
+<pre><code>1.增加
+@RequestMapping(value = &quot;/api/yolar/v1/user-addresses&quot;,method=RequestMethod.POST)
+createUserAddress(@RequestBody Yolar.UserAddressCreateOption userAddressCreateOption)
+2.查找某条信息
+@RequestMapping(value=&quot;/api/yolar/v1/user-addresses/{userAddressId}&quot;,method = RequestMethod.GET)
+getUserAddress(@PathVariable(&quot;userAddressId&quot;) Long userAddressId)
+3.更改某条信息
+@RequestMapping(value = &quot;/api/yolar/v1/user-addresses/{userAddressId}&quot;,method = RequestMethod.PATCH)
+updateUserAddress(@PathVariable(&quot;userAddressId&quot;) Long userAddressId,@RequestBody Yolar.UserAddressUpdateOption userAddressUpdateOption)
+4.删除某条信息
+@RequestMapping(value=&quot;/api/yolar/v1/user-addresses/{userAddressId}&quot;,method = RequestMethod.DELETE)
+deleteUserAddress(@PathVariable(&quot;userAddressId&quot;) Long userAddressId) 
+5.根据userAddress修改is_default字段
+@RequestMapping(value=&quot;/api/yolar/v1/user-addresses/{userAddressId}/set-default&quot;,method = RequestMethod.PATCH)
+setUserAddressDefault(@PathVariable(&quot;userAddressId&quot;) Long userAddressId,@RequestBody Yolar.UserAddressUpdateOption userAddressUpdateOption
+)
+</code></pre><h4 id="UserAddressBO-UserAddressBO（与之平行的有UserAddress、UserAddressDAO）"><a href="#UserAddressBO-UserAddressBO（与之平行的有UserAddress、UserAddressDAO）" class="headerlink" title="UserAddressBO UserAddressBO（与之平行的有UserAddress、UserAddressDAO）"></a>UserAddressBO UserAddressBO（与之平行的有UserAddress、UserAddressDAO）</h4><ul>
+<li>AddUserAddressBO addUserAddressBO;</li>
+<li>DeleteUserAddressBO deleteUserAddressBO;</li>
+<li>UpdateUserAddressBO updateUserAddressBO;</li>
+<li>QueryUserAddressBO queryUserAddressBO;</li>
+<li>SetBO setBO;</li>
+</ul>
+<ol>
+<li><p>createUserAddress(Yolar.UserAddressCreateOption userAddressCreateOption)<br>return addUserAddressBO.createUserAddress(userAddressCreateOption);</p>
+</li>
+<li><p>getByUserAddressId(Long userAddressId)<br>return queryUserAddressBO.getByUserAddressId(userAddressId);</p>
+</li>
+<li><p>updateByUserAddressId(Long userAddressId, Yolar.UserAddressUpdateOption userAddressUpdateOption)<br> return updateUserAddressBO.updateByUserAddressId(userAddressId, userAddressUpdateOption);</p>
+</li>
+<li><p>deleteByUserAddressId(Long userAddressId, Long userId)<br> return deleteUserAddressBO.deleteByUserAddressId(userAddressId,userId);</p>
+</li>
+<li><p>setUserAddressDefault(Long userAddressId)<br> return setBO.setByUserAddressId(userAddressId);</p>
+</li>
+</ol>
+<h4 id="add-AddUserAddressBO"><a href="#add-AddUserAddressBO" class="headerlink" title="add AddUserAddressBO"></a>add AddUserAddressBO</h4><p>AddUserAddressFactory addUserAddressFactory;</p>
+<p>UserAddressDAO userAddressDAO</p>
+<pre><code>createUserAddress(Yolar.UserAddressCreateOption userAddressCreateOption) {
+1.将前端传过来的数据到addUserAddressFactory里面做校验
+2.创建链接数据库的实体类对象，将数据存在数据库中，
+3.在AddUserAddressDTOFactory中将数据传回
+}
+</code></pre><h4 id="AddUserAddressFactory"><a href="#AddUserAddressFactory" class="headerlink" title="AddUserAddressFactory"></a>AddUserAddressFactory</h4><pre><code>computeAddContext(Yolar.UserAddressCreateOption userAddressCreateOption) {
+1.将前端传过来的数据存在addContext中
+2.校验数据是否为空，参数是否合法
+3.将结果返回
+}
+</code></pre><h4 id="query-QueryUserAddressBO"><a href="#query-QueryUserAddressBO" class="headerlink" title="query QueryUserAddressBO"></a>query QueryUserAddressBO</h4><p>QueryUserAddressFactory queryUserAddressFactory;</p>
+<p>UserAddressDAO userAddressDAO</p>
+<pre><code>getByUserAddressId(Long userAddressId) {
+    1.到QueryUserAddressFactory中做参数校验
+    2.根据Id到数据库中查询，放入context中
+3.到QueryUserAddressDTOFactory中将数据返回给前端。
+}
+
+getUserAddressListByUserId(Long userId){
+   1.到QueryUserAddressFactory中做参数校验
+    2.根据userId到数据库中查询，放入context中
+3.到QueryUserAddressDTOFactory中将数据返回给前端。
+}    
+</code></pre><h4 id="QueryUserAddressFactory"><a href="#QueryUserAddressFactory" class="headerlink" title="QueryUserAddressFactory"></a>QueryUserAddressFactory</h4><pre><code>computeQueryContext(Long userAddressId) {
+1.检查userAddressId是否合法,
+2.对权限做校验
+}
+
+QueryContext(Long userId){
+  1.对userId做合法性校验
+  2.对权限做校验
+}
+</code></pre><h4 id="delete-DeleteUserAddressBO"><a href="#delete-DeleteUserAddressBO" class="headerlink" title="delete DeleteUserAddressBO"></a>delete DeleteUserAddressBO</h4><p>DeleteAddressFactory deleteAddressFactory;</p>
+<pre><code>deleteByUserAddressId(Long userAddressId, Long userId) {
+1.到DeleteAddressFactory中检验参数的合法行，以及权限校验
+2.将数据库中的is_deleted字段置为true
+3.将结果返回
+}
+</code></pre><h4 id="DeleteAddressFactory"><a href="#DeleteAddressFactory" class="headerlink" title="DeleteAddressFactory"></a>DeleteAddressFactory</h4><pre><code>UserAddressDAO userAddressDAO;
+computeDeleteContext(Long userAddressId, Long userId) {
+1.检验参数的合法性以及权限校验
+}
+</code></pre><h4 id="update-UpdateUserAddressBO"><a href="#update-UpdateUserAddressBO" class="headerlink" title="update UpdateUserAddressBO"></a>update UpdateUserAddressBO</h4><p>UpdateUserAddressFactory updateUserAddressFactory;<br>UserAddressDAO userAddressDAO;</p>
+<pre><code>updateByUserAddressId(Long userAddressId,Yolar.UserAddressUpdateOption userAddressUpdateOption) {
+    1.到UpdateUserAddressFactory中做参数的校验和权限的检查
+    2.在UpdateUserAddressDTOFactory中将参数返回
+}
+</code></pre><h4 id="UpdateUserAddressFactory"><a href="#UpdateUserAddressFactory" class="headerlink" title="UpdateUserAddressFactory"></a>UpdateUserAddressFactory</h4><p>computeUpdateContext(Long userAddressId, Yolar.UserAddressUpdateOption userAddressUpdateOption) {<br>    //对参数做校验，校验权限<br>    }</p>
+<h4 id="set-SetBO"><a href="#set-SetBO" class="headerlink" title="set SetBO"></a>set SetBO</h4><pre><code>SetUserAddressFactory setUserAddressFactory;
+UserAddressDAO userAddressDAO;
+setByUserAddress(Long userAddressId) {
+    1.检查参数的合法性
+    2.修稿default字段
+    3.将结果返回
+}
+</code></pre><h4 id="SetUserAddressFactory"><a href="#SetUserAddressFactory" class="headerlink" title="SetUserAddressFactory"></a>SetUserAddressFactory</h4><pre><code>computeSetContext(Long userAddressId) {
+    1.检验参数的合法行
+    2.将结果返回
+}
+</code></pre><h4 id="UserAddressDAO"><a href="#UserAddressDAO" class="headerlink" title="UserAddressDAO"></a>UserAddressDAO</h4><p>注：UserAddressDAOextends是一个接口，继承JpaRepository<br>编写各种查询方法</p>
+<pre><code> UserAddress findById(Long id);
+@Query(&quot;select userAddress from UserAddress userAddress where userAddress.userId = ?1&quot;)
+List&lt;UserAddress&gt; findByUserId(Long userId);
+@Query(&quot;select userAddress from UserAddress userAddress &quot; +
+&quot;where userAddress.userId = ?1 and userAddress.deleted = ?2 order by userAddress.default desc&quot;)
+List&lt;UserAddress&gt; findUserAddress(Long userId, boolean isDelete);
+</code></pre><h4 id="UserAddress"><a href="#UserAddress" class="headerlink" title="UserAddress"></a>UserAddress</h4><p>填写表中字段（可自动生成），作为数据中转站</p>
+<h4 id="2-UserController"><a href="#2-UserController" class="headerlink" title="2.UserController"></a>2.UserController</h4><p>封装UserService userService; </p>
+<pre><code>1.增加接口，根据userId获得userAddressList
+getUserAddressListByUserId (@PathVariable(&quot;userId&quot;) Long userId) {
+return userAddressBO.getUserAddressListByUserId(userId); }
+</code></pre><h2 id="注：地址问题"><a href="#注：地址问题" class="headerlink" title="注：地址问题"></a>注：地址问题</h2><pre><code>地址改为json格式，可能会影响以前的部分功能，解决办法：在C端处理，将从数据库中拿出的地址拼接成字符串。 
+</code></pre>
+					</div>
+
+			  <!-- about -->
+			  
+		</div>
+
+		<!-- pagination -->
+	  
+
+		<div class="comment-section">
+  
+  
+
+
+</div>
+	</div>
+
+	
+
+</div>
+
+
+		<footer>
+			
+
+<p>
+  由 <a href="https://hexo.io">hexo</a> 强力驱动 | 搭载 <a href="https://github.com/wayou/hexo-theme-material">material</a> 主题
+</p>
+<p>
+  &copy; 2017 <a href="http://yoursite.com"> John Doe </a>
+</p>
+<a id="gotop" href="#" title="back to top"><i class="mdi-hardware-keyboard-arrow-up"></i></a>
+
+		</footer>
+	  </div>
+
+		<!-- <script src="/libs/bs/js/bootstrap.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script>(typeof $().modal == 'function')|| document.write('<script src="/libs/bs/js/bootstrap.min.js" type="text/javascript"><\/script>')</script>
+
+		<!-- material design -->
+		<!-- <script src="/libs/bs-material/js/ripples.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/ripples.min.js"></script>
+		<!-- <script src="/libs/bs-material/js/material.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/bootstrap-material/0.3.0/js/material.min.js"></script>
+		<!-- toc -->
+		<!-- <script src="/libs/tocify/jquery-ui.min.js"></script> -->
+		<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<script src="/libs/tocify/jquery.tocify.custom.js"></script>
+
+		<script src="/js/main.js"></script>
+
+	</body>
+</html>
